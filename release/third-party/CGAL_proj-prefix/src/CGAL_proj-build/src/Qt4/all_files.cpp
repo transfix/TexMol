@@ -1,0 +1,6 @@
+#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALQt4/DemosMainWindow.cpp"
+#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALQt4/resources.cpp"
+#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALQt4/utility.cpp"
+#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALQt4/debug.cpp"
+#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALQt4/GraphicsViewNavigation.cpp"
+#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALQt4/GraphicsViewPolylineInput.cpp"

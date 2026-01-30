@@ -1,0 +1,24 @@
+#ifndef SURFACE_H
+#define SURFACE_H
+
+#include <vector>
+
+namespace GEOMETRY
+{
+        class Vertex;
+        class Face;
+        class Surface
+        {
+        public:
+                Surface();
+                void addPoint(Vertex* point);
+                void addFacet(Face* facet);
+                std::vector<Vertex*> m_Vertices;
+                std::vector<Face*> m_Faces;                
+                int numbpts, numbtris, nodes_per_face;
+                double min[3], max[3];
+                double center[3];
+        };
+}
+
+#endif //SURFACE_H

@@ -1,0 +1,268 @@
+\cchapter{Scripting and animations}
+
+The computations defined in chapter \ref{Chapter:computations} can
+also be performed in batch mode. This is useful when a large number
+of files need to be manipulated at once. Two other powerful features
+of \TexMol include
+\begin{itemize}
+\item Scripting.
+\item Animation.
+\end{itemize}
+In this chapter, we will go through simple examples for each of the
+above three features.
+
+\csection{Batch-mode calculations}
+
+Electron density, hydrophobicity and curvatures can be estimated
+from the command line. The commands are as follows.
+
+\subsection{Electron density and hydrophobicity}
+
+The command line for creating an electron density or hydrophobicity
+map is:
+
+\TexMol \textbf{-blur} \param{input molecule file name}
+\param{output volume file name} \param{dim1} \param{dim2}
+\param{dim3}
+\param{density type} \param{colored volume} \param{gaussian
+blobbiness}
+\param{color} \param{colormap file name} \param{gap}
+
+The different parameters are:
+
+\param{input molecule file name} The full path and name of the input molecule
+file.
+
+\param{output volume file name} The full path and name of the output
+rawiv or rawv file.
+
+\param{dim1, dim2, dim3} Dimensions of the output volume.
+
+\param{density type} Enter \mm{0} for electron density and \mm{1} for
+hydrophobicity.
+
+\param{colored volume} \emph{true} if you want a rawv volume.
+
+\param{gaussian blobbiness} We recommend a value of -2.3 to conform
+with previous research and bigger values, say -0.1, to get smoother
+shapes representing the volume at much lower resolutions.
+
+\param{color} If the colored volume parameter was true, then we can
+either specify either color by structure or provide a color map
+file. If we do not provide a color map file, then this parameter is
+relevant. \mm{0} stands for atom coloring, \mm{1} for residue,
+\mm{2} for secondary structure and \mm{3} for chain coloring.
+
+\param{colormap file name} The molecule can be colored according to
+some user defined colors, to perhaps highlight some structure which
+cannot be done in the more general method previous described. The
+file format for the \emph{colormap file name} is given in the file
+format description page from CCV's website.
+
+\param{gap} This should be used sparingly, to provide a gap of empty
+space around the requested dimensions. It is best left as \mm{0}.
+
+\subsection{Curvatures}
+
+There are two commands for generating curvatures. One is from a
+volume file with a given isovalue, where \TexMol extracts the mesh
+where we need to obtain the curvature, and second, where the user
+inputs the mesh directly. The two commands in order are:
+
+\TexMol \textbf{-setcurvature} \param{1} \param{input molecule file
+name} \param{output volume file name} \param{output mean curvature
+file name} \param{output gaussian curvature file name} \param{dim1}
+\param{dim2} \param{dim3} \param{gaussian
+blobbiness} \param{isovalue} \param{number of grid subdivisions}
+\param{maximum function error}\\
+
+\TexMol \textbf{-setcurvature} \param{0} \param{input molecule file
+name} \param{input surface file name} \param{output mean curvature
+file name} \param{output gaussian curvature file name} \param{dim1}
+\param{dim2} \param{dim3} \param{gaussian
+blobbiness} \param{number of grid subdivisions}
+\param{maximum function error}\\
+
+The various parameters are described below.
+
+\param{0} and \param{1} differentiate between the two calls.
+
+\param{input molecule file name} The full path and name of the input molecule
+file.
+
+\param{output volume file name} The full path and name of the output
+rawiv or rawv file.
+
+\param{output mean curvature file name} The full path and name of
+the output mean curvature file.
+
+\param{output gaussian curvature file name} The full path and name of
+the output gaussian curvature file.
+
+\param{dim1, dim2, dim3} Dimensions of the output volume.
+
+\param{gaussian blobbiness} We recommend a value of -2.3 to conform
+with previous research and bigger values, say -0.1, to get smoother
+shapes representing the volume at much lower resolutions.
+
+\param{number of grid subdivisions} The higher this value, the more
+the precomputation and memory requirement. There is a cut off value
+around 10 to 20 where you get optimum speed for a given machine.
+
+\param{maximum function error} The maximum allowable function error
+while calculating the curvatures.
+
+\warning{While creating curvatures, if we overestimate the value of
+grid spacing, we could end up with very high memory usages and may
+have to kill the program.}
+
+
+\csection{Scripting}
+
+\TexMol currently offers a limited but powerful set of functions as
+part of its scripting module. This module is available once \TexMol
+is run in user interface mode. The parser command window can be
+opened from Utilities - script from the main menu bar. Here users
+can enter commands, select one or more and execute them. Some of the
+commands available are listed below.
+
+\textcolor{BrickRed}{bool} blur(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} setCurvature(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool}
+outGridPositions(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} classifyPoints(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} growOut(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} getSurface(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} evolve(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} writePDB(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} writeGOA(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} depthColor(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool}
+printPDBInformation(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool}
+getMaxDistanceFromPoint(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[]);
+
+\textcolor{BrickRed}{bool} addNewDataSet(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+\textcolor{BrickRed}{bool} splitView(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+\textcolor{BrickRed}{bool} deleteData(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+\textcolor{BrickRed}{bool} deletePrevData(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+\textcolor{BrickRed}{bool} deleteAllData(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+\textcolor{BrickRed}{bool} setVisible(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+\textcolor{BrickRed}{bool} setVisiblePrev(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+\textcolor{BrickRed}{bool} saveImage(\textcolor{BrickRed}{int} argc,
+\textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+\textcolor{BrickRed}{bool} setGridVisible(\textcolor{BrickRed}{int}
+argc, \textcolor{BrickRed}{char*} argv[],
+\textcolor{BrickRed}{MoleculeVizMainWindow} *mWindow );
+
+
+
+\csection{Animations}
+
+This module is mainly useful for making movies. Animations can be
+saved as a sequence of images in \TexMol. We allow the user to load
+a data set, render it and transform the view point, and save
+trajectories and play it back. There are actually two steps in the
+animation process.
+
+\begin{enumerate}
+\item Create and save a trajectory.
+\item Save the animation based on a trajectory.
+\end{enumerate}
+
+\subsection{Creating a trajectory}
+\label{subsection:CreateTrajectory}
+
+Data sets can be quite large, making them hard to interact with.
+Hence, it is sometimes useful to save a trajectory using a low
+resolution data set and later use it to render a large data set in
+high resolution. In order to create the trajectory it is useful to
+have a low resolution data set which the user can comfortably
+rotate, zoom and translate interactively. To save a trajectory,
+follow the procedure outlined in table \ref{Table:Trajectory}
+
+\steps{Creating and saving a trajectory}{Table:Trajectory}{\item
+Load and display the data set or set of data sets you want to create
+a movie of.
+\item Use the mouse to move them into the correct starting viewing
+position. \item Click Animation, Start recording from the menu bar.
+\item Enter and save the file name of the trajectory file. It does
+not require any specific file extension. \item On pressing OK, the
+recording is on. Any mouse movement in the rendering area is saved
+in to the file, along  with the time. \item Once you are done with
+transforming the data, click Animation, Stop recording in the menu
+bar. \item You can see if the trajectory was satisfactory by playing
+it back by clicking on Animation, Playback animation from the menu
+bar.}
+
+\subsection{Saving animations}
+
+Before you can save a sequence of images, you need to create a
+trajectory as described in section
+\ref{subsection:CreateTrajectory}.
+
+
+\steps{Saving an animation}{Table:SavingAnimations}{ \item Load the
+high resolution data sets to save.
+\item keep the screen resolution and window size as high as
+required.
+\item Open the trajectory file by selecting Animation, Record
+animation from the menu bar. \item \TexMol will automatically begin
+to replay the trajectory and save images.}
+
+\warning{Disable the screensaver as saving images in high resolution
+can take a long time. We also interpolate between mouse movements
+using linear interpolation to get better smoothness, causing the
+movie to be longer than expected.}

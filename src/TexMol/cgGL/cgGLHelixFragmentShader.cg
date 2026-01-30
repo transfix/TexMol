@@ -1,0 +1,151 @@
+// this is the fragment program
+
+
+struct inputs
+{
+	float4 HPOS : POSITION;
+	float4 texcoord : TEXCOORD0;
+	float4 texcoord1 : TEXCOORD1;	// duplicate of HPOS to read it
+	float4 texcoord2 : TEXCOORD2;
+	float4 texcoord3 : TEXCOORD3;
+	float4 primarycolor : COLOR0;
+	float3 secondarycolor : COLOR1;
+};
+
+float3 expand(float3 vector)
+{
+    return 2.0 * (vector - 0.5);
+}
+
+// register combiner vector normalization function
+float3 normalize(float3 vector)
+{
+    float3 VdotV = dot(expand(vector), expand(vector));
+    return (1-saturate(VdotV)) * (vector-0.5) + expand(vector);
+}
+
+float getOpacity(uniform float4x4 ModelViewProjInverse,
+				 float4 ndcPos,
+				 uniform float4 endPoint1,
+				 uniform float3 helixDCs,
+				 uniform float3 refVector,
+				 uniform sampler2D opacitymap,
+				 uniform float3 helixDCsCrossRefVector,
+				 uniform float lengthOfHelix)
+{
+	float pitch = endPoint1.a;
+	endPoint1.a = 1.0;
+
+	// P be obj pos of frag
+	// DCs be DCs of axis
+	// P1 be one end point
+	// P0 be a point on cylinder
+	// P2 be point on axis closest to P
+
+	// 1. Get obj pos of point P
+	float4 P = mul(ModelViewProjInverse,ndcPos);
+
+	// 2. t = (DCs . (P-P1)) / 1  ( 1 = DC.DC if DCs is normalized )
+	float3 PminusP1 = (P-endPoint1).rgb;
+	float y = dot(helixDCs, PminusP1);
+
+	float opacity = 0.0;
+
+	if( y >= 0 ) 
+	{
+		if( y <= lengthOfHelix )
+		{
+			// 3. x = cos-1 [(P-P1-t*DCs) . (P0-P1)]
+			float3 PVector = PminusP1-y*helixDCs;
+			PVector = PVector / length(PVector);
+			float x = acos(dot(PVector,refVector));	// theta lies in 0 to 180
+
+			// take cross of ref vec, dcs. // sent in by program
+			// see which side new vector lies on
+			float side = dot( PVector, helixDCsCrossRefVector );
+			// modify the theta to lie in 0 - 360
+			if( side < 0 ) x = 2.0*3.1415926535897932384626433832795 - x;
+			x = x / (2.0*3.1415926535897932384626433832795);	// get answer from 0 - 1
+			
+			// H = endPoint1.a = pitch
+			y = fmod( y, pitch ) / pitch;
+
+			// 5. opacity = TEX2D( opacitymap, xy )
+			opacity = tex2D(opacitymap, float2(x,y)).r;
+//			opacity = 1.0;
+		}
+	}
+
+	return opacity;
+}
+
+float4 main(inputs IN, out float depth: DEPTH,
+			uniform float4 maincolor,
+			uniform sampler1D normalmap,
+			uniform sampler2D depthmap,
+			uniform sampler2D opacitymap,
+			uniform float4x4 ModelViewProjInverse,
+			uniform float3 helixDCs,
+			uniform float3 refVector,
+			uniform float3 helixDCsCrossRefVector,
+			uniform float4 endPoint1,
+			uniform float lengthOfHelix) : COLOR
+{
+	float4 normal = 2.0 * (tex1D(normalmap, IN.texcoord.x) - 0.5);
+	
+	IN.secondarycolor.rgb = normalize(IN.secondarycolor.rgb);
+
+	float3 NdotL = dot(normal.rgb, IN.secondarycolor);
+	float3 color = IN.primarycolor.rgb*(saturate(NdotL) + IN.primarycolor.w);
+
+    // calculate reflection vector
+    // R = 2 * (N * (N dot L) - L/2)
+    //   = 2 * N * (N dot L) - L
+    float3 reflectVec = ((NdotL * normal.rgb) + (-0.5 * IN.secondarycolor)) * 2.0;
+
+    // eye vector E = (0, 0, 1)
+    // R dot E = (R.r*0 + R.g*0 + 1*R.b) = R.b
+    float RdotE = saturate(reflectVec.b);   // max(0, RdotE);
+
+    // calculate specular as pow(RdotE, 16)
+	float specular = pow(RdotE, 16); 
+    // add specular light contribution to final color
+	color += specular;
+	
+	float3 depthVal;
+	float z;
+	float w;
+	float4 ndcPos;
+
+
+	depthVal = tex2D(depthmap, IN.texcoord.xy).rgb;
+	// this endPoint.a is totally overloaded !
+	if( endPoint1.a < 0.0 ) 
+	{
+		depthVal.r = -1.0 * depthVal.r;
+		endPoint1.a = -1.0 * endPoint1.a;
+		color = color*0.5;
+	}
+    z = dot(IN.texcoord2.xyz, depthVal);
+    w = dot(IN.texcoord3.xyz, depthVal);
+    depth = (z / w);
+	ndcPos = float4( IN.texcoord1.x, IN.texcoord1.y, depth, 1.0 );
+
+	float opacity = getOpacity(ModelViewProjInverse,
+				 ndcPos,
+				 endPoint1,
+				 helixDCs,
+				 refVector,
+				 opacitymap,
+				 helixDCsCrossRefVector,
+				 lengthOfHelix);
+	
+	depth = depth*0.5 + 0.5;
+	return float4(color, opacity);
+}
+
+
+// send in a helix opacity map
+// obtain the fragments rotation and offset on cylinder
+// get a mod of the offset
+// lookup opacity!

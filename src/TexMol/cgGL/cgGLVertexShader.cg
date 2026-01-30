@@ -1,0 +1,109 @@
+// this is the vertex program
+
+//#pragma bind appdata.position = ATTR0
+//#pragma bind appdata.normal = ATTR1
+
+struct appdata
+{
+	float4 center : POSITION;
+	float4 color : COLOR0;
+	//float4 offset : TEXCOORD0;
+};
+
+struct vfconn
+{
+	float4 HPOS : POSITION;
+	float4 TEX0 : TEXCOORD0;
+	float4 TEX1 : TEXCOORD1;
+	float4 TEX2 : TEXCOORD2;
+//	float4 TEX3 : TEXCOORD3;
+	float4 primarycolor : COLOR0;
+	//float3 secondarycolor : COLOR1;
+};
+
+float4 remapTo01(float4 v, float4 low, float4 high) {
+	return saturate((v - low)/(high-low));
+}
+
+vfconn main(appdata IN,
+            uniform float4x4 ModelViewIT,
+            uniform float4x4 ModelViewProj,
+            uniform float4x4 Proj,
+            uniform float4x4 ModelViewInverse)
+{
+	vfconn OUT;
+	/* uniform float4 positions[4] = {float4(-1,-1,0, 0.1), float4(1,-1,0, 0.6), float4(1,1,0, 0.1), float4(-1,1,0, 0.1)}; */
+        float3 offset;
+        float3 ambient;
+	if(IN.center.w == 0) {
+                offset = float3(-1,-1,0);
+                ambient = 0.1;
+        }
+        else if(IN.center.w == 1) {
+                offset = float3(1,-1,0);
+                ambient = 0.6;
+        }
+        else if(IN.center.w == 2) {
+                offset = float3(1,1,0);
+                ambient = 0.1;
+        }
+	else if(IN.center.w == 3) {
+                offset = float3(-1,1,0);
+                ambient = 0.1;
+        }
+        OUT.TEX0 = remapTo01(float4(offset, 0.0), (float4)-1.0, (float4)1.0);
+        
+	OUT.TEX0.zw = float2(0,1);
+	//OUT.TEX0.xy = textures[IN.center.w];
+	//OUT.TEX0.zw = float2(0,1);
+	IN.center.w = 1.0;
+	float radius = IN.color.w;
+    
+	// 1. z_scale = radius * PROJ[10];
+	OUT.TEX1.x = radius * Proj[2].z*0.5;
+	
+    // z_bias = MVP[2] * center;
+    OUT.TEX1.z = dot(ModelViewProj[2], IN.center)*0.5;
+	
+
+    // 2. w_scale = radius * PROJ[11]
+    OUT.TEX2.x = radius * Proj[3].z;
+    // w_bias = MVP[3] * center;
+    OUT.TEX2.z = dot(ModelViewProj[3], IN.center);
+
+	// 3. optimization, instead of doing *0.5 + 0.5, we simply do it here itself
+	OUT.TEX1.xz = OUT.TEX1.xz + OUT.TEX2.xz/2.0;
+
+	// In the above, we are assuming that OUT.TEX1.y = OUT.TEX2.y = 0, 
+	// and/or the low component in the depth map is 0!
+
+    // eye_space_offset = radius * v[OPOS]
+    float4 eye_space_offset = radius * float4(offset, 0.0);
+
+    // object_space_offset = INV_MV * eye_space_offset
+    float4 object_space_offset = mul(ModelViewInverse, eye_space_offset);
+
+    IN.center.xyz = IN.center.xyz + object_space_offset.xyz;
+    // clip coordinates
+    OUT.HPOS = mul(ModelViewProj, IN.center);
+
+	OUT.primarycolor.xyz = IN.color.xyz;
+	OUT.primarycolor.w = ambient;
+
+//	OUT.TEX1 = OUT.TEX0;
+
+	//float4 lightVect = float4(600,600,640,1) - IN.center;
+	//float4 lightVect = float4(50,100,140,0);
+	
+	//lightVect = normalize(lightVect);
+
+    // xform light vector into eye space
+    //float4 eyeLightVec = lightVect;//mul(ModelViewIT, lightVect);
+
+    // Range compress light vector to fit in a color
+    //OUT.secondarycolor.xyz = eyeLightVec.xyz * 0.5 + 0.5;
+
+	return OUT;
+} // main;
+
+

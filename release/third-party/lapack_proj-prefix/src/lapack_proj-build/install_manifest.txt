@@ -1,0 +1,9 @@
+/workspace/cvcsoft/TexMol/release/lib/pkgconfig/lapack.pc
+/workspace/cvcsoft/TexMol/release/lib/cmake/lapack-3.4.2/lapack-config.cmake
+/workspace/cvcsoft/TexMol/release/lib/cmake/lapack-3.4.2/lapack-config-version.cmake
+/workspace/cvcsoft/TexMol/release/lib/cmake/lapack-3.4.2/lapack-targets.cmake
+/workspace/cvcsoft/TexMol/release/lib/cmake/lapack-3.4.2/lapack-targets-noconfig.cmake
+/workspace/cvcsoft/TexMol/release/lib/pkgconfig/blas.pc
+/workspace/cvcsoft/TexMol/release/lib/libblas.a
+/workspace/cvcsoft/TexMol/release/lib/liblapack.a
+/workspace/cvcsoft/TexMol/release/lib/libtmglib.a

@@ -1,0 +1,168 @@
+// this is the vertex program
+
+//#pragma bind appdata.position = ATTR0
+//#pragma bind appdata.normal = ATTR1
+
+struct appdata : application2vertex 
+{
+	float4 offsetRadius : POSITION;
+	float4 p1 : TEXCOORD0;
+	float4 p2 : TEXCOORD1;
+	float4 color : COLOR0;
+};
+
+struct vfconn : vertex2fragment 
+{
+	float4 HPOS : POSITION;
+	float4 TEX0 : TEXCOORD0;
+	float4 TEX1 : TEXCOORD1;
+	float4 TEX2 : TEXCOORD2;
+	float4 TEX3 : TEXCOORD3;
+	float4 primarycolor : COLOR0;
+	float3 secondarycolor : COLOR1;
+};
+
+float4 remapTo01(float4 v, float4 low, float4 high) {
+	return saturate((v - low)/(high-low));
+}
+
+vfconn main(appdata IN,
+         uniform float4x4 ModelViewIT,
+         uniform float4x4 ModelViewProj,
+		 uniform float4x4 Proj,
+		 uniform float4x4 ModelViewInverse,
+		 uniform float4x4 ModelView)
+{
+	vfconn OUT;
+
+    // eye_space_offset = radius * v[OPOS]
+	float radius = IN.offsetRadius.z;
+
+	// get vector from P1 to P2
+	float4 axis = IN.p2 - IN.p1;
+
+	float4 eye_space_axis = normalize(mul(ModelView, axis));
+	float h = 1 / sqrt(1-eye_space_axis.z*eye_space_axis.z);
+
+    //float4 eye_space_offset = radius * float4(IN.offset.xyz, 0.0);
+	float4 unit_eye_space_offset = normalize(float4(eye_space_axis.y,-eye_space_axis.x , 0, 0));
+/*
+	float4 eye_space_offset = unit_eye_space_offset * IN.offsetRadius.y * radius;
+
+	if( IN.offsetRadius.x	< 0.5 ) 
+	{
+		eye_space_offset = eye_space_offset + eye_space_axis * h*radius * eye_space_axis.z;
+	}
+	else
+	{
+		eye_space_offset = eye_space_offset + eye_space_axis * -h*radius * eye_space_axis.z;
+	}
+
+    // object_space_offset = INV_MV * eye_space_offset
+    float4 object_space_offset = mul(ModelViewInverse, eye_space_offset);
+
+	// offsetRadius.x = 0 or 1 for points near p0 or p1. 
+	// obtain the output position in object space
+	// assume that w is correct
+    IN.p2 = IN.p1 + IN.offsetRadius.x*axis + object_space_offset;
+*/
+
+
+
+	float4 eye_space_offset = unit_eye_space_offset * IN.offsetRadius.y * radius;
+
+	if( IN.offsetRadius.x	< 0.5 )// && eye_space_axis.z < 0 ) 
+	{
+		if( eye_space_axis.z < 0 )
+		{
+			eye_space_offset = eye_space_offset + eye_space_axis * h*radius * eye_space_axis.z;
+		}
+		else
+		{
+			eye_space_offset = eye_space_offset + eye_space_axis * h*radius * eye_space_axis.z*-1;
+		}
+	}
+	else
+	{
+		if( eye_space_axis.z < 0 )
+		{
+			eye_space_offset = eye_space_offset + eye_space_axis * -h*radius * eye_space_axis.z;
+
+		}
+		else
+		{
+			eye_space_offset = eye_space_offset + eye_space_axis * -h*radius * eye_space_axis.z*-1;
+		}
+	}
+
+    // object_space_offset = INV_MV * eye_space_offset
+    float4 object_space_offset = mul(ModelViewInverse, eye_space_offset);
+
+	// offsetRadius.x = 0 or 1 for points near p0 or p1. 
+	// obtain the output position in object space
+	// assume that w is correct
+    IN.p2 = IN.p1 + IN.offsetRadius.x*axis + object_space_offset;
+
+
+
+
+	//---------------------------------------------
+    // clip coordinates
+	// IN.p2 has the position
+    OUT.HPOS = mul(ModelViewProj, IN.p2);
+	OUT.TEX1 = OUT.HPOS; // because HPOS is apparently not readable !
+
+	OUT.primarycolor.xyzw = IN.color.xyzw;
+
+	// calculate normal-space light vector
+	// float4 lightVect = float4(00,100,140,1) - IN.p2;
+	//float4 lightVect = float4(-10,-10,10,0);
+	float4 lightVect = float4(50,100,140,0);
+
+	lightVect = normalize(lightVect);
+
+	OUT.TEX0 = float4(IN.offsetRadius.y*0.5+0.5,0,0,1);
+	OUT.TEX0.y = 0.5;
+
+
+	// xform light vector into eye space
+	
+    float4 eyeLightVec = lightVect; //mul(ModelViewIT, lightVect);
+	eyeLightVec = float4(dot(unit_eye_space_offset, eyeLightVec), 
+						 dot(eye_space_axis, eyeLightVec),
+						 dot(cross(unit_eye_space_offset.xyz, eye_space_axis.xyz), eyeLightVec.xyz),//eyeLightVec.z,
+						 0);
+						 
+    // Range compress light vector to fit in a color
+    OUT.secondarycolor.xyz = eyeLightVec.xyz * 0.5 + 0.5;
+
+	
+	radius = radius * h;
+
+	/* works ! going to remove the 1/2 optimization thing from here+fragment shader
+	// z_scale = radius * PROJ[10];
+    OUT.TEX2.x = radius * Proj[2].z*0.5;
+    // z_bias = MVP[2] * center;
+    OUT.TEX2.z = dot(ModelViewProj[2], IN.p2)*0.5;
+
+    // w_scale = radius * PROJ[11]
+    OUT.TEX3.x = radius * Proj[3].z;
+    // w_bias = MVP[3] * center;
+    OUT.TEX3.z = dot(ModelViewProj[3], IN.p2);
+
+	OUT.TEX2.xz = OUT.TEX2.xz + OUT.TEX3.xz/2.0;
+	*/
+	// z_scale = radius * PROJ[10];
+    OUT.TEX2.x = radius * Proj[2].z;
+    // z_bias = MVP[2] * center;
+    OUT.TEX2.z = dot(ModelViewProj[2], IN.p2);
+
+    // w_scale = radius * PROJ[11]
+    OUT.TEX3.x = radius * Proj[3].z;
+    // w_bias = MVP[3] * center;
+    OUT.TEX3.z = dot(ModelViewProj[3], IN.p2);
+
+	return OUT;
+} // main;
+
+

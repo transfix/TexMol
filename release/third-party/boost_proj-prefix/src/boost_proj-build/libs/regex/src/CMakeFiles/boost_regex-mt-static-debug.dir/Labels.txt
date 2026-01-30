@@ -1,0 +1,20 @@
+# Target labels
+ regex
+# Source files and their labels
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/c_regex_traits.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/cpp_regex_traits.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/cregex.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/fileiter.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/icu.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/instances.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/posix_api.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/regex.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/regex_debug.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/regex_raw_buffer.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/regex_traits_defaults.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/static_mutex.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/w32_regex_traits.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/wc_regex_traits.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/wide_posix_api.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/winstances.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/regex/src/usinstances.cpp

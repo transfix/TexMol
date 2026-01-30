@@ -1,0 +1,12 @@
+# Target labels
+ serialization
+# Source files and their labels
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_text_wiprimitive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_text_woprimitive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/text_wiarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/text_woarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/utf8_codecvt_facet.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_wgrammar.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_wiarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_woarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/codecvt_null.cpp

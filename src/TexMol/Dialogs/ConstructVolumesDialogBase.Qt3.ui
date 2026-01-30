@@ -1,0 +1,508 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>ConstructVolumesDialogBase</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>ConstructVolumesDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>550</width>
+            <height>451</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>ConstructVolumesDialogBase</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget" row="0" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>layout11</cstring>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>layout10</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_Dim1SpinBox</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>1025</number>
+                            </property>
+                            <property name="value">
+                                <number>128</number>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>m_Dim1TextLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Dim 1</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>layout9</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_Dim2SpinBox</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>1025</number>
+                            </property>
+                            <property name="value">
+                                <number>128</number>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>m_Dim2TextLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Dim 2</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>layout8</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QSpinBox">
+                            <property name="name">
+                                <cstring>m_Dim3SpinBox</cstring>
+                            </property>
+                            <property name="maxValue">
+                                <number>1025</number>
+                            </property>
+                            <property name="value">
+                                <number>128</number>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>m_Dim3TextLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Dim 3</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QLineEdit" row="1" column="1">
+            <property name="name">
+                <cstring>m_BlobbyLineEdit</cstring>
+            </property>
+            <property name="text">
+                <string>-2.3</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="1" column="2">
+            <property name="name">
+                <cstring>m_BlobbyTextLabel</cstring>
+            </property>
+            <property name="text">
+                <string>Gaussian shape param</string>
+            </property>
+        </widget>
+        <widget class="QButtonGroup" row="2" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>m_RadiusTypeButtonGroup</cstring>
+            </property>
+            <property name="title">
+                <string>Radius type</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QRadioButton" row="1" column="0">
+                    <property name="name">
+                        <cstring>m_AtomSolventEnlargedRadiusRadioButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Solvent enlarged</string>
+                    </property>
+                </widget>
+                <widget class="QRadioButton" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_AtomRadiusRadioButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>VDW Radius</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QLayoutWidget" row="5" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>Layout1</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>Horizontal Spacing2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonOk</cstring>
+                    </property>
+                    <property name="caption">
+                        <string></string>
+                    </property>
+                    <property name="text">
+                        <string>&amp;OK</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+O</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="4" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>layout16</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>m_UseHardCutOffCheckBox</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Use hard cutoff</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QGroupBox" row="3" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>m_RawVGroupBox</cstring>
+            </property>
+            <property name="title">
+                <string>RawV parameters</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_RawVCheckBox</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Construct RawV</string>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget" row="1" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>layout14</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_ColormapFileLineEdit</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>m_ColorMapFilePushButton</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
+                            <property name="text">
+                                <string>Colormap file</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QButtonGroup" row="0" column="1">
+                    <property name="name">
+                        <cstring>m_ColoringTypeButtonGroup</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="title">
+                        <string>Color level</string>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QRadioButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_ResidueRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Residues</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="2" column="0">
+                            <property name="name">
+                                <cstring>m_SSRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>SS</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="0" column="0">
+                            <property name="name">
+                                <cstring>m_AtomRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Atoms</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="0" column="1">
+                            <property name="name">
+                                <cstring>m_ChainRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Chain</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="1" column="1">
+                            <property name="name">
+                                <cstring>m_ProteinRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Protein</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="2" column="1">
+                            <property name="name">
+                                <cstring>m_CollectionRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Collection</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QButtonGroup" row="0" column="0" rowspan="3" colspan="1">
+            <property name="name">
+                <cstring>functionTypeButtonGroup</cstring>
+            </property>
+            <property name="title">
+                <string>Function type</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QGroupBox" row="1" column="0">
+                    <property name="name">
+                        <cstring>m_HydrophobicityTypeGroupBox</cstring>
+                    </property>
+                    <property name="title">
+                        <string>Hydrophobicity type</string>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QRadioButton" row="0" column="0">
+                            <property name="name">
+                                <cstring>m_PerAtomHydrophobicityRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Atom</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_PerResidueHydrophobicityRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Residue</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout9</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QRadioButton" row="2" column="0">
+                            <property name="name">
+                                <cstring>m_ElectrostaticPotentialRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Charge density</string>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="0" column="0">
+                            <property name="name">
+                                <cstring>electronDensityRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Electron density</string>
+                            </property>
+                            <property name="checked">
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                        <widget class="QRadioButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>hydrophobicityRadioButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Hydrophobicity</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>buttonOk</sender>
+        <signal>clicked()</signal>
+        <receiver>ConstructVolumesDialogBase</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>buttonCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>ConstructVolumesDialogBase</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>m_ColorMapFilePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>ConstructVolumesDialogBase</receiver>
+        <slot>colorMapFileSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_RawVCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ConstructVolumesDialogBase</receiver>
+        <slot>constructRawVSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>functionTypeButtonGroup</sender>
+        <signal>clicked(int)</signal>
+        <receiver>ConstructVolumesDialogBase</receiver>
+        <slot>functionTypeChangedSlot(int)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>electronDensityRadioButton</tabstop>
+    <tabstop>hydrophobicityRadioButton</tabstop>
+    <tabstop>m_Dim1SpinBox</tabstop>
+    <tabstop>m_Dim2SpinBox</tabstop>
+    <tabstop>m_Dim3SpinBox</tabstop>
+    <tabstop>m_BlobbyLineEdit</tabstop>
+    <tabstop>m_RawVCheckBox</tabstop>
+    <tabstop>m_AtomRadioButton</tabstop>
+    <tabstop>m_ColormapFileLineEdit</tabstop>
+    <tabstop>m_ColorMapFilePushButton</tabstop>
+    <tabstop>m_UseHardCutOffCheckBox</tabstop>
+    <tabstop>buttonOk</tabstop>
+    <tabstop>buttonCancel</tabstop>
+</tabstops>
+<slots>
+    <slot>outputVolumeFileSlot()</slot>
+    <slot>colorMapFileSlot()</slot>
+    <slot>constructRawVSlot(bool)</slot>
+    <slot>functionTypeChangedSlot(int)</slot>
+    <slot>outputSurfaceFileSlot()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

@@ -1,0 +1,542 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>TransformationsDialogBase</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>TransformationsDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>588</width>
+            <height>477</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Objects transformations</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLayoutWidget" row="1" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>Layout1</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonHelp</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Help</string>
+                    </property>
+                    <property name="accel">
+                        <string>F1</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>Horizontal Spacing2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonOk</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;OK</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QGroupBox" row="0" column="1">
+            <property name="name">
+                <cstring>m_CurrentTransformationsGroupBox</cstring>
+            </property>
+            <property name="title">
+                <string>Current transformations</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QListBox" row="0" column="0">
+                    <item>
+                        <property name="text">
+                            <string>New Item</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>m_CurrentTransformationsListBox</cstring>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>m_NewTransformationsGroupBox</cstring>
+            </property>
+            <property name="title">
+                <string>Add new transformation</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout11</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_XTranslationLineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_YTranslationLineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_ZTranslationLineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>m_AddTranslationPushButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Add translation</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QLayoutWidget" row="1" column="0">
+                    <property name="name">
+                        <cstring>layout10</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_AngleLineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QComboBox">
+                            <property name="name">
+                                <cstring>m_RotationAxisComboBox</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>m_AddRotationPushButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Add rotation</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QLayoutWidget" row="2" column="0">
+                    <property name="name">
+                        <cstring>layout12</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_ScaleLineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>m_AddScalePushButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Add scale</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QGroupBox" row="3" column="0">
+                    <property name="name">
+                        <cstring>m_GeneralRotationGroupBox</cstring>
+                    </property>
+                    <property name="title">
+                        <string></string>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLineEdit" row="0" column="0">
+                            <property name="name">
+                                <cstring>m_R00LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="0" column="1">
+                            <property name="name">
+                                <cstring>m_R01LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="0" column="2">
+                            <property name="name">
+                                <cstring>m_R02LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_R10LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="1" column="1">
+                            <property name="name">
+                                <cstring>m_R11LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="1" column="2">
+                            <property name="name">
+                                <cstring>m_R12LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="0">
+                            <property name="name">
+                                <cstring>m_R20LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="1">
+                            <property name="name">
+                                <cstring>m_R21LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="2">
+                            <property name="name">
+                                <cstring>m_R22LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="3">
+                            <property name="name">
+                                <cstring>layout5</cstring>
+                            </property>
+                            <hbox>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <spacer>
+                                    <property name="name">
+                                        <cstring>spacer2</cstring>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property name="sizeHint">
+                                        <size>
+                                            <width>40</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                                <widget class="QPushButton">
+                                    <property name="name">
+                                        <cstring>m_GeneralRotationPushButton</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>General Rotation</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                    </grid>
+                </widget>
+                <widget class="QGroupBox" row="4" column="0">
+                    <property name="name">
+                        <cstring>m_GeneralTransformationGroupBox</cstring>
+                    </property>
+                    <property name="title">
+                        <string></string>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLineEdit" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_X10LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="0">
+                            <property name="name">
+                                <cstring>m_X20LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="3" column="0">
+                            <property name="name">
+                                <cstring>m_X30LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="3" column="1">
+                            <property name="name">
+                                <cstring>m_X31LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="3" column="2">
+                            <property name="name">
+                                <cstring>m_X32LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="3" column="3">
+                            <property name="name">
+                                <cstring>m_X33LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="0" column="0">
+                            <property name="name">
+                                <cstring>m_X00LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="0" column="1">
+                            <property name="name">
+                                <cstring>m_X01LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="1" column="1">
+                            <property name="name">
+                                <cstring>m_X11LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="1">
+                            <property name="name">
+                                <cstring>m_X21LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="0" column="2">
+                            <property name="name">
+                                <cstring>m_X02LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="1" column="2">
+                            <property name="name">
+                                <cstring>m_X12LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="2">
+                            <property name="name">
+                                <cstring>m_X22LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="0" column="3">
+                            <property name="name">
+                                <cstring>m_X03LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="1" column="3">
+                            <property name="name">
+                                <cstring>m_X13LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" row="2" column="3">
+                            <property name="name">
+                                <cstring>m_X23LineEdit</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLayoutWidget" row="4" column="0" rowspan="1" colspan="4">
+                            <property name="name">
+                                <cstring>layout7</cstring>
+                            </property>
+                            <hbox>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <spacer>
+                                    <property name="name">
+                                        <cstring>spacer3</cstring>
+                                    </property>
+                                    <property name="orientation">
+                                        <enum>Horizontal</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>Expanding</enum>
+                                    </property>
+                                    <property name="sizeHint">
+                                        <size>
+                                            <width>270</width>
+                                            <height>20</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                                <widget class="QPushButton">
+                                    <property name="name">
+                                        <cstring>m_GeneralTransformationPushButton</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>General Xform</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>buttonOk</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>m_AddRotationPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>addRotationSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_AddScalePushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>addScaleSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_AddTranslationPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>addTranslationSlot()</slot>
+    </connection>
+    <connection>
+        <sender>buttonCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>m_GeneralRotationPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>addGeneralRotationSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_GeneralTransformationPushButton</sender>
+        <signal>clicked()</signal>
+        <receiver>TransformationsDialogBase</receiver>
+        <slot>addGeneralXFormSlot()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>buttonHelp</tabstop>
+    <tabstop>buttonOk</tabstop>
+    <tabstop>buttonCancel</tabstop>
+    <tabstop>m_CurrentTransformationsListBox</tabstop>
+    <tabstop>m_XTranslationLineEdit</tabstop>
+    <tabstop>m_YTranslationLineEdit</tabstop>
+    <tabstop>m_ZTranslationLineEdit</tabstop>
+    <tabstop>m_AddTranslationPushButton</tabstop>
+    <tabstop>m_AngleLineEdit</tabstop>
+    <tabstop>m_RotationAxisComboBox</tabstop>
+    <tabstop>m_AddRotationPushButton</tabstop>
+    <tabstop>m_ScaleLineEdit</tabstop>
+    <tabstop>m_AddScalePushButton</tabstop>
+    <tabstop>m_R00LineEdit</tabstop>
+    <tabstop>m_R01LineEdit</tabstop>
+    <tabstop>m_R02LineEdit</tabstop>
+    <tabstop>m_R10LineEdit</tabstop>
+    <tabstop>m_R11LineEdit</tabstop>
+    <tabstop>m_R12LineEdit</tabstop>
+    <tabstop>m_R20LineEdit</tabstop>
+    <tabstop>m_R21LineEdit</tabstop>
+    <tabstop>m_R22LineEdit</tabstop>
+    <tabstop>m_GeneralRotationPushButton</tabstop>
+    <tabstop>m_X00LineEdit</tabstop>
+    <tabstop>m_X01LineEdit</tabstop>
+    <tabstop>m_X02LineEdit</tabstop>
+    <tabstop>m_X03LineEdit</tabstop>
+    <tabstop>m_X10LineEdit</tabstop>
+    <tabstop>m_X11LineEdit</tabstop>
+    <tabstop>m_X12LineEdit</tabstop>
+    <tabstop>m_X13LineEdit</tabstop>
+    <tabstop>m_X20LineEdit</tabstop>
+    <tabstop>m_X21LineEdit</tabstop>
+    <tabstop>m_X22LineEdit</tabstop>
+    <tabstop>m_X23LineEdit</tabstop>
+    <tabstop>m_X30LineEdit</tabstop>
+    <tabstop>m_X31LineEdit</tabstop>
+    <tabstop>m_X32LineEdit</tabstop>
+    <tabstop>m_X33LineEdit</tabstop>
+    <tabstop>m_GeneralTransformationPushButton</tabstop>
+</tabstops>
+<slots>
+    <slot>addRotationSlot()</slot>
+    <slot>deleteTransformationSlot()</slot>
+    <slot>addTranslationSlot()</slot>
+    <slot>addScaleSlot()</slot>
+    <slot>clearAllSlot()</slot>
+    <slot>addGeneralRotationSlot()</slot>
+    <slot>addGeneralXFormSlot()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

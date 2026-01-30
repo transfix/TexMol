@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../lib/libCGAL_ImageIO.a  CMakeFiles/CGAL_ImageIO.dir/all_files.cpp.o
+/usr/bin/ranlib ../../lib/libCGAL_ImageIO.a

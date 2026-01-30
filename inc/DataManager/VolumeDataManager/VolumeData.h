@@ -1,0 +1,152 @@
+/*
+  Copyright 2011 The University of Texas at Austin
+
+	Advisor: Chandrajit Bajaj <bajaj@cs.utexas.edu>
+
+  This file is part of TexMol.
+
+  TexMol is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License version 2.1 as published by the Free Software Foundation.
+
+  TexMol is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+// VolumeData.h: interface for the VolumeData class.
+
+#if !defined(AFX_VOLUMEDATA_H__7385C4A8_3689_40F0_BCD5_626863EDC619__INCLUDED_)
+#define AFX_VOLUMEDATA_H__7385C4A8_3689_40F0_BCD5_626863EDC619__INCLUDED_
+
+#include <qstring.h>
+
+#include <DataManager/VolumeDataManager/VolumeRenderingProperties.h>
+#include <DataManager/AbstractData.h>
+#include <UsefulMath/Ray.h>
+#include <OpenGL_Viewer/Plane.h>
+#include <Geometry/Geometry.h>
+#include <ColorTable2/ColorTable.h>
+
+class VolumeRenderingProperties;
+class DataManager;
+class SimpleVolumeData;
+
+namespace CCVContouring
+{
+	class MultiContour;
+}
+
+const int RAWIV_TYPE = 0;
+const int RAWV_TYPE = 1;
+
+const int VOLUME_RENDERING = 0;
+const int SPLATTING = 1;
+
+class VolumeData : public AbstractData
+{
+		Q_OBJECT
+
+	public:
+		VolumeData(DataManager* dataManager);
+		virtual ~VolumeData();
+
+		virtual void associateDataManager(DataManager* dataManager);
+
+		virtual bool isLoaded();
+		virtual void setLoaded(bool loaded);
+	
+		VolumeRenderingProperties *m_VolumeRenderingProperties;
+		virtual QWidget* getPropertiesWidget();
+		virtual void setVisibilityInPropertiesWidget();
+
+		virtual bool setSimpleData(SimpleVolumeData* sData);
+		virtual bool deleteIsocontourBar(int index);
+		bool setHardCutOff(float cutOffValue);
+		virtual void renderContours();
+		virtual QString getSelection(CCVOpenGLMath::Ray targetVector);
+		virtual bool save(const char* filename);
+		virtual bool getMinMax(float* min, float* max);
+
+		bool read(QStringList fileNames);
+		bool connectSlots();
+		int getRenderingType();
+		Plane getClippingPlane();
+
+		float getAlpha()
+		{
+			return m_Alpha;
+		}
+
+		bool parseAnimationCommand(QStringList commands, int curCommand);
+
+		static bool supportsFileNames(QStringList fileNames);
+
+		SimpleVolumeData* m_SimpleVolumeData;
+
+		Geometry* getGeometry();
+
+		void forceAlpha(float alpha);
+
+	public slots:
+		void functionChangedSlot();
+		void isocontourNodeAddedSlot(int index, double isovalue, double R, double G, double B);
+		void isocontourNodeDeletedSlot(int index);
+		void isocontourNodeChangedSlot(int index, double isovalue, double R, double G, double B);
+		void isocontourNodeColorChangedSlot(int node, double R, double G, double B);
+		void isocontourNodeSavedSlot();
+		void isocontourChangedSlot();
+
+		void renderEnabledSlot(bool enabled);
+
+		void acquireContourSpectrumSlot();
+		void initSpectrumSlot();
+		void selectedIsocontourNodeSlot(int index, double isovalue);
+		void clipValueChangedSlot(int value);
+		void transparencyValueChangedSlot(int value);
+		double getClippingPlaneExtent();
+
+	protected:
+		bool updateProperties();
+		void setValExtents();
+		void loadColorMap();
+		bool allocateSpectrumData(int size);
+
+		bool m_Loaded;
+
+		CCVContouring::MultiContour* m_MultiContour;
+
+		int m_CurrentIsocontourSelected;
+
+		int array_size;
+		float* isoval;
+		float* area;
+		float* min_vol;
+		float* max_vol;
+		float* gradient;
+
+		double m_ClippingPlane;
+		// these data sets are needed for contouring. Its needed because
+		// simple volume data may not have this data type. Also, multicontour only stores
+		// a pointer. So we need to store these somewhere.
+		// Should we use this also for rendering and delete SimpleVolumeData's data ?
+		// or should we extend both rendering and isocontouring to deal with different
+		// data types ?
+		// I think we should do the latter. So im currently keeping duplicate data.
+		unsigned char* data1;
+		unsigned char* data2;
+		unsigned char* data3;
+		unsigned char* data4;
+
+		float m_Alpha;
+
+		vector<double> isoValueList;
+
+		QGridLayout* m_RenderPropertyFrameLayout;
+};
+
+#endif // !defined(AFX_VOLUMEDATA_H__7385C4A8_3689_40F0_BCD5_626863EDC619__INCLUDED_)

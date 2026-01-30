@@ -1,0 +1,22 @@
+# Target labels
+ test
+# Source files and their labels
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/compiler_log_formatter.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/debug.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/exception_safety.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/execution_monitor.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/framework.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/interaction_based.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/logged_expectations.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/plain_report_formatter.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/progress_monitor.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/results_collector.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/results_reporter.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/test_tools.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/unit_test_log.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/unit_test_main.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/unit_test_monitor.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/unit_test_parameters.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/unit_test_suite.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/xml_log_formatter.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/xml_report_formatter.cpp

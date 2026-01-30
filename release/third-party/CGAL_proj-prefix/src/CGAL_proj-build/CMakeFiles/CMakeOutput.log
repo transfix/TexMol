@@ -1,0 +1,728 @@
+The system is: Linux - 2.6.32-279.22.1.el6.x86_64 - x86_64
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CompilerIdCXX/a.out"
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CompilerIdC/a.out"
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1885272227/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1885272227.dir/build.make CMakeFiles/cmTryCompileExec1885272227.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1885272227.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1885272227.dir/testCXXCompiler.cxx.o -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec1885272227
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1885272227.dir/link.txt --verbose=1
+/usr/bin/c++          CMakeFiles/cmTryCompileExec1885272227.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec1885272227 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec53553162/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec53553162.dir/build.make CMakeFiles/cmTryCompileExec53553162.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec53553162
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec53553162.dir/link.txt --verbose=1
+/usr/bin/c++        -v CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec53553162 -rdynamic  
+Using built-in specs.
+Target: x86_64-redhat-linux
+Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux
+Thread model: posix
+gcc version 4.4.6 20120305 (Red Hat 4.4.6-4) (GCC) 
+COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec53553162' '-rdynamic' '-shared-libgcc' '-mtune=generic'
+ /usr/libexec/gcc/x86_64-redhat-linux/4.4.6/collect2 --eh-frame-hdr --build-id -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec53553162 /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../.. CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crtn.o
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec53553162/fast"]
+  ignore line: [gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec53553162.dir/build.make CMakeFiles/cmTryCompileExec53553162.dir/build]
+  ignore line: [gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp']
+  ignore line: [/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec53553162]
+  ignore line: [/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec53553162.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++        -v CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec53553162 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [Target: x86_64-redhat-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.4.6 20120305 (Red Hat 4.4.6-4) (GCC) ]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec53553162' '-rdynamic' '-shared-libgcc' '-mtune=generic']
+  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/4.4.6/collect2 --eh-frame-hdr --build-id -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec53553162 /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../.. CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crtn.o]
+    arg [/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec53553162] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../..]
+    arg [CMakeFiles/cmTryCompileExec53553162.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64] ==> [/usr/lib64]
+  collapse dir [/lib/../lib64] ==> [/lib64]
+  collapse dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/4.4.6;/usr/lib64;/lib64;/usr/lib]
+
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1768180176/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1768180176.dir/build.make CMakeFiles/cmTryCompileExec1768180176.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1768180176.dir/testCCompiler.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1768180176.dir/testCCompiler.c.o   -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec1768180176
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1768180176.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec1768180176.dir/testCCompiler.c.o  -o cmTryCompileExec1768180176 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1155290537/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1155290537.dir/build.make CMakeFiles/cmTryCompileExec1155290537.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec1155290537
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1155290537.dir/link.txt --verbose=1
+/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1155290537 -rdynamic  
+Using built-in specs.
+Target: x86_64-redhat-linux
+Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux
+Thread model: posix
+gcc version 4.4.6 20120305 (Red Hat 4.4.6-4) (GCC) 
+COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1155290537' '-rdynamic' '-mtune=generic'
+ /usr/libexec/gcc/x86_64-redhat-linux/4.4.6/collect2 --eh-frame-hdr --build-id -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec1155290537 /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../.. CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crtn.o
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec1155290537/fast"]
+  ignore line: [gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1155290537.dir/build.make CMakeFiles/cmTryCompileExec1155290537.dir/build]
+  ignore line: [gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp']
+  ignore line: [/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec1155290537]
+  ignore line: [/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1155290537.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1155290537 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [Target: x86_64-redhat-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-languages=c,c++,objc,obj-c++,java,fortran,ada --enable-java-awt=gtk --disable-dssi --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-1.5.0.0/jre --enable-libgcj-multifile --enable-java-maintainer-mode --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --disable-libjava-multilib --with-ppl --with-cloog --with-tune=generic --with-arch_32=i686 --build=x86_64-redhat-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.4.6 20120305 (Red Hat 4.4.6-4) (GCC) ]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/:/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1155290537' '-rdynamic' '-mtune=generic']
+  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/4.4.6/collect2 --eh-frame-hdr --build-id -m elf_x86_64 --hash-style=gnu -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec1155290537 /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../.. CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crtn.o]
+    arg [/usr/libexec/gcc/x86_64-redhat-linux/4.4.6/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec1155290537] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crti.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../..]
+    arg [CMakeFiles/cmTryCompileExec1155290537.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.4.6]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../../../lib64] ==> [/usr/lib64]
+  collapse dir [/lib/../lib64] ==> [/lib64]
+  collapse dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse dir [/usr/lib/gcc/x86_64-redhat-linux/4.4.6/../../..] ==> [/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/4.4.6;/usr/lib64;/lib64;/usr/lib]
+
+
+Performing C++ SOURCE FILE Test CGAL_CFG_ARRAY_MEMBER_INITIALIZATION_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3226314103/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3226314103.dir/build.make CMakeFiles/cmTryCompileExec3226314103.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3226314103.dir/CGAL_CFG_ARRAY_MEMBER_INITIALIZATION_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec3226314103.dir/CGAL_CFG_ARRAY_MEMBER_INITIALIZATION_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_ARRAY_MEMBER_INITIALIZATION_BUG.cpp
+Linking CXX executable cmTryCompileExec3226314103
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3226314103.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec3226314103.dir/CGAL_CFG_ARRAY_MEMBER_INITIALIZATION_BUG.cpp.o  -o cmTryCompileExec3226314103 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_DENORMALS_COMPILE_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3099976552/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3099976552.dir/build.make CMakeFiles/cmTryCompileExec3099976552.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3099976552.dir/CGAL_CFG_DENORMALS_COMPILE_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec3099976552.dir/CGAL_CFG_DENORMALS_COMPILE_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_DENORMALS_COMPILE_BUG.cpp
+Linking CXX executable cmTryCompileExec3099976552
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3099976552.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec3099976552.dir/CGAL_CFG_DENORMALS_COMPILE_BUG.cpp.o  -o cmTryCompileExec3099976552 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_FPU_ROUNDING_MODE_UNWINDING_VC_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2934170554/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2934170554.dir/build.make CMakeFiles/cmTryCompileExec2934170554.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2934170554.dir/CGAL_CFG_FPU_ROUNDING_MODE_UNWINDING_VC_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec2934170554.dir/CGAL_CFG_FPU_ROUNDING_MODE_UNWINDING_VC_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_FPU_ROUNDING_MODE_UNWINDING_VC_BUG.cpp
+Linking CXX executable cmTryCompileExec2934170554
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2934170554.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec2934170554.dir/CGAL_CFG_FPU_ROUNDING_MODE_UNWINDING_VC_BUG.cpp.o  -o cmTryCompileExec2934170554 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_IEEE_754_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3881967082/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3881967082.dir/build.make CMakeFiles/cmTryCompileExec3881967082.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3881967082.dir/CGAL_CFG_IEEE_754_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec3881967082.dir/CGAL_CFG_IEEE_754_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_IEEE_754_BUG.cpp
+Linking CXX executable cmTryCompileExec3881967082
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3881967082.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec3881967082.dir/CGAL_CFG_IEEE_754_BUG.cpp.o  -o cmTryCompileExec3881967082 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_ISTREAM_INT_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4044386432/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4044386432.dir/build.make CMakeFiles/cmTryCompileExec4044386432.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec4044386432.dir/CGAL_CFG_ISTREAM_INT_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec4044386432.dir/CGAL_CFG_ISTREAM_INT_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_ISTREAM_INT_BUG.cpp
+Linking CXX executable cmTryCompileExec4044386432
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4044386432.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec4044386432.dir/CGAL_CFG_ISTREAM_INT_BUG.cpp.o  -o cmTryCompileExec4044386432 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+7812
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_MATCHING_BUG_5 succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec434687104/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec434687104.dir/build.make CMakeFiles/cmTryCompileExec434687104.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec434687104.dir/CGAL_CFG_MATCHING_BUG_5.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec434687104.dir/CGAL_CFG_MATCHING_BUG_5.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_MATCHING_BUG_5.cpp
+Linking CXX executable cmTryCompileExec434687104
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec434687104.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec434687104.dir/CGAL_CFG_MATCHING_BUG_5.cpp.o  -o cmTryCompileExec434687104 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_MATCHING_BUG_6 succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3086171976/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3086171976.dir/build.make CMakeFiles/cmTryCompileExec3086171976.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3086171976.dir/CGAL_CFG_MATCHING_BUG_6.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec3086171976.dir/CGAL_CFG_MATCHING_BUG_6.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_MATCHING_BUG_6.cpp
+Linking CXX executable cmTryCompileExec3086171976
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3086171976.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec3086171976.dir/CGAL_CFG_MATCHING_BUG_6.cpp.o  -o cmTryCompileExec3086171976 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_NESTED_CLASS_FRIEND_DECLARATION_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1850088719/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1850088719.dir/build.make CMakeFiles/cmTryCompileExec1850088719.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1850088719.dir/CGAL_CFG_NESTED_CLASS_FRIEND_DECLARATION_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec1850088719.dir/CGAL_CFG_NESTED_CLASS_FRIEND_DECLARATION_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NESTED_CLASS_FRIEND_DECLARATION_BUG.cpp
+Linking CXX executable cmTryCompileExec1850088719
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1850088719.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec1850088719.dir/CGAL_CFG_NESTED_CLASS_FRIEND_DECLARATION_BUG.cpp.o  -o cmTryCompileExec1850088719 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+A's do_something
+C's do_something
+B's do_something
+C's do_something
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_NO_LIMITS succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1245339576/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1245339576.dir/build.make CMakeFiles/cmTryCompileExec1245339576.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1245339576.dir/CGAL_CFG_NO_LIMITS.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec1245339576.dir/CGAL_CFG_NO_LIMITS.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NO_LIMITS.cpp
+Linking CXX executable cmTryCompileExec1245339576
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1245339576.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec1245339576.dir/CGAL_CFG_NO_LIMITS.cpp.o  -o cmTryCompileExec1245339576 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_NO_NEXTAFTER succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3778092232/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3778092232.dir/build.make CMakeFiles/cmTryCompileExec3778092232.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3778092232.dir/CGAL_CFG_NO_NEXTAFTER.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec3778092232.dir/CGAL_CFG_NO_NEXTAFTER.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NO_NEXTAFTER.cpp
+Linking CXX executable cmTryCompileExec3778092232
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3778092232.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec3778092232.dir/CGAL_CFG_NO_NEXTAFTER.cpp.o  -o cmTryCompileExec3778092232 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_NO_STL succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2564647870/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2564647870.dir/build.make CMakeFiles/cmTryCompileExec2564647870.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2564647870.dir/CGAL_CFG_NO_STL.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec2564647870.dir/CGAL_CFG_NO_STL.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NO_STL.cpp
+Linking CXX executable cmTryCompileExec2564647870
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2564647870.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec2564647870.dir/CGAL_CFG_NO_STL.cpp.o  -o cmTryCompileExec2564647870 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_NO_WARNING_CPP_DIRECTIVE_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec788782291/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec788782291.dir/build.make CMakeFiles/cmTryCompileExec788782291.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec788782291.dir/CGAL_CFG_NO_WARNING_CPP_DIRECTIVE_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec788782291.dir/CGAL_CFG_NO_WARNING_CPP_DIRECTIVE_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NO_WARNING_CPP_DIRECTIVE_BUG.cpp
+/workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NO_WARNING_CPP_DIRECTIVE_BUG.cpp:25:2: warning: #warning "Hello world"
+Linking CXX executable cmTryCompileExec788782291
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec788782291.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec788782291.dir/CGAL_CFG_NO_WARNING_CPP_DIRECTIVE_BUG.cpp.o  -o cmTryCompileExec788782291 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_NUMERIC_LIMITS_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2825998336/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2825998336.dir/build.make CMakeFiles/cmTryCompileExec2825998336.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2825998336.dir/CGAL_CFG_NUMERIC_LIMITS_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec2825998336.dir/CGAL_CFG_NUMERIC_LIMITS_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_NUMERIC_LIMITS_BUG.cpp
+Linking CXX executable cmTryCompileExec2825998336
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2825998336.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec2825998336.dir/CGAL_CFG_NUMERIC_LIMITS_BUG.cpp.o  -o cmTryCompileExec2825998336 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_OUTOFLINE_MEMBER_DEFINITION_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2930172195/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2930172195.dir/build.make CMakeFiles/cmTryCompileExec2930172195.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2930172195.dir/CGAL_CFG_OUTOFLINE_MEMBER_DEFINITION_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec2930172195.dir/CGAL_CFG_OUTOFLINE_MEMBER_DEFINITION_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_OUTOFLINE_MEMBER_DEFINITION_BUG.cpp
+Linking CXX executable cmTryCompileExec2930172195
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2930172195.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec2930172195.dir/CGAL_CFG_OUTOFLINE_MEMBER_DEFINITION_BUG.cpp.o  -o cmTryCompileExec2930172195 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_TEMPLATE_IN_DEFAULT_PARAMETER_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1564169436/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1564169436.dir/build.make CMakeFiles/cmTryCompileExec1564169436.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1564169436.dir/CGAL_CFG_TEMPLATE_IN_DEFAULT_PARAMETER_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec1564169436.dir/CGAL_CFG_TEMPLATE_IN_DEFAULT_PARAMETER_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_TEMPLATE_IN_DEFAULT_PARAMETER_BUG.cpp
+Linking CXX executable cmTryCompileExec1564169436
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1564169436.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec1564169436.dir/CGAL_CFG_TEMPLATE_IN_DEFAULT_PARAMETER_BUG.cpp.o  -o cmTryCompileExec1564169436 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_TYPENAME_BEFORE_DEFAULT_ARGUMENT_BUG succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec974582720/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec974582720.dir/build.make CMakeFiles/cmTryCompileExec974582720.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec974582720.dir/CGAL_CFG_TYPENAME_BEFORE_DEFAULT_ARGUMENT_BUG.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec974582720.dir/CGAL_CFG_TYPENAME_BEFORE_DEFAULT_ARGUMENT_BUG.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_TYPENAME_BEFORE_DEFAULT_ARGUMENT_BUG.cpp
+Linking CXX executable cmTryCompileExec974582720
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec974582720.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec974582720.dir/CGAL_CFG_TYPENAME_BEFORE_DEFAULT_ARGUMENT_BUG.cpp.o  -o cmTryCompileExec974582720 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Performing C++ SOURCE FILE Test CGAL_CFG_USING_BASE_MEMBER_BUG_2 succeded with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3498846458/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3498846458.dir/build.make CMakeFiles/cmTryCompileExec3498846458.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3498846458.dir/CGAL_CFG_USING_BASE_MEMBER_BUG_2.cpp.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec3498846458.dir/CGAL_CFG_USING_BASE_MEMBER_BUG_2.cpp.o -c /workspace/cvcsoft/TexMol/third-party/cgal/config/testfiles/CGAL_CFG_USING_BASE_MEMBER_BUG_2.cpp
+Linking CXX executable cmTryCompileExec3498846458
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3498846458.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec3498846458.dir/CGAL_CFG_USING_BASE_MEMBER_BUG_2.cpp.o  -o cmTryCompileExec3498846458 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+Source file was:
+
+Determining if the function XOpenDisplay exists in the /usr/lib64/libX11.so;/usr/lib64/libXext.so passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1236266258/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1236266258.dir/build.make CMakeFiles/cmTryCompileExec1236266258.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1236266258.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec1236266258.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1236266258
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1236266258.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec1236266258.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1236266258 -rdynamic -lX11 -lXext 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1677300602/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1677300602.dir/build.make CMakeFiles/cmTryCompileExec1677300602.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1677300602.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec1677300602.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1677300602
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1677300602.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec1677300602.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1677300602 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3874489804/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3874489804.dir/build.make CMakeFiles/cmTryCompileExec3874489804.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3874489804.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec3874489804.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3874489804
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3874489804.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec3874489804.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3874489804 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2592996568/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2592996568.dir/build.make CMakeFiles/cmTryCompileExec2592996568.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2592996568.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec2592996568.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2592996568
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2592996568.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec2592996568.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2592996568 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3122519199/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3122519199.dir/build.make CMakeFiles/cmTryCompileExec3122519199.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3122519199.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec3122519199.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3122519199
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3122519199.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec3122519199.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3122519199 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec608678478/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec608678478.dir/build.make CMakeFiles/cmTryCompileExec608678478.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec608678478.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec608678478.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec608678478
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec608678478.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec608678478.dir/CheckFunctionExists.c.o  -o cmTryCompileExec608678478 -rdynamic -lICE 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the Q_WS_X11 exist passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1240496023/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1240496023.dir/build.make CMakeFiles/cmTryCompileExec1240496023.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1240496023.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec1240496023.dir/CheckSymbolExists.cxx.o -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTryCompileExec1240496023
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1240496023.dir/link.txt --verbose=1
+/usr/bin/c++     -frounding-math      CMakeFiles/cmTryCompileExec1240496023.dir/CheckSymbolExists.cxx.o  -o cmTryCompileExec1240496023 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+File /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_X11
+  return ((int*)(&Q_WS_X11))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if files pthread.h exist passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3236226817/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3236226817.dir/build.make CMakeFiles/cmTryCompileExec3236226817.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3236226817.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3236226817.dir/CheckIncludeFiles.c.o   -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec3236226817
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3236226817.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec3236226817.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec3236226817 -rdynamic 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2184139106/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2184139106.dir/build.make CMakeFiles/cmTryCompileExec2184139106.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2184139106.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec2184139106.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2184139106
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2184139106.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec2184139106.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2184139106 -rdynamic -lpthread 
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+

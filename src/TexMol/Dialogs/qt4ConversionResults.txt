@@ -1,0 +1,20 @@
+<arand@neutron|Dialogs>$ ./toQt4.sh 
+AboutDialogBase.Qt3.ui
+uic3: flag 'WordBreak' for widget 'QLabel' is not supported
+ConstructCurvaturesDialogBase.Qt3.ui
+ConstructDepthColoredVolumesDialogBase.Qt3.ui
+ConstructVolumesDialogBase.Qt3.ui
+DownloadPDBDialogBase.Qt3.ui
+FileSaveDialogBase.Qt3.ui
+LightsDialogBase.Qt3.ui
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'Sunken' for widget 'QLineEdit' is not supported
+MainWindowBase.Qt3.ui
+MouseHandlerDialogBase.Qt3.ui
+MovieImageFileSaveDialogBase.Qt3.ui
+ScriptsDialogBase.Qt3.ui
+SetViewingParametersDialogBase.Qt3.ui
+SliceDialogBase.Qt3.ui
+SurfaceAreaAndVolumeDialogBase.Qt3.ui
+SurfaceDialogBase.Qt3.ui
+TransformationsDialogBase.Qt3.ui

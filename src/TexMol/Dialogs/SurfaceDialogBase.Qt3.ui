@@ -1,0 +1,308 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>SurfaceDialogBase</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>SurfaceDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>303</width>
+            <height>295</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Generate surface</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>false</bool>
+    </property>
+    <property name="modal">
+        <bool>true</bool>
+    </property>
+    <property name="toolTip" stdset="0">
+        <string></string>
+    </property>
+    <hbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="resizeMode">
+            <enum>Fixed</enum>
+        </property>
+        <widget class="QLayoutWidget">
+            <property name="name">
+                <cstring>layoutMain</cstring>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QComboBox" row="0" column="1" rowspan="1" colspan="2">
+                    <item>
+                        <property name="text">
+                            <string>Adaptive grid</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>HLS</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Gaussian blur</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>LBIE</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>inputAlgorithm</cstring>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Select an algorithm to use when generating the surface.</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton" row="9" column="2">
+                    <property name="name">
+                        <cstring>pushButtonCalculate</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Calculate</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Generate the surface.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="5" column="0">
+                    <property name="name">
+                        <cstring>labelLevel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Level</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="1" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputSize</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>999999</number>
+                    </property>
+                    <property name="minValue">
+                        <number>32</number>
+                    </property>
+                    <property name="lineStep">
+                        <number>32</number>
+                    </property>
+                    <property name="value">
+                        <number>128</number>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Size of the cube containing the surface.</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="8" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputOptimizeRadii</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="5" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputLevel</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>999999</number>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                    <property name="lineStep">
+                        <number>1</number>
+                    </property>
+                    <property name="value">
+                        <number>1</number>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="0">
+                    <property name="name">
+                        <cstring>labelBlobbiness</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Blobbiness</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Blobbiness, in thousandths.</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="7" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputWeight</cstring>
+                    </property>
+                    <property name="text">
+                        <string>0.001</string>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="4" column="1" rowspan="1" colspan="2">
+                    <item>
+                        <property name="text">
+                            <string>van der Waals</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Roux</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>inputRadiusType</cstring>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="8" column="0">
+                    <property name="name">
+                        <cstring>textLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Optimize radii</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>labelSize</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Size</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Size of the cube containing the surface.</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="6" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputIterations</cstring>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                    <property name="value">
+                        <number>3</number>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Number of iterations to run algorithm.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>textIsovalue</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Isovalue</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="2" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputIsovalue</cstring>
+                    </property>
+                    <property name="value">
+                        <number>1</number>
+                    </property>
+                </widget>
+                <spacer row="9" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>292</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="7" column="0">
+                    <property name="name">
+                        <cstring>labelWeight</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Weight</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Weight, in thousandths.</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="4" column="0">
+                    <property name="name">
+                        <cstring>labelRadiusType</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Radius type</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>labelAlgorithm</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Algorithm</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Select an algorithm to use when generating the surface.</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="3" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>inputBlobbiness</cstring>
+                    </property>
+                    <property name="text">
+                        <string>-2.3</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="6" column="0">
+                    <property name="name">
+                        <cstring>labelIterations</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Iterations</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Number of iterations to run algorithm.</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </hbox>
+</widget>
+<connections>
+    <connection>
+        <sender>pushButtonCalculate</sender>
+        <signal>clicked()</signal>
+        <receiver>SurfaceDialogBase</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>inputAlgorithm</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>SurfaceDialogBase</receiver>
+        <slot>setupSlot(const QString&amp;)</slot>
+    </connection>
+</connections>
+<slots>
+    <slot>setupSlot( const QString &amp; algorithm )</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

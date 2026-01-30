@@ -1,0 +1,558 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>714</width>
+    <height>808</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>0</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="font" >
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
+  <property name="cursor" >
+   <cursorShape>PointingHandCursor</cursorShape>
+  </property>
+  <property name="windowTitle" >
+   <string>TexMol 1.1 Alpha</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <layout class="QGridLayout" name="gridLayout_3" >
+    <item row="0" column="0" >
+     <widget class="Q3GroupBox" name="m_RendererGroupBox" >
+      <layout class="QGridLayout" name="gridLayout_2" >
+       <item row="0" column="0" >
+        <widget class="QSplitter" name="m_SplitViewer" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1" >
+     <widget class="Q3GroupBox" name="m_MoleculeBrowserGroupBox" >
+      <property name="sizePolicy" >
+       <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font" >
+       <font>
+        <family>Georgia</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="title" >
+       <string>Molecule Browser</string>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
+      <layout class="QGridLayout" name="gridLayout" >
+       <item row="0" column="0" >
+        <widget class="Q3ListBox" name="m_DataSetsListBox" />
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2" >
+     <widget class="Q3GroupBox" name="m_PropertiesGroupBox" >
+      <property name="sizePolicy" >
+       <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>0</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="font" >
+       <font>
+        <family>Georgia</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="title" >
+       <string>Properties</string>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>714</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="m_FilePopupMenu" >
+    <property name="font" >
+     <font>
+      <family>DejaVu Sans</family>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor" >
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="autoFillBackground" >
+     <bool>true</bool>
+    </property>
+    <property name="title" >
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="m_Action_RecentFileListMenu" >
+     <property name="title" >
+      <string>Recent Files</string>
+     </property>
+     <addaction name="m_Action_RecentFileListDummy" />
+    </widget>
+    <addaction name="m_Action_FileOpen" />
+    <addaction name="m_Action_FileOpenMulti" />
+    <addaction name="m_Action_DownloadPDB" />
+    <addaction name="m_Action_SaveImage" />
+    <addaction name="m_Action_RecentFileListMenu" />
+    <addaction name="separator" />
+    <addaction name="m_Action_Exit" />
+   </widget>
+   <widget class="QMenu" name="m_ViewPopupMenu" >
+    <property name="font" >
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="title" >
+     <string>View</string>
+    </property>
+    <widget class="QMenu" name="menuProjection" >
+     <property name="title" >
+      <string>Projection</string>
+     </property>
+     <addaction name="m_Action_PerspectiveView" />
+     <addaction name="m_Action_OrthographicView" />
+    </widget>
+    <addaction name="menuProjection" />
+    <addaction name="m_Action_SetViewParameters" />
+    <addaction name="separator" />
+    <addaction name="m_Action_SplitView" />
+    <addaction name="m_Action_SyncView" />
+    <addaction name="separator" />
+    <addaction name="m_Action_FullScreen" />
+    <addaction name="m_Action_Stereo" />
+    <addaction name="m_Action_ForceMeshRender" />
+   </widget>
+   <addaction name="m_FilePopupMenu" />
+   <addaction name="m_ViewPopupMenu" />
+  </widget>
+  <widget class="QStatusBar" name="statusbar" />
+  <action name="m_Action_FileOpen" >
+   <property name="text" >
+    <string>Open</string>
+   </property>
+   <property name="toolTip" >
+    <string>Open New File</string>
+   </property>
+   <property name="font" >
+    <font>
+     <family>DejaVu Sans</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </action>
+  <action name="m_Action_FileOpenMulti" >
+   <property name="text" >
+    <string>Open Multi</string>
+   </property>
+  </action>
+  <action name="m_Action_DownloadPDB" >
+   <property name="text" >
+    <string>Download PDB</string>
+   </property>
+  </action>
+  <action name="m_Action_SaveImage" >
+   <property name="text" >
+    <string>Save Image</string>
+   </property>
+  </action>
+  <action name="m_Action_RecentFileList" >
+   <property name="text" >
+    <string>Recent Files</string>
+   </property>
+  </action>
+  <action name="m_Action_Exit" >
+   <property name="text" >
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="m_Action_RecentFileListDummy" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>&lt;No files></string>
+   </property>
+  </action>
+  <action name="viewTypeAction" >
+   <property name="text" >
+    <string>Projection</string>
+   </property>
+  </action>
+  <action name="perspectiveViewTypeAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Perspective</string>
+   </property>
+  </action>
+  <action name="orthographicViewTypeAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Orthographic</string>
+   </property>
+  </action>
+  <action name="viewSetViewAction" >
+   <property name="text" >
+    <string>Set view parameters</string>
+   </property>
+  </action>
+  <action name="splitViewAction" >
+   <property name="text" >
+    <string>Split view</string>
+   </property>
+  </action>
+  <action name="sincViewAction" >
+   <property name="text" >
+    <string>Sinc views</string>
+   </property>
+  </action>
+  <action name="fullScreenViewAction" >
+   <property name="text" >
+    <string>Full screen</string>
+   </property>
+  </action>
+  <action name="stereoViewAction" >
+   <property name="text" >
+    <string>Stereo</string>
+   </property>
+  </action>
+  <action name="forceMeshRenderingAction" >
+   <property name="text" >
+    <string>Force mesh rendering</string>
+   </property>
+  </action>
+  <action name="startRecordAction" >
+   <property name="text" >
+    <string>Start recording</string>
+   </property>
+  </action>
+  <action name="stopRecordAction" >
+   <property name="text" >
+    <string>Stop recording</string>
+   </property>
+  </action>
+  <action name="playbackAnimationAction" >
+   <property name="text" >
+    <string>Playback animation</string>
+   </property>
+  </action>
+  <action name="recordAnimationAction" >
+   <property name="text" >
+    <string>Record animation</string>
+   </property>
+  </action>
+  <action name="playbackMovieAction" >
+   <property name="text" >
+    <string>Playback movie</string>
+   </property>
+  </action>
+  <action name="m_RenderTypeAction" >
+   <property name="text" >
+    <string>Ray trace</string>
+   </property>
+  </action>
+  <action name="m_BackgroundColorAction" >
+   <property name="text" >
+    <string>Background Color</string>
+   </property>
+  </action>
+  <action name="showGridOptionsAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Display grid</string>
+   </property>
+  </action>
+  <action name="m_UserInteractionAction" >
+   <property name="text" >
+    <string>Mouse-keyboard functions</string>
+   </property>
+  </action>
+  <action name="optionsTransformObjectAction" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>Transform object</string>
+   </property>
+  </action>
+  <action name="m_SelectObjectstAction" >
+   <property name="text" >
+    <string>Select objects</string>
+   </property>
+  </action>
+  <action name="m_GlobalBoundingBoxAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Global bounding box</string>
+   </property>
+  </action>
+  <action name="m_DataBoundingBoxAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Data bounding box</string>
+   </property>
+  </action>
+  <action name="m_ShowViewOptionsAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show view information</string>
+   </property>
+  </action>
+  <action name="m_ShowMouseOptionsAction" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Show mouse position</string>
+   </property>
+  </action>
+  <action name="action_13" >
+   <property name="text" >
+    <string>Script</string>
+   </property>
+  </action>
+  <action name="surfaceDialogAction" >
+   <property name="text" >
+    <string>Construct surface</string>
+   </property>
+  </action>
+  <action name="m_ConstructNurbsSurfaceAction" >
+   <property name="text" >
+    <string>Construct NURBS surface</string>
+   </property>
+  </action>
+  <action name="surfaceAreaAndVolumeDialogAction" >
+   <property name="text" >
+    <string>Surface area and volume</string>
+   </property>
+  </action>
+  <action name="constructVolumeUtilitiesAction" >
+   <property name="text" >
+    <string>Construct volume</string>
+   </property>
+  </action>
+  <action name="m_ConstructDepthColoredVolumeAction" >
+   <property name="text" >
+    <string>Construct depth colored volume</string>
+   </property>
+  </action>
+  <action name="m_ConstructPocketsAction" >
+   <property name="text" >
+    <string>Construct Pockets</string>
+   </property>
+  </action>
+  <action name="m_ComputePocketTunnelAction" >
+   <property name="text" >
+    <string>Compute Pocket-Tunnel by Stable Manifold</string>
+   </property>
+  </action>
+  <action name="m_ConstructHLSPocketsAction" >
+   <property name="text" >
+    <string>Construct HLS Pockets</string>
+   </property>
+  </action>
+  <action name="getCurvatureUtilitiesAction" >
+   <property name="text" >
+    <string>Get curvatures</string>
+   </property>
+  </action>
+  <action name="m_MatchAction" >
+   <property name="text" >
+    <string>Perform a (MACT) match</string>
+   </property>
+  </action>
+  <action name="m_GB_energy" >
+   <property name="text" >
+    <string>Compute Energy (GB)</string>
+   </property>
+  </action>
+  <action name="m_GB_forceField" >
+   <property name="text" >
+    <string>Compute Forcefield (GB)</string>
+   </property>
+  </action>
+  <action name="m_PB_energy" >
+   <property name="text" >
+    <string>Compute Energy+Potential (PB)</string>
+   </property>
+  </action>
+  <action name="m_2DSliceAction" >
+   <property name="text" >
+    <string>Get 2D Slice</string>
+   </property>
+  </action>
+  <action name="utilitiesElucidateSecondaryStructuresAction" >
+   <property name="text" >
+    <string>Elucidate Secondary Structures</string>
+   </property>
+  </action>
+  <action name="F2DockAction" >
+   <property name="text" >
+    <string>F2Dock</string>
+   </property>
+  </action>
+  <action name="contentsHelpAction" >
+   <property name="text" >
+    <string>Contents</string>
+   </property>
+  </action>
+  <action name="indexHelpAction" >
+   <property name="text" >
+    <string>Index</string>
+   </property>
+  </action>
+  <action name="m_AcknowledgementAction" >
+   <property name="text" >
+    <string>Acknowledgements</string>
+   </property>
+  </action>
+  <action name="m_Action_SyncView" >
+   <property name="text" >
+    <string>Sync View</string>
+   </property>
+  </action>
+  <action name="m_Action_PerspectiveView" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Perspective</string>
+   </property>
+  </action>
+  <action name="m_Action_OrthographicView" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Orthographic</string>
+   </property>
+  </action>
+  <action name="m_Action_SetViewParameters" >
+   <property name="text" >
+    <string>Set View Parameters</string>
+   </property>
+  </action>
+  <action name="m_Action_SplitView" >
+   <property name="text" >
+    <string>Split View</string>
+   </property>
+  </action>
+  <action name="m_Action_FullScreen" >
+   <property name="text" >
+    <string>Full Screen</string>
+   </property>
+  </action>
+  <action name="m_Action_Stereo" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Stereo</string>
+   </property>
+  </action>
+  <action name="m_Action_ForceMeshRender" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>Force Mesh Render</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Q3GroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>Qt3Support/Q3GroupBox</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Q3ListBox</class>
+   <extends>Q3Frame</extends>
+   <header>q3listbox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

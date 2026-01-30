@@ -1,0 +1,14 @@
+// VolumeRenderingProperties.cpp: implementation of the VolumeRenderingProperties class.
+
+#include <DataManager/VolumeDataManager/VolumeRenderingProperties.h>
+#include <q3groupbox.h>
+#include <q3mainwindow.h>
+
+VolumeRenderingProperties::VolumeRenderingProperties(QWidget* parent, const char* name, Qt::WFlags fl)
+	: VolumeRenderingPropertiesBase(parent, name, fl)
+{
+}
+
+VolumeRenderingProperties::~VolumeRenderingProperties()
+{
+}

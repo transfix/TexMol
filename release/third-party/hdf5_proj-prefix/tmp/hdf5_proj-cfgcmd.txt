@@ -1,0 +1,1 @@
+cmd='/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake;-DBUILD_SHARED_LIBS=FALSE;-DHDF5_BUILD_CPP_LIB=ON;-DCMAKE_INSTALL_PREFIX=/workspace/cvcsoft/TexMol/release;-GUnix Makefiles;/workspace/cvcsoft/TexMol/third-party/hdf5'

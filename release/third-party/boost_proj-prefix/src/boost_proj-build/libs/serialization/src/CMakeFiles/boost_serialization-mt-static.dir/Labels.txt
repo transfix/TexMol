@@ -1,0 +1,31 @@
+# Target labels
+ serialization
+# Source files and their labels
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_archive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_iarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_iserializer.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_oarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_oserializer.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_pointer_iserializer.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_pointer_oserializer.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_serializer_map.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_text_iprimitive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_text_oprimitive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/basic_xml_archive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/binary_iarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/binary_oarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/extended_type_info.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/extended_type_info_typeid.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/extended_type_info_no_rtti.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/polymorphic_iarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/polymorphic_oarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/stl_port.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/text_iarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/text_oarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/void_cast.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/archive_exception.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_grammar.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_iarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_oarchive.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/xml_archive_exception.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/serialization/src/shared_ptr_helper.cpp

@@ -1,0 +1,9 @@
+arand@ices.utexas.edu, 10-28-2010
+
+The CG code in this directory (i.e. the CoarseGrain and Optimizer 
+subdirectories) has been disablied since this functionality is provided
+in the libCG directory of MolSurf.
+
+Future: GBEnergy contains duplicate (but slightly different) versions
+of atom/groupOfAtoms/surface/aspline/... .  At some point this should be 
+modified to use the actually libraries for these functions.

@@ -1,0 +1,268 @@
+<ui version="4.0" >
+ <class>GeneralizedBornDialogBase</class>
+ <widget class="QDialog" name="GeneralizedBornDialogBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>397</width>
+    <height>169</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>371</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="gbPqrLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>271</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="gbRawnLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>271</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="gbOutputLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>271</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="gbEpsilonLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>200</x>
+     <y>100</y>
+     <width>61</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="gbThresholdLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>340</x>
+     <y>100</y>
+     <width>51</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="gbPqrButton" >
+   <property name="geometry" >
+    <rect>
+     <x>300</x>
+     <y>10</y>
+     <width>91</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>PQR File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="gbRawnButton" >
+   <property name="geometry" >
+    <rect>
+     <x>300</x>
+     <y>40</y>
+     <width>91</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>RAWN File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="gbOutputButton" >
+   <property name="geometry" >
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>91</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Output Prefix</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>150</x>
+     <y>100</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Epsilon</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>270</x>
+     <y>100</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Threshold</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>51</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Surface</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="gbSurfaceTypeSelector" >
+   <property name="geometry" >
+    <rect>
+     <x>80</x>
+     <y>100</y>
+     <width>61</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text" >
+     <string>PQR</string>
+    </property>
+   </item>
+   <item>
+    <property name="text" >
+     <string>VDW</string>
+    </property>
+   </item>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>GeneralizedBornDialogBase</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>GeneralizedBornDialogBase</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gbPqrButton</sender>
+   <signal>clicked()</signal>
+   <receiver>GeneralizedBornDialogBase</receiver>
+   <slot>gbPqrFileNameSlot()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>204</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gbRawnButton</sender>
+   <signal>clicked()</signal>
+   <receiver>GeneralizedBornDialogBase</receiver>
+   <slot>gbRawnFileNameSlot()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>204</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gbOutputButton</sender>
+   <signal>clicked()</signal>
+   <receiver>GeneralizedBornDialogBase</receiver>
+   <slot>gbOutputPrefixSlot()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>204</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>gbPqrFileNameSlot()</slot>
+  <slot>gbRawnFileNameSlot()</slot>
+  <slot>gbOutputPrefixSlot()</slot>
+ </slots>
+</ui>

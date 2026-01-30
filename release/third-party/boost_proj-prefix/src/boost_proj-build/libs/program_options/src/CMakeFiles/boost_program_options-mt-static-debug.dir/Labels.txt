@@ -1,0 +1,13 @@
+# Target labels
+ program_options
+# Source files and their labels
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/cmdline.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/config_file.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/options_description.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/parsers.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/variables_map.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/value_semantic.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/positional_options.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/utf8_codecvt_facet.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/convert.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/program_options/src/winmain.cpp

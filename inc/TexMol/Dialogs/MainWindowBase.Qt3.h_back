@@ -1,0 +1,940 @@
+#ifndef MAINWINDOWBASE_H
+#define MAINWINDOWBASE_H
+#include <Qt3Support>
+
+#include <qvariant.h>
+
+
+#include <Qt3Support/Q3GroupBox>
+#include <Qt3Support/Q3ListBox>
+#include <Qt3Support/Q3MainWindow>
+#include <Qt3Support/Q3MimeSourceFactory>
+#include <QtCore/QVariant>
+#include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QGridLayout>
+#include <QtGui/QMenu>
+#include <QtGui/QMenuBar>
+#include <QtGui/QSplitter>
+#include <QtGui/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_MainWindowBase
+{
+public:
+    QAction *exitAction;
+    QAction *fileOpenAction;
+    QAction *startRecordAction;
+    QAction *stopRecordAction;
+    QAction *recordAnimationAction;
+    QAction *playbackAnimationAction;
+    QAction *playbackMovieAction;
+    QAction *contentsHelpAction;
+    QAction *indexHelpAction;
+    QAction *constructVolumeUtilitiesAction;
+    QAction *saveImageAction;
+    QAction *downloadPDBAction;
+    QAction *splitViewAction;
+    QAction *syncViewAction;
+    QAction *viewAction;
+    QAction *fullscreenViewAction;
+    QAction *getCurvatureUtilitiesAction;
+    QAction *showGridOptionsAction;
+    QAction *recentFileListAction;
+    QAction *fileOpenUnnamedAction;
+    QAction *fileUnnamedAction;
+    QAction *recentFileListDummyAction;
+    QAction *viewTypeAction;
+    QAction *viewUnnamedAction;
+    QAction *perspectiveViewTypeAction;
+    QAction *orthographicViewTypeAction;
+    QAction *m_ConstructDepthColoredVolumeAction;
+    QAction *m_UserDefinedAction;
+    QAction *m_ShowViewOptionsAction;
+    QAction *m_ShowMouseOptionsAction;
+    QAction *m_SelectObjectsAction;
+    QAction *m_BackgroundColorAction;
+    QAction *viewSetViewAction;
+    QAction *optionsTransformObjectAction;
+    QAction *stereoViewAction;
+    QAction *lightingAction;
+    QAction *menunew_itemAction;
+    QAction *Action;
+    QAction *menunew_itemAction_2;
+    QAction *m_UserInteractionAction;
+    QAction *m_ConstructMolecularSurfaceAction;
+    QAction *m_GlobalBoundingBoxAction;
+    QAction *m_DataBoundingBoxAction;
+    QAction *m_AcknowledgementAction;
+    QAction *m_2DSliceAction;
+    QAction *m_RenderTypeAction;
+    QAction *m_ConstructPocketsAction;
+    QAction *m_ComputePocketTunnelAction;
+    QAction *m_ConstructNurbsSurfaceAction;
+    QAction *m_HLevelSetAction;
+    QAction *forceMeshRenderingAction;
+    QAction *utilitiesElucidateSecondaryStructuresAction;
+    QAction *m_ConstructHLSPocketsAction;
+    QAction *m_MatchAction;
+    QAction *m_GB_energy;
+    QAction *m_GB_forceField;
+    QAction *m_PB_energy;
+    QAction *F2DockAction;
+    QAction *surfaceDialogAction;
+    QAction *Action_2;
+    QAction *surfaceAreaAndVolumeDialogAction;
+    QAction *Action_4;
+    QAction *Action_5;
+    QAction *Action_6;
+    QAction *fileOpenMultiAction;
+    QWidget *widget;
+    QGridLayout *gridLayout;
+    Q3GroupBox *m_MoleculeBrowserGroupBox;
+    QGridLayout *gridLayout1;
+    Q3ListBox *m_DataSetsListBox;
+    Q3GroupBox *m_PropertiesGroupBox;
+    Q3GroupBox *m_RendererGroupBox;
+    QGridLayout *gridLayout2;
+    QSplitter *m_ViewSplitter;
+    QMenuBar *m_MainMenubar;
+    QMenu *m_FilePopupMenu;
+    QMenu *popupMenu_5;
+    QMenu *m_ViewPopupMenu;
+    QMenu *popupMenu_9;
+    QMenu *m_AnimationPopupMenu;
+    QMenu *m_OptionsPopupMenu;
+    QMenu *m_LightingPopupMenu;
+    QMenu *m_UtilitiesPopupMenu;
+    QMenu *popupMenu_43;
+    QMenu *m_HelpPopupMenu;
+
+    void setupUi(Q3MainWindow *MainWindowBase)
+    {
+    if (MainWindowBase->objectName().isEmpty())
+        MainWindowBase->setObjectName(QString::fromUtf8("MainWindowBase"));
+    MainWindowBase->resize(777, 934);
+    MainWindowBase->setFocusPolicy(Qt::StrongFocus);
+    exitAction = new QAction(MainWindowBase);
+    exitAction->setObjectName(QString::fromUtf8("exitAction"));
+    exitAction->setName("exitAction");
+    fileOpenAction = new QAction(MainWindowBase);
+    fileOpenAction->setObjectName(QString::fromUtf8("fileOpenAction"));
+    fileOpenAction->setName("fileOpenAction");
+
+    startRecordAction = new QAction(MainWindowBase);
+    startRecordAction->setObjectName(QString::fromUtf8("startRecordAction"));
+    startRecordAction->setName("startRecordAction");
+    stopRecordAction = new QAction(MainWindowBase);
+    stopRecordAction->setObjectName(QString::fromUtf8("stopRecordAction"));
+    stopRecordAction->setName("stopRecordAction");
+    recordAnimationAction = new QAction(MainWindowBase);
+    recordAnimationAction->setObjectName(QString::fromUtf8("recordAnimationAction"));
+    recordAnimationAction->setName("recordAnimationAction");
+    playbackAnimationAction = new QAction(MainWindowBase);
+    playbackAnimationAction->setObjectName(QString::fromUtf8("playbackAnimationAction"));
+    playbackAnimationAction->setName("playbackAnimationAction");
+    playbackMovieAction = new QAction(MainWindowBase);
+    playbackMovieAction->setObjectName(QString::fromUtf8("playbackMovieAction"));
+    playbackMovieAction->setName("playbackMovieAction");
+    contentsHelpAction = new QAction(MainWindowBase);
+    contentsHelpAction->setObjectName(QString::fromUtf8("contentsHelpAction"));
+    contentsHelpAction->setName("contentsHelpAction");
+    indexHelpAction = new QAction(MainWindowBase);
+    indexHelpAction->setObjectName(QString::fromUtf8("indexHelpAction"));
+    indexHelpAction->setName("indexHelpAction");
+    constructVolumeUtilitiesAction = new QAction(MainWindowBase);
+    constructVolumeUtilitiesAction->setObjectName(QString::fromUtf8("constructVolumeUtilitiesAction"));
+    constructVolumeUtilitiesAction->setName("constructVolumeUtilitiesAction");
+    saveImageAction = new QAction(MainWindowBase);
+    saveImageAction->setObjectName(QString::fromUtf8("saveImageAction"));
+    saveImageAction->setName("saveImageAction");
+    downloadPDBAction = new QAction(MainWindowBase);
+    downloadPDBAction->setObjectName(QString::fromUtf8("downloadPDBAction"));
+    downloadPDBAction->setName("downloadPDBAction");
+    splitViewAction = new QAction(MainWindowBase);
+    splitViewAction->setObjectName(QString::fromUtf8("splitViewAction"));
+    splitViewAction->setName("splitViewAction");
+    splitViewAction->setCheckable(false);
+    syncViewAction = new QAction(MainWindowBase);
+    syncViewAction->setObjectName(QString::fromUtf8("syncViewAction"));
+    syncViewAction->setName("syncViewAction");
+    syncViewAction->setCheckable(true);
+    syncViewAction->setEnabled(true);
+    viewAction = new QAction(MainWindowBase);
+    viewAction->setObjectName(QString::fromUtf8("viewAction"));
+    viewAction->setName("viewAction");
+    fullscreenViewAction = new QAction(MainWindowBase);
+    fullscreenViewAction->setObjectName(QString::fromUtf8("fullscreenViewAction"));
+    fullscreenViewAction->setName("fullscreenViewAction");
+    fullscreenViewAction->setCheckable(false);
+    fullscreenViewAction->setChecked(false);
+    getCurvatureUtilitiesAction = new QAction(MainWindowBase);
+    getCurvatureUtilitiesAction->setObjectName(QString::fromUtf8("getCurvatureUtilitiesAction"));
+    getCurvatureUtilitiesAction->setName("getCurvatureUtilitiesAction");
+    showGridOptionsAction = new QAction(MainWindowBase);
+    showGridOptionsAction->setObjectName(QString::fromUtf8("showGridOptionsAction"));
+    showGridOptionsAction->setName("showGridOptionsAction");
+    showGridOptionsAction->setCheckable(true);
+    showGridOptionsAction->setChecked(true);
+    recentFileListAction = new QAction(MainWindowBase);
+    recentFileListAction->setObjectName(QString::fromUtf8("recentFileListAction"));
+    recentFileListAction->setName("recentFileListAction");
+    fileOpenUnnamedAction = new QAction(MainWindowBase);
+    fileOpenUnnamedAction->setObjectName(QString::fromUtf8("fileOpenUnnamedAction"));
+    fileOpenUnnamedAction->setName("fileOpenUnnamedAction");
+    fileUnnamedAction = new QAction(MainWindowBase);
+    fileUnnamedAction->setObjectName(QString::fromUtf8("fileUnnamedAction"));
+    fileUnnamedAction->setName("fileUnnamedAction");
+    recentFileListDummyAction = new QAction(MainWindowBase);
+    recentFileListDummyAction->setObjectName(QString::fromUtf8("recentFileListDummyAction"));
+    recentFileListDummyAction->setName("recentFileListDummyAction");
+    recentFileListDummyAction->setEnabled(false);
+    viewTypeAction = new QAction(MainWindowBase);
+    viewTypeAction->setObjectName(QString::fromUtf8("viewTypeAction"));
+    viewTypeAction->setName("viewTypeAction");
+    viewTypeAction->setEnabled(true);
+    viewUnnamedAction = new QAction(MainWindowBase);
+    viewUnnamedAction->setObjectName(QString::fromUtf8("viewUnnamedAction"));
+    viewUnnamedAction->setName("viewUnnamedAction");
+    perspectiveViewTypeAction = new QAction(MainWindowBase);
+    perspectiveViewTypeAction->setObjectName(QString::fromUtf8("perspectiveViewTypeAction"));
+    perspectiveViewTypeAction->setName("perspectiveViewTypeAction");
+    perspectiveViewTypeAction->setCheckable(true);
+    perspectiveViewTypeAction->setChecked(true);
+    perspectiveViewTypeAction->setEnabled(true);
+    orthographicViewTypeAction = new QAction(MainWindowBase);
+    orthographicViewTypeAction->setObjectName(QString::fromUtf8("orthographicViewTypeAction"));
+    orthographicViewTypeAction->setName("orthographicViewTypeAction");
+    orthographicViewTypeAction->setCheckable(true);
+    orthographicViewTypeAction->setChecked(false);
+    orthographicViewTypeAction->setEnabled(true);
+    m_ConstructDepthColoredVolumeAction = new QAction(MainWindowBase);
+    m_ConstructDepthColoredVolumeAction->setObjectName(QString::fromUtf8("m_ConstructDepthColoredVolumeAction")
+
+);
+
+    m_ConstructDepthColoredVolumeAction->setName("m_ConstructDepthColoredVolumeAction");
+    m_UserDefinedAction = new QAction(MainWindowBase);
+    m_UserDefinedAction->setObjectName(QString::fromUtf8("m_UserDefinedAction"));
+    m_UserDefinedAction->setName("m_UserDefinedAction");
+    m_ShowViewOptionsAction = new QAction(MainWindowBase);
+    m_ShowViewOptionsAction->setObjectName(QString::fromUtf8("m_ShowViewOptionsAction"));
+    m_ShowViewOptionsAction->setName("m_ShowViewOptionsAction");
+    m_ShowViewOptionsAction->setCheckable(true);
+    m_ShowViewOptionsAction->setChecked(true);
+    m_ShowMouseOptionsAction = new QAction(MainWindowBase);
+    m_ShowMouseOptionsAction->setObjectName(QString::fromUtf8("m_ShowMouseOptionsAction"));
+    m_ShowMouseOptionsAction->setName("m_ShowMouseOptionsAction");
+    m_ShowMouseOptionsAction->setCheckable(true);
+    m_ShowMouseOptionsAction->setChecked(true);
+    m_SelectObjectsAction = new QAction(MainWindowBase);
+    m_SelectObjectsAction->setObjectName(QString::fromUtf8("m_SelectObjectsAction"));
+    m_SelectObjectsAction->setName("m_SelectObjectsAction");
+    m_SelectObjectsAction->setCheckable(true);
+    m_BackgroundColorAction = new QAction(MainWindowBase);
+    m_BackgroundColorAction->setObjectName(QString::fromUtf8("m_BackgroundColorAction"));
+    m_BackgroundColorAction->setName("m_BackgroundColorAction");
+    viewSetViewAction = new QAction(MainWindowBase);
+    viewSetViewAction->setObjectName(QString::fromUtf8("viewSetViewAction"));
+    viewSetViewAction->setName("viewSetViewAction");
+    optionsTransformObjectAction = new QAction(MainWindowBase);
+    optionsTransformObjectAction->setObjectName(QString::fromUtf8("optionsTransformObjectAction"));
+    optionsTransformObjectAction->setName("optionsTransformObjectAction");
+    optionsTransformObjectAction->setEnabled(false);
+    stereoViewAction = new QAction(MainWindowBase);
+    stereoViewAction->setObjectName(QString::fromUtf8("stereoViewAction"));
+    stereoViewAction->setName("stereoViewAction");
+    stereoViewAction->setCheckable(true);
+    lightingAction = new QAction(MainWindowBase);
+    lightingAction->setObjectName(QString::fromUtf8("lightingAction"));
+    lightingAction->setName("lightingAction");
+    menunew_itemAction = new QAction(MainWindowBase);
+    menunew_itemAction->setObjectName(QString::fromUtf8("menunew_itemAction"));
+    menunew_itemAction->setName("menunew_itemAction");
+    Action = new QAction(MainWindowBase);
+    Action->setObjectName(QString::fromUtf8("Action"));
+    Action->setName("Action");
+    menunew_itemAction_2 = new QAction(MainWindowBase);
+    menunew_itemAction_2->setObjectName(QString::fromUtf8("menunew_itemAction_2"));
+    menunew_itemAction_2->setName("menunew_itemAction_2");
+    m_UserInteractionAction = new QAction(MainWindowBase);
+    m_UserInteractionAction->setObjectName(QString::fromUtf8("m_UserInteractionAction"));
+    m_UserInteractionAction->setName("m_UserInteractionAction");
+    m_ConstructMolecularSurfaceAction = new QAction(MainWindowBase);
+    m_ConstructMolecularSurfaceAction->setObjectName(QString::fromUtf8("m_ConstructMolecularSurfaceAction"));
+    m_ConstructMolecularSurfaceAction->setName("m_ConstructMolecularSurfaceAction");
+    m_GlobalBoundingBoxAction = new QAction(MainWindowBase);
+    m_GlobalBoundingBoxAction->setObjectName(QString::fromUtf8("m_GlobalBoundingBoxAction"));
+    m_GlobalBoundingBoxAction->setName("m_GlobalBoundingBoxAction");
+    m_GlobalBoundingBoxAction->setCheckable(true);
+    m_DataBoundingBoxAction = new QAction(MainWindowBase);
+    m_DataBoundingBoxAction->setObjectName(QString::fromUtf8("m_DataBoundingBoxAction"));
+    m_DataBoundingBoxAction->setName("m_DataBoundingBoxAction");
+    m_DataBoundingBoxAction->setCheckable(true);
+    m_AcknowledgementAction = new QAction(MainWindowBase);
+    m_AcknowledgementAction->setObjectName(QString::fromUtf8("m_AcknowledgementAction"));
+    m_AcknowledgementAction->setName("m_AcknowledgementAction");
+    m_2DSliceAction = new QAction(MainWindowBase);
+    m_2DSliceAction->setObjectName(QString::fromUtf8("m_2DSliceAction"));
+    m_2DSliceAction->setName("m_2DSliceAction");
+    m_RenderTypeAction = new QAction(MainWindowBase);
+    m_RenderTypeAction->setObjectName(QString::fromUtf8("m_RenderTypeAction"));
+    m_RenderTypeAction->setName("m_RenderTypeAction");
+    m_RenderTypeAction->setCheckable(true);
+    m_RenderTypeAction->setEnabled(true);
+    m_ConstructPocketsAction = new QAction(MainWindowBase);
+    m_ConstructPocketsAction->setObjectName(QString::fromUtf8("m_ConstructPocketsAction"));
+    m_ConstructPocketsAction->setName("m_ConstructPocketsAction");
+    m_ComputePocketTunnelAction = new QAction(MainWindowBase);
+    m_ComputePocketTunnelAction->setObjectName(QString::fromUtf8("m_ComputePocketTunnelAction"));
+    m_ComputePocketTunnelAction->setName("m_ComputePocketTunnelAction");
+    m_ConstructNurbsSurfaceAction = new QAction(MainWindowBase);
+    m_ConstructNurbsSurfaceAction->setObjectName(QString::fromUtf8("m_ConstructNurbsSurfaceAction"));
+    m_ConstructNurbsSurfaceAction->setName("m_ConstructNurbsSurfaceAction");
+    m_HLevelSetAction = new QAction(MainWindowBase);
+    m_HLevelSetAction->setObjectName(QString::fromUtf8("m_HLevelSetAction"));
+    m_HLevelSetAction->setName("m_HLevelSetAction");
+    forceMeshRenderingAction = new QAction(MainWindowBase);
+    forceMeshRenderingAction->setObjectName(QString::fromUtf8("forceMeshRenderingAction"));
+    forceMeshRenderingAction->setName("forceMeshRenderingAction");
+    forceMeshRenderingAction->setCheckable(true);
+    utilitiesElucidateSecondaryStructuresAction = new QAction(MainWindowBase);
+    utilitiesElucidateSecondaryStructuresAction->setObjectName(QString::fromUtf8("utilitiesElucidateSecondaryStructuresAction"));
+    utilitiesElucidateSecondaryStructuresAction->setName("utilitiesElucidateSecondaryStructuresAction");
+    m_ConstructHLSPocketsAction = new QAction(MainWindowBase);
+    m_ConstructHLSPocketsAction->setObjectName(QString::fromUtf8("m_ConstructHLSPocketsAction"));
+    m_ConstructHLSPocketsAction->setName("m_ConstructHLSPocketsAction");
+    m_MatchAction = new QAction(MainWindowBase);
+    m_MatchAction->setObjectName(QString::fromUtf8("m_MatchAction"));
+    m_MatchAction->setName("m_MatchAction");
+    m_GB_energy = new QAction(MainWindowBase);
+    m_GB_energy->setObjectName(QString::fromUtf8("m_GB_energy"));
+    m_GB_energy->setName("m_GB_energy");
+    m_GB_forceField = new QAction(MainWindowBase);
+    m_GB_forceField->setObjectName(QString::fromUtf8("m_GB_forceField"));
+    m_GB_forceField->setName("m_GB_forceField");
+    m_PB_energy = new QAction(MainWindowBase);
+    m_PB_energy->setObjectName(QString::fromUtf8("m_PB_energy"));
+    m_PB_energy->setName("m_PB_energy");
+    F2DockAction = new QAction(MainWindowBase);
+    F2DockAction->setObjectName(QString::fromUtf8("F2DockAction"));
+    F2DockAction->setName("F2DockAction");
+    surfaceDialogAction = new QAction(MainWindowBase);
+    surfaceDialogAction->setObjectName(QString::fromUtf8("surfaceDialogAction"));
+    surfaceDialogAction->setName("surfaceDialogAction");
+    Action_2 = new QAction(MainWindowBase);
+    Action_2->setObjectName(QString::fromUtf8("Action_2"));
+    Action_2->setName("Action_2");
+    surfaceAreaAndVolumeDialogAction = new QAction(MainWindowBase);
+    surfaceAreaAndVolumeDialogAction->setObjectName(QString::fromUtf8("surfaceAreaAndVolumeDialogAction"));
+    surfaceAreaAndVolumeDialogAction->setName("surfaceAreaAndVolumeDialogAction");
+    Action_4 = new QAction(MainWindowBase);
+    Action_4->setObjectName(QString::fromUtf8("Action_4"));
+    Action_4->setName("Action_4");
+    Action_5 = new QAction(MainWindowBase);
+    Action_5->setObjectName(QString::fromUtf8("Action_5"));
+    Action_5->setName("Action_5");
+    Action_6 = new QAction(MainWindowBase);
+    Action_6->setObjectName(QString::fromUtf8("Action_6"));
+    Action_6->setName("Action_6");
+    fileOpenMultiAction = new QAction(MainWindowBase);
+    fileOpenMultiAction->setObjectName(QString::fromUtf8("fileOpenMultiAction"));
+    fileOpenMultiAction->setName("fileOpenMultiAction");
+    widget = new QWidget(MainWindowBase);
+    widget->setObjectName(QString::fromUtf8("widget"));
+
+    gridLayout = new QGridLayout(widget);
+    gridLayout->setSpacing(6);
+    gridLayout->setMargin(11);
+
+    gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+    gridLayout->setContentsMargins(0, 0, 0, 0);
+
+    m_MoleculeBrowserGroupBox = new Q3GroupBox(widget);
+    m_MoleculeBrowserGroupBox->setObjectName(QString::fromUtf8("m_MoleculeBrowserGroupBox"));
+    QSizePolicy sizePolicy(static_cast<QSizePolicy::Policy>(0), static_cast<QSizePolicy::Policy>(5));
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(m_MoleculeBrowserGroupBox->sizePolicy().hasHeightForWidth());
+    m_MoleculeBrowserGroupBox->setSizePolicy(sizePolicy);
+    m_MoleculeBrowserGroupBox->setCursor(QCursor(static_cast<Qt::CursorShape>(0)));
+    m_MoleculeBrowserGroupBox->setColumnLayout(0, Qt::Vertical);
+    m_MoleculeBrowserGroupBox->layout()->setSpacing(6);
+    m_MoleculeBrowserGroupBox->layout()->setMargin(11);
+
+    gridLayout1 = new QGridLayout();
+    QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(m_MoleculeBrowserGroupBox->layout());
+    if (boxlayout)
+        boxlayout->addLayout(gridLayout1);
+    gridLayout1->setAlignment(Qt::AlignTop);
+    gridLayout1->setObjectName(QString::fromUtf8("gridLayout1"));
+    m_DataSetsListBox = new Q3ListBox(m_MoleculeBrowserGroupBox);
+    m_DataSetsListBox->setObjectName(QString::fromUtf8("m_DataSetsListBox"));
+    m_DataSetsListBox->setCursor(QCursor(static_cast<Qt::CursorShape>(0)));
+    m_DataSetsListBox->setCurrentItem(0);
+
+    gridLayout1->addWidget(m_DataSetsListBox, 0, 0, 1, 2);
+
+
+    gridLayout->addWidget(m_MoleculeBrowserGroupBox, 0, 1, 1, 1);
+
+    m_PropertiesGroupBox = new Q3GroupBox(widget);
+    m_PropertiesGroupBox->setObjectName(QString::fromUtf8("m_PropertiesGroupBox"));
+    QSizePolicy sizePolicy1(static_cast<QSizePolicy::Policy>(5), static_cast<QSizePolicy::Policy>(0));
+    sizePolicy1.setHorizontalStretch(0);
+    sizePolicy1.setVerticalStretch(0);
+    sizePolicy1.setHeightForWidth(m_PropertiesGroupBox->sizePolicy().hasHeightForWidth());
+    m_PropertiesGroupBox->setSizePolicy(sizePolicy1);
+    m_PropertiesGroupBox->setMinimumSize(QSize(0, 200));
+
+    gridLayout->addWidget(m_PropertiesGroupBox, 1, 0, 1, 2);
+
+    m_RendererGroupBox = new Q3GroupBox(widget);
+    m_RendererGroupBox->setObjectName(QString::fromUtf8("m_RendererGroupBox"));
+    QSizePolicy sizePolicy2(static_cast<QSizePolicy::Policy>(7), static_cast<QSizePolicy::Policy>(7));
+    sizePolicy2.setHorizontalStretch(0);
+    sizePolicy2.setVerticalStretch(0);
+    sizePolicy2.setHeightForWidth(m_RendererGroupBox->sizePolicy().hasHeightForWidth());
+    m_RendererGroupBox->setSizePolicy(sizePolicy2);
+    m_RendererGroupBox->setColumnLayout(0, Qt::Vertical);
+    m_RendererGroupBox->layout()->setSpacing(6);
+    m_RendererGroupBox->layout()->setMargin(11);
+    gridLayout2 = new QGridLayout();
+    QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(m_RendererGroupBox->layout());
+    if (boxlayout1)
+        boxlayout1->addLayout(gridLayout2);
+    gridLayout2->setAlignment(Qt::AlignTop);
+    gridLayout2->setObjectName(QString::fromUtf8("gridLayout2"));
+    m_ViewSplitter = new QSplitter(m_RendererGroupBox);
+    m_ViewSplitter->setObjectName(QString::fromUtf8("m_ViewSplitter"));
+    sizePolicy2.setHeightForWidth(m_ViewSplitter->sizePolicy().hasHeightForWidth());
+    m_ViewSplitter->setSizePolicy(sizePolicy2);
+    m_ViewSplitter->setAcceptDrops(true);
+    m_ViewSplitter->setFrameShape(QFrame::NoFrame);
+    m_ViewSplitter->setOrientation(Qt::Horizontal);
+
+    gridLayout2->addWidget(m_ViewSplitter, 0, 0, 1, 1);
+
+
+    gridLayout->addWidget(m_RendererGroupBox, 0, 0, 1, 1);
+
+    MainWindowBase->setCentralWidget(widget);
+    m_MainMenubar = new QMenuBar(MainWindowBase);
+    m_MainMenubar->setObjectName(QString::fromUtf8("m_MainMenubar"));
+    m_MainMenubar->setGeometry(QRect(0, 0, 777, 24));
+
+    QPalette palette;
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(0), QColor(0, 0, 0));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(1), QColor(221, 223, 228));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(2), QColor(255, 255, 255));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(3), QColor(238, 239, 241));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(4), QColor(110, 111, 114));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(5), QColor(147, 149, 152));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(6), QColor(0, 0, 0));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(7), QColor(255, 255, 255));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(8), QColor(0, 0, 0));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(9), QColor(255, 255, 255));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(10), QColor(170, 170, 127));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(11), QColor(0, 0, 0));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(12), QColor(0, 0, 128));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(13), QColor(255, 255, 255));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(14), QColor(0, 0, 0));
+    palette.setColor(QPalette::Active, static_cast<QPalette::ColorRole>(15), QColor(0, 0, 0));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(0), QColor(0, 0, 0));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(1), QColor(221, 223, 228));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(2), QColor(255, 255, 255));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(3), QColor(254, 254, 255));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(4), QColor(110, 111, 114));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(5), QColor(147, 149, 152));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(6), QColor(0, 0, 0));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(7), QColor(255, 255, 255));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(8), QColor(0, 0, 0));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(9), QColor(255, 255, 255));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(10), QColor(170, 170, 127));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(11), QColor(0, 0, 0));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(12), QColor(0, 0, 128));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(13), QColor(255, 255, 255));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(14), QColor(0, 0, 238));
+    palette.setColor(QPalette::Inactive, static_cast<QPalette::ColorRole>(15), QColor(82, 24, 139));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(0), QColor(128, 128, 128));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(1), QColor(221, 223, 228));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(2), QColor(255, 255, 255));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(3), QColor(254, 254, 255));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(4), QColor(110, 111, 114));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(5), QColor(147, 149, 152));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(6), QColor(128, 128, 128));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(7), QColor(255, 255, 255));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(8), QColor(128, 128, 128));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(9), QColor(255, 255, 255));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(10), QColor(170, 170, 127));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(11), QColor(0, 0, 0));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(12), QColor(0, 0, 128));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(13), QColor(255, 255, 255));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(14), QColor(0, 0, 238));
+    palette.setColor(QPalette::Disabled, static_cast<QPalette::ColorRole>(15), QColor(82, 24, 139));
+    m_MainMenubar->setPalette(palette);
+    m_MainMenubar->setCursor(QCursor(static_cast<Qt::CursorShape>(13)));
+    m_MainMenubar->setFrameShadow(QMenuBar::Raised);
+    m_MainMenubar->setMargin(0);
+    m_MainMenubar->setContentsMargins(0, 0, 0, 0);
+
+    m_FilePopupMenu = new QMenu(m_MainMenubar);
+    m_FilePopupMenu->setObjectName(QString::fromUtf8("m_FilePopupMenu"));
+    popupMenu_5 = new QMenu(m_FilePopupMenu);
+    popupMenu_5->setObjectName(QString::fromUtf8("popupMenu_5"));
+    
+    m_ViewPopupMenu = new QMenu(m_MainMenubar);
+    m_ViewPopupMenu->setObjectName(QString::fromUtf8("m_ViewPopupMenu"));
+    popupMenu_9 = new QMenu(m_ViewPopupMenu);
+    popupMenu_9->setObjectName(QString::fromUtf8("popupMenu_9"));
+    
+    m_AnimationPopupMenu = new QMenu(m_MainMenubar);
+    m_AnimationPopupMenu->setObjectName(QString::fromUtf8("m_AnimationPopupMenu"));
+
+    m_OptionsPopupMenu = new QMenu(m_MainMenubar);
+    m_OptionsPopupMenu->setObjectName(QString::fromUtf8("m_OptionsPopupMenu"));
+
+    m_LightingPopupMenu = new QMenu(m_MainMenubar);
+    m_LightingPopupMenu->setObjectName(QString::fromUtf8("m_LightingPopupMenu"));
+
+    m_UtilitiesPopupMenu = new QMenu(m_MainMenubar);
+    m_UtilitiesPopupMenu->setObjectName(QString::fromUtf8("m_UtilitiesPopupMenu"));
+    popupMenu_43 = new QMenu(m_UtilitiesPopupMenu);
+    popupMenu_43->setObjectName(QString::fromUtf8("popupMenu_43"));
+
+    m_HelpPopupMenu = new QMenu(m_MainMenubar);
+    m_HelpPopupMenu->setObjectName(QString::fromUtf8("m_HelpPopupMenu"));
+
+    m_MainMenubar->addAction(m_FilePopupMenu->menuAction());
+    m_MainMenubar->addAction(m_ViewPopupMenu->menuAction());
+    m_MainMenubar->addAction(m_AnimationPopupMenu->menuAction());
+    m_MainMenubar->addAction(m_OptionsPopupMenu->menuAction());
+    m_MainMenubar->addAction(m_LightingPopupMenu->menuAction());
+    m_MainMenubar->addAction(m_UtilitiesPopupMenu->menuAction());
+    m_MainMenubar->addAction(m_HelpPopupMenu->menuAction());
+    m_FilePopupMenu->addAction(fileOpenAction);
+    m_FilePopupMenu->addAction(fileOpenMultiAction);
+    m_FilePopupMenu->addAction(downloadPDBAction);
+    m_FilePopupMenu->addAction(saveImageAction);
+    m_FilePopupMenu->addAction(recentFileListAction);
+    m_FilePopupMenu->addAction(popupMenu_5->menuAction());
+    m_FilePopupMenu->addSeparator();
+    m_FilePopupMenu->addAction(exitAction);
+    popupMenu_5->addAction(recentFileListDummyAction);
+    m_ViewPopupMenu->addAction(viewTypeAction);
+    m_ViewPopupMenu->addAction(popupMenu_9->menuAction());
+    m_ViewPopupMenu->addAction(viewSetViewAction);
+    m_ViewPopupMenu->addSeparator();
+    m_ViewPopupMenu->addAction(splitViewAction);
+    m_ViewPopupMenu->addAction(syncViewAction);
+    m_ViewPopupMenu->addSeparator();
+    m_ViewPopupMenu->addAction(fullscreenViewAction);
+    m_ViewPopupMenu->addAction(stereoViewAction);
+    m_ViewPopupMenu->addAction(forceMeshRenderingAction);
+    popupMenu_9->addAction(perspectiveViewTypeAction);
+    popupMenu_9->addAction(orthographicViewTypeAction);
+    m_AnimationPopupMenu->addAction(startRecordAction);
+    m_AnimationPopupMenu->addAction(stopRecordAction);
+    m_AnimationPopupMenu->addAction(playbackAnimationAction);
+    m_AnimationPopupMenu->addSeparator();
+    m_AnimationPopupMenu->addAction(recordAnimationAction);
+    m_AnimationPopupMenu->addSeparator();
+    m_AnimationPopupMenu->addAction(playbackMovieAction);
+    m_OptionsPopupMenu->addAction(m_RenderTypeAction);
+    m_OptionsPopupMenu->addAction(m_BackgroundColorAction);
+    m_OptionsPopupMenu->addAction(showGridOptionsAction);
+    m_OptionsPopupMenu->addSeparator();
+    m_OptionsPopupMenu->addAction(m_UserInteractionAction);
+    m_OptionsPopupMenu->addAction(optionsTransformObjectAction);
+    m_OptionsPopupMenu->addAction(m_SelectObjectsAction);
+    m_OptionsPopupMenu->addSeparator();
+    m_OptionsPopupMenu->addAction(m_GlobalBoundingBoxAction);
+    m_OptionsPopupMenu->addAction(m_DataBoundingBoxAction);
+    m_OptionsPopupMenu->addSeparator();
+    m_OptionsPopupMenu->addAction(m_ShowViewOptionsAction);
+    m_OptionsPopupMenu->addAction(m_ShowMouseOptionsAction);
+    m_UtilitiesPopupMenu->addAction(m_UserDefinedAction);
+    m_UtilitiesPopupMenu->addSeparator();
+    m_UtilitiesPopupMenu->addAction(surfaceDialogAction);
+    m_UtilitiesPopupMenu->addAction(m_ConstructNurbsSurfaceAction);
+    m_UtilitiesPopupMenu->addAction(popupMenu_43->menuAction());
+    m_UtilitiesPopupMenu->addAction(surfaceAreaAndVolumeDialogAction);
+    m_UtilitiesPopupMenu->addSeparator();
+    m_UtilitiesPopupMenu->addAction(constructVolumeUtilitiesAction);
+    m_UtilitiesPopupMenu->addAction(m_ConstructDepthColoredVolumeAction);
+    m_UtilitiesPopupMenu->addSeparator();
+    m_UtilitiesPopupMenu->addAction(m_ConstructPocketsAction);
+    m_UtilitiesPopupMenu->addAction(m_ComputePocketTunnelAction);
+    m_UtilitiesPopupMenu->addAction(m_ConstructHLSPocketsAction);
+    m_UtilitiesPopupMenu->addSeparator();
+    m_UtilitiesPopupMenu->addAction(getCurvatureUtilitiesAction);
+    m_UtilitiesPopupMenu->addAction(m_MatchAction);
+    m_UtilitiesPopupMenu->addAction(m_GB_energy);
+    m_UtilitiesPopupMenu->addAction(m_GB_forceField);
+    m_UtilitiesPopupMenu->addAction(m_PB_energy);
+    m_UtilitiesPopupMenu->addSeparator();
+    m_UtilitiesPopupMenu->addAction(m_2DSliceAction);
+    m_UtilitiesPopupMenu->addAction(utilitiesElucidateSecondaryStructuresAction);
+    m_UtilitiesPopupMenu->addAction(F2DockAction);
+    m_UtilitiesPopupMenu->addSeparator();
+    popupMenu_43->addSeparator();
+    m_HelpPopupMenu->addAction(contentsHelpAction);
+    m_HelpPopupMenu->addAction(indexHelpAction);
+    m_HelpPopupMenu->addSeparator();
+    m_HelpPopupMenu->addAction(m_AcknowledgementAction);
+    m_HelpPopupMenu->addSeparator();
+
+    retranslateUi(MainWindowBase);
+    QObject::connect(constructVolumeUtilitiesAction, SIGNAL(activated()), MainWindowBase, SLOT(constructVolumeUtilitiesSlot()));
+    QObject::connect(exitAction, SIGNAL(activated()), MainWindowBase, SLOT(close()));
+    QObject::connect(fileOpenAction, SIGNAL(activated()), MainWindowBase, SLOT(fileOpenSlot()));
+    QObject::connect(indexHelpAction, SIGNAL(activated()), MainWindowBase, SLOT(indexHelpSlot()));
+    QObject::connect(playbackAnimationAction, SIGNAL(activated()), MainWindowBase, SLOT(playbackAnimationSlot()));
+    QObject::connect(playbackMovieAction, SIGNAL(activated()), MainWindowBase, SLOT(playbackMovieSlot()));
+    QObject::connect(recordAnimationAction, SIGNAL(activated()), MainWindowBase, SLOT(recordAnimationSlot()));
+    QObject::connect(startRecordAction, SIGNAL(activated()), MainWindowBase, SLOT(startRecordSlot()));
+    QObject::connect(stopRecordAction, SIGNAL(activated()), MainWindowBase, SLOT(stopRecordSlot()));
+    QObject::connect(saveImageAction, SIGNAL(activated()), MainWindowBase, SLOT(saveImageSlot()));
+    QObject::connect(downloadPDBAction, SIGNAL(activated()), MainWindowBase, SLOT(downloadPDBSlot()));
+    QObject::connect(m_DataSetsListBox, SIGNAL(highlighted(int)), MainWindowBase, SLOT(newDataSetSelectedSlot(int)));
+    QObject::connect(m_DataSetsListBox, SIGNAL(selected(int)), MainWindowBase, SLOT(newDataSetSelectedSlot(int)));
+    QObject::connect(fullscreenViewAction, SIGNAL(activated()), MainWindowBase, SLOT(fullscreenSlot()));
+    QObject::connect(splitViewAction, SIGNAL(activated()), MainWindowBase, SLOT(splitViewSlot()));
+    QObject::connect(syncViewAction, SIGNAL(activated()), MainWindowBase, SLOT(syncViewSlot()));
+    QObject::connect(getCurvatureUtilitiesAction, SIGNAL(activated()), MainWindowBase, SLOT(constructCurvaturesUtilitySlot()));
+    QObject::connect(showGridOptionsAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(showGridOptionsSlot(bool)));
+    QObject::connect(orthographicViewTypeAction, SIGNAL(activated()), MainWindowBase, SLOT(orthographicViewSlot()));
+    QObject::connect(perspectiveViewTypeAction, SIGNAL(activated()), MainWindowBase, SLOT(perspectiveViewSlot()));
+    QObject::connect(m_ConstructDepthColoredVolumeAction, SIGNAL(activated()), MainWindowBase, SLOT(constructDepthColoredVolumeSlot()));
+    QObject::connect(m_UserDefinedAction, SIGNAL(activated()), MainWindowBase, SLOT(scriptSlot()));
+    QObject::connect(m_ShowMouseOptionsAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(showMousePositionSlot(bool)));
+    QObject::connect(m_ShowViewOptionsAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(showViewInformationSlot(bool)));
+    QObject::connect(m_SelectObjectsAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(selectObjectsSlot(bool)));
+    QObject::connect(m_BackgroundColorAction, SIGNAL(activated()), MainWindowBase, SLOT(backgroundColorSlot()));
+    QObject::connect(viewSetViewAction, SIGNAL(activated()), MainWindowBase, SLOT(setViewingParametersSlot()));
+    QObject::connect(optionsTransformObjectAction, SIGNAL(activated()), MainWindowBase, SLOT(transformObjectSlot()));
+    QObject::connect(stereoViewAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(stereoSlot(bool)));
+    QObject::connect(m_UserInteractionAction, SIGNAL(activated()), MainWindowBase, SLOT(userInteractionSlot()));
+    QObject::connect(m_ConstructMolecularSurfaceAction, SIGNAL(activated()), MainWindowBase, SLOT(constructMolecularSurfaceSlot()));
+    QObject::connect(m_DataBoundingBoxAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(dataBoundingBoxSlot(bool)));
+    QObject::connect(m_GlobalBoundingBoxAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(globalBoundingBoxSlot(bool)));
+    QObject::connect(m_AcknowledgementAction, SIGNAL(activated()), MainWindowBase, SLOT(acknowledgementSlot()));
+    QObject::connect(m_2DSliceAction, SIGNAL(activated()), MainWindowBase, SLOT(sliceParameterizationSlot()));
+    QObject::connect(m_RenderTypeAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(renderTypeSlot(bool)));
+    QObject::connect(m_ConstructPocketsAction, SIGNAL(activated()), MainWindowBase, SLOT(constructPocketsSlot()));
+    QObject::connect(m_ComputePocketTunnelAction, SIGNAL(activated()), MainWindowBase, SLOT(computePocketTunnelSlot()));
+    QObject::connect(m_ConstructNurbsSurfaceAction, SIGNAL(activated()), MainWindowBase, SLOT(constructNurbsSurfaceSlot()));
+    QObject::connect(m_HLevelSetAction, SIGNAL(activated()), MainWindowBase, SLOT(computeHOrderLevelSetSlot()));
+    QObject::connect(forceMeshRenderingAction, SIGNAL(toggled(bool)), MainWindowBase, SLOT(forceMeshRenderingSlot(bool)));
+    QObject::connect(utilitiesElucidateSecondaryStructuresAction, SIGNAL(activated()), MainWindowBase, SLOT(elucidateSecondaryStructuresSlot()));
+    QObject::connect(m_ConstructHLSPocketsAction, SIGNAL(activated()), MainWindowBase, SLOT(constructHLSPocketsSlot()));
+    QObject::connect(m_MatchAction, SIGNAL(activated()), MainWindowBase, SLOT(matchSlot()));
+    QObject::connect(m_GB_energy, SIGNAL(activated()), MainWindowBase, SLOT(GB_energy_Slot()));
+    QObject::connect(m_GB_forceField, SIGNAL(activated()), MainWindowBase, SLOT(GB_forceField_Slot()));
+    QObject::connect(m_PB_energy, SIGNAL(activated()), MainWindowBase, SLOT(PB_energy_Slot()));
+    QObject::connect(F2DockAction, SIGNAL(activated()), MainWindowBase, SLOT(dockingSlot()));
+    QObject::connect(surfaceDialogAction, SIGNAL(activated()), MainWindowBase, SLOT(surfaceDialogSlot()));
+    QObject::connect(surfaceAreaAndVolumeDialogAction, SIGNAL(activated()), MainWindowBase, SLOT(surfaceAreaAndVolumeDialogSlot()));
+    QObject::connect(fileOpenMultiAction, SIGNAL(activated()), MainWindowBase, SLOT(fileOpenMultiSlot()));
+
+    QMetaObject::connectSlotsByName(MainWindowBase);
+    } // setupUi
+
+    void retranslateUi(Q3MainWindow *MainWindowBase)
+    {
+    MainWindowBase->setWindowTitle(QApplication::translate("MainWindowBase", "TexMol", 0, QApplication::UnicodeUTF8));
+    exitAction->setIconText(QApplication::translate("MainWindowBase", "ExitAction", 0, QApplication::UnicodeUTF8));
+    exitAction->setText(QApplication::translate("MainWindowBase", "E&xit", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    exitAction->setToolTip(QApplication::translate("MainWindowBase", "Exit the application", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+
+#ifndef QT_NO_STATUSTIP
+    exitAction->setStatusTip(QApplication::translate("MainWindowBase", "Exit the application", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+
+    fileOpenAction->setIconText(QApplication::translate("MainWindowBase", "Open", 0, QApplication::UnicodeUTF8));
+    fileOpenAction->setText(QApplication::translate("MainWindowBase", "&Open", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    fileOpenAction->setToolTip(QApplication::translate("MainWindowBase", "Open file to render", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    startRecordAction->setIconText(QApplication::translate("MainWindowBase", "Start recording", 0, QApplication::UnicodeUTF8));
+    startRecordAction->setText(QApplication::translate("MainWindowBase", "Start recording", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    startRecordAction->setToolTip(QApplication::translate("MainWindowBase", "Start recording animation view information", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+
+#ifndef QT_NO_STATUSTIP
+    startRecordAction->setStatusTip(QApplication::translate("MainWindowBase", "Start recording animation view information", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+
+    stopRecordAction->setIconText(QApplication::translate("MainWindowBase", "Stop recording", 0, QApplication::UnicodeUTF8));
+    stopRecordAction->setText(QApplication::translate("MainWindowBase", "Stop recording", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    stopRecordAction->setToolTip(QApplication::translate("MainWindowBase", "Stop recording animation view information", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    recordAnimationAction->setIconText(QApplication::translate("MainWindowBase", "Record animation", 0, QApplication::UnicodeUTF8));
+    recordAnimationAction->setText(QApplication::translate("MainWindowBase", "Record animation", 0, QApplication::UnicodeUTF8));
+    playbackAnimationAction->setIconText(QApplication::translate("MainWindowBase", "Playback animation", 0, QApplication::UnicodeUTF8));
+    playbackAnimationAction->setText(QApplication::translate("MainWindowBase", "Playback animation", 0, QApplication::UnicodeUTF8));
+    playbackMovieAction->setIconText(QApplication::translate("MainWindowBase", "Playback movie", 0, QApplication::UnicodeUTF8));
+    playbackMovieAction->setText(QApplication::translate("MainWindowBase", "Playback movie", 0, QApplication::UnicodeUTF8));
+    contentsHelpAction->setIconText(QApplication::translate("MainWindowBase", "&Contents", 0, QApplication::UnicodeUTF8));
+    contentsHelpAction->setText(QApplication::translate("MainWindowBase", "&Contents", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    contentsHelpAction->setToolTip(QApplication::translate("MainWindowBase", "Contents", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    indexHelpAction->setIconText(QApplication::translate("MainWindowBase", "&Index", 0, QApplication::UnicodeUTF8));
+    indexHelpAction->setText(QApplication::translate("MainWindowBase", "&Index", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    indexHelpAction->setToolTip(QApplication::translate("MainWindowBase", "Index", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    constructVolumeUtilitiesAction->setIconText(QApplication::translate("MainWindowBase", "Construct volume", 0, QApplication::UnicodeUTF8));
+    constructVolumeUtilitiesAction->setText(QApplication::translate("MainWindowBase", "Construct volume", 0, QApplication::UnicodeUTF8));
+    saveImageAction->setIconText(QApplication::translate("MainWindowBase", "Save image", 0, QApplication::UnicodeUTF8));
+    saveImageAction->setText(QApplication::translate("MainWindowBase", "&Save image", 0, QApplication::UnicodeUTF8));
+    downloadPDBAction->setIconText(QApplication::translate("MainWindowBase", "Download PDB", 0, QApplication::UnicodeUTF8));
+    downloadPDBAction->setText(QApplication::translate("MainWindowBase", "&Download PDB", 0, QApplication::UnicodeUTF8));
+    splitViewAction->setIconText(QApplication::translate("MainWindowBase", "Action", 0, QApplication::UnicodeUTF8));
+    splitViewAction->setText(QApplication::translate("MainWindowBase", "Split view", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    splitViewAction->setToolTip(QApplication::translate("MainWindowBase", "Split/merge the views", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    syncViewAction->setIconText(QApplication::translate("MainWindowBase", "Sync views", 0, QApplication::UnicodeUTF8));
+    syncViewAction->setText(QApplication::translate("MainWindowBase", "Sync views", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    syncViewAction->setToolTip(QApplication::translate("MainWindowBase", "Sync / Unsync views", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    viewAction->setIconText(QString());
+    viewAction->setText(QString());
+    fullscreenViewAction->setIconText(QApplication::translate("MainWindowBase", "Full screen", 0, QApplication::UnicodeUTF8));
+    fullscreenViewAction->setText(QApplication::translate("MainWindowBase", "Full screen", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    fullscreenViewAction->setToolTip(QApplication::translate("MainWindowBase", "Display in full screen mode", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    getCurvatureUtilitiesAction->setIconText(QApplication::translate("MainWindowBase", "Get curvatures", 0, QApplication::UnicodeUTF8));
+    getCurvatureUtilitiesAction->setText(QApplication::translate("MainWindowBase", "Get curvatures", 0, QApplication::UnicodeUTF8));
+    showGridOptionsAction->setIconText(QApplication::translate("MainWindowBase", "Display grid", 0, QApplication::UnicodeUTF8));
+    showGridOptionsAction->setText(QApplication::translate("MainWindowBase", "Display grid", 0, QApplication::UnicodeUTF8));
+    recentFileListAction->setIconText(QApplication::translate("MainWindowBase", "Recent files", 0, QApplication::UnicodeUTF8));
+    recentFileListAction->setText(QApplication::translate("MainWindowBase", "Recent &files", 0, QApplication::UnicodeUTF8));
+    fileOpenUnnamedAction->setIconText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    fileOpenUnnamedAction->setText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    fileUnnamedAction->setIconText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    fileUnnamedAction->setText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    recentFileListDummyAction->setIconText(QApplication::translate("MainWindowBase", "<No files>", 0, QApplication::UnicodeUTF8));
+    recentFileListDummyAction->setText(QApplication::translate("MainWindowBase", "<No files>", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    recentFileListDummyAction->setToolTip(QApplication::translate("MainWindowBase", "No recently opened files", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    viewTypeAction->setIconText(QApplication::translate("MainWindowBase", "&Projection", 0, QApplication::UnicodeUTF8));
+    viewTypeAction->setText(QApplication::translate("MainWindowBase", "&Projection", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    viewTypeAction->setToolTip(QApplication::translate("MainWindowBase", "Type of view", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    viewUnnamedAction->setIconText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    viewUnnamedAction->setText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    perspectiveViewTypeAction->setIconText(QApplication::translate("MainWindowBase", "&Perspective", 0, QApplication::UnicodeUTF8));
+    perspectiveViewTypeAction->setText(QApplication::translate("MainWindowBase", "&Perspective", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    perspectiveViewTypeAction->setToolTip(QApplication::translate("MainWindowBase", "Select perspective view", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    orthographicViewTypeAction->setIconText(QApplication::translate("MainWindowBase", "&Orthographic", 0, QApplication::UnicodeUTF8));
+    orthographicViewTypeAction->setText(QApplication::translate("MainWindowBase", "&Orthographic", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    orthographicViewTypeAction->setToolTip(QApplication::translate("MainWindowBase", "Select orthographic view", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    m_ConstructDepthColoredVolumeAction->setIconText(QApplication::translate("MainWindowBase", "Construct depth colored volume", 0, QApplication::UnicodeUTF8));
+    m_ConstructDepthColoredVolumeAction->setText(QApplication::translate("MainWindowBase", "Construct depth colored volume", 0, QApplication::UnicodeUTF8));
+    m_UserDefinedAction->setIconText(QApplication::translate("MainWindowBase", "Script", 0, QApplication::UnicodeUTF8));
+    m_UserDefinedAction->setText(QApplication::translate("MainWindowBase", "Script", 0, QApplication::UnicodeUTF8));
+    m_ShowViewOptionsAction->setIconText(QApplication::translate("MainWindowBase", "Show view information", 0, QApplication::UnicodeUTF8));
+    m_ShowViewOptionsAction->setText(QApplication::translate("MainWindowBase", "Show view information", 0, QApplication::UnicodeUTF8));
+    m_ShowMouseOptionsAction->setIconText(QApplication::translate("MainWindowBase", "Show mouse position", 0, QApplication::UnicodeUTF8));
+    m_ShowMouseOptionsAction->setText(QApplication::translate("MainWindowBase", "Show mouse position", 0, QApplication::UnicodeUTF8));
+    m_SelectObjectsAction->setIconText(QApplication::translate("MainWindowBase", "Select objects", 0, QApplication::UnicodeUTF8));
+    m_SelectObjectsAction->setText(QApplication::translate("MainWindowBase", "Select objects", 0, QApplication::UnicodeUTF8));
+    m_BackgroundColorAction->setIconText(QApplication::translate("MainWindowBase", "Background Color", 0, QApplication::UnicodeUTF8));
+    m_BackgroundColorAction->setText(QApplication::translate("MainWindowBase", "Background Color", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    m_BackgroundColorAction->setToolTip(QApplication::translate("MainWindowBase", "Change the background color", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    viewSetViewAction->setIconText(QApplication::translate("MainWindowBase", "Set view parameters", 0, QApplication::UnicodeUTF8));
+    viewSetViewAction->setText(QApplication::translate("MainWindowBase", "Set view parameters", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    viewSetViewAction->setToolTip(QApplication::translate("MainWindowBase", "Set viewing parameters", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    optionsTransformObjectAction->setIconText(QApplication::translate("MainWindowBase", "Transform object", 0, QApplication::UnicodeUTF8));
+    optionsTransformObjectAction->setText(QApplication::translate("MainWindowBase", "Transform object", 0, QApplication::UnicodeUTF8));
+    stereoViewAction->setIconText(QApplication::translate("MainWindowBase", "Stereo", 0, QApplication::UnicodeUTF8));
+    stereoViewAction->setText(QApplication::translate("MainWindowBase", "Stereo", 0, QApplication::UnicodeUTF8));
+    lightingAction->setIconText(QApplication::translate("MainWindowBase", "Lighting", 0, QApplication::UnicodeUTF8));
+    menunew_itemAction->setIconText(QApplication::translate("MainWindowBase", "new item", 0, QApplication::UnicodeUTF8));
+    menunew_itemAction->setText(QApplication::translate("MainWindowBase", "new item", 0, QApplication::UnicodeUTF8));
+    Action->setIconText(QApplication::translate("MainWindowBase", "Action", 0, QApplication::UnicodeUTF8));
+    menunew_itemAction_2->setIconText(QApplication::translate("MainWindowBase", "new item", 0, QApplication::UnicodeUTF8));
+    menunew_itemAction_2->setText(QApplication::translate("MainWindowBase", "new item", 0, QApplication::UnicodeUTF8));
+    m_UserInteractionAction->setIconText(QApplication::translate("MainWindowBase", "Mouse keyboard functions", 0, QApplication::UnicodeUTF8));
+    m_ConstructMolecularSurfaceAction->setIconText(QApplication::translate("MainWindowBase", "Construct Molecular Surface", 0, QApplication::UnicodeUTF8));
+    m_GlobalBoundingBoxAction->setIconText(QApplication::translate("MainWindowBase", "Global bounding box", 0, QApplication::UnicodeUTF8));
+    m_DataBoundingBoxAction->setIconText(QApplication::translate("MainWindowBase", "Data bounding box", 0, QApplication::UnicodeUTF8));
+    m_AcknowledgementAction->setIconText(QApplication::translate("MainWindowBase", "Acknowledgements", 0, QApplication::UnicodeUTF8));
+    m_2DSliceAction->setIconText(QApplication::translate("MainWindowBase", "Get 2D Slice", 0, QApplication::UnicodeUTF8));
+    m_RenderTypeAction->setIconText(QApplication::translate("MainWindowBase", "RayTrace", 0, QApplication::UnicodeUTF8));
+    m_ConstructPocketsAction->setIconText(QApplication::translate("MainWindowBase", "Construct pockets", 0, QApplication::UnicodeUTF8));
+    m_ComputePocketTunnelAction->setIconText(QApplication::translate("MainWindowBase", "Computes pocket-tunnel by Stable Manifold", 0, QApplication::UnicodeUTF8));
+    m_ConstructNurbsSurfaceAction->setIconText(QApplication::translate("MainWindowBase", "Construct nurbs surface", 0, QApplication::UnicodeUTF8));
+    m_HLevelSetAction->setIconText(QApplication::translate("MainWindowBase", "H Level Set", 0, QApplication::UnicodeUTF8));
+    m_HLevelSetAction->setText(QApplication::translate("MainWindowBase", "Construct H Level Set", 0, QApplication::UnicodeUTF8));
+
+#ifndef QT_NO_TOOLTIP
+    m_HLevelSetAction->setToolTip(QApplication::translate("MainWindowBase", "Compute higher-order level set", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+
+    forceMeshRenderingAction->setIconText(QApplication::translate("MainWindowBase", "Force Mesh Rendering", 0, QApplication::UnicodeUTF8));
+    forceMeshRenderingAction->setText(QApplication::translate("MainWindowBase", "Force Mesh Rendering", 0, QApplication::UnicodeUTF8));
+    utilitiesElucidateSecondaryStructuresAction->setIconText(QApplication::translate("MainWindowBase", "Elucidate Secondary Structures", 0, QApplication::UnicodeUTF8));
+    utilitiesElucidateSecondaryStructuresAction->setText(QApplication::translate("MainWindowBase", "Elucidate Secondary Structures", 0, QApplication::UnicodeUTF8));
+    m_ConstructHLSPocketsAction->setIconText(QApplication::translate("MainWindowBase", "Construct HLS pockets", 0, QApplication::UnicodeUTF8));
+    m_MatchAction->setIconText(QApplication::translate("MainWindowBase", "Perform a (MACT) Match", 0, QApplication::UnicodeUTF8));
+    m_GB_energy->setIconText(QApplication::translate("MainWindowBase", "Compute Energy (GB)", 0, QApplication::UnicodeUTF8));
+    m_GB_forceField->setIconText(QApplication::translate("MainWindowBase", "Compute Force Field (GB)", 0, QApplication::UnicodeUTF8));
+    m_PB_energy->setIconText(QApplication::translate("MainWindowBase", "Compute Energy + Potential (PB)", 0, QApplication::UnicodeUTF8));
+    F2DockAction->setIconText(QApplication::translate("MainWindowBase", "F2Dock", 0, QApplication::UnicodeUTF8));
+    F2DockAction->setText(QApplication::translate("MainWindowBase", "F2Dock", 0, QApplication::UnicodeUTF8));
+    surfaceDialogAction->setIconText(QApplication::translate("MainWindowBase", "Construct surface", 0, QApplication::UnicodeUTF8));
+    surfaceDialogAction->setText(QApplication::translate("MainWindowBase", "Construct surface", 0, QApplication::UnicodeUTF8));
+    Action_2->setIconText(QApplication::translate("MainWindowBase", "Action_2", 0, QApplication::UnicodeUTF8));
+    surfaceAreaAndVolumeDialogAction->setIconText(QApplication::translate("MainWindowBase", "Surface area and volume", 0, QApplication::UnicodeUTF8));
+    surfaceAreaAndVolumeDialogAction->setText(QApplication::translate("MainWindowBase", "Surface area and volume", 0, QApplication::UnicodeUTF8));
+    Action_4->setIconText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    Action_5->setIconText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    Action_6->setIconText(QApplication::translate("MainWindowBase", "Unnamed", 0, QApplication::UnicodeUTF8));
+    fileOpenMultiAction->setIconText(QApplication::translate("MainWindowBase", "Open Multi", 0, QApplication::UnicodeUTF8));
+    fileOpenMultiAction->setText(QApplication::translate("MainWindowBase", "Open Multi", 0, QApplication::UnicodeUTF8));
+    m_MoleculeBrowserGroupBox->setTitle(QApplication::translate("MainWindowBase", "Molecule Browser", 0, QApplication::UnicodeUTF8));
+    m_DataSetsListBox->clear();
+    m_DataSetsListBox->insertItem(QApplication::translate("MainWindowBase", "New Item", 0, QApplication::UnicodeUTF8));
+    m_PropertiesGroupBox->setTitle(QApplication::translate("MainWindowBase", "Properties", 0, QApplication::UnicodeUTF8));
+    m_RendererGroupBox->setTitle(QString());
+    m_FilePopupMenu->setTitle(QApplication::translate("MainWindowBase", "&File", 0, QApplication::UnicodeUTF8));
+    popupMenu_5->setTitle(QApplication::translate("MainWindowBase", "Recent &files", 0, QApplication::UnicodeUTF8));
+    m_ViewPopupMenu->setTitle(QApplication::translate("MainWindowBase", "&View", 0, QApplication::UnicodeUTF8));
+    popupMenu_9->setTitle(QApplication::translate("MainWindowBase", "&Projection", 0, QApplication::UnicodeUTF8));
+    m_AnimationPopupMenu->setTitle(QApplication::translate("MainWindowBase", "&Animation", 0, QApplication::UnicodeUTF8));
+    m_OptionsPopupMenu->setTitle(QApplication::translate("MainWindowBase", "&Options", 0, QApplication::UnicodeUTF8));
+    m_LightingPopupMenu->setTitle(QApplication::translate("MainWindowBase", "&Lighting", 0, QApplication::UnicodeUTF8));
+    m_UtilitiesPopupMenu->setTitle(QApplication::translate("MainWindowBase", "&Utilities", 0, QApplication::UnicodeUTF8));
+    popupMenu_43->setTitle(QApplication::translate("MainWindowBase", "Construct nurbs surface", 0, QApplication::UnicodeUTF8));
+    m_HelpPopupMenu->setTitle(QApplication::translate("MainWindowBase", "&Help", 0, QApplication::UnicodeUTF8));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class MainWindowBase: public Ui_MainWindowBase {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+class MainWindowBase : public Q3MainWindow, public Ui::MainWindowBase
+{
+    Q_OBJECT
+
+public:
+    MainWindowBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = Qt::WType_TopLevel);
+    ~MainWindowBase();
+
+public slots:
+    virtual bool fileOpenSlot();
+    virtual void deleteSlot();
+    virtual void startRecordSlot();
+    virtual void stopRecordSlot();
+    virtual void aboutHelpSlot();
+    virtual void indexHelpSlot();
+    virtual void playbackMovieSlot();
+    virtual void playbackAnimationSlot();
+    virtual void recordAnimationSlot();
+    virtual void constructVolumeUtilitiesSlot();
+    virtual void datasetComboBoxSlot( int );
+    virtual void saveImageSlot();
+    virtual void downloadPDBSlot();
+    virtual void newDataSetSelectedSlot( int );
+    virtual void fullscreenSlot();
+    virtual void splitViewSlot();
+    virtual void syncViewSlot();
+    virtual void constructCurvaturesUtilitySlot();
+    virtual void showGridOptionsSlot( bool );
+    virtual void orthographicViewSlot();
+    virtual void perspectiveViewSlot();
+    virtual void constructRawVSlot();
+    virtual void constructDepthColoredVolumeSlot();
+    virtual void scriptSlot();
+    virtual void showMousePositionSlot( bool );
+    virtual void showViewInformationSlot( bool );
+    virtual void selectObjectsSlot( bool );
+    virtual void backgroundColorSlot();
+    virtual void setViewingParametersSlot();
+    virtual void transformObjectSlot();
+    virtual void stereoSlot( bool );
+    virtual void userInteractionSlot();
+    virtual void constructMolecularSurfaceSlot();
+    virtual void globalBoundingBoxSlot( bool );
+    virtual void dataBoundingBoxSlot( bool );
+    virtual void acknowledgementSlot();
+    virtual void sliceParameterizationSlot();
+    virtual void renderTypeSlot( bool );
+    virtual void constructPocketsSlot();
+    virtual void computePocketTunnelSlot();
+    virtual void constructNurbsSurfaceSlot();
+    virtual void computeHOrderLevelSetSlot();
+    virtual void forceMeshRenderingSlot( bool );
+    virtual void elucidateSecondaryStructuresSlot();
+    virtual void constructHLSPocketsSlot();
+    virtual void matchSlot();
+    virtual void GB_energy_Slot();
+    virtual void GB_forceField_Slot();
+    virtual void PB_energy_Slot();
+    virtual void dockingSlot();
+    virtual void surfaceDialogSlot();
+    virtual void surfaceAreaAndVolumeDialogSlot();
+    virtual bool fileOpenMultiSlot();
+
+protected slots:
+    virtual void languageChange();
+
+};
+
+#endif // MAINWINDOWBASE_H

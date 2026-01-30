@@ -1,0 +1,119 @@
+\documentclass{book}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\definecolor{lightBrown}{rgb}{0.5,0.2,0.2}
+\definecolor{darkBrown}{rgb}{0.5,0,0}
+\definecolor{darkBlue}{rgb}{0,0,0.5}
+\definecolor{deepBlue}{rgb}{0,0,0.5}
+\definecolor{lightGrey}{rgb}{0.9,0.9,0.9}
+\definecolor{darkGrey}{rgb}{0.3,0.3,0.3}
+\definecolor{lightYellow}{rgb}{1.0,1.0,0.9}
+\definecolor{darkGreen}{rgb}{0.0,0.3,0.0}
+\definecolor{lightGreen}{rgb}{0.95,1.0,0.95}
+\definecolor{darkDarkBrown}{rgb}{0.1,0.1,0.0}
+\definecolor{BrickRed}{rgb}{0.7,0.3,0.4}
+
+\newcommand{\csection}[1]{\textcolor{darkBrown}{\section{#1}}}
+\newcommand{\cchapter}[1]{\textcolor{lightBrown}{\chapter{#1}}}
+\newcommand{\ccaption}[1]{\textcolor{deepBlue}{\caption{#1}}}
+\newcommand{\mm}[1]{\textcolor{darkDarkBrown}{$#1$}}
+\newcommand{\param}[1]{\fcolorbox{darkGreen}{lightGreen}{\textcolor{darkGreen}{#1}}}
+\newcommand{\warning}[1]{
+\begin{center}
+\begin{tabular}{|c>{\columncolor{lightGrey}}p{4in}|}
+    \hline
+\includegraphics[height=0.1in,angle=45]{warning.eps} & \textcolor{red}{Warning:}\textcolor{darkBlue}{#1}\\
+    \hline
+\end{tabular}
+\end{center}
+}
+
+\newcommand{\steps}[3]{
+\begin{table}[h]
+\caption{#1} \label{#2}
+\begin{center}
+\begin{tabular}{|>{\columncolor{lightYellow}}p{4in}|}
+    \hline
+\textcolor{darkBlue}
+{\raggedright{\begin{itemize}{#3}\end{itemize}}}\\
+    \hline
+\end{tabular}
+
+\end{center}
+\end{table}
+}
+
+\newcommand{\TexMol}{\textcolor{darkGrey}{\textbf{\it{Te$\chi$Mol }}}}
+
+\title{\TexMol User Guide}
+
+\author{Vinay K Siddavanahalli}
+
+\date{ }
+\begin{document}
+
+
+
+\maketitle
+ \addcontentsline{toc}{chapter}{Contents}
+%\pagenumbering{roman}
+\tableofcontents %\listoffigures \listoftables
+\chapter*{TexMol}\normalsize\addcontentsline{toc}{chapter}{Preface}
+
+\pagestyle{plain} This is the user documentation for \TexMol v1.0.
+This is to help both new users familiarize themselves with the
+software, and to provide a comprehensive list of functions to
+everyone. There is a separate programmer documentation available for
+those interested in extending the functionality of \TexMol, which is
+an open source software. \TexMol was developed at the Center for
+Computational Visualization under Dr. Chandrajit Bajaj, at the
+University of Texas at Austin.
+
+
+\input{Introduction}
+
+\input{OpeningFiles}
+
+\input{computations}
+
+\input{scripting}
+
+\chapter*{Acknowledgements}\normalsize\addcontentsline{toc}{chapter}{Acknowledgements}
+
+\TexMol was developed by Vinay K Siddavanahalli under Prof
+Chandrajit Bajaj. Some of the other contributors include
+
+\begin{itemize}
+\item Peter Djeu
+\item Anthony Thane
+\item John Wiggins
+\item Xiaoyu Zhang
+\end{itemize}
+
+
+\begin{thebibliography}{99}
+  \addcontentsline{toc}{chapter}{Bibliography}
+\bibitem{texmol} Chandrajit Bajaj, Peter Djeu, Vinay Siddavanahalli and Anthony Thane {{\bf \TexMol}: Interactive Visual Exploration of Large Flexible Multi-component Molecular
+Complexes} IEEE Visualization 2004.
+\bibitem{pdb} H.M. Berman, J. Westbrook, Z. Feng, G. Gilliland, T.N. Bhat, H.
+Weissig, I.N. Shindyalov, P.E. Bourne: The Protein Data Bank.
+Nucleic Acids Research, 28 pp. 235-242 (2000).
+\bibitem{pqr}Todd J. Dolinsky, Jens E. Nielsen, J. Andrew McCammon, and Nathan
+A. Baker: PDB2PQR: an automated pipeline for the setup of
+Poisson–Boltzmann electrostatics calculations.  Nucleic Acids Res.
+2004 July 1; 32
+\bibitem{bajaj06fast}Chandrajit Bajaj and Vinay Siddavanahalli,  Fast Error-bounded
+Surfaces and Derivatives Computation for Volumetric Particle Data,
+ICES Report 06-03, January 2006.
+\end{thebibliography}
+
+
+
+\include{index}
+  \addcontentsline{toc}{chapter}{Index}
+
+\end{document}

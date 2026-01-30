@@ -1,0 +1,237 @@
+This is a listing of the subdirectories of TexMol.
+
+For each directory, we need to determine if the code is
+currently in use, under development or outdated (and should
+be removed). 
+
+arand: I have filled in some information that I know.  Please
+fill in the details if you know additional info.
+
+
+*** AdaptiveIsocontouring ***
+
+*** ASpline ***
+IN USE.
+Used for generating ASMS surfaces.
+
+*** Blurmaps ***
+IN USE.
+Used for generating Gaussian blur surfaces.
+
+*** ByteOrder ***
+IN USE.
+Does some low level stuff.
+
+*** C2C ***
+???
+
+*** ColorManager ***
+???
+
+*** ColorTable ***
+???
+
+*** ComputeNormals ***
+IN USE.
+Used to compute surface normals for surface meshes.
+Maybe this should be rolled into another library.(?)
+
+*** Contour ***
+???
+
+*** Contouring *** 
+???
+
+*** contourtree *** 
+???
+
+*** Curvatures ***
+???
+
+*** DataManager ***
+IN USE.
+Manages the list of active files (pdb, rawn, rawiv) loaded in TexMol.
+
+*** Decimation ***
+IN USE.  
+Can be called via MolSurfAPI.
+
+*** Docking ***
+UNUSED.
+Very old docking code.
+
+*** DPG *** 
+(Soon to be) IN USE.
+
+*** F2DockAnimator ***
+Currently UNUSED.
+Should be moved into the F2Dock directory.
+
+*** F2DockClient ***
+IN USE.
+Interface to F2Dock.
+
+*** FastSummation ***
+IN USE.
+Inferface to NFFT.
+
+*** GBEnergy ***
+IN USE
+NFFT-base GB energy computation.
+
+*** Geometry ***
+IN USE.
+???
+
+*** GeometryFileTypes ***
+IN USE.
+File types for mesh geometry.
+
+*** GeometryRenderer ***
+IN USE
+???
+
+*** glew ***
+???
+
+*** GOAFileTypes ***
+IN USE.
+File types for pdb-type data. 
+
+*** GraphicsPrimitives *** 
+???
+
+*** Histogram ***
+???
+
+*** HLevelSet ***
+???
+
+*** ImposterRenderer ***
+IN USE.
+Provides imposter rendering of groups of spheres. (?)
+
+*** Interface ***
+???
+
+*** KIFMM3D ***
+IN USE.
+Fast Multipole code for PB.
+
+*** LBIE_lib ***
+IN USE.
+LBIE meshing library.
+
+*** levmar-2.5 ***
+???
+Used by coarse grain libray.
+
+*** libCG ***
+???
+Coarse graining library.
+
+*** MolecularCharacteristics ***
+???
+
+*** MolEnergyUtil ***
+IN USE.
+Utility functions for MolEnergy/F2Dock.
+
+*** MolSurfAPI ***
+IN USE.
+Simplest methods for calling MolSurf functions.
+
+*** MultiresolutionSurface ***
+Currently not callable?
+Should produce the multi-resolution surface view used in a 
+different implementation.
+
+*** Nurbs ***
+???
+
+*** ObjectRenderer ***
+???
+
+*** OpenGL_Viewer ***
+???
+
+*** PatchComplex ***
+???
+Appears to be a template for constructing SES surface
+but many functions are not implemented.
+
+*** PB2 ***
+IN USE.
+The Poisson-Boltzmann energy computation.
+
+*** PDBParser ***
+IN USE.
+Parsers PDB type files.
+
+*** Pocket ***
+IN USE.
+Find protein pockets.
+
+*** PocketTunnel ***
+IN USE.
+Finds protein pockets and tunnels.
+
+*** QGLViewer ***
+???
+
+*** RayTracer ***
+???
+
+*** SecondaryStructures *** 
+???
+
+*** SignDistanceFunction ***
+???
+
+*** SignDistanceFunction_v2 ***
+???
+
+*** SimpleVolumeData ***
+IN USE.
+An alternative to VolMagick for creating .rawiv files.
+
+*** SmoothingFunction ***
+???
+
+*** SphericalPatchIntersections ***
+???
+
+*** SplattingRenderer ***
+???
+
+*** Summation ***
+???
+
+*** TexMol ***
+IN USE.
+The main TexMol code.
+
+*** TriElement ***
+IN USE.
+This is an altered copy of ASpline used by PB2.
+
+*** UsefulMath ***
+IN USE. 
+???
+
+*** Utility ***
+???
+
+*** VolMagick *** 
+IN USE.
+Not exactly sure what is using this though.
+
+*** VolumeFileTypes ***
+???
+
+*** VolumeLibrary ***
+???
+
+*** XmlRPC ***
+IN USE.
+F2DockClient using XmlRPC to call the server.

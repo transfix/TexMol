@@ -1,0 +1,80 @@
+Log for qt3to4 on Fri Oct 15 14:28:40 2010. Number of log entries: 72
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/AboutDialog.cpp at line 3 column 78: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructCurvaturesDialog.cpp at line 3 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructCurvaturesDialog.cpp at line 19 column 107: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructCurvaturesDialog.cpp at line 170 column 39: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructCurvaturesDialog.cpp at line 180 column 46: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructCurvaturesDialog.cpp at line 190 column 50: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructCurvaturesDialog.cpp at line 200 column 54: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructDepthColoredVolumesDialog.cpp at line 3 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructDepthColoredVolumesDialog.cpp at line 12 column 154: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructDepthColoredVolumesDialog.cpp at line 25 column 35: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructVolumesDialog.cpp at line 2 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructVolumesDialog.cpp at line 7 column 22: qbuttongroup.h -> q3buttongroup.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructVolumesDialog.cpp at line 16 column 89: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ConstructVolumesDialog.cpp at line 151 column 31: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/FileSaveDialog.cpp at line 6 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/FileSaveDialog.cpp at line 11 column 84: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/FileSaveDialog.cpp at line 14 column 9: QStrList -> Q3StrList
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/FileSaveDialog.cpp at line 35 column 36: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/FileSaveDialog.cpp: Added the following include directives:
+	#include <Q3StrList> 
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/LightsDialog.cpp at line 22 column 112: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 13 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 14 column 19: qgroupbox.h -> q3groupbox.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 15 column 15: qhttp.h -> q3http.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 21 column 18: qlistbox.h -> q3listbox.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 22 column 18: qlistbox.h -> q3listbox.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 25 column 18: qnetwork.h -> q3network.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 27 column 25: qprogressdialog.h -> q3progressdialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 176 column 64: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 207 column 30: QBoxLayout -> Q3BoxLayout
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 207 column 73: QBoxLayout -> Q3BoxLayout
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 211 column 66: QListBoxItem -> Q3ListBoxItem
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 211 column 135: QListBoxItem -> Q3ListBoxItem
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 214 column 17: QHttp -> Q3Http
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 407 column 24: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 428 column 24: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 606 column 31: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 643 column 31: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 871 column 34: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 1200 column 22: qInitNetworkProtocols -> q3InitNetworkProtocols
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 1205 column 33: IO_WriteOnly -> QIODevice::WriteOnly
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 1420 column 11: QPopupMenu -> Q3PopupMenu
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 1426 column 55: QListBoxItem -> Q3ListBoxItem
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp at line 1445 column 34: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MainWindow.cpp: Added the following include directives:
+	#include <Q3BoxLayout> 	#include <QCloseEvent> 	#include <QKeyEvent> 	#include <QCustomEvent> 	#include <Q3PopupMenu> 
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MouseHandlerDialog.cpp at line 3 column 93: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MovieImageFileSaveDialog.cpp at line 6 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MovieImageFileSaveDialog.cpp at line 11 column 104: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MovieImageFileSaveDialog.cpp at line 14 column 9: QStrList -> Q3StrList
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MovieImageFileSaveDialog.cpp at line 31 column 40: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MovieImageFileSaveDialog.cpp at line 37 column 40: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/MovieImageFileSaveDialog.cpp: Added the following include directives:
+	#include <Q3StrList> 
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/RenderAreaWidgetBase.cpp at line 7 column 21: qobjectlist.h -> qobject.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/RenderAreaWidgetBase.cpp at line 51 column 139: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/RenderAreaWidgetBase.cpp: Added the following include directives:
+	#include <QWheelEvent> 	#include <QMouseEvent> 
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/RenderAreaWidget.cpp at line 29 column 131: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/RenderAreaWidget.cpp: Added the following include directives:
+	#include <QMouseEvent> 
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptEditorDialog.cpp at line 22 column 12: QVBoxLayout -> Q3VBoxLayout
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptEditorDialog.cpp at line 22 column 36: QVBoxLayout -> Q3VBoxLayout
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptEditorDialog.cpp at line 24 column 12: QHBoxLayout -> Q3HBoxLayout
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptEditorDialog.cpp at line 24 column 36: QHBoxLayout -> Q3HBoxLayout
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptEditorDialog.cpp at line 47 column 26: Key_Escape -> Qt::Key_Escape
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptEditorDialog.cpp: Added the following include directives:
+	#include <Q3VBoxLayout> 	#include <QKeyEvent> 	#include <Q3HBoxLayout> 
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptsDialog.cpp at line 1 column 18: qtextedit.h -> q3textedit.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptsDialog.cpp at line 2 column 21: qfiledialog.h -> q3filedialog.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptsDialog.cpp at line 81 column 31: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/ScriptsDialog.cpp at line 110 column 31: QFileDialog -> Q3FileDialog
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/SetViewingParametersDialog.cpp at line 5 column 201: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/SliceDialog.cpp at line 4 column 114: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/SurfaceAreaAndVolumeDialog.cpp at line 7 column 136: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/SurfaceDialog.cpp at line 16 column 81: WFlags -> Qt::WFlags
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/TransformationsDialog.cpp at line 7 column 18: qlistbox.h -> q3listbox.h
+In file /workspace/deukhyun/TexMol_QT4/src/TexMol/Dialogs/TransformationsDialog.cpp at line 10 column 99: WFlags -> Qt::WFlags
+

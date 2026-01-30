@@ -1,0 +1,300 @@
+#include "../../../inc/TexMol/Dialogs/MainWindowBase.Qt3.h"
+
+#include <qvariant.h>
+/*
+ *  Constructs a MainWindowBase as a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'.
+ *
+ */
+MainWindowBase::MainWindowBase(QWidget* parent, const char* name, Qt::WindowFlags fl)
+    : Q3MainWindow(parent, name, fl)
+{
+    setupUi(this);
+
+    (void)statusBar();
+}
+
+/*
+ *  Destroys the object and frees any allocated resources
+ */
+MainWindowBase::~MainWindowBase()
+{
+    // no need to delete child widgets, Qt does it all for us
+}
+
+/*
+ *  Sets the strings of the subwidgets using the current
+ *  language.
+ */
+void MainWindowBase::languageChange()
+{
+    retranslateUi(this);
+}
+
+bool MainWindowBase::fileOpenSlot()
+{
+    qWarning("MainWindowBase::fileOpenSlot(): Not implemented yet");
+    return false;
+}
+
+void MainWindowBase::deleteSlot()
+{
+    qWarning("MainWindowBase::deleteSlot(): Not implemented yet");
+}
+
+void MainWindowBase::startRecordSlot()
+{
+    qWarning("MainWindowBase::startRecordSlot(): Not implemented yet");
+}
+
+void MainWindowBase::stopRecordSlot()
+{
+    qWarning("MainWindowBase::stopRecordSlot(): Not implemented yet");
+}
+
+void MainWindowBase::aboutHelpSlot()
+{
+    qWarning("MainWindowBase::aboutHelpSlot(): Not implemented yet");
+}
+
+void MainWindowBase::indexHelpSlot()
+{
+    qWarning("MainWindowBase::indexHelpSlot(): Not implemented yet");
+}
+
+void MainWindowBase::playbackMovieSlot()
+{
+    qWarning("MainWindowBase::playbackMovieSlot(): Not implemented yet");
+}
+
+void MainWindowBase::playbackAnimationSlot()
+{
+    qWarning("MainWindowBase::playbackAnimationSlot(): Not implemented yet");
+}
+
+void MainWindowBase::recordAnimationSlot()
+{
+    qWarning("MainWindowBase::recordAnimationSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructVolumeUtilitiesSlot()
+{
+    qWarning("MainWindowBase::constructVolumeUtilitiesSlot(): Not implemented yet");
+}
+
+void MainWindowBase::datasetComboBoxSlot(int)
+{
+    qWarning("MainWindowBase::datasetComboBoxSlot(int): Not implemented yet");
+}
+
+void MainWindowBase::saveImageSlot()
+{
+    qWarning("MainWindowBase::saveImageSlot(): Not implemented yet");
+}
+
+void MainWindowBase::downloadPDBSlot()
+{
+    qWarning("MainWindowBase::downloadPDBSlot(): Not implemented yet");
+}
+
+void MainWindowBase::newDataSetSelectedSlot(int)
+{
+    qWarning("MainWindowBase::newDataSetSelectedSlot(int): Not implemented yet");
+}
+
+void MainWindowBase::fullscreenSlot()
+{
+    qWarning("MainWindowBase::fullscreenSlot(): Not implemented yet");
+}
+
+void MainWindowBase::splitViewSlot()
+{
+    qWarning("MainWindowBase::splitViewSlot(): Not implemented yet");
+}
+
+void MainWindowBase::syncViewSlot()
+{
+    qWarning("MainWindowBase::syncViewSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructCurvaturesUtilitySlot()
+{
+    qWarning("MainWindowBase::constructCurvaturesUtilitySlot(): Not implemented yet");
+}
+
+void MainWindowBase::showGridOptionsSlot(bool)
+{
+    qWarning("MainWindowBase::showGridOptionsSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::orthographicViewSlot()
+{
+    qWarning("MainWindowBase::orthographicViewSlot(): Not implemented yet");
+}
+
+void MainWindowBase::perspectiveViewSlot()
+{
+    qWarning("MainWindowBase::perspectiveViewSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructRawVSlot()
+{
+    qWarning("MainWindowBase::constructRawVSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructDepthColoredVolumeSlot()
+{
+    qWarning("MainWindowBase::constructDepthColoredVolumeSlot(): Not implemented yet");
+}
+
+void MainWindowBase::scriptSlot()
+{
+    qWarning("MainWindowBase::scriptSlot(): Not implemented yet");
+}
+
+void MainWindowBase::showMousePositionSlot(bool)
+{
+    qWarning("MainWindowBase::showMousePositionSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::showViewInformationSlot(bool)
+{
+    qWarning("MainWindowBase::showViewInformationSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::selectObjectsSlot(bool)
+{
+    qWarning("MainWindowBase::selectObjectsSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::backgroundColorSlot()
+{
+    qWarning("MainWindowBase::backgroundColorSlot(): Not implemented yet");
+}
+
+void MainWindowBase::setViewingParametersSlot()
+{
+    qWarning("MainWindowBase::setViewingParametersSlot(): Not implemented yet");
+}
+
+void MainWindowBase::transformObjectSlot()
+{
+    qWarning("MainWindowBase::transformObjectSlot(): Not implemented yet");
+}
+
+void MainWindowBase::stereoSlot(bool)
+{
+    qWarning("MainWindowBase::stereoSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::userInteractionSlot()
+{
+    qWarning("MainWindowBase::userInteractionSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructMolecularSurfaceSlot()
+{
+    qWarning("MainWindowBase::constructMolecularSurfaceSlot(): Not implemented yet");
+}
+
+void MainWindowBase::globalBoundingBoxSlot(bool)
+{
+    qWarning("MainWindowBase::globalBoundingBoxSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::dataBoundingBoxSlot(bool)
+{
+    qWarning("MainWindowBase::dataBoundingBoxSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::acknowledgementSlot()
+{
+    qWarning("MainWindowBase::acknowledgementSlot(): Not implemented yet");
+}
+
+void MainWindowBase::sliceParameterizationSlot()
+{
+    qWarning("MainWindowBase::sliceParameterizationSlot(): Not implemented yet");
+}
+
+void MainWindowBase::renderTypeSlot(bool)
+{
+    qWarning("MainWindowBase::renderTypeSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::constructPocketsSlot()
+{
+    qWarning("MainWindowBase::constructPocketsSlot(): Not implemented yet");
+}
+
+void MainWindowBase::computePocketTunnelSlot()
+{
+    qWarning("MainWindowBase::computePocketTunnelSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructNurbsSurfaceSlot()
+{
+    qWarning("MainWindowBase::constructNurbsSurfaceSlot(): Not implemented yet");
+}
+
+void MainWindowBase::computeHOrderLevelSetSlot()
+{
+    qWarning("MainWindowBase::computeHOrderLevelSetSlot(): Not implemented yet");
+}
+
+void MainWindowBase::forceMeshRenderingSlot(bool)
+{
+    qWarning("MainWindowBase::forceMeshRenderingSlot(bool): Not implemented yet");
+}
+
+void MainWindowBase::elucidateSecondaryStructuresSlot()
+{
+    qWarning("MainWindowBase::elucidateSecondaryStructuresSlot(): Not implemented yet");
+}
+
+void MainWindowBase::constructHLSPocketsSlot()
+{
+    qWarning("MainWindowBase::constructHLSPocketsSlot(): Not implemented yet");
+}
+
+void MainWindowBase::matchSlot()
+{
+    qWarning("MainWindowBase::matchSlot(): Not implemented yet");
+}
+
+void MainWindowBase::GB_energy_Slot()
+{
+    qWarning("MainWindowBase::GB_energy_Slot(): Not implemented yet");
+}
+
+void MainWindowBase::GB_forceField_Slot()
+{
+    qWarning("MainWindowBase::GB_forceField_Slot(): Not implemented yet");
+}
+
+void MainWindowBase::PB_energy_Slot()
+{
+    qWarning("MainWindowBase::PB_energy_Slot(): Not implemented yet");
+}
+
+void MainWindowBase::dockingSlot()
+{
+    qWarning("MainWindowBase::dockingSlot(): Not implemented yet");
+}
+
+void MainWindowBase::surfaceDialogSlot()
+{
+    qWarning("MainWindowBase::surfaceDialogSlot(): Not implemented yet");
+}
+
+void MainWindowBase::surfaceAreaAndVolumeDialogSlot()
+{
+    qWarning("MainWindowBase::surfaceAreaAndVolumeDialogSlot(): Not implemented yet");
+}
+
+bool MainWindowBase::fileOpenMultiSlot()
+{
+    qWarning("MainWindowBase::fileOpenMultiSlot(): Not implemented yet");
+    return false;
+}
+

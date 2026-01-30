@@ -1,0 +1,207 @@
+<ui version="4.0" >
+ <class>f2dGenUI</class>
+ <widget class="QDialog" name="f2dGenUI" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>711</width>
+    <height>343</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Submit pqr and f2d generation job</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>691</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string/>
+   </property>
+   <widget class="QPushButton" name="receptorButton" >
+    <property name="geometry" >
+     <rect>
+      <x>590</x>
+      <y>20</y>
+      <width>84</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Browse</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ligandButton" >
+    <property name="geometry" >
+     <rect>
+      <x>590</x>
+      <y>60</y>
+      <width>84</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Browse</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="receptorTextBox" >
+    <property name="geometry" >
+     <rect>
+      <x>162</x>
+      <y>20</y>
+      <width>421</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ligandTextBox" >
+    <property name="geometry" >
+     <rect>
+      <x>162</x>
+      <y>60</y>
+      <width>421</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="resolutionCombo" >
+    <property name="geometry" >
+     <rect>
+      <x>160</x>
+      <y>100</y>
+      <width>231</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Receptor PDB</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Ligand PDB</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Resolution</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="saveF2dButton" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Save Only f2d</string>
+    </property>
+    <property name="checked" >
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="savePQRButton" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>201</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Save Both f2d and pqr</string>
+    </property>
+    <property name="checked" >
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="submitButton" >
+   <property name="geometry" >
+    <rect>
+     <x>243</x>
+     <y>290</y>
+     <width>201</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Submit</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="titleTextBox" >
+   <property name="geometry" >
+    <rect>
+     <x>90</x>
+     <y>20</y>
+     <width>111</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Job Title </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5" >
+   <property name="geometry" >
+    <rect>
+     <x>210</x>
+     <y>20</y>
+     <width>481</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>[Used for autogenerating names of temporary files (No spaces allowed)]</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

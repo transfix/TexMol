@@ -1,0 +1,40 @@
+--------------------------------------------------------------------------------
+TexMol Open Bug List
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Colormap Interface Crashes on PQR files (Matt)
+--------------------------------------------------------------------------------
+
+BallAndStickData.cpp:1159
+
+ColorMapInterface::setGOAData crashes on PQR file
+/ices/mstrange/cvs/TexMol/Docking/DockingData/1A2K_r_b.pqr. I just
+took it out this initialization line because I don't have time to fix
+it.  The interface doesn't appear to be very well documented or used
+anyway.
+
+--------------------------------------------------------------------------------
+Transparency Issues (Matt)
+--------------------------------------------------------------------------------
+
+There's no good way to do transparency other than adding all Geometry
+together and sorting it.  Right now I sort the Geometry independently.
+That means you can't have multiple transparent surfaces in the file
+and expect them to work together.  The correct solution is for any
+transparent render to register itself on a Geometry chain, then to
+sort and draw the chain at the end of the rendering cycle.
+
+Another possibility is Depth Peeling Rendering, which blends together
+many depth-masked renders.  I didn't have time to debug this to a
+working state but the pieces are in DepthPeelingRenderer.cpp
+
+--------------------------------------------------------------------------------
+No Color VBOs (Matt)
+--------------------------------------------------------------------------------
+
+Geometry.cpp:1861
+
+If i put the color data in a vertex buffer object then there's an
+inexplicable flickering effect.  I couldn't find a solution other than
+to disable this for the time being.

@@ -1,0 +1,49 @@
+#include <F2DockClient/f2dGenDialog.h>
+#include <F2DockClient/f2dGenControl.h>
+#include <F2DockClient/quadGenDialog.h>
+#include <F2DockClient/quadGenControl.h>
+#include <F2DockClient/jobParams.h>
+
+#include <cmath>
+#include <qapplication.h>
+
+int main(int argc, char** argv)
+{
+	JobParams jp;
+
+	QApplication app(argc, argv);
+
+	F2dGenDialog f2dGenDial;
+	f2dGenDial.setAttribute(Qt::WA_DeleteOnClose, false);
+
+	F2dGenControl f2dGenCont;
+
+	f2dGenCont.setF2dGenParams(jp.getF2dGenParams());
+	f2dGenCont.setBasicParams(jp.getBasicParams());
+	f2dGenCont.setDialog(&f2dGenDial);
+
+	app.setMainWidget(&f2dGenDial);
+
+	if (f2dGenDial.exec() == QDialog::Accepted)
+	{	
+		f2dGenCont.populateParams();
+	}
+
+	QuadGenDialog quadGenDial;
+	quadGenDial.setAttribute(Qt::WA_DeleteOnClose, false);
+
+	QuadGenControl quadGenCont;
+
+	quadGenCont.setQuadGenParams(jp.getQuadGenParams());
+	quadGenCont.setBasicParams(jp.getBasicParams());
+	quadGenCont.setDialog(&quadGenDial);
+
+	app.setMainWidget(&quadGenDial);
+
+	if (quadGenDial.exec() == QDialog::Accepted)
+	{	
+		quadGenCont.populateParams();
+	}
+
+	return 1;
+}

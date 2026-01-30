@@ -1,0 +1,8 @@
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/src/CGAL/CMakeFiles/CGAL.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/src/Core/CMakeFiles/CGAL_Core.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/src/ImageIO/CMakeFiles/CGAL_ImageIO.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/src/Qt3/CMakeFiles/CGAL_Qt3.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/src/Qt4/CMakeFiles/CGAL_Qt4.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/demos.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/examples.dir
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/install_FindCGAL.dir

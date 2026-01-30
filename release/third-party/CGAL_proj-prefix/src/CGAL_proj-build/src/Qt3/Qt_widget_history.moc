@@ -1,0 +1,140 @@
+/****************************************************************************
+** CGAL::Qt_widget_history meta object code from reading C++ file 'Qt_widget_history.h'
+**
+** Created: Tue Mar 12 14:23:05 2013
+**      by: The Qt MOC ($Id: qt/moc_yacc.cpp   3.3.8   edited Feb 2 14:59 $)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#undef QT_NO_COMPAT
+#include "../../../../../../../third-party/cgal/include/CGAL/IO/Qt_widget_history.h"
+#include <qmetaobject.h>
+#include <qapplication.h>
+
+#include <private/qucomextra_p.h>
+#if !defined(Q_MOC_OUTPUT_REVISION) || (Q_MOC_OUTPUT_REVISION != 26)
+#error "This file was generated using the moc from 3.3.8b. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+const char *CGAL::Qt_widget_history::className() const
+{
+    return "CGAL::Qt_widget_history";
+}
+
+QMetaObject *CGAL::Qt_widget_history::metaObj = 0;
+static QMetaObjectCleanUp cleanUp_CGAL__Qt_widget_history( "CGAL::Qt_widget_history", &CGAL::Qt_widget_history::staticMetaObject );
+
+#ifndef QT_NO_TRANSLATION
+QString CGAL::Qt_widget_history::tr( const char *s, const char *c )
+{
+    if ( qApp )
+	return qApp->translate( "CGAL::Qt_widget_history", s, c, QApplication::DefaultCodec );
+    else
+	return QString::fromLatin1( s );
+}
+#ifndef QT_NO_TRANSLATION_UTF8
+QString CGAL::Qt_widget_history::trUtf8( const char *s, const char *c )
+{
+    if ( qApp )
+	return qApp->translate( "CGAL::Qt_widget_history", s, c, QApplication::UnicodeUTF8 );
+    else
+	return QString::fromUtf8( s );
+}
+#endif // QT_NO_TRANSLATION_UTF8
+
+#endif // QT_NO_TRANSLATION
+
+QMetaObject* CGAL::Qt_widget_history::staticMetaObject()
+{
+    if ( metaObj )
+	return metaObj;
+    QMetaObject* parentObject = QObject::staticMetaObject();
+    static const QUMethod slot_0 = {"backward", 0, 0 };
+    static const QUMethod slot_1 = {"forward", 0, 0 };
+    static const QUMethod slot_2 = {"save", 0, 0 };
+    static const QUMethod slot_3 = {"clear", 0, 0 };
+    static const QMetaData slot_tbl[] = {
+	{ "backward()", &slot_0, QMetaData::Public },
+	{ "forward()", &slot_1, QMetaData::Public },
+	{ "save()", &slot_2, QMetaData::Public },
+	{ "clear()", &slot_3, QMetaData::Public }
+    };
+    static const QUParameter param_signal_0[] = {
+	{ 0, &static_QUType_bool, 0, QUParameter::In }
+    };
+    static const QUMethod signal_0 = {"backwardAvaillable", 1, param_signal_0 };
+    static const QUParameter param_signal_1[] = {
+	{ 0, &static_QUType_bool, 0, QUParameter::In }
+    };
+    static const QUMethod signal_1 = {"forwardAvaillable", 1, param_signal_1 };
+    static const QMetaData signal_tbl[] = {
+	{ "backwardAvaillable(bool)", &signal_0, QMetaData::Public },
+	{ "forwardAvaillable(bool)", &signal_1, QMetaData::Public }
+    };
+    metaObj = QMetaObject::new_metaobject(
+	"CGAL::Qt_widget_history", parentObject,
+	slot_tbl, 4,
+	signal_tbl, 2,
+#ifndef QT_NO_PROPERTIES
+	0, 0,
+	0, 0,
+#endif // QT_NO_PROPERTIES
+	0, 0 );
+    cleanUp_CGAL__Qt_widget_history.setMetaObject( metaObj );
+    return metaObj;
+}
+
+void* CGAL::Qt_widget_history::qt_cast( const char* clname )
+{
+    if ( !qstrcmp( clname, "CGAL::Qt_widget_history" ) )
+	return this;
+    return QObject::qt_cast( clname );
+}
+
+// SIGNAL backwardAvaillable
+void CGAL::Qt_widget_history::backwardAvaillable( bool t0 )
+{
+    activate_signal_bool( staticMetaObject()->signalOffset() + 0, t0 );
+}
+
+// SIGNAL forwardAvaillable
+void CGAL::Qt_widget_history::forwardAvaillable( bool t0 )
+{
+    activate_signal_bool( staticMetaObject()->signalOffset() + 1, t0 );
+}
+
+bool CGAL::Qt_widget_history::qt_invoke( int _id, QUObject* _o )
+{
+    switch ( _id - staticMetaObject()->slotOffset() ) {
+    case 0: backward(); break;
+    case 1: forward(); break;
+    case 2: save(); break;
+    case 3: clear(); break;
+    default:
+	return QObject::qt_invoke( _id, _o );
+    }
+    return TRUE;
+}
+
+bool CGAL::Qt_widget_history::qt_emit( int _id, QUObject* _o )
+{
+    switch ( _id - staticMetaObject()->signalOffset() ) {
+    case 0: backwardAvaillable((bool)static_QUType_bool.get(_o+1)); break;
+    case 1: forwardAvaillable((bool)static_QUType_bool.get(_o+1)); break;
+    default:
+	return QObject::qt_emit(_id,_o);
+    }
+    return TRUE;
+}
+#ifndef QT_NO_PROPERTIES
+
+bool CGAL::Qt_widget_history::qt_property( int id, int f, QVariant* v)
+{
+    return QObject::qt_property( id, f, v);
+}
+
+bool CGAL::Qt_widget_history::qt_static_property( QObject* , int , int , QVariant* ){ return FALSE; }
+#endif // QT_NO_PROPERTIES

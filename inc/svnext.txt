@@ -1,0 +1,57 @@
+AdaptiveIsocontouring     https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/AdaptiveIsocontouring
+Blurmaps                  https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Blurmaps
+ByteOrder                 https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/ByteOrder
+C2C                       https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/C2C
+Contour                   https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Contour
+ColorManager              https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/ColorManager
+ColorSurfaceByFunction    https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/ColorSurfaceByFunction
+Contouring                https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Contouring
+Curvatures                https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Curvatures
+DPG			  https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/DPG
+DynamicAdaptiveGrid	  https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/DynamicAdaptiveGrid
+FastSummation             https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/FastSummation
+Geometry                  https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Geometry
+GeometryFileTypes         https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/GeometryFileTypes
+GOAFileTypes              https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/GOAFileTypes
+HLevelSet                 https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/HLevelSet
+LBIE_lib                  https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/LBIE_lib
+InterfaceStats            https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/InterfaceStats
+libCG                     https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/libCG
+MolecularCharacteristics  https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/MolecularCharacteristics
+MultiresolutionSurface    https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/MultiresolutionSurface
+PDBParser                 https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/PDBParser
+Pocket                    https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Pocket
+PocketTunnel              https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/PocketTunnel
+SignDistanceFunction      https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/SignDistanceFunction
+SignDistanceFunction_v2   https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/SignDistanceFunction_v2
+SimpleVolumeData          https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/SimpleVolumeData
+SmoothingFunction         https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/SmoothingFunction
+SphericalPatchIntersections https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/SphericalPatchIntersections
+Summation                 https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Summation
+Utility                   https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Utility
+UsefulMath                https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/UsefulMath
+VolumeFileTypes           https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/VolumeFileTypes
+MolSurfAPI                https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/MolSurfAPI
+ASpline                   https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/ASpline
+ComputeNormals            https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/ComputeNormals
+Decimation                https://svn.ices.utexas.edu/repos/cvc/trunk/MolSurf/inc/Decimation
+KIFMM3D			  https://svn.ices.utexas.edu/repos/cvc/trunk/MolEnergy/inc/KIFMM3D
+TriElement		  https://svn.ices.utexas.edu/repos/cvc/trunk/MolEnergy/inc/TriElement
+PB2			  https://svn.ices.utexas.edu/repos/cvc/trunk/MolEnergy/inc/PB2
+GBEnergy		  https://svn.ices.utexas.edu/repos/cvc/trunk/MolEnergy/inc/GBEnergy
+MolEnergyUtil		  https://svn.ices.utexas.edu/repos/cvc/trunk/MolEnergy/inc/MolEnergyUtil
+ColorTable2		  https://svn.ices.utexas.edu/repos/cvc/trunk/VolumeRover-Qt4/inc/ColorTable2
+glew 			  https://svn.ices.utexas.edu/repos/cvc/trunk/VolumeRover-Qt4/inc/glew
+contourtree		  https://svn.ices.utexas.edu/repos/cvc/trunk/VolumeRover-Qt4/inc/contourtree
+QGLViewer		  https://svn.ices.utexas.edu/repos/cvc/trunk/VolumeRover-Qt4/inc/QGLViewer
+CVC			  https://svn.ices.utexas.edu/repos/cvc/trunk/VolumeRover-Qt4/inc/CVC
+VolMagick		  https://svn.ices.utexas.edu/repos/cvc/trunk/VolMagick-cmake/inc/VolMagick
+
+
+
+
+
+
+
+
+

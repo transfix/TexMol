@@ -1,0 +1,15 @@
+// VolumeRenderingProperties.h: interface for the VolumeRenderingProperties class.
+
+#if !defined(AFX_VOLUMERENDERINGPROPERTIES_H__54A1E83C_6EE6_4B70_B1EA_9279B9A2CDED__INCLUDED_)
+#define AFX_VOLUMERENDERINGPROPERTIES_H__54A1E83C_6EE6_4B70_B1EA_9279B9A2CDED__INCLUDED_
+#include <qapplication.h>
+#include "VolumeRenderingPropertiesBase.Qt3.h"
+
+class VolumeRenderingProperties : public VolumeRenderingPropertiesBase
+{
+	public:
+		VolumeRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
+		virtual ~VolumeRenderingProperties();
+};
+
+#endif // !defined(AFX_VOLUMERENDERINGPROPERTIES_H__54A1E83C_6EE6_4B70_B1EA_9279B9A2CDED__INCLUDED_)

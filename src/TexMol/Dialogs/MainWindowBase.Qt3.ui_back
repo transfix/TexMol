@@ -1,0 +1,1652 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>MainWindowBase</class>
+<widget class="QMainWindow">
+    <property name="name">
+        <cstring>MainWindowBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>777</width>
+            <height>934</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>TexMol</string>
+    </property>
+    <property name="focusPolicy">
+        <enum>NoFocus</enum>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QGroupBox" row="0" column="1">
+            <property name="name">
+                <cstring>m_MoleculeBrowserGroupBox</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="cursor">
+                <cursor>0</cursor>
+            </property>
+            <property name="title">
+                <string>Molecule Browser</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QListBox" row="0" column="0" rowspan="1" colspan="2">
+                    <item>
+                        <property name="text">
+                            <string>New Item</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>m_DataSetsListBox</cstring>
+                    </property>
+                    <property name="cursor">
+                        <cursor>0</cursor>
+                    </property>
+                    <property name="currentItem">
+                        <number>0</number>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>m_PropertiesGroupBox</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>0</width>
+                    <height>200</height>
+                </size>
+            </property>
+            <property name="title">
+                <string>Properties</string>
+            </property>
+        </widget>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>m_RendererGroupBox</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="title">
+                <string></string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QSplitter" row="0" column="0">
+                    <property name="name">
+                        <cstring>m_ViewSplitter</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>7</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="acceptDrops">
+                        <bool>true</bool>
+                    </property>
+                    <property name="frameShape">
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<menubar>
+    <property name="name">
+        <cstring>m_MainMenubar</cstring>
+    </property>
+    <property name="paletteBackgroundColor">
+        <color>
+            <red>170</red>
+            <green>170</green>
+            <blue>127</blue>
+        </color>
+    </property>
+    <property name="palette">
+        <palette>
+            <active>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>221</red>
+                    <green>223</green>
+                    <blue>228</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>238</red>
+                    <green>239</green>
+                    <blue>241</blue>
+                </color>
+                <color>
+                    <red>110</red>
+                    <green>111</green>
+                    <blue>114</blue>
+                </color>
+                <color>
+                    <red>147</red>
+                    <green>149</green>
+                    <blue>152</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>170</red>
+                    <green>170</green>
+                    <blue>127</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>128</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+            </active>
+            <disabled>
+                <color>
+                    <red>128</red>
+                    <green>128</green>
+                    <blue>128</blue>
+                </color>
+                <color>
+                    <red>221</red>
+                    <green>223</green>
+                    <blue>228</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>254</red>
+                    <green>254</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>110</red>
+                    <green>111</green>
+                    <blue>114</blue>
+                </color>
+                <color>
+                    <red>147</red>
+                    <green>149</green>
+                    <blue>152</blue>
+                </color>
+                <color>
+                    <red>128</red>
+                    <green>128</green>
+                    <blue>128</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>128</red>
+                    <green>128</green>
+                    <blue>128</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>170</red>
+                    <green>170</green>
+                    <blue>127</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>128</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>238</blue>
+                </color>
+                <color>
+                    <red>82</red>
+                    <green>24</green>
+                    <blue>139</blue>
+                </color>
+            </disabled>
+            <inactive>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>221</red>
+                    <green>223</green>
+                    <blue>228</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>254</red>
+                    <green>254</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>110</red>
+                    <green>111</green>
+                    <blue>114</blue>
+                </color>
+                <color>
+                    <red>147</red>
+                    <green>149</green>
+                    <blue>152</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>170</red>
+                    <green>170</green>
+                    <blue>127</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>128</blue>
+                </color>
+                <color>
+                    <red>255</red>
+                    <green>255</green>
+                    <blue>255</blue>
+                </color>
+                <color>
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>238</blue>
+                </color>
+                <color>
+                    <red>82</red>
+                    <green>24</green>
+                    <blue>139</blue>
+                </color>
+            </inactive>
+        </palette>
+    </property>
+    <property name="backgroundOrigin">
+        <enum>ParentOrigin</enum>
+    </property>
+    <property name="cursor">
+        <cursor>13</cursor>
+    </property>
+    <property name="frameShadow">
+        <enum>Raised</enum>
+    </property>
+    <property name="margin">
+        <number>15</number>
+    </property>
+    <item text="&amp;File" name="m_FilePopupMenu">
+        <action name="fileOpenAction"/>
+        <action name="fileOpenMultiAction"/>
+        <action name="downloadPDBAction"/>
+        <action name="saveImageAction"/>
+        <action name="recentFileListAction"/>
+        <item text="Recent &amp;files" name="popupMenu_5" accel="">
+            <action name="recentFileListDummyAction"/>
+        </item>
+        <separator/>
+        <action name="exitAction"/>
+    </item>
+    <item text="&amp;View" name="m_ViewPopupMenu">
+        <action name="viewTypeAction"/>
+        <item text="&amp;Projection" name="popupMenu_9" accel="">
+            <action name="perspectiveViewTypeAction"/>
+            <action name="orthographicViewTypeAction"/>
+        </item>
+        <action name="viewSetViewAction"/>
+        <separator/>
+        <action name="splitViewAction"/>
+        <action name="syncViewAction"/>
+        <separator/>
+        <action name="fullscreenViewAction"/>
+        <action name="stereoViewAction"/>
+        <action name="forceMeshRenderingAction"/>
+    </item>
+    <item text="&amp;Animation" name="m_AnimationPopupMenu">
+        <action name="startRecordAction"/>
+        <action name="stopRecordAction"/>
+        <action name="playbackAnimationAction"/>
+        <separator/>
+        <action name="recordAnimationAction"/>
+        <separator/>
+        <action name="playbackMovieAction"/>
+    </item>
+    <item text="&amp;Options" name="m_OptionsPopupMenu">
+        <action name="m_RenderTypeAction"/>
+        <action name="m_BackgroundColorAction"/>
+        <action name="showGridOptionsAction"/>
+        <separator/>
+        <action name="m_UserInteractionAction"/>
+        <action name="optionsTransformObjectAction"/>
+        <action name="m_SelectObjectsAction"/>
+        <separator/>
+        <action name="m_GlobalBoundingBoxAction"/>
+        <action name="m_DataBoundingBoxAction"/>
+        <separator/>
+        <action name="m_ShowViewOptionsAction"/>
+        <action name="m_ShowMouseOptionsAction"/>
+    </item>
+    <item text="&amp;Lighting" name="m_LightingPopupMenu">
+    </item>
+    <item text="&amp;Utilities" name="m_UtilitiesPopupMenu">
+        <action name="m_UserDefinedAction"/>
+        <separator/>
+        <action name="surfaceDialogAction"/>
+        <action name="m_ConstructNurbsSurfaceAction"/>
+        <item text="Construct nurbs surface" name="popupMenu_43" accel="">
+            <separator/>
+        </item>
+        <action name="surfaceAreaAndVolumeDialogAction"/>
+        <separator/>
+        <action name="constructVolumeUtilitiesAction"/>
+        <action name="m_ConstructDepthColoredVolumeAction"/>
+        <separator/>
+        <action name="m_ConstructPocketsAction"/>
+        <action name="m_ComputePocketTunnelAction"/>
+        <action name="m_ConstructHLSPocketsAction"/>
+        <separator/>
+        <action name="getCurvatureUtilitiesAction"/>
+        <action name="m_MatchAction"/>
+        <action name="m_GB_energy"/>
+        <action name="m_GB_forceField"/>
+        <action name="m_PB_energy"/>
+        <separator/>
+        <action name="m_2DSliceAction"/>
+        <action name="utilitiesElucidateSecondaryStructuresAction"/>
+        <action name="F2DockAction"/>
+        <separator/>
+    </item>
+    <item text="&amp;Help" name="m_HelpPopupMenu">
+        <action name="contentsHelpAction"/>
+        <action name="indexHelpAction"/>
+        <separator/>
+        <action name="m_AcknowledgementAction"/>
+        <separator/>
+    </item>
+</menubar>
+<toolbars>
+</toolbars>
+<actions>
+    <action>
+        <property name="name">
+            <cstring>exitAction</cstring>
+        </property>
+        <property name="text">
+            <string>ExitAction</string>
+        </property>
+        <property name="menuText">
+            <string>E&amp;xit</string>
+        </property>
+        <property name="toolTip">
+            <string>Exit the application</string>
+        </property>
+        <property name="statusTip">
+            <string>Exit the application</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>fileOpenAction</cstring>
+        </property>
+        <property name="text">
+            <string>Open</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Open</string>
+        </property>
+        <property name="toolTip">
+            <string>Open file to render</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>startRecordAction</cstring>
+        </property>
+        <property name="text">
+            <string>Start recording</string>
+        </property>
+        <property name="menuText">
+            <string>Start recording</string>
+        </property>
+        <property name="toolTip">
+            <string>Start recording animation view information</string>
+        </property>
+        <property name="statusTip">
+            <string>Start recording animation view information</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>stopRecordAction</cstring>
+        </property>
+        <property name="text">
+            <string>Stop recording</string>
+        </property>
+        <property name="menuText">
+            <string>Stop recording</string>
+        </property>
+        <property name="toolTip">
+            <string>Stop recording animation view information</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>recordAnimationAction</cstring>
+        </property>
+        <property name="text">
+            <string>Record animation</string>
+        </property>
+        <property name="menuText">
+            <string>Record animation</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>playbackAnimationAction</cstring>
+        </property>
+        <property name="text">
+            <string>Playback animation</string>
+        </property>
+        <property name="menuText">
+            <string>Playback animation</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>playbackMovieAction</cstring>
+        </property>
+        <property name="text">
+            <string>Playback movie</string>
+        </property>
+        <property name="menuText">
+            <string>Playback movie</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>contentsHelpAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Contents</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Contents</string>
+        </property>
+        <property name="toolTip">
+            <string>Contents</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>indexHelpAction</cstring>
+        </property>
+        <property name="text">
+            <string>&amp;Index</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Index</string>
+        </property>
+        <property name="toolTip">
+            <string>Index</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>constructVolumeUtilitiesAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct volume</string>
+        </property>
+        <property name="menuText">
+            <string>Construct volume</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>saveImageAction</cstring>
+        </property>
+        <property name="text">
+            <string>Save image</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Save image</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>downloadPDBAction</cstring>
+        </property>
+        <property name="text">
+            <string>Download PDB</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Download PDB</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>splitViewAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>false</bool>
+        </property>
+        <property name="text">
+            <string>Action</string>
+        </property>
+        <property name="menuText">
+            <string>Split view</string>
+        </property>
+        <property name="toolTip">
+            <string>Split/merge the views</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>syncViewAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Sync views</string>
+        </property>
+        <property name="menuText">
+            <string>Sync views</string>
+        </property>
+        <property name="toolTip">
+            <string>Sync / Unsync views</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>viewAction</cstring>
+        </property>
+        <property name="text">
+            <string></string>
+        </property>
+        <property name="menuText">
+            <string></string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>fullscreenViewAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>false</bool>
+        </property>
+        <property name="on">
+            <bool>false</bool>
+        </property>
+        <property name="text">
+            <string>Full screen</string>
+        </property>
+        <property name="menuText">
+            <string>Full screen</string>
+        </property>
+        <property name="toolTip">
+            <string>Display in full screen mode</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>getCurvatureUtilitiesAction</cstring>
+        </property>
+        <property name="text">
+            <string>Get curvatures</string>
+        </property>
+        <property name="menuText">
+            <string>Get curvatures</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>showGridOptionsAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="on">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Display grid</string>
+        </property>
+        <property name="menuText">
+            <string>Display grid</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>recentFileListAction</cstring>
+        </property>
+        <property name="text">
+            <string>Recent files</string>
+        </property>
+        <property name="menuText">
+            <string>Recent &amp;files</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>fileOpenUnnamedAction</cstring>
+        </property>
+        <property name="text">
+            <string>Unnamed</string>
+        </property>
+        <property name="menuText">
+            <string>Unnamed</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>fileUnnamedAction</cstring>
+        </property>
+        <property name="text">
+            <string>Unnamed</string>
+        </property>
+        <property name="menuText">
+            <string>Unnamed</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>recentFileListDummyAction</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="text">
+            <string>&lt;No files&gt;</string>
+        </property>
+        <property name="menuText">
+            <string>&lt;No files&gt;</string>
+        </property>
+        <property name="toolTip">
+            <string>No recently opened files</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>viewTypeAction</cstring>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>&amp;Projection</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Projection</string>
+        </property>
+        <property name="toolTip">
+            <string>Type of view</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>viewUnnamedAction</cstring>
+        </property>
+        <property name="text">
+            <string>Unnamed</string>
+        </property>
+        <property name="menuText">
+            <string>Unnamed</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>perspectiveViewTypeAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="on">
+            <bool>true</bool>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>&amp;Perspective</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Perspective</string>
+        </property>
+        <property name="toolTip">
+            <string>Select perspective view</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>orthographicViewTypeAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="on">
+            <bool>false</bool>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="iconSet">
+            <iconset></iconset>
+        </property>
+        <property name="text">
+            <string>&amp;Orthographic</string>
+        </property>
+        <property name="menuText">
+            <string>&amp;Orthographic</string>
+        </property>
+        <property name="toolTip">
+            <string>Select orthographic view</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ConstructDepthColoredVolumeAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct depth colored volume</string>
+        </property>
+        <property name="menuText">
+            <string>Construct depth colored volume</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_UserDefinedAction</cstring>
+        </property>
+        <property name="text">
+            <string>Script</string>
+        </property>
+        <property name="menuText">
+            <string>Script</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ShowViewOptionsAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="on">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Show view information</string>
+        </property>
+        <property name="menuText">
+            <string>Show view information</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ShowMouseOptionsAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="on">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Show mouse position</string>
+        </property>
+        <property name="menuText">
+            <string>Show mouse position</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_SelectObjectsAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Select objects</string>
+        </property>
+        <property name="menuText">
+            <string>Select objects</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_BackgroundColorAction</cstring>
+        </property>
+        <property name="text">
+            <string>Background Color</string>
+        </property>
+        <property name="menuText">
+            <string>Background Color</string>
+        </property>
+        <property name="toolTip">
+            <string>Change the background color</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>viewSetViewAction</cstring>
+        </property>
+        <property name="text">
+            <string>Set view parameters</string>
+        </property>
+        <property name="menuText">
+            <string>Set view parameters</string>
+        </property>
+        <property name="toolTip">
+            <string>Set viewing parameters</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>optionsTransformObjectAction</cstring>
+        </property>
+        <property name="enabled">
+            <bool>false</bool>
+        </property>
+        <property name="text">
+            <string>Transform object</string>
+        </property>
+        <property name="menuText">
+            <string>Transform object</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>stereoViewAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Stereo</string>
+        </property>
+        <property name="menuText">
+            <string>Stereo</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>lightingAction</cstring>
+        </property>
+        <property name="text">
+            <string>Lighting</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>menunew_itemAction</cstring>
+        </property>
+        <property name="text">
+            <string>new item</string>
+        </property>
+        <property name="menuText">
+            <string>new item</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>Action</cstring>
+        </property>
+        <property name="text">
+            <string>Action</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>menunew_itemAction_2</cstring>
+        </property>
+        <property name="text">
+            <string>new item</string>
+        </property>
+        <property name="menuText">
+            <string>new item</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_UserInteractionAction</cstring>
+        </property>
+        <property name="text">
+            <string>Mouse keyboard functions</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ConstructMolecularSurfaceAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct Molecular Surface</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_GlobalBoundingBoxAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Global bounding box</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_DataBoundingBoxAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Data bounding box</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_AcknowledgementAction</cstring>
+        </property>
+        <property name="text">
+            <string>Acknowledgements</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_2DSliceAction</cstring>
+        </property>
+        <property name="text">
+            <string>Get 2D Slice</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_RenderTypeAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>RayTrace</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ConstructPocketsAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct pockets</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ComputePocketTunnelAction</cstring>
+        </property>
+        <property name="text">
+            <string>Computes pocket-tunnel by Stable Manifold</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ConstructNurbsSurfaceAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct nurbs surface</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_HLevelSetAction</cstring>
+        </property>
+        <property name="text">
+            <string>H Level Set</string>
+        </property>
+        <property name="menuText">
+            <string>Construct H Level Set</string>
+        </property>
+        <property name="toolTip">
+            <string>Compute higher-order level set</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>forceMeshRenderingAction</cstring>
+        </property>
+        <property name="toggleAction">
+            <bool>true</bool>
+        </property>
+        <property name="text">
+            <string>Force Mesh Rendering</string>
+        </property>
+        <property name="menuText">
+            <string>Force Mesh Rendering</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>utilitiesElucidateSecondaryStructuresAction</cstring>
+        </property>
+        <property name="text">
+            <string>Elucidate Secondary Structures</string>
+        </property>
+        <property name="menuText">
+            <string>Elucidate Secondary Structures</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_ConstructHLSPocketsAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct HLS pockets</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_MatchAction</cstring>
+        </property>
+        <property name="text">
+            <string>Perform a (MACT) Match</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_GB_energy</cstring>
+        </property>
+        <property name="text">
+            <string>Compute Energy (GB)</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_GB_forceField</cstring>
+        </property>
+        <property name="text">
+            <string>Compute Force Field (GB)</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>m_PB_energy</cstring>
+        </property>
+        <property name="text">
+            <string>Compute Energy + Potential (PB)</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>F2DockAction</cstring>
+        </property>
+        <property name="text">
+            <string>F2Dock</string>
+        </property>
+        <property name="menuText">
+            <string>F2Dock</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>surfaceDialogAction</cstring>
+        </property>
+        <property name="text">
+            <string>Construct surface</string>
+        </property>
+        <property name="menuText">
+            <string>Construct surface</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>Action_2</cstring>
+        </property>
+        <property name="text">
+            <string>Action_2</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>surfaceAreaAndVolumeDialogAction</cstring>
+        </property>
+        <property name="text">
+            <string>Surface area and volume</string>
+        </property>
+        <property name="menuText">
+            <string>Surface area and volume</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>Action_4</cstring>
+        </property>
+        <property name="text">
+            <string>Unnamed</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>Action_5</cstring>
+        </property>
+        <property name="text">
+            <string>Unnamed</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>Action_6</cstring>
+        </property>
+        <property name="text">
+            <string>Unnamed</string>
+        </property>
+    </action>
+    <action>
+        <property name="name">
+            <cstring>fileOpenMultiAction</cstring>
+        </property>
+        <property name="text">
+            <string>Open Multi</string>
+        </property>
+        <property name="menuText">
+            <string>Open Multi</string>
+        </property>
+    </action>
+</actions>
+<connections>
+    <connection>
+        <sender>constructVolumeUtilitiesAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructVolumeUtilitiesSlot()</slot>
+    </connection>
+    <connection>
+        <sender>exitAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>close()</slot>
+    </connection>
+    <connection>
+        <sender>fileOpenAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>fileOpenSlot()</slot>
+    </connection>
+    <connection>
+        <sender>indexHelpAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>indexHelpSlot()</slot>
+    </connection>
+    <connection>
+        <sender>playbackAnimationAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>playbackAnimationSlot()</slot>
+    </connection>
+    <connection>
+        <sender>playbackMovieAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>playbackMovieSlot()</slot>
+    </connection>
+    <connection>
+        <sender>recordAnimationAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>recordAnimationSlot()</slot>
+    </connection>
+    <connection>
+        <sender>startRecordAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>startRecordSlot()</slot>
+    </connection>
+    <connection>
+        <sender>stopRecordAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>stopRecordSlot()</slot>
+    </connection>
+    <connection>
+        <sender>saveImageAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>saveImageSlot()</slot>
+    </connection>
+    <connection>
+        <sender>downloadPDBAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>downloadPDBSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_DataSetsListBox</sender>
+        <signal>highlighted(int)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>newDataSetSelectedSlot(int)</slot>
+    </connection>
+    <connection>
+        <sender>m_DataSetsListBox</sender>
+        <signal>selected(int)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>newDataSetSelectedSlot(int)</slot>
+    </connection>
+    <connection>
+        <sender>fullscreenViewAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>fullscreenSlot()</slot>
+    </connection>
+    <connection>
+        <sender>splitViewAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>splitViewSlot()</slot>
+    </connection>
+    <connection>
+        <sender>syncViewAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>syncViewSlot()</slot>
+    </connection>
+    <connection>
+        <sender>getCurvatureUtilitiesAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructCurvaturesUtilitySlot()</slot>
+    </connection>
+    <connection>
+        <sender>showGridOptionsAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>showGridOptionsSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>orthographicViewTypeAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>orthographicViewSlot()</slot>
+    </connection>
+    <connection>
+        <sender>perspectiveViewTypeAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>perspectiveViewSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_ConstructDepthColoredVolumeAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructDepthColoredVolumeSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_UserDefinedAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>scriptSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_ShowMouseOptionsAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>showMousePositionSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_ShowViewOptionsAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>showViewInformationSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_SelectObjectsAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>selectObjectsSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_BackgroundColorAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>backgroundColorSlot()</slot>
+    </connection>
+    <connection>
+        <sender>viewSetViewAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>setViewingParametersSlot()</slot>
+    </connection>
+    <connection>
+        <sender>optionsTransformObjectAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>transformObjectSlot()</slot>
+    </connection>
+    <connection>
+        <sender>stereoViewAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>stereoSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_UserInteractionAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>userInteractionSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_ConstructMolecularSurfaceAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructMolecularSurfaceSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_DataBoundingBoxAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>dataBoundingBoxSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_GlobalBoundingBoxAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>globalBoundingBoxSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_AcknowledgementAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>acknowledgementSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_2DSliceAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>sliceParameterizationSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_RenderTypeAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>renderTypeSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>m_ConstructPocketsAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructPocketsSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_ComputePocketTunnelAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>computePocketTunnelSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_ConstructNurbsSurfaceAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructNurbsSurfaceSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_HLevelSetAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>computeHOrderLevelSetSlot()</slot>
+    </connection>
+    <connection>
+        <sender>forceMeshRenderingAction</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>forceMeshRenderingSlot(bool)</slot>
+    </connection>
+    <connection>
+        <sender>utilitiesElucidateSecondaryStructuresAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>elucidateSecondaryStructuresSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_ConstructHLSPocketsAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>constructHLSPocketsSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_MatchAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>matchSlot()</slot>
+    </connection>
+    <connection>
+        <sender>m_GB_energy</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>GB_energy_Slot()</slot>
+    </connection>
+    <connection>
+        <sender>m_GB_forceField</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>GB_forceField_Slot()</slot>
+    </connection>
+    <connection>
+        <sender>m_PB_energy</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>PB_energy_Slot()</slot>
+    </connection>
+    <connection>
+        <sender>F2DockAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>dockingSlot()</slot>
+    </connection>
+    <connection>
+        <sender>surfaceDialogAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>surfaceDialogSlot()</slot>
+    </connection>
+    <connection>
+        <sender>surfaceAreaAndVolumeDialogAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>surfaceAreaAndVolumeDialogSlot()</slot>
+    </connection>
+    <connection>
+        <sender>fileOpenMultiAction</sender>
+        <signal>activated()</signal>
+        <receiver>MainWindowBase</receiver>
+        <slot>fileOpenMultiSlot()</slot>
+    </connection>
+</connections>
+<slots>
+    <slot returnType="bool">fileOpenSlot()</slot>
+    <slot>deleteSlot()</slot>
+    <slot>startRecordSlot()</slot>
+    <slot>stopRecordSlot()</slot>
+    <slot>aboutHelpSlot()</slot>
+    <slot>indexHelpSlot()</slot>
+    <slot>playbackMovieSlot()</slot>
+    <slot>playbackAnimationSlot()</slot>
+    <slot>recordAnimationSlot()</slot>
+    <slot>constructVolumeUtilitiesSlot()</slot>
+    <slot>datasetComboBoxSlot( int )</slot>
+    <slot>saveImageSlot()</slot>
+    <slot>downloadPDBSlot()</slot>
+    <slot>newDataSetSelectedSlot( int )</slot>
+    <slot>fullscreenSlot()</slot>
+    <slot>splitViewSlot()</slot>
+    <slot>syncViewSlot()</slot>
+    <slot>constructCurvaturesUtilitySlot()</slot>
+    <slot>showGridOptionsSlot( bool )</slot>
+    <slot>orthographicViewSlot()</slot>
+    <slot>perspectiveViewSlot()</slot>
+    <slot>constructRawVSlot()</slot>
+    <slot>constructDepthColoredVolumeSlot()</slot>
+    <slot>scriptSlot()</slot>
+    <slot>showMousePositionSlot( bool )</slot>
+    <slot>showViewInformationSlot( bool )</slot>
+    <slot>selectObjectsSlot( bool )</slot>
+    <slot>backgroundColorSlot()</slot>
+    <slot>setViewingParametersSlot()</slot>
+    <slot>transformObjectSlot()</slot>
+    <slot>stereoSlot( bool )</slot>
+    <slot>userInteractionSlot()</slot>
+    <slot>constructMolecularSurfaceSlot()</slot>
+    <slot>globalBoundingBoxSlot( bool )</slot>
+    <slot>dataBoundingBoxSlot( bool )</slot>
+    <slot>acknowledgementSlot()</slot>
+    <slot>sliceParameterizationSlot()</slot>
+    <slot>renderTypeSlot( bool )</slot>
+    <slot>constructPocketsSlot()</slot>
+    <slot>computePocketTunnelSlot()</slot>
+    <slot>constructNurbsSurfaceSlot()</slot>
+    <slot>computeHOrderLevelSetSlot()</slot>
+    <slot>forceMeshRenderingSlot( bool )</slot>
+    <slot>elucidateSecondaryStructuresSlot()</slot>
+    <slot>constructHLSPocketsSlot()</slot>
+    <slot>matchSlot()</slot>
+    <slot>GB_energy_Slot()</slot>
+    <slot>GB_forceField_Slot()</slot>
+    <slot>PB_energy_Slot()</slot>
+    <slot>dockingSlot()</slot>
+    <slot>surfaceDialogSlot()</slot>
+    <slot>surfaceAreaAndVolumeDialogSlot()</slot>
+    <slot returnType="bool">fileOpenMultiSlot()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

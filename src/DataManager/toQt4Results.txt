@@ -1,0 +1,80 @@
+<arand@neutron|BallAndStickDataManager>$ ../../TexMol/Dialogs/toQt4.sh 
+AnglesDialog.Qt3.ui
+BallAndStickRenderingPropertiesBase.Qt3.ui
+ColorLegendBase.Qt3.ui
+uic3: property `paletteForegroundColor' for widget `residueColor3' of type `Q3Frame' is not supported. Line: 33 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor3' of type `Q3Frame' is not supported. Line: 33 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor4' of type `Q3Frame' is not supported. Line: 66 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor4' of type `Q3Frame' is not supported. Line: 66 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor10' of type `Q3Frame' is not supported. Line: 99 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor10' of type `Q3Frame' is not supported. Line: 99 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor12' of type `Q3Frame' is not supported. Line: 132 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor12' of type `Q3Frame' is not supported. Line: 132 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor5' of type `Q3Frame' is not supported. Line: 165 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor5' of type `Q3Frame' is not supported. Line: 165 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor2' of type `Q3Frame' is not supported. Line: 198 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor2' of type `Q3Frame' is not supported. Line: 198 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor11' of type `Q3Frame' is not supported. Line: 231 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor11' of type `Q3Frame' is not supported. Line: 231 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor8' of type `Q3Frame' is not supported. Line: 264 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor8' of type `Q3Frame' is not supported. Line: 264 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor9' of type `Q3Frame' is not supported. Line: 297 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor9' of type `Q3Frame' is not supported. Line: 297 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor13' of type `Q3Frame' is not supported. Line: 330 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor13' of type `Q3Frame' is not supported. Line: 330 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor14' of type `Q3Frame' is not supported. Line: 363 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor14' of type `Q3Frame' is not supported. Line: 363 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor15' of type `Q3Frame' is not supported. Line: 396 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor15' of type `Q3Frame' is not supported. Line: 396 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor16' of type `Q3Frame' is not supported. Line: 429 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor16' of type `Q3Frame' is not supported. Line: 429 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor17' of type `Q3Frame' is not supported. Line: 462 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor17' of type `Q3Frame' is not supported. Line: 462 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor18' of type `Q3Frame' is not supported. Line: 495 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor18' of type `Q3Frame' is not supported. Line: 495 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor19' of type `Q3Frame' is not supported. Line: 528 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor19' of type `Q3Frame' is not supported. Line: 528 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor20' of type `Q3Frame' is not supported. Line: 561 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor20' of type `Q3Frame' is not supported. Line: 561 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor21' of type `Q3Frame' is not supported. Line: 594 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor21' of type `Q3Frame' is not supported. Line: 594 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor22' of type `Q3Frame' is not supported. Line: 627 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor22' of type `Q3Frame' is not supported. Line: 627 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor23' of type `Q3Frame' is not supported. Line: 660 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor23' of type `Q3Frame' is not supported. Line: 660 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor24' of type `Q3Frame' is not supported. Line: 693 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor24' of type `Q3Frame' is not supported. Line: 693 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor25' of type `Q3Frame' is not supported. Line: 726 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor25' of type `Q3Frame' is not supported. Line: 726 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor27' of type `Q3Frame' is not supported. Line: 759 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor27' of type `Q3Frame' is not supported. Line: 759 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor26' of type `Q3Frame' is not supported. Line: 792 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor26' of type `Q3Frame' is not supported. Line: 792 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor28' of type `Q3Frame' is not supported. Line: 825 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor28' of type `Q3Frame' is not supported. Line: 825 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor7' of type `Q3Frame' is not supported. Line: 858 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor7' of type `Q3Frame' is not supported. Line: 858 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor1' of type `Q3Frame' is not supported. Line: 891 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor1' of type `Q3Frame' is not supported. Line: 891 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor6' of type `Q3Frame' is not supported. Line: 1020 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor6' of type `Q3Frame' is not supported. Line: 1020 Column: 31
+uic3: property `paletteForegroundColor' for widget `residueColor0' of type `Q3Frame' is not supported. Line: 1405 Column: 31
+uic3: property `paletteBackgroundColor' for widget `residueColor0' of type `Q3Frame' is not supported. Line: 1405 Column: 31
+uic3: property `paletteForegroundColor' for widget `ssColor3' of type `Q3Frame' is not supported. Line: 1518 Column: 31
+uic3: property `paletteBackgroundColor' for widget `ssColor3' of type `Q3Frame' is not supported. Line: 1518 Column: 31
+uic3: property `paletteForegroundColor' for widget `ssColor2' of type `Q3Frame' is not supported. Line: 1551 Column: 31
+uic3: property `paletteBackgroundColor' for widget `ssColor2' of type `Q3Frame' is not supported. Line: 1551 Column: 31
+uic3: property `paletteForegroundColor' for widget `ssColor1' of type `Q3Frame' is not supported. Line: 1584 Column: 31
+uic3: property `paletteBackgroundColor' for widget `ssColor1' of type `Q3Frame' is not supported. Line: 1584 Column: 31
+uic3: property `paletteForegroundColor' for widget `ssColor0' of type `Q3Frame' is not supported. Line: 1617 Column: 31
+uic3: property `paletteBackgroundColor' for widget `ssColor0' of type `Q3Frame' is not supported. Line: 1617 Column: 31
+uic3: property `paletteForegroundColor' for widget `moleculeColorFrame' of type `Q3Frame' is not supported. Line: 1682 Column: 31
+uic3: property `paletteBackgroundColor' for widget `moleculeColorFrame' of type `Q3Frame' is not supported. Line: 1682 Column: 31
+ColorMapInterfaceBase.Qt3.ui
+
+
+VolumeRenderingPropertiesBase.Qt3.ui
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'Sunken' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'Sunken' for widget 'QLineEdit' is not supported

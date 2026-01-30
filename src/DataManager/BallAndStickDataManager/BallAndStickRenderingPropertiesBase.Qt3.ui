@@ -1,0 +1,395 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>BallAndStickRenderingPropertiesBase</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>BallAndStickRenderingPropertiesBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>683</width>
+            <height>180</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>0</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="minimumSize">
+        <size>
+            <width>0</width>
+            <height>180</height>
+        </size>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>32767</width>
+            <height>180</height>
+        </size>
+    </property>
+    <property name="caption">
+        <string>Form2</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>RenderGroupBox</cstring>
+            </property>
+            <property name="title">
+                <string></string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QGroupBox" row="2" column="0" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>groupBox2</cstring>
+                    </property>
+                    <property name="title">
+                        <string></string>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QPushButton" row="1" column="1">
+                            <property name="name">
+                                <cstring>m_PlotAnglesPushButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Plot Angles</string>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>m_ColorLegendPushButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Show Legend</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+                            <property name="name">
+                                <cstring>m_UseSolventEnlargedRadiusCheckBox</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Solvent enlarged radius</string>
+                            </property>
+                        </widget>
+                        <widget class="QLayoutWidget" row="0" column="2" rowspan="2" colspan="1">
+                            <property name="name">
+                                <cstring>layout11</cstring>
+                            </property>
+                            <vbox>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QLayoutWidget">
+                                    <property name="name">
+                                        <cstring>layout10</cstring>
+                                    </property>
+                                    <hbox>
+                                        <property name="name">
+                                            <cstring>unnamed</cstring>
+                                        </property>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout9</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLineEdit">
+                                                    <property name="name">
+                                                        <cstring>m_FunctionLineEdit</cstring>
+                                                    </property>
+                                                    <property name="enabled">
+                                                        <bool>false</bool>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QPushButton">
+                                                    <property name="name">
+                                                        <cstring>m_FunctionPushButton</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Associate function</string>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                                <widget class="QLayoutWidget">
+                                    <property name="name">
+                                        <cstring>layout8</cstring>
+                                    </property>
+                                    <hbox>
+                                        <property name="name">
+                                            <cstring>unnamed</cstring>
+                                        </property>
+                                        <widget class="QLayoutWidget">
+                                            <property name="name">
+                                                <cstring>layout7</cstring>
+                                            </property>
+                                            <hbox>
+                                                <property name="name">
+                                                    <cstring>unnamed</cstring>
+                                                </property>
+                                                <widget class="QLineEdit">
+                                                    <property name="name">
+                                                        <cstring>m_ColorMapLineEdit</cstring>
+                                                    </property>
+                                                    <property name="enabled">
+                                                        <bool>false</bool>
+                                                    </property>
+                                                </widget>
+                                                <widget class="QPushButton">
+                                                    <property name="name">
+                                                        <cstring>m_ColorMapPushButton</cstring>
+                                                    </property>
+                                                    <property name="text">
+                                                        <string>Color map</string>
+                                                    </property>
+                                                </widget>
+                                            </hbox>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                            </vbox>
+                        </widget>
+                        <widget class="QLayoutWidget" row="0" column="3" rowspan="2" colspan="1">
+                            <property name="name">
+                                <cstring>layout11</cstring>
+                            </property>
+                            <grid>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QLabel" row="0" column="0">
+                                    <property name="name">
+                                        <cstring>m_SubCubeTextLabel</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Sub cube</string>
+                                    </property>
+                                </widget>
+                                <widget class="QLayoutWidget" row="0" column="1" rowspan="2" colspan="1">
+                                    <property name="name">
+                                        <cstring>layout10</cstring>
+                                    </property>
+                                    <grid>
+                                        <property name="name">
+                                            <cstring>unnamed</cstring>
+                                        </property>
+                                        <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
+                                            <property name="name">
+                                                <cstring>textLabel4</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>I</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLabel" row="1" column="3">
+                                            <property name="name">
+                                                <cstring>textLabel3</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>B</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLineEdit" row="1" column="2">
+                                            <property name="name">
+                                                <cstring>m_OuterCubeIsoLineEdit</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>1.0</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLineEdit" row="1" column="4">
+                                            <property name="name">
+                                                <cstring>m_OuterCubeBLineEdit</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>-2.3</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLineEdit" row="0" column="4">
+                                            <property name="name">
+                                                <cstring>m_SubCubeBLineEdit</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>-2.3</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLabel" row="0" column="3">
+                                            <property name="name">
+                                                <cstring>textLabel2</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>B</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLineEdit" row="0" column="1" rowspan="1" colspan="2">
+                                            <property name="name">
+                                                <cstring>m_SubCubeIsoLineEdit</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>1.0</string>
+                                            </property>
+                                        </widget>
+                                        <widget class="QLabel" row="0" column="0">
+                                            <property name="name">
+                                                <cstring>textLabel1</cstring>
+                                            </property>
+                                            <property name="text">
+                                                <string>I</string>
+                                            </property>
+                                        </widget>
+                                    </grid>
+                                </widget>
+                                <widget class="QLabel" row="1" column="0">
+                                    <property name="name">
+                                        <cstring>m_OuterCubeTextLabel</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Outer cube</string>
+                                    </property>
+                                </widget>
+                            </grid>
+                        </widget>
+                    </grid>
+                </widget>
+                <widget class="QLayoutWidget" row="1" column="0">
+                    <property name="name">
+                        <cstring>layout1</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QComboBox">
+                            <property name="name">
+                                <cstring>m_StructureLODComboBox</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>m_StructureLODTextLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Structure detail</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QLayoutWidget" row="1" column="1">
+                    <property name="name">
+                        <cstring>layout2</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QComboBox">
+                            <property name="name">
+                                <cstring>m_ColorLODComboBox</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>m_ColorLODTextLabel</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Color detail</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QPushButton" row="1" column="2">
+                    <property name="name">
+                        <cstring>m_ColorMapInterfacePushButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Colormap Interface</string>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>layout20</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_RenderCheckBox</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Render</string>
+                            </property>
+                        </widget>
+                        <widget class="QSlider">
+                            <property name="name">
+                                <cstring>m_FrameSlider</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="tickmarks">
+                                <enum>Below</enum>
+                            </property>
+                        </widget>
+                        <widget class="QSlider">
+                            <property name="name">
+                                <cstring>m_ClipSlider</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>m_CorrelateCheckBox</cstring>
+                            </property>
+                            <property name="text">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit">
+                            <property name="name">
+                                <cstring>m_CorrelateLineEdit</cstring>
+                            </property>
+                            <property name="enabled">
+                                <bool>false</bool>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton">
+                            <property name="name">
+                                <cstring>m_ReplicatePushButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Replicate</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<slots>
+    <slot>redrawSlot()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

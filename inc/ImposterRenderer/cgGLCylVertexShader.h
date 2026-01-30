@@ -1,0 +1,114 @@
+/*
+  Copyright 2011 The University of Texas at Austin
+
+	Advisor: Chandrajit Bajaj <bajaj@cs.utexas.edu>
+
+  This file is part of TexMol.
+
+  TexMol is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License version 2.1 as published by the Free Software Foundation.
+
+  TexMol is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+const char cgGLCylVertexShader[] =
+	"// this is the vertex program\n"
+	"\n"
+	"//#pragma bind appdata.position = ATTR0\n"
+	"//#pragma bind appdata.normal = ATTR1\n"
+	"\n"
+	"struct appdata : application2vertex \n"
+	"{\n"
+	"	float4 offsetRadius : POSITION;\n"
+	"	float4 p1 : TEXCOORD0;\n"
+	"	float4 p2 : TEXCOORD1;\n"
+	"	float4 color : COLOR0;\n"
+	"};\n"
+	"\n"
+	"struct vfconn : vertex2fragment \n"
+	"{\n"
+	"	float4 HPOS : POSITION;\n"
+	"	float4 TEX0 : TEXCOORD0;\n"
+	"	float4 TEX1 : TEXCOORD1;\n"
+	"	float4 TEX2 : TEXCOORD2;\n"
+	"	//float4 TEX3 : TEXCOORD3;\n"
+	"	float4 primarycolor : COLOR0;\n"
+	"	float3 secondarycolor : COLOR1;\n"
+	"};\n"
+	"\n"
+	"float4 remapTo01(float4 v, float4 low, float4 high) {\n"
+	"	return saturate((v - low)/(high-low));\n"
+	"}\n"
+	"\n"
+	"vfconn main(appdata IN,\n"
+	"         uniform float4x4 ModelViewIT,\n"
+	"         uniform float4x4 ModelViewProj,\n"
+	"		 uniform float4x4 Proj,\n"
+	"		 uniform float4x4 ModelViewInverse,\n"
+	"		 uniform float4x4 ModelView)\n"
+	"{\n"
+	"	vfconn OUT;\n"
+	"\n"
+	"	// eye_space_offset = radius * v[OPOS]\n"
+	"	float radius = IN.offsetRadius.z;\n"
+	"\n"
+	"	// get vector from P1 to P2\n"
+	"	float4 axis = IN.p2 - IN.p1;\n"
+	"\n"
+	"	float4 eye_space_axis = normalize(mul(ModelView, axis));\n"
+	"	float h = 1 / sqrt(1-eye_space_axis.z*eye_space_axis.z);\n"
+	"\n"
+	"	//float4 eye_space_offset = radius * float4(IN.offset.xyz, 0.0);\n"
+	"	float4 unit_eye_space_offset = normalize(float4(eye_space_axis.y,-eye_space_axis.x , 0, 0));\n"
+	"	float4 eye_space_offset = unit_eye_space_offset * IN.offsetRadius.y * radius;\n"
+	"\n"
+	"	eye_space_offset = eye_space_offset + eye_space_axis * -h*radius * eye_space_axis.z;\n"
+	"\n"
+	"	// object_space_offset = INV_MV * eye_space_offset\n"
+	"	float4 object_space_offset = mul(ModelViewInverse, eye_space_offset);\n"
+	"\n"
+	"	// offsetRadius.x = 0 or 1 for points near p0 or p1. \n"
+	"	// obtain the output position in object space\n"
+	"	// assume that w is correct\n"
+	"	IN.p2 = IN.p1 + IN.offsetRadius.x*axis + object_space_offset;\n"
+	"\n"
+	"	//CHA: send eye position to fragment shader for depth correction\n"
+	"	OUT.TEX2 = mul(ModelView, IN.p2);\n"
+	"	//CHA: send radius to fragment shader for depth correction\n"
+	"	OUT.TEX2.w = radius;\n"
+	"\n"
+	"	// clip coordinates\n"
+	"	// IN.p2 has the position\n"
+	"	OUT.HPOS = mul(ModelViewProj, IN.p2);\n"
+	"\n"
+	"	OUT.primarycolor.xyzw = IN.color.xyzw;\n"
+	"\n"
+	"	// calculate normal-space light vector\n"
+	"	// float4 lightVect = float4(00,100,140,1) - IN.p2;\n"
+	"	float4 lightVect = float4(50,100,140,0);\n"
+	"	lightVect = normalize(lightVect);\n"
+	"\n"
+	"	OUT.TEX0 = float4(IN.offsetRadius.y*0.5+0.5,0,0,1);\n"
+	"	OUT.TEX1 = OUT.TEX0;\n"
+	"	OUT.TEX1.y = 0.5;\n"
+	"\n"
+	"	// xform light vector into eye space\n"
+	"	float4 eyeLightVec = lightVect; //mul(ModelViewIT, lightVect);\n"
+	"	eyeLightVec = float4(dot(unit_eye_space_offset, eyeLightVec), \n"
+	"	 		dot(eye_space_axis, eyeLightVec),\n"
+	"	 		dot(cross(unit_eye_space_offset.xyz, eye_space_axis.xyz), eyeLightVec.xyz),//eyeLightVec.z,\n"
+	"			0);\n"
+	"\n"
+	"	// Range compress light vector to fit in a color\n"
+	"	OUT.secondarycolor.xyz = eyeLightVec.xyz * 0.5 + 0.5;\n"
+	"\n"
+	"	return OUT;\n"
+	"} // main;\n";
+

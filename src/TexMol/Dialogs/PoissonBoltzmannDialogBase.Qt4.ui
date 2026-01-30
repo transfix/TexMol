@@ -1,0 +1,235 @@
+<ui version="4.0" >
+ <class>PoissonBoltzmannDialogBase</class>
+ <widget class="QDialog" name="PoissonBoltzmannDialogBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>397</width>
+    <height>169</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>371</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pbPqrLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>271</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pbRawnLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>271</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pbOutputLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>271</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pbTempLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>120</x>
+     <y>100</y>
+     <width>61</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pbIonConcLineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>330</x>
+     <y>100</y>
+     <width>61</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbPqrButton" >
+   <property name="geometry" >
+    <rect>
+     <x>300</x>
+     <y>10</y>
+     <width>91</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>PQR File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbRawnButton" >
+   <property name="geometry" >
+    <rect>
+     <x>300</x>
+     <y>40</y>
+     <width>91</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>RAWN File</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbOutputButton" >
+   <property name="geometry" >
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>91</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Output Prefix</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Temperature</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>200</x>
+     <y>100</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Ion Concentration</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>PoissonBoltzmannDialogBase</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>PoissonBoltzmannDialogBase</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbPqrButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PoissonBoltzmannDialogBase</receiver>
+   <slot>pbPqrFileNameSlot()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>204</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRawnButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PoissonBoltzmannDialogBase</receiver>
+   <slot>pbRawnFileNameSlot()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>204</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbOutputButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PoissonBoltzmannDialogBase</receiver>
+   <slot>pbOutputPrefixSlot()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>348</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>204</x>
+     <y>112</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>pbPqrFileNameSlot()</slot>
+  <slot>pbRawnFileNameSlot()</slot>
+  <slot>pbOutputPrefixSlot()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,6 @@
+# Target labels
+ test
+# Source files and their labels
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/execution_monitor.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/debug.cpp
+/workspace/cvcsoft/TexMol/third-party/boost/libs/test/src/cpp_main.cpp

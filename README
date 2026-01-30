@@ -1,0 +1,16 @@
+------------------------------------------------
+|            TexMol 2.0 - Usage                |
+------------------------------------------------
+Alex R. -- arand@ices.utexas.edu -- 10/20/2010
+
+TexMol is a molecular visualization and computation 
+package. It allows for quick and high quality 
+visualization of Proteins and RNA.
+
+Refer to the INSTALL file for build instructions.
+
+More information is available via the Computational
+Visualization Center's website: 
+
+http://cvcweb.ices.utexas.edu/cvc
+

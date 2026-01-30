@@ -1,0 +1,9 @@
+prefix=/workspace/cvcsoft/TexMol/release
+libdir=/workspace/cvcsoft/TexMol/release/lib
+
+Name: lapack
+Description: FORTRAN reference implementation of LAPACK Linear Algebra PACKage
+Version: 3.4.2
+URL: http://www.netlib.org/lapack/
+Libs: -L/workspace/cvcsoft/TexMol/release/lib -llapack
+Requires: blas

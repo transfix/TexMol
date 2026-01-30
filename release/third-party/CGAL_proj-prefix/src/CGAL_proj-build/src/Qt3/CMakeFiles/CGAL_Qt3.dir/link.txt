@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../lib/libCGAL_Qt3.a  CMakeFiles/CGAL_Qt3.dir/all_files.cpp.o
+/usr/bin/ranlib ../../lib/libCGAL_Qt3.a

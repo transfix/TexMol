@@ -1,0 +1,42 @@
+  
+  SET(GMP_INC_SEARCHPATH
+    ${PROJECT_BINARY_DIR}/include
+    /sw/include
+    /usr/include
+    /usr/local/include
+    /usr/include/gmp
+    /usr/local/include/gmp
+    $ENV{_NMI_PREREQ_gmp_ROOT}/include
+    C:/MinGW/msys/1.0/local
+    $ENV{TACC_GMP_INC}
+  )
+
+  FIND_PATH(GMP_INCLUDE_PATH gmp.h ${GMP_INC_SEARCHPATH})
+
+  IF(GMP_INCLUDE_PATH)
+    SET(GMP_INCLUDE ${GMP_INCLUDE_PATH})
+  ENDIF (GMP_INCLUDE_PATH)
+
+  #IF(GMP_INCLUDE)
+  #  INCLUDE_DIRECTORIES( ${GMP_INCLUDE})
+  #ENDIF(GMP_INCLUDE)
+
+  GET_FILENAME_COMPONENT(GMP_INSTALL_BASE_PATH ${GMP_INCLUDE_PATH} PATH)
+
+  SET(GMP_LIB_SEARCHPATH
+    ${PROJECT_BINARY_DIR}/lib
+    ${GMP_INSTALL_BASE_PATH}/lib
+    /usr/lib/gmp
+    /usr/local/lib/gmp
+    C:/MinGW/msys/1.0/local
+    $ENV{TACC_GMP_LIB}
+  )
+
+  FIND_LIBRARY(GMP_LIB libgmp.a ${GMP_LIB_SEARCHPATH})
+  FIND_LIBRARY(GMPXX_LIB libgmpxx.a ${GMP_LIB_SEARCHPATH})
+
+  IF(GMP_LIB AND GMPXX_LIB)
+    SET(GMP_FOUND 1)
+  ENDIF(GMP_LIB AND GMPXX_LIB)
+
+  MESSAGE(GMP_INCLUDE: ${GMP_INCLUDE})

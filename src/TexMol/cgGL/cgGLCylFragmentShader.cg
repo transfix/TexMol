@@ -1,0 +1,78 @@
+// this is the fragment program
+
+
+struct inputs
+{
+	float4 HPOS : POSITION;
+	float4 texcoord : TEXCOORD0;
+	float4 texcoord1 : TEXCOORD1;
+	float4 texcoord2 : TEXCOORD2;
+	float4 texcoord3 : TEXCOORD3;
+	float4 primarycolor : COLOR0;
+	float3 secondarycolor : COLOR1;
+};
+
+float3 expand(float3 vector)
+{
+    return 2.0 * (vector - 0.5);
+}
+
+// register combiner vector normalization function
+float3 normalize(float3 vector)
+{
+    float3 VdotV = dot(expand(vector), expand(vector));
+    return (1-saturate(VdotV)) * (vector-0.5) + expand(vector);
+}
+
+float4 main(inputs IN, out float depth: DEPTH,
+			uniform float4 maincolor,
+			uniform sampler1D normalmap,
+			uniform sampler2D depthmap) : COLOR
+{
+
+	
+	//float3 color = tex2D(alphamap, IN.texcoord.xy).xyz;
+	float4 normal = 2.0 * (tex1D(normalmap, IN.texcoord.x) - 0.5);
+
+
+	//float3 normal = (tex2D(normalmap, IN.texcoord1.xy)).rgb;
+	
+	//IN.secondarycolor.rgb = 2.0*(IN.secondarycolor.rgb-0.5);
+	IN.secondarycolor.rgb = normalize(IN.secondarycolor.rgb);
+
+	float3 NdotL = dot(normal.rgb, IN.secondarycolor);
+	float3 color = IN.primarycolor.rgb*(saturate(NdotL) + IN.primarycolor.w);
+	//float3 diffuse = IN.col1.rgb;
+	//float3 specular = (float3)lighting.a;
+
+    // calculate reflection vector
+    // R = 2 * (N * (N dot L) - L/2)
+    //   = 2 * N * (N dot L) - L
+    float3 reflectVec = ((NdotL * normal.rgb) + (-0.5 * IN.secondarycolor)) * 2.0;
+
+    // eye vector E = (0, 0, 1)
+    // R dot E = (R.r*0 + R.g*0 + 1*R.b) = R.b
+    float RdotE = saturate(reflectVec.b);   // max(0, RdotE);
+
+    // calculate specular as pow(RdotE, 16)
+	float specular = pow(RdotE, 16); 
+
+    // add specular light contribution to final color
+	color += specular;
+    //finalColor += specular;
+
+
+	//IN.color.rgb = IN.color.rgb * diffuse;// + specular;
+	//IN.color.w = 1.0;
+	
+    float3 depthVal = tex2D(depthmap, IN.texcoord1.xy).rgb;
+	// check with no extra depth to see whats being drawn.
+	//depthVal.x = 0.0;
+
+    float z = dot(IN.texcoord2.xyz, depthVal);
+    float w = dot(IN.texcoord3.xyz, depthVal);
+    depth = (z / w);
+
+	float4 outcolor = float4(color, normal.w);
+	return outcolor;
+}

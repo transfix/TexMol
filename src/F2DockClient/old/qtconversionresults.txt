@@ -1,0 +1,26 @@
+<arand@neutron|F2DockClient>$ ./toQt4.sh 
+f2dgen.Qt3.ui
+f2dockadv.Qt3.ui
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+f2dockmaster.Qt3.ui
+f2dock.Qt3.ui
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+uic3: enumerator 'LineEditPanel' for widget 'QLineEdit' is not supported
+f2dockresultdetails.Qt3.ui
+f2dockresult.Qt3.ui
+gbrerank.Qt3.ui
+gbrerankresultdetails.Qt3.ui
+gbrerankresult.Qt3.ui
+quadgen.Qt3.ui

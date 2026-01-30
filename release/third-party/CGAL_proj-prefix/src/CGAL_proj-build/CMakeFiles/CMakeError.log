@@ -1,0 +1,153 @@
+Determining if the Q_WS_WIN exist failed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4234971851/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4234971851.dir/build.make CMakeFiles/cmTryCompileExec4234971851.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec4234971851.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec4234971851.dir/CheckSymbolExists.cxx.o -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8: error: ‘Q_WS_WIN’ was not declared in this scope
+gmake[4]: *** [CMakeFiles/cmTryCompileExec4234971851.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: *** [cmTryCompileExec4234971851/fast] Error 2
+
+File /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_WIN
+  return ((int*)(&Q_WS_WIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_QWS exist failed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2225068996/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2225068996.dir/build.make CMakeFiles/cmTryCompileExec2225068996.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2225068996.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec2225068996.dir/CheckSymbolExists.cxx.o -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8: error: ‘Q_WS_QWS’ was not declared in this scope
+gmake[4]: *** [CMakeFiles/cmTryCompileExec2225068996.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: *** [cmTryCompileExec2225068996/fast] Error 2
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+File /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_QWS
+  return ((int*)(&Q_WS_QWS))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the Q_WS_MAC exist failed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2946098186/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2946098186.dir/build.make CMakeFiles/cmTryCompileExec2946098186.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec2946098186.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -frounding-math     -o CMakeFiles/cmTryCompileExec2946098186.dir/CheckSymbolExists.cxx.o -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8: error: ‘Q_WS_MAC’ was not declared in this scope
+gmake[4]: *** [CMakeFiles/cmTryCompileExec2946098186.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: *** [cmTryCompileExec2946098186/fast] Error 2
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+File /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_MAC
+  return ((int*)(&Q_WS_MAC))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec2240095930/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec2240095930.dir/build.make CMakeFiles/cmTryCompileExec2240095930.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2240095930.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec2240095930.dir/CheckSymbolExists.c.o   -c /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec2240095930
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2240095930.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec2240095930.dir/CheckSymbolExists.c.o  -o cmTryCompileExec2240095930 -rdynamic 
+CMakeFiles/cmTryCompileExec2240095930.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0xc): undefined reference to `pthread_create'
+collect2: ld returned 1 exit status
+gmake[4]: *** [cmTryCompileExec2240095930] Error 1
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[3]: *** [cmTryCompileExec2240095930/fast] Error 2
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+File /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3553018265/fast"
+gmake[3]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3553018265.dir/build.make CMakeFiles/cmTryCompileExec3553018265.dir/build
+gmake[4]: Entering directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_progress_report /workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3553018265.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec3553018265.dir/CheckFunctionExists.c.o   -c /opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3553018265
+/opt/apps/ossw/applications/cmake/cmake-2.8.9/sl6/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3553018265.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec3553018265.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3553018265 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: ld returned 1 exit status
+gmake[4]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+gmake[4]: *** [cmTryCompileExec3553018265] Error 1
+gmake[3]: *** [cmTryCompileExec3553018265/fast] Error 2
+gmake[3]: Leaving directory `/workspace/cvcsoft/TexMol/release/third-party/CGAL_proj-prefix/src/CGAL_proj-build/CMakeFiles/CMakeTmp'
+
+
