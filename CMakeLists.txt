@@ -1,313 +1,249 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6.2)
-PROJECT (TexMol)
+# ===========================================================================
+# TexMol — Molecular Processing and Visualization
+# ===========================================================================
+# Modernized CMake build (Phase 2+3 of CVC Modernization Plan)
+# - CMake 3.16+ with target-based patterns
+# - libcvc as core dependency (FetchContent or local)
+# - No third-party/ ExternalProject chain
+# - GLSL only (Cg removed)
+# ===========================================================================
+cmake_minimum_required(VERSION 3.16)
 
-ADD_DEFINITIONS(-frounding-math)
+project(TexMol
+  VERSION 2.1.0
+  DESCRIPTION "Molecular Processing and Visualization"
+  LANGUAGES C CXX
+)
 
-SET(CGAL_DIR
-  ${PROJECT_BINARY_DIR}/lib/CGAL)
+# ---------------------------------------------------------------------------
+# C++ Standard
+# ---------------------------------------------------------------------------
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Global build variables.  Use the standard CPPFLAGS and LDFLAGS env vars.
-SET (CMAKE_CXX_FLAGS "-Wno-deprecated -Wno-non-template-friend")
-if(CMAKE_HOST_UNIX)
-  SET (CMAKE_CXX_FLAGS $ENV{CPPFLAGS})
-  SET (CMAKE_LD_FLAGS $ENV{LDFLAGS})
-endif(CMAKE_HOST_UNIX)
+# ---------------------------------------------------------------------------
+# Output directories
+# ---------------------------------------------------------------------------
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-option(USING_MAKE_ENV_VARS_FOR_INSTALL "If this is enabled, use the LDFLAGS environment variable as a directory to look up libs for a bundle" ON)
-mark_as_advanced(USING_MAKE_ENV_VARS_FOR_INSTALL)
-if(USING_MAKE_ENV_VARS_FOR_INSTALL)
-  set(ENV_LIB_DIR "$ENV{ENV}/lib")
-endif(USING_MAKE_ENV_VARS_FOR_INSTALL)
+# ---------------------------------------------------------------------------
+# Qt6 auto-processing (replaces manual QT_WRAP_CPP / QT4_WRAP_UI calls)
+# ---------------------------------------------------------------------------
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
 
-if(NOT BUNDLE_LIB_SEARCH_DIRS)
-  set(BUNDLE_LIB_SEARCH_DIRS "${ENV_LIB_DIR}")
-endif(NOT BUNDLE_LIB_SEARCH_DIRS)
-message(STATUS "BUNDLE_LIB_SEARCH_DIRS: ${BUNDLE_LIB_SEARCH_DIRS}")
+# ---------------------------------------------------------------------------
+# CMake modules
+# ---------------------------------------------------------------------------
+list(PREPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 
+# ---------------------------------------------------------------------------
+# GLSL rendering (Cg removed — discontinued by NVIDIA)
+# ---------------------------------------------------------------------------
+add_compile_definitions(GLSL)
 
-# CMake Modules
-SET(CMAKE_MODULE_PATH
-  ${PROJECT_BINARY_DIR}/lib/CGAL
-  ${PROJECT_BINARY_DIR}/share/cmake/hdf5
-  ${PROJECT_BINARY_DIR}/lib/cmake/lapack-3.4.2
-  ${CMAKE_SOURCE_DIR}/CMake
-  ${CMAKE_MODULE_PATH})
+# ---------------------------------------------------------------------------
+# libcvc — Core dependency
+# ---------------------------------------------------------------------------
+# Option A (default): FetchContent from GitHub
+# Option B: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
+#   cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
+# ---------------------------------------------------------------------------
+option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use FetchContent)" "")
 
-SET(CGAL_DIR
-  ${PROJECT_BINARY_DIR}/lib/CGAL)
-SET(ENV{HDF5_ROOT_DIR_HINT}
-  ${PROJECT_BINARY_DIR})
+if(LIBCVC_SOURCE_DIR)
+  message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
+  add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
+else()
+  include(FetchContent)
+  FetchContent_Declare(libcvc
+    GIT_REPOSITORY https://github.com/transfix/libcvc.git
+    GIT_TAG        573a89bfcadc70ef052e111dee569634063625f3
+  )
+  # Configure libcvc build options
+  set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
+  set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
+  set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
+  set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
+  set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
+  FetchContent_MakeAvailable(libcvc)
+endif()
 
-# option for using Cg
-option(USING_CG "option for using cg for imposter render (default: GLSL)" OFF)
-if(USING_CG)
-  find_package(Cg)
-  if(CG_FOUND)
-    add_definitions(-DCG)
-    message("Cg found!")
-    option(USING_ARB_PROFILE "option for using ARB profile for Cg" OFF)
-    if(USING_ARB_PROFILE)
-      add_definitions(-DCGARB)
-    endif(USING_ARB_PROFILE)
-  else(CG_FOUND)
-    message(SEND_ERROR "Cg NOT found!")
-  endif(CG_FOUND)
-else(USING_CG)
-  message("Using GLSL!")
-  add_definitions(-DGLSL)
-endif(USING_CG)
+# ---------------------------------------------------------------------------
+# System dependencies
+# ---------------------------------------------------------------------------
+# Qt6
+find_package(Qt6 COMPONENTS Core Gui Widgets Xml OpenGL OpenGLWidgets QUIET)
+if(NOT Qt6_FOUND)
+  message(FATAL_ERROR "Qt6 not found. Install: sudo apt-get install qt6-base-dev libqt6opengl6-dev libqt6openglwidgets6")
+endif()
 
-# Build output 
-set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
-set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}/bin")
-mark_as_advanced(LIBRARY_OUTPUT_PATH EXECUTABLE_OUTPUT_PATH)
+# OpenGL
+find_package(OpenGL REQUIRED)
 
-set(PETSC_ARCH linux-gnu)
-set(PETSC_DIR l${PROJECT_SOURCE_DIR}/third-party/petsc)
+# GLEW
+find_package(GLEW QUIET)
+if(NOT GLEW_FOUND)
+  # Fallback: use bundled glew in src/glew/
+  message(STATUS "System GLEW not found, using bundled version")
+endif()
 
-# Set the revision number from svn.
-option(USING_SUBVERSION "If you're using subversion, TexMol can use the revision number for version info" OFF)
-set(CVC_SVN_REVISION "0")
-if(USING_SUBVERSION)
-  find_package(Subversion)
-  if(Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_SOURCE_DIR} TexMol)
-    set(CVC_SVN_REVISION ${TexMol_WC_REVISION})
-    message(STATUS "Building Revision: ${CVC_SVN_REVISION}")
-  endif(Subversion_FOUND)
-endif(USING_SUBVERSION)
+# GSL (for molecular analysis modules)
+find_package(GSL QUIET)
 
+# FFTW (for FastSummation, GBEnergy, MultiresolutionSurface)
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+  pkg_check_modules(FFTW3 IMPORTED_TARGET fftw3)
+endif()
+if(NOT FFTW3_FOUND)
+  # Try CMake module path
+  find_package(FFTW QUIET)
+endif()
+set(HAVE_FFTW ${FFTW3_FOUND} CACHE BOOL "FFTW3 available")
 
-# The TexMol version number.
-SET(TexMol_VERSION_MAJOR 2)
-SET(TexMol_VERSION_MINOR 0)
-SET(TexMol_VERSION_PATCH ${CVC_SVN_REVISION})
+# ---------------------------------------------------------------------------
+# Optional dependencies
+# ---------------------------------------------------------------------------
+option(HAVE_CGAL "Use CGAL-dependent functions (SecondaryStructures, PocketTunnel)" ON)
+option(HAVE_NFFT "Use NFFT-dependent functions (FastSummation, GBEnergy)" OFF)
+option(HAVE_PETSC "Use PETSc-dependent functions (KIFMM3D, PB2)" OFF)
+option(HAVE_LAPACK "Use LAPACK-dependent functions" ON)
 
-# The full version string
-SET(TexMol_VERSION ${TexMol_VERSION_MAJOR}.${TexMol_VERSION_MINOR}.${TexMol_VERSION_PATCH})
-message(STATUS "TexMol version: ${TexMol_VERSION}")
+option(ENABLE_SECONDARY_STRUCTURE "Enable secondary structure analysis" ON)
+option(ENABLE_POCKET_TUNNEL "Enable pocket-tunnel detection" ON)
+option(BUILD_INTERFACESTATS "Enable InterfaceStats module" ON)
+option(BUILD_MOLSURF_API "Enable MolSurfAPI module" ON)
+option(ENABLE_MULTIRESOL_SURFACE "Enable multiresolution surface" ON)
+option(TEXMOL_ENABLE_ROUNDING_MATH "Enable -frounding-math (needed for CGAL on some compilers)" OFF)
 
-# OSX Bundle settings
-IF(APPLE)
-  SET(CMAKE_BUNDLE_NAME
-    "TexMol ${TexMol_VERSION_MAJOR}.${TexMol_VERSION_MINOR}-${TexMol_VERSION_PATCH}")
-  SET(CMAKE_BUNDLE_LOCATION "${CMAKE_INSTALL_PREFIX}")
-  # make sure CMAKE_INSTALL_PREFIX ends in /
-  STRING(LENGTH "${CMAKE_INSTALL_PREFIX}" LEN)
-  MATH(EXPR LEN "${LEN} -1" )
-  STRING(SUBSTRING "${CMAKE_INSTALL_PREFIX}" ${LEN} 1 ENDCH)
-  IF(NOT "${ENDCH}" STREQUAL "/")
-    SET(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/")
-  ENDIF(NOT "${ENDCH}" STREQUAL "/")
-  SET(CMAKE_INSTALL_PREFIX 
-    "${CMAKE_INSTALL_PREFIX}${CMAKE_BUNDLE_NAME}.app/Contents")
-ENDIF(APPLE)
-
-
-
-
-# include macro for setting up Qt
-include( SetupQt )
-include( SetupFFTW )
-include( SetupNFFT )
-include( SetupPETSC )
-include( SetupBoost )
-include( SetupGSL )
-include( SetupGLUT )
-include( SetupLapack )
-include( SetupCGAL )
-
-
-
-
-
-option(TEXMOL_ENABLE_ROUNDING_MATH "Enable the -frounding-math flag.  Needed for using CGAL with some compiler versions" OFF)
-if(TEXMOL_ENABLE_ROUNDING_MATH)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frounding-math")
-endif(TEXMOL_ENABLE_ROUNDING_MATH)
-
-option(TEXMOL_DISABLE_COARSEGRAIN "TexMol needs this on." ON)
-OPTION(HAVE_CGAL "Use CGAL dependent functions." ON)
-OPTION(HAVE_NFFT "Use NFFT dependent functions." ON)
-OPTION(HAVE_PETSC "Use PETSC dependent functions." ON)
-OPTION(HAVE_LAPACK "Use Lapack dependent functions." ON)
-OPTION(ENABLE_SECONDARY_STRUCTURE "Enable secondary structure elucidation unitility." ON)
-OPTION(ENABLE_POCKET_TUNNEL "Enable pocket-tunnel unitility." ON)
-option(BUILD_INTERFACESTATS "Enable building of InterfaceStats" ON)
-OPTION(BUILD_MOLSURF_API "Enable building molsurf API." ON)
-
-set(ENABLE_SECONDARY_STRUCTURE ON)
-set(ENABLE_POCKET_TUNNEL ON)
-set(BUILD_INTERFACESTATS ON)
-set(BUILD_MOLSURF_API ON)
-set(BUILD_GEOMETRY ON)
-set(ENABLE_SECONDARY_STRUCTURE ON)
-set(ENABLE_POCKET_TUNNEL ON)
-set(ENABLE_MULTIRESOL_SURFACE ON)
-
-
-
-
-# **** Print messages for final setup of enabling flags ****
-message("*****************************")
-message("   Status of build options   ")
-message("*****************************")
-if(HAVE_LAPACK)
-   message("- HAVE_LAPACK flag ENABLED: required for Sec. Struct., Pocket Tunnel, Interfacestats, Geometry and MolSurfAPI")
-else(HAVE_LAPACK)
-   message("- HAVE_LAPACK flag DISABLED: required for Sec. Struct., Pocket Tunnel, Interfacestats, Geometry and MolSurfAPI")
-endif(HAVE_LAPACK)
 if(HAVE_CGAL)
-   message("- HAVE_CGAL flag ENABLED: required for Sec. Struct. and Pocket Tunnel")
-else(HAVE_CGAL)
-   message("- HAVE_CGAL flag DISABLED: required for Sec. Struct. and Pocket Tunnel")
-endif(HAVE_CGAL)
+  find_package(CGAL QUIET)
+  if(NOT CGAL_FOUND)
+    message(WARNING "CGAL not found — disabling CGAL-dependent modules")
+    set(HAVE_CGAL OFF)
+  endif()
+endif()
+
+if(HAVE_LAPACK)
+  find_package(LAPACK QUIET)
+  if(NOT LAPACK_FOUND)
+    message(WARNING "LAPACK not found — disabling LAPACK-dependent modules")
+    set(HAVE_LAPACK OFF)
+  endif()
+endif()
+
 if(HAVE_NFFT)
-   message("- HAVE_NFFT flag ENABLED: required for FastSummation and GB")
-else(HAVE_NFFT)
-   message("- HAVE_NFFT flag DISABLED: required for FastSummation and GB")
-endif(HAVE_NFFT)
+  # NFFT is rare; make it genuinely optional
+  find_library(NFFT_LIBRARY nfft3)
+  if(NOT NFFT_LIBRARY)
+    message(WARNING "NFFT not found — disabling NFFT-dependent modules")
+    set(HAVE_NFFT OFF)
+  endif()
+endif()
+
 if(HAVE_PETSC)
-   message("- HAVE_NFFT flag ENABLED: required for KIFMM and PB")
-else(HAVE_PETSC)
-   message("- HAVE_NFFT flag DISABLED: required for KIFMM and PB")
-endif(HAVE_PETSC)
-if(HAVE_FFTW)
-   message("- HAVE_FFTW flag ENABLED: required for KIFMM, FastSummation, Multiresolution surface and Docking")
-else(HAVE_FFTW)
-   message("- HAVE_FFTW flag DISABLED: required for KIFMM, FastSummation, Multiresolution surface and Docking")
-endif(HAVE_FFTW)
-message("*****************************")
-if(ENABLE_SECONDARY_STRUCTURE)
-   ADD_DEFINITIONS(-DSS)
-   message("- Secondary Structure elucidation ENABLED")
-else(ENABLE_SECONDARY_STRUCTURE)
-   message("- Secondary Structure elucidation DISABLED")
-endif(ENABLE_SECONDARY_STRUCTURE)
-if(ENABLE_POCKET_TUNNEL)
-   ADD_DEFINITIONS(-DPOCKET_TUNNEL)
-   message("- Pocket Tunnel ENABLED")
-else(ENABLE_POCKET_TUNNEL)
-   message("- Pocket Tunnel DISABLED")
-endif(ENABLE_POCKET_TUNNEL)
-if(BUILD_INTERFACESTATS)
-   ADD_DEFINITIONS(-DIFS)
-   message("- Build interface stats ENABLED")
-else(BUILD_INTERFACESTATS)
-   message("- Build interface stats DISABLED")
-endif(BUILD_INTERFACESTATS)
-if(BUILD_MOLSURF_API)
-   ADD_DEFINITIONS(-DMSA)
-   message("- Build MolSurfAPI ENABLED")
-else(BUILD_MOLSURF_API)
-   message("- Build MolSurfAPI DISABLED")
-endif(BUILD_MOLSURF_API)
-if(ENABLE_MULTIRESOL_SURFACE)
-   ADD_DEFINITIONS(-DMS)
-   message("- Build Multiresolution surface ENABLED")
-else(ENABLE_MULTIRESOL_SURFACE)
-   message("- Build Multiresolution surface DISABLED")
-endif(ENABLE_MULTIRESOL_SURFACE)
-message("*****************************")
+  find_package(PETSc QUIET)
+  if(NOT PETSC_FOUND)
+    message(WARNING "PETSc not found — disabling PETSc-dependent modules")
+    set(HAVE_PETSC OFF)
+  endif()
+endif()
 
+# ---------------------------------------------------------------------------
+# Global compile definitions for feature flags
+# ---------------------------------------------------------------------------
+if(ENABLE_SECONDARY_STRUCTURE AND HAVE_CGAL AND HAVE_LAPACK)
+  add_compile_definitions(SS)
+else()
+  set(ENABLE_SECONDARY_STRUCTURE OFF)
+endif()
 
+if(ENABLE_POCKET_TUNNEL AND HAVE_CGAL AND HAVE_LAPACK)
+  add_compile_definitions(POCKET_TUNNEL)
+else()
+  set(ENABLE_POCKET_TUNNEL OFF)
+endif()
 
+if(BUILD_INTERFACESTATS AND HAVE_LAPACK)
+  add_compile_definitions(IFS)
+else()
+  set(BUILD_INTERFACESTATS OFF)
+endif()
 
+if(BUILD_MOLSURF_API AND HAVE_LAPACK)
+  add_compile_definitions(MSA)
+else()
+  set(BUILD_MOLSURF_API OFF)
+endif()
 
-# ************* CPack configuration for TexMol *************
-# Include the packaging system for distributing binaries
+if(ENABLE_MULTIRESOL_SURFACE AND HAVE_FFTW)
+  add_compile_definitions(MS)
+else()
+  set(ENABLE_MULTIRESOL_SURFACE OFF)
+endif()
+
+if(TEXMOL_ENABLE_ROUNDING_MATH)
+  add_compile_options(-frounding-math)
+endif()
+
+# ---------------------------------------------------------------------------
+# Status report
+# ---------------------------------------------------------------------------
+message(STATUS "=== TexMol ${PROJECT_VERSION} Build Configuration ===")
+message(STATUS "  C++ Standard:           ${CMAKE_CXX_STANDARD}")
+message(STATUS "  Qt6:                    ${Qt6_VERSION}")
+message(STATUS "  libcvc:                 ${LIBCVC_SOURCE_DIR}")
+message(STATUS "  CGAL:                   ${HAVE_CGAL}")
+message(STATUS "  LAPACK:                 ${HAVE_LAPACK}")
+message(STATUS "  FFTW:                   ${HAVE_FFTW}")
+message(STATUS "  NFFT:                   ${HAVE_NFFT}")
+message(STATUS "  PETSc:                  ${HAVE_PETSC}")
+message(STATUS "  Secondary Structure:    ${ENABLE_SECONDARY_STRUCTURE}")
+message(STATUS "  Pocket Tunnel:          ${ENABLE_POCKET_TUNNEL}")
+message(STATUS "  InterfaceStats:         ${BUILD_INTERFACESTATS}")
+message(STATUS "  MolSurfAPI:             ${BUILD_MOLSURF_API}")
+message(STATUS "  Multiresolution Surf:   ${ENABLE_MULTIRESOL_SURFACE}")
+message(STATUS "===============================================")
+
+# ---------------------------------------------------------------------------
+# Source tree
+# ---------------------------------------------------------------------------
+add_subdirectory(src)
+
+# ---------------------------------------------------------------------------
+# macOS Bundle
+# ---------------------------------------------------------------------------
+if(APPLE)
+  set_target_properties(TexMol PROPERTIES
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_GUI_IDENTIFIER "edu.utexas.cvc.texmol"
+    MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
+  )
+endif()
+
+# ---------------------------------------------------------------------------
+# CPack packaging
+# ---------------------------------------------------------------------------
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Molecular Processing and Visualization")
+set(CPACK_PACKAGE_VENDOR "Computational Visualization Center")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_CONTACT "arand@ices.utexas.edu")
+set(CPACK_STRIP_FILES ON)
+set(CPACK_PACKAGE_EXECUTABLES "TexMol" "TexMol")
+
 if(WIN32)
   set(CPACK_GENERATOR "NSIS")
 elseif(APPLE)
-  set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 1)
-  set(CPACK_GENERATOR "ZIP")
-else(WIN32)
-  set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 1)
-  set(CPACK_GENERATOR "TGZ")
-endif(WIN32)
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Molecular Processing and Visualization")
-SET(CPACK_PACKAGE_VENDOR "Computational Visualization Center")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/README")
-SET(CPACK_PACKAGE_VERSION_MAJOR "${TexMol_VERSION_MAJOR}")
-SET(CPACK_PACKAGE_VERSION_MINOR "${TexMol_VERSION_MINOR}")
-SET(CPACK_PACKAGE_VERSION_PATCH "${TexMol_VERSION_PATCH}")
-SET(CPACK_PACKAGE_VERSION "${TexMol_VERSION}")
-SET(CPACK_PACKAGE_INSTALL_DIRECTORY "TexMol ${TexMol_VERSION_MAJOR}.${TexMol_VERSION_MINOR}")
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "TexMol-${TexMol_VERSION}")
-SET(CPACK_PACKAGE_NAME "${CMAKE_PROJECT_NAME}")
-# Installers for 32- vs. 64-bit CMake:
-#  - Root install directory (displayed to end user at installer-run time)
-#  - "NSIS package/display name" (text used in the installer GUI)
-#  - Registry key used to store info about the installation
-IF(CMAKE_CL_64)
-  SET(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
-  SET(CPACK_NSIS_PACKAGE_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} (Win64)")
-  SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "${CPACK_PACKAGE_NAME} ${CPACK_PACKAGE_VERSION} (Win64)")
-ELSE()
-  SET(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES")
-  SET(CPACK_NSIS_PACKAGE_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY}")
-  SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} TexMol")
-  SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\cvcweb.ices.utexas.edu")
-  SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\cvcweb.ices.utexas.edu")
-  SET(CPACK_NSIS_CONTACT "arand@ices.utexas.edu")
-  SET(CPACK_NSIS_MODIFY_PATH ON)
-  SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "${CPACK_PACKAGE_NAME} ${CPACK_PACKAGE_VERSION}")
-ENDIF()
-IF(NOT DEFINED CPACK_SYSTEM_NAME)
-  # make sure package is not Cygwin-unknown, for Cygwin just
-  # cygwin is good for the system name
-  IF("${CMAKE_SYSTEM_NAME}" STREQUAL "CYGWIN")
-    SET(CPACK_SYSTEM_NAME Cygwin)
-  ELSE("${CMAKE_SYSTEM_NAME}" STREQUAL "CYGWIN")
-    SET(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR})
-  ENDIF("${CMAKE_SYSTEM_NAME}" STREQUAL "CYGWIN")
-ENDIF(NOT DEFINED CPACK_SYSTEM_NAME)
-IF(${CPACK_SYSTEM_NAME} MATCHES Windows)
-  IF(CMAKE_CL_64)
-    SET(CPACK_SYSTEM_NAME win64-x64)
-  ELSE(CMAKE_CL_64)
-    SET(CPACK_SYSTEM_NAME win32-x86)
-  ENDIF(CMAKE_CL_64)
-ENDIF(${CPACK_SYSTEM_NAME} MATCHES Windows)
-IF(NOT DEFINED CPACK_PACKAGE_FILE_NAME)
-  # if the CPACK_PACKAGE_FILE_NAME is not defined by the cache
-  # default to source package - system, on cygwin system is not 
-  # needed
-  IF(CYGWIN)
-    SET(CPACK_PACKAGE_FILE_NAME "${CPACK_SOURCE_PACKAGE_FILE_NAME}")
-  ELSE(CYGWIN)
-    SET(CPACK_PACKAGE_FILE_NAME 
-      "${CPACK_SOURCE_PACKAGE_FILE_NAME}-${CPACK_SYSTEM_NAME}")
-  ENDIF(CYGWIN)
-ENDIF(NOT DEFINED CPACK_PACKAGE_FILE_NAME)
-
-SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Alex Rand") #required
-SET(CPACK_PACKAGE_CONTACT "arand@ices.utexas.edu")
-SET(CPACK_STRIP_FILES ON)
-SET(CPACK_SOURCE_STRIP_FILES "")
-SET(CPACK_PACKAGE_EXECUTABLES "TexMol" "TexMol")
-SET(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README")
-SET(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_SOURCE_DIR}/README")
-include( CPack )
-include(InstallRequiredSystemLibraries)
-
-
-
-option(PRE_BUILD "Builds dependencies" ON)
-if(PRE_BUILD)
-  ADD_SUBDIRECTORY (third-party)
-  MESSAGE(STATUS "*******************************************************")
-  MESSAGE(STATUS "** If your expected target is not available, consider")
-  MESSAGE(STATUS "** changing the PRE_BUILD option using ccmake.")
-  MESSAGE(STATUS "*******************************************************")
-else(PRE_BUILD)
-  include_directories(${PROJECT_BINARY_DIR}/include)
-  link_directories(${PROJECT_BINARY_DIR}/lib)
-  ADD_SUBDIRECTORY (src)
-  MESSAGE(STATUS "*******************************************************")
-  MESSAGE(STATUS "** If needed dependencies are not available, consider")
-  MESSAGE(STATUS "** changing the PRE_BUILD option using ccmake.")
-  MESSAGE(STATUS "*******************************************************")
-endif(PRE_BUILD)
-
+  set(CPACK_GENERATOR "DragNDrop")
+else()
+  set(CPACK_GENERATOR "DEB;TGZ")
+  set(CPACK_DEBIAN_PACKAGE_MAINTAINER "CVC Lab")
+endif()
+include(CPack)
