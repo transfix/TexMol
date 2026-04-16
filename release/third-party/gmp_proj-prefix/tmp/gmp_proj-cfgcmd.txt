@@ -1,1 +1,0 @@
-cmd='/workspace/cvcsoft/TexMol/third-party/gmp/configure;--prefix=/workspace/cvcsoft/TexMol/release;--disable-shared'

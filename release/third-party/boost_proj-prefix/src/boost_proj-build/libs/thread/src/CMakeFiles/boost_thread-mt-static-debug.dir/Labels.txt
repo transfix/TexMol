@@ -1,5 +1,0 @@
-# Target labels
- thread
-# Source files and their labels
-/workspace/cvcsoft/TexMol/third-party/boost/libs/thread/src/pthread/thread.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/thread/src/pthread/once.cpp

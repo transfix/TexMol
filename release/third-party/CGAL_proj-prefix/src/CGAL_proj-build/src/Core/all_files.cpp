@@ -1,8 +1,0 @@
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/Expr.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/extLong.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/CoreDefs.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/GmpIO.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/CoreAux.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/BigFloat.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/CoreIO.cpp"
-#include "/workspace/cvcsoft/TexMol/third-party/cgal/src/CGALCore/Real.cpp"

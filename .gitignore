@@ -1,0 +1,62 @@
+# ==== CMake build artifacts ====
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CTestTestfile.cmake
+install_manifest.txt
+_deps/
+build/
+build-*/
+
+# ==== Compiled objects and libraries ====
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dylib
+*.lib
+*.dll
+*.la
+
+# ==== Executables ====
+*.exe
+*.out
+*.app
+
+# ==== Pre-built binaries ====
+bin/TexMol
+bin/runTexMol
+
+# ==== Pre-built vendored libraries ====
+lib/libgmp.a
+lib/libgmp.la
+lib/libmpfr.a
+lib/libmpfr.la
+
+# ==== Vendored headers (from third-party builds) ====
+include/gmp.h
+include/mpf2mpfr.h
+include/mpfr.h
+
+# ==== Release build tree (committed build artifacts) ====
+release/
+
+# ==== IDE / Editor files ====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==== Testing and coverage ====
+Testing/
+coverage/
+*.gcno
+*.gcda
+*.gcov

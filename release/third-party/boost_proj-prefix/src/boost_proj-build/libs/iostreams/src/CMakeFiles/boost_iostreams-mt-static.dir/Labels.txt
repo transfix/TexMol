@@ -1,8 +1,0 @@
-# Target labels
- iostreams
-# Source files and their labels
-/workspace/cvcsoft/TexMol/third-party/boost/libs/iostreams/src/file_descriptor.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/iostreams/src/mapped_file.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/iostreams/src/zlib.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/iostreams/src/gzip.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/iostreams/src/bzip2.cpp

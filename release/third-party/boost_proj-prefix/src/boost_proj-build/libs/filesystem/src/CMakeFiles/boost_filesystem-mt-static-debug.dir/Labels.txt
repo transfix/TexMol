@@ -1,7 +1,0 @@
-# Target labels
- filesystem
-# Source files and their labels
-/workspace/cvcsoft/TexMol/third-party/boost/libs/filesystem/src/operations.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/filesystem/src/path.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/filesystem/src/portability.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/filesystem/src/utf8_codecvt_facet.cpp

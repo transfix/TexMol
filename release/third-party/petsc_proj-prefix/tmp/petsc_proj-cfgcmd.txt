@@ -1,1 +1,0 @@
-cmd='/workspace/cvcsoft/TexMol/third-party/petsc/configure;--prefix=/workspace/cvcsoft/TexMol/release;--PETSC_DIR=/workspace/cvcsoft/TexMol/third-party/petsc;--PETSC_ARCH=linux-gnu;--with-cc=gcc;--with-fc=gfortran;--download-f-blas-lapack;--download-mpich'

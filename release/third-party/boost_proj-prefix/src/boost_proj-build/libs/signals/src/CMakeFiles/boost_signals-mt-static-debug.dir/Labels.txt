@@ -1,8 +1,0 @@
-# Target labels
- signals
-# Source files and their labels
-/workspace/cvcsoft/TexMol/third-party/boost/libs/signals/src/trackable.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/signals/src/connection.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/signals/src/named_slot_map.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/signals/src/signal_base.cpp
-/workspace/cvcsoft/TexMol/third-party/boost/libs/signals/src/slot.cpp

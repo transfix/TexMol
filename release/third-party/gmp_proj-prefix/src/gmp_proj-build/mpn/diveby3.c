@@ -1,1 +1,0 @@
-/workspace/cvcsoft/TexMol/third-party/gmp/mpn/generic/diveby3.c

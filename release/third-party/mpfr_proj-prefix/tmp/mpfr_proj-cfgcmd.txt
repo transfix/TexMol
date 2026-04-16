@@ -1,1 +1,0 @@
-cmd='/workspace/cvcsoft/TexMol/third-party/mpfr/configure;--prefix=/workspace/cvcsoft/TexMol/release;--disable-shared;--with-gmp=/workspace/cvcsoft/TexMol/release'

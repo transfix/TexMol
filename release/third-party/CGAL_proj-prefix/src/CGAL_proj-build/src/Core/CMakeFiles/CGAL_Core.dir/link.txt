@@ -1,2 +1,0 @@
-/usr/bin/ar cr ../../lib/libCGAL_Core.a  CMakeFiles/CGAL_Core.dir/all_files.cpp.o
-/usr/bin/ranlib ../../lib/libCGAL_Core.a

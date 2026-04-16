@@ -1,9 +1,0 @@
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/CGAL_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/boost_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/fftw_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/gmp_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/hdf5_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/lapack_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/mpfr_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/nfft_proj.dir
-/workspace/cvcsoft/TexMol/release/third-party/CMakeFiles/petsc_proj.dir

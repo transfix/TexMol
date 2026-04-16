@@ -1,1 +1,0 @@
-cmd='/workspace/cvcsoft/TexMol/third-party/fftw/configure;--prefix=/workspace/cvcsoft/TexMol/release;--disable-shared'

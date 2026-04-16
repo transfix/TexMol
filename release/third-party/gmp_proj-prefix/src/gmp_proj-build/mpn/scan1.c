@@ -1,1 +1,0 @@
-/workspace/cvcsoft/TexMol/third-party/gmp/mpn/generic/scan1.c

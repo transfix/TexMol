@@ -1,4 +1,0 @@
-# Target labels
- system
-# Source files and their labels
-/workspace/cvcsoft/TexMol/third-party/boost/libs/system/src/error_code.cpp
