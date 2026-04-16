@@ -3,21 +3,9 @@
 #ifndef CCV_OPENGL_SPHERE_RENDERER_H
 #define CCV_OPENGL_SPHERE_RENDERER_H
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
-#if defined(__APPLE__)
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
-#else
-# include <GL/gl.h>
-# include <GL/glu.h>
-#endif
+#include <GL/glew.h>
 
 #include <ObjectRenderer/Sphere/SphereRendererBase.h>
-
-class MyExtensions;
 
 namespace ObjectRendererLibrary
 {
@@ -63,8 +51,7 @@ namespace ObjectRendererLibrary
 			float* m_Vertices;
 			float* m_Colors;
 			float* m_Normals;
-			MyExtensions* m_Extensions; // manage extensions in this neat way!
-			// If this variable exists, assume that version 1_5, and hence vbos exist.
+			// VBO availability checked via GLEW_VERSION_1_5
 			bool checkForVertexBuffers();
 			int m_NumberOfVertices;
 			GLuint m_VertexBuffer;

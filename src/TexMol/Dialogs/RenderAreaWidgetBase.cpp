@@ -19,6 +19,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include <GL/glew.h>
 #include <qcolor.h>
 #include <qgl.h>
 #include <qobject.h>
@@ -69,6 +70,14 @@ void RenderAreaWidgetBase::initParams()
 
 void RenderAreaWidgetBase::initializeGL()
 {
+	// Initialize GLEW for GL extension function pointers (replaces
+	// hand-rolled StaticExtensionPointers and bundled GLEW 1.7.0)
+	glewExperimental = GL_TRUE;
+	GLenum err = glewInit();
+	if (err != GLEW_OK) {
+		fprintf(stderr, "GLEW init failed: %s\n", glewGetErrorString(err));
+	}
+
 	m_OpenGL_Viewer.initializeGL();
 	// setAutoBufferSwap removed in Qt6 — QOpenGLWidget always double-buffers
 }

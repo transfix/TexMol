@@ -19,7 +19,6 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include <ObjectRenderer/OpenGLShadingLanguageRenderer.h>
-#include <OpenGL_Viewer/MyExtensions.h>
 #include <OpenGL_Viewer/OpenGL_Viewer.h>
 #include <stdio.h>
 
@@ -30,7 +29,6 @@ OpenGLShadingLanguageRenderer::OpenGLShadingLanguageRenderer()
 	m_Program = 0;
 	m_VertexShader = 0;
 	m_FragmentShader = 0;
-	m_Extensions = 0;
 	m_Initialized = false;
 }
 
@@ -38,29 +36,28 @@ OpenGLShadingLanguageRenderer::~OpenGLShadingLanguageRenderer()
 {
 	if (m_VertexShader)
 	{
-		m_Extensions->glDetachShader(m_Program, m_VertexShader);
-		m_Extensions->glDeleteShader(m_VertexShader);
+		glDetachShader(m_Program, m_VertexShader);
+		glDeleteShader(m_VertexShader);
 		m_VertexShader = 0;
 	}
 	if (m_FragmentShader)
 	{
-		m_Extensions->glDetachShader(m_Program, m_FragmentShader);
-		m_Extensions->glDeleteShader(m_FragmentShader);
+		glDetachShader(m_Program, m_FragmentShader);
+		glDeleteShader(m_FragmentShader);
 		m_FragmentShader = 0;
 	}
 	if (m_Program)
 	{
-		m_Extensions->glDeleteProgram(m_Program);
+		glDeleteProgram(m_Program);
 		m_Program = 0;
 	}
-	delete m_Extensions;
 	OpenGL_Viewer::CHECK_GL_ERROR();
 }
 
 bool OpenGLShadingLanguageRenderer::createShaders()
 {
-	m_VertexShader = m_Extensions->glCreateShader(GL_VERTEX_SHADER);
-	m_FragmentShader = m_Extensions->glCreateShader(GL_FRAGMENT_SHADER);
+	m_VertexShader = glCreateShader(GL_VERTEX_SHADER);
+	m_FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	if (OpenGL_Viewer::CHECK_GL_ERROR())
 	{
 		m_VertexShader = 0;
@@ -73,8 +70,8 @@ bool OpenGLShadingLanguageRenderer::createShaders()
 	{
 		return false;
 	}
-	m_Extensions->glShaderSource(m_VertexShader, 1, (const char**)&vp, NULL);
-	m_Extensions->glShaderSource(m_FragmentShader, 1, (const char**)&fp, NULL);
+	glShaderSource(m_VertexShader, 1, (const char**)&vp, NULL);
+	glShaderSource(m_FragmentShader, 1, (const char**)&fp, NULL);
 	if (OpenGL_Viewer::CHECK_GL_ERROR())
 	{
 		m_VertexShader = 0;
@@ -87,17 +84,13 @@ bool OpenGLShadingLanguageRenderer::createShaders()
 bool OpenGLShadingLanguageRenderer::shaderCompiled(GLuint shader)
 {
 	int status = GL_FALSE;
-	m_Extensions->glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
 	return (status == GL_TRUE)? true : false;
 }
 
 bool OpenGLShadingLanguageRenderer::compile()
 {
-	if (!m_Extensions)
-	{
-		return false;
-	}
-	m_Extensions->glCompileShader(m_VertexShader);
+	glCompileShader(m_VertexShader);
 	if (OpenGL_Viewer::CHECK_GL_ERROR())
 	{
 		printf("Error compiling vertex program\n");
@@ -108,7 +101,7 @@ bool OpenGLShadingLanguageRenderer::compile()
 		getShaderError("After checking if it compiled", m_VertexShader);
 		return false;
 	}
-	m_Extensions->glCompileShader(m_FragmentShader);
+	glCompileShader(m_FragmentShader);
 	if (!shaderCompiled(m_FragmentShader))
 	{
 		return false;
@@ -118,41 +111,33 @@ bool OpenGLShadingLanguageRenderer::compile()
 
 bool OpenGLShadingLanguageRenderer::link()
 {
-	if (!m_Extensions)
-	{
-		return false;
-	}
-	m_Extensions->glLinkProgram(m_Program);
+	glLinkProgram(m_Program);
 	getProgramError("After linking program");
 	int status = GL_FALSE;
-	m_Extensions->glGetProgramiv(m_Program, GL_LINK_STATUS, &status);
+	glGetProgramiv(m_Program, GL_LINK_STATUS, &status);
 	return (status == GL_TRUE)? true : false;
 }
 
 int OpenGLShadingLanguageRenderer::getNumberOfAttachedShaders(GLuint program)
 {
 	int numberOfAttachedShaders = 0;
-	m_Extensions->glGetProgramiv(program, GL_ATTACHED_SHADERS, &numberOfAttachedShaders);
+	glGetProgramiv(program, GL_ATTACHED_SHADERS, &numberOfAttachedShaders);
 	return numberOfAttachedShaders;
 }
 
 bool OpenGLShadingLanguageRenderer::attachAndlink()
 {
-	if (!m_Extensions)
-	{
-		return false;
-	}
 	if (getNumberOfAttachedShaders(m_Program) != 0)
 	{
 		return false;
 	}
-	m_Extensions->glAttachShader(m_Program, m_VertexShader);
+	glAttachShader(m_Program, m_VertexShader);
 	if (OpenGL_Viewer::CHECK_GL_ERROR())
 	{
 		return false;
 	}
 	getShaderError("After attaching v s", m_VertexShader);
-	m_Extensions->glAttachShader(m_Program, m_FragmentShader);
+	glAttachShader(m_Program, m_FragmentShader);
 	if (OpenGL_Viewer::CHECK_GL_ERROR())
 	{
 		return false;
@@ -173,10 +158,6 @@ bool OpenGLShadingLanguageRenderer::isInitialized()
 bool OpenGLShadingLanguageRenderer::initialize()
 {
 	m_Initialized = false;
-	if (!m_Extensions)
-	{
-		return false;
-	}
 	// create shaders
 	if (!createShaders())
 	{
@@ -186,16 +167,16 @@ bool OpenGLShadingLanguageRenderer::initialize()
 	// check the source and make sure it is correct
 	{
 		int length = 0;
-		m_Extensions->glGetShaderiv(m_VertexShader, GL_SHADER_SOURCE_LENGTH, &length);
+		glGetShaderiv(m_VertexShader, GL_SHADER_SOURCE_LENGTH, &length);
 		char* buffer = new char[length+1];
-		m_Extensions->glGetShaderSource(m_VertexShader, length+1, &length, buffer);
+		glGetShaderSource(m_VertexShader, length+1, &length, buffer);
 		printf("Vertex program is %s\n", buffer);
 	}
 	{
 		int length = 0;
-		m_Extensions->glGetShaderiv(m_FragmentShader, GL_SHADER_SOURCE_LENGTH, &length);
+		glGetShaderiv(m_FragmentShader, GL_SHADER_SOURCE_LENGTH, &length);
 		char* buffer = new char[length+1];
-		m_Extensions->glGetShaderSource(m_FragmentShader, length+1, &length, buffer);
+		glGetShaderSource(m_FragmentShader, length+1, &length, buffer);
 		printf("Fragment program is %s\n", buffer);
 	}
 	// compile
@@ -205,7 +186,7 @@ bool OpenGLShadingLanguageRenderer::initialize()
 		return false;
 	}
 	// create program
-	if ((m_Program = m_Extensions->glCreateProgram()) == 0)
+	if ((m_Program = glCreateProgram()) == 0)
 	{
 		getShaderError("After creating program", m_VertexShader);
 		return false;
@@ -228,7 +209,7 @@ bool OpenGLShadingLanguageRenderer::initialize()
 void OpenGLShadingLanguageRenderer::getShaderError(const char* message, GLuint obj)
 {
 	int infologLength = 0;
-	m_Extensions->glGetShaderiv(obj, GL_INFO_LOG_LENGTH, &infologLength);
+	glGetShaderiv(obj, GL_INFO_LOG_LENGTH, &infologLength);
 	if (message)
 	{
 		printf("%s\n", message);
@@ -237,7 +218,7 @@ void OpenGLShadingLanguageRenderer::getShaderError(const char* message, GLuint o
 	{
 		char* infoLog = new char[infologLength];
 		int charsWritten  = 0;
-		m_Extensions->glGetShaderInfoLog(obj, infologLength, &charsWritten, infoLog);
+		glGetShaderInfoLog(obj, infologLength, &charsWritten, infoLog);
 		printf("%s\n",infoLog);
 		delete []infoLog;
 	}
@@ -250,7 +231,7 @@ void OpenGLShadingLanguageRenderer::getShaderError(const char* message, GLuint o
 void OpenGLShadingLanguageRenderer::getProgramError(const char* message)
 {
 	int infologLength = 0;
-	m_Extensions->glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &infologLength);
+	glGetProgramiv(m_Program, GL_INFO_LOG_LENGTH, &infologLength);
 	if (message)
 	{
 		printf("%s\n", message);
@@ -259,7 +240,7 @@ void OpenGLShadingLanguageRenderer::getProgramError(const char* message)
 	{
 		char* infoLog = new char[infologLength];
 		int charsWritten  = 0;
-		m_Extensions->glGetProgramInfoLog(m_Program, infologLength, &charsWritten, infoLog);
+		glGetProgramInfoLog(m_Program, infologLength, &charsWritten, infoLog);
 		printf("%s\n",infoLog);
 		delete []infoLog;
 	}

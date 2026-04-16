@@ -1,13 +1,12 @@
 // FunctionImposterSphereRenderer.cpp: implementation of the FunctionImposterSphereRenderer class.
 
+#include <GL/glew.h>
 #include <ObjectRenderer/Sphere/FunctionImposterSphereRenderer.h>
-#include <OpenGL_Viewer/MyExtensions.h>
 
 using namespace ObjectRendererLibrary;
 
-FunctionImposterSphereRenderer::FunctionImposterSphereRenderer(MyExtensions* extensions)
+FunctionImposterSphereRenderer::FunctionImposterSphereRenderer()
 {
-	m_Extensions = extensions;
 }
 
 FunctionImposterSphereRenderer::~FunctionImposterSphereRenderer()

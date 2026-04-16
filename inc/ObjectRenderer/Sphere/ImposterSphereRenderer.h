@@ -3,21 +3,9 @@
 #ifndef CCV_IMPOSTER_SPHERE_RENDERER_H
 #define CCV_IMPOSTER_SPHERE_RENDERER_H
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
-#if defined(__APPLE__)
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
-#else
-# include <GL/gl.h>
-# include <GL/glu.h>
-#endif
+#include <GL/glew.h>
 
 #include <ObjectRenderer/Sphere/SphereRendererBase.h>
-
-class MyExtensions;
 
 namespace ObjectRendererLibrary
 {
@@ -46,7 +34,6 @@ namespace ObjectRendererLibrary
 			GLuint m_ColorBuffer;
 			PlainImposterSphereRenderer* m_PlainImposterSphereRenderer;
 			FunctionImposterSphereRenderer* m_FunctionImposterSphereRenderer;
-			MyExtensions* m_Extensions; // manage extensions in this neat way!
 	};
 };
 

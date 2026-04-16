@@ -108,7 +108,7 @@ ADD_SUBDIRECTORY(MultiresolutionSurface)
 endif(ENABLE_MULTIRESOL_SURFACE)
 
 ADD_SUBDIRECTORY(QGLViewer)
-ADD_SUBDIRECTORY(glew)
+# Bundled glew removed — using system GLEW (Phase 6)
 ADD_SUBDIRECTORY(contourtree)
 
 ADD_SUBDIRECTORY(DataManager)

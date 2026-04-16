@@ -8,7 +8,7 @@ namespace ObjectRendererLibrary
 	class FunctionImposterSphereRenderer  : public OpenGLShadingLanguageRenderer
 	{
 		public:
-			FunctionImposterSphereRenderer(MyExtensions* extensions);
+				FunctionImposterSphereRenderer();
 			bool bindProgramAndParams();
 			bool bindMatrices();
 			bool unbindProgramAndParams();

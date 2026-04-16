@@ -27,7 +27,7 @@
 #ifndef __MESHHELIXRENDERER_H__
 #define __MESHHELIXRENDERER_H__
 
-#include <glew/glew.h>
+#include <GL/glew.h>
 
 #include <stdio.h>
 #include <ImposterRenderer/ExpandableBuffer.h>

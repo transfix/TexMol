@@ -21,7 +21,7 @@
 #if !defined(AFX_HELIXRENDERER_H__55F98E43_5A95_4CB7_9F7D_B6ADBD4D0FA9__INCLUDED_)
 #define AFX_HELIXRENDERER_H__55F98E43_5A95_4CB7_9F7D_B6ADBD4D0FA9__INCLUDED_
 
-#include <glew/glew.h>
+#include <GL/glew.h>
 
 #ifdef CG
 #include <Cg/cgGL.h>

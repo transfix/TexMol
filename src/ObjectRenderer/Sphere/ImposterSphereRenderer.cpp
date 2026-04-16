@@ -1,11 +1,12 @@
 // ImposterSphereRenderer.cpp: implementation of the ImposterSphereRenderer class.
 
+#include <GL/glew.h>
 #include <cstdlib>
 #include <ObjectRenderer/Sphere/FunctionImposterSphereRenderer.h>
 #include <ObjectRenderer/Sphere/ImposterSphereRenderer.h>
 #include <ObjectRenderer/Sphere/PlainImposterSphereRenderer.h>
 #include <ObjectRenderer/TransformationParameters.h>
-#include <OpenGL_Viewer/MyExtensions.h>
+#include <GL/glew.h>
 
 using namespace std;
 using namespace ObjectRendererLibrary;
@@ -16,7 +17,6 @@ ImposterSphereRenderer::ImposterSphereRenderer()
 	m_Colors = 0;
 	m_VertexBuffer = 0;
 	m_ColorBuffer = 0;
-	m_Extensions = 0;
 	m_FunctionImposterSphereRenderer = 0;
 	m_PlainImposterSphereRenderer = 0;
 }
@@ -28,8 +28,6 @@ ImposterSphereRenderer::~ImposterSphereRenderer()
 	m_FunctionImposterSphereRenderer = 0;
 	delete m_PlainImposterSphereRenderer;
 	m_PlainImposterSphereRenderer = 0;
-	delete m_Extensions;
-	m_Extensions = 0; // delete this last!
 }
 
 void ImposterSphereRenderer::deleteData()
@@ -49,43 +47,16 @@ void ImposterSphereRenderer::deleteData()
 	m_SphereData.clear();
 	m_NumberOfSpheres = 0;
 
-	if(m_Extensions)
-	{
-		m_Extensions->glDeleteBuffers(1, &m_VertexBuffer);
-		m_Extensions->glDeleteBuffers(1, &m_ColorBuffer);
-	}
+	glDeleteBuffers(1, &m_VertexBuffer);
+	glDeleteBuffers(1, &m_ColorBuffer);
 }
 
 bool ImposterSphereRenderer::initRenderer()
 {
-	delete m_Extensions;
-	m_Extensions = 0;
-	m_Extensions = new MyExtensions();
+	// Extension availability handled by GLEW (initialized in RenderAreaWidgetBase)
 
-	if(!m_Extensions->initExtensions(
-				"GL_VERSION_1_5 "   // for all the arrays. does initializing 2.0 initialize 1.5? maybe
-				"GL_VERSION_2_0"))  // if this version is defined, then get all vertex and fragment program calls!
-	{
-		delete m_Extensions;
-		m_Extensions = 0;
-
-		if(m_FunctionImposterSphereRenderer)
-		{
-			delete m_FunctionImposterSphereRenderer;
-			m_FunctionImposterSphereRenderer = 0;
-		}
-
-		if(m_PlainImposterSphereRenderer)
-		{
-			delete m_PlainImposterSphereRenderer;
-			m_PlainImposterSphereRenderer = 0;
-		}
-
-		return false;
-	}
-
-	m_FunctionImposterSphereRenderer = new FunctionImposterSphereRenderer(m_Extensions);
-	m_PlainImposterSphereRenderer = new PlainImposterSphereRenderer(m_Extensions);
+	m_FunctionImposterSphereRenderer = new FunctionImposterSphereRenderer();
+	m_PlainImposterSphereRenderer = new PlainImposterSphereRenderer();
 
 	if(!m_FunctionImposterSphereRenderer->initialize() || !m_PlainImposterSphereRenderer->initialize())
 	{
@@ -105,10 +76,6 @@ void ImposterSphereRenderer::clearObjects()
 
 bool ImposterSphereRenderer::fillUpBuffers()
 {
-	if(!m_Extensions)
-	{
-		return false;
-	}
 
 	if(!m_Vertices || !m_Colors)
 	{
@@ -166,11 +133,6 @@ bool ImposterSphereRenderer::fillUpBuffers()
 
 bool ImposterSphereRenderer::prepareBuffers()
 {
-	if(!m_Extensions)
-	{
-		return false;
-	}
-
 	if(m_SphereData.size() == 0)
 	{
 		return false;    // nothing to add to buffers!
@@ -205,13 +167,13 @@ bool ImposterSphereRenderer::prepareBuffers()
 	}
 
 	m_SphereData.clear(); // dont need this anymore
-	m_Extensions->glGenBuffers(1, &m_VertexBuffer);
-	m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-	m_Extensions->glBufferData(GL_ARRAY_BUFFER, m_NumberOfSpheres*16*sizeof(float), m_Vertices, GL_STATIC_DRAW);
-	m_Extensions->glGenBuffers(1, &m_ColorBuffer);
-	m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
-	m_Extensions->glBufferData(GL_ARRAY_BUFFER, m_NumberOfSpheres*16*sizeof(float), m_Colors, GL_STATIC_DRAW);
-	m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glGenBuffers(1, &m_VertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, m_NumberOfSpheres*16*sizeof(float), m_Vertices, GL_STATIC_DRAW);
+	glGenBuffers(1, &m_ColorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
+	glBufferData(GL_ARRAY_BUFFER, m_NumberOfSpheres*16*sizeof(float), m_Colors, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//if( m_Vertices) { delete []m_Vertices; m_Vertices = 0; }
 	//if( m_Colors ) { delete []m_Colors; m_Colors = 0; }
 	m_Dirty = false;
@@ -221,15 +183,15 @@ bool ImposterSphereRenderer::prepareBuffers()
 // client states must be set already. All data must be set up!
 void ImposterSphereRenderer::renderOnce()
 {
-	/*	m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+	/*	glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 		glVertexPointer(4, GL_FLOAT, 0, 0);
 
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
 		glColorPointer(4, GL_FLOAT, 0, 0);
 
 		glDrawArrays(GL_QUADS, 0, m_NumberOfSpheres*4);
 
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, 0);*/
+		glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 	glColor4f(1,0,0,1);
 	glBegin(GL_QUADS);
 	glVertex4f(0,0,0,0);
@@ -275,7 +237,7 @@ void ImposterSphereRenderer::render(TransformationParameters* transformationPara
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.5);
 	glEnable(GL_COLOR_SUM);
-	m_Extensions->glSecondaryColor3f(0.,0.,1.);
+	glSecondaryColor3f(0.,0.,1.);
 	glEnableClientState(GL_VERTEX_ARRAY);
 
 	if(! transformationParameters->useRandomColors())
@@ -325,7 +287,7 @@ void ImposterSphereRenderer::render(TransformationParameters* transformationPara
 	}
 
 	(m_RenderFunctionOnSurface) ? m_FunctionImposterSphereRenderer->unbindProgramAndParams() : m_PlainImposterSphereRenderer->unbindProgramAndParams();
-	m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisable(GL_BLEND);
 	glDisable(GL_COLOR_SUM);
 	glPopAttrib();

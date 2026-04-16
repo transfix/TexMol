@@ -1,17 +1,7 @@
 #ifndef CVC_TEXMOL_PLAIN_IMPOSTER_SPHERE_RENDERER_H
 #define CVC_TEXMOL_PLAIN_IMPOSTER_SPHERE_RENDERER_H
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
-#if defined(__APPLE__)
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
-#else
-# include <GL/gl.h>
-# include <GL/glu.h>
-#endif
+#include <GL/glew.h>
 
 #include <ObjectRenderer/OpenGLShadingLanguageRenderer.h>
 
@@ -22,7 +12,7 @@ namespace ObjectRendererLibrary
 	class PlainImposterSphereRenderer : public OpenGLShadingLanguageRenderer
 	{
 		public:
-			PlainImposterSphereRenderer(MyExtensions* extensions);
+				PlainImposterSphereRenderer();
 			virtual ~PlainImposterSphereRenderer();
 			bool bindProgramAndParams();
 			bool unbindProgramAndParams();

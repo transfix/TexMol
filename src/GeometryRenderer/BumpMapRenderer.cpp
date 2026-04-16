@@ -20,7 +20,7 @@
 */
 // BumpMapRenderer.cpp: implementation of the BumpMapRenderer class.
 
-#include <Geometry/MyExtensions.h>
+#include <GL/glew.h>
 #include <GeometryRenderer/BumpMapping.h>
 #include <GeometryRenderer/BumpMapRenderer.h>
 #include <stdio.h>
@@ -40,7 +40,6 @@ BumpMapRenderer::~BumpMapRenderer()
 	cgDestroyProgram(m_FragmentProgram);
 	cgDestroyContext(m_Context);
 	#endif
-	delete m_Extensions;
 }
 
 bool BumpMapRenderer::initialize()
@@ -57,16 +56,7 @@ bool BumpMapRenderer::initialize()
 	cgGLEnableProfile(m_FragmentProfile);
 	#endif
 
-	m_Extensions = new MyExtensions();
-	if (!m_Extensions->initExtensions(
-				"GL_VERSION_1_2 "
-				"GL_EXT_secondary_color "
-				"GL_ARB_multitexture "
-				"GL_ARB_vertex_buffer_object"))
-	{
-		delete m_Extensions;
-		return false;
-	}
+	// Extension availability is handled by GLEW (initialized in RenderAreaWidgetBase)
 	m_Initialized = true;
 	return true;
 }

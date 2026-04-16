@@ -233,12 +233,8 @@ if(HDF5_FOUND)
   list(APPEND TEXMOL_LINK_LIBS ${HDF5_LIBRARIES})
 endif()
 
-# GLEW — prefer system, fall back to bundled
-if(TARGET GLEW::GLEW)
-  list(APPEND TEXMOL_LINK_LIBS GLEW::GLEW)
-else()
-  list(APPEND TEXMOL_LINK_LIBS glew)
-endif()
+# GLEW — system (required)
+list(APPEND TEXMOL_LINK_LIBS GLEW::GLEW)
 
 # Legacy GL for extension function pointers (glBindFramebufferEXT etc.)
 list(APPEND TEXMOL_LINK_LIBS GL)

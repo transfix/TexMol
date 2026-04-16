@@ -23,7 +23,7 @@
 
 class VolumeData;
 
-#include <glew/glew.h>
+#include <GL/glew.h>
 
 #include <ImposterRenderer/Texture.h>
 #include <ImposterRenderer/BallRenderer.h>

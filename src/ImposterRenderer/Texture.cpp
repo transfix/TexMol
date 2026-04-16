@@ -20,7 +20,7 @@
 */
 // Texture.cpp: implementation of the Texture class.
 
-#include <glew/glew.h>
+#include <GL/glew.h>
 
 #include <ImposterRenderer/Texture.h>
 #include <math.h>

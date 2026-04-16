@@ -1,17 +1,16 @@
 // PlainImposterSphereRenderer.cpp: implementation of the PlainImposterSphereRenderer class.
 
+#include <GL/glew.h>
 #include <ObjectRenderer/Sphere/PlainImposterSphereRenderer.h>
 #include <ObjectRenderer/Texture.h>
-#include <OpenGL_Viewer/MyExtensions.h>
 #include <OpenGL_Viewer/OpenGL_Viewer.h>
 #include <stdio.h>
 
 using namespace ObjectRendererLibrary;
 
-PlainImposterSphereRenderer::PlainImposterSphereRenderer(MyExtensions* extensions)
+PlainImposterSphereRenderer::PlainImposterSphereRenderer()
 {
 	m_Initialized = false;
-	m_Extensions = extensions;
 	m_Program = 0;
 	m_MainColorParam = 0;
 	m_NormalMapParam = 0;
@@ -44,7 +43,7 @@ bool PlainImposterSphereRenderer::bindProgramAndParams()
 		return false;
 	}
 
-	m_Extensions->glUseProgram(m_Program);
+	glUseProgram(m_Program);
 
 	if(OpenGL_Viewer::CHECK_GL_ERROR())
 	{
@@ -52,20 +51,20 @@ bool PlainImposterSphereRenderer::bindProgramAndParams()
 	}
 
 	// get parameter handles
-	m_MainColorParam = m_Extensions->glGetUniformLocation(m_Program,"maincolor");
-	m_NormalMapParam = m_Extensions->glGetUniformLocation(m_Program,"normalmap");
-	m_DepthMapParam  = m_Extensions->glGetUniformLocation(m_Program,"depthmap");
+	m_MainColorParam = glGetUniformLocation(m_Program,"maincolor");
+	m_NormalMapParam = glGetUniformLocation(m_Program,"normalmap");
+	m_DepthMapParam  = glGetUniformLocation(m_Program,"depthmap");
 	//cgGLSetTextureParameter(m_NormalMapParam, m_TextureNormalMap->getTextureID());
 	//cgGLSetTextureParameter(m_DepthMapParam, m_TextureDepthMap->getTextureID());
 	//cgGLEnableTextureParameter(m_NormalMapParam);
 	//cgGLEnableTextureParameter(m_DepthMapParam);
-	m_Extensions->glUniform4f(m_MainColorParam,1.0, 0.0, 0.0, 1.0); // red
+	glUniform4f(m_MainColorParam,1.0, 0.0, 0.0, 1.0); // red
 	return true;
 }
 
 bool PlainImposterSphereRenderer::unbindProgramAndParams()
 {
-	m_Extensions->glUseProgram(0);   // 0 disables the shale and enables fixed pipeline rendering.
+	glUseProgram(0);   // 0 disables the shale and enables fixed pipeline rendering.
 	return true;
 }
 

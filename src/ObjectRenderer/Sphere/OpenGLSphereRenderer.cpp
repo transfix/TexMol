@@ -1,12 +1,11 @@
 // OpenGLSphereRenderer.cpp: implementation of the OpenGLSphereRenderer class.
 
+#include <GL/glew.h>
 #include <math.h>
 #include <ObjectRenderer/Sphere/OpenGLSphereRenderer.h>
 #include <ObjectRenderer/TransformationParameters.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <OpenGL_Viewer/MyExtensions.h>
 
 using namespace ObjectRendererLibrary;
 
@@ -14,7 +13,6 @@ OpenGLSphereRenderer::OpenGLSphereRenderer()
 {
 	m_NumberOfLevels = NUMBER_OF_LEVELS;
 	m_Dirty = true;
-	m_Extensions = 0;
 	m_Vertices = 0;
 	m_Colors = 0;
 	m_Normals = 0;
@@ -25,8 +23,6 @@ OpenGLSphereRenderer::OpenGLSphereRenderer()
 OpenGLSphereRenderer::~OpenGLSphereRenderer()
 {
 	deleteData();
-	delete m_Extensions;
-	m_Extensions = 0; // delete this last!
 }
 
 void OpenGLSphereRenderer::deleteData()
@@ -51,32 +47,17 @@ void OpenGLSphereRenderer::deleteData()
 
 	m_SphereData.clear();
 
-	if(m_Extensions)
+	if(GLEW_VERSION_1_5)
 	{
-		m_Extensions->glDeleteBuffers(1, &m_VertexBuffer);
-		m_Extensions->glDeleteBuffers(1, &m_NormalBuffer);
-		m_Extensions->glDeleteBuffers(1, &m_ColorBuffer);
+		glDeleteBuffers(1, &m_VertexBuffer);
+		glDeleteBuffers(1, &m_NormalBuffer);
+		glDeleteBuffers(1, &m_ColorBuffer);
 	}
 }
 
 bool OpenGLSphereRenderer::checkForVertexBuffers()
 {
-	delete m_Extensions;
-	m_Extensions = 0;
-	m_Extensions = new MyExtensions();
-
-	if(!m_Extensions->initExtensions(
-				"GL_VERSION_1_5"))  // if this version is defined, then I must get all the vertex buffer function calls !
-	{
-		delete m_Extensions;
-
-		if(!m_Extensions->initExtensions(
-					"GL_VERSION_1_1"))  // for drawarrays
-		{
-			return false; // sucky opengl.
-		}
-	}
-
+	// Extension availability handled by GLEW
 	return true;
 }
 
@@ -275,18 +256,18 @@ bool OpenGLSphereRenderer::prepareBuffers()
 
 	m_SphereData.clear(); // dont need this anymore
 
-	if(m_Extensions)
+	if(GLEW_VERSION_1_5)
 	{
-		m_Extensions->glGenBuffers(1, &m_VertexBuffer);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-		m_Extensions->glBufferData(GL_ARRAY_BUFFER, m_NumberOfVertices*3*sizeof(float), m_Vertices, GL_STATIC_DRAW);
-		m_Extensions->glGenBuffers(1, &m_ColorBuffer);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
-		m_Extensions->glBufferData(GL_ARRAY_BUFFER, m_NumberOfVertices*3*sizeof(float), m_Colors, GL_STATIC_DRAW);
-		m_Extensions->glGenBuffers(1, &m_NormalBuffer);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_NormalBuffer);
-		m_Extensions->glBufferData(GL_ARRAY_BUFFER, m_NumberOfVertices*3*sizeof(float), m_Normals, GL_STATIC_DRAW);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glGenBuffers(1, &m_VertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+		glBufferData(GL_ARRAY_BUFFER, m_NumberOfVertices*3*sizeof(float), m_Vertices, GL_STATIC_DRAW);
+		glGenBuffers(1, &m_ColorBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
+		glBufferData(GL_ARRAY_BUFFER, m_NumberOfVertices*3*sizeof(float), m_Colors, GL_STATIC_DRAW);
+		glGenBuffers(1, &m_NormalBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_NormalBuffer);
+		glBufferData(GL_ARRAY_BUFFER, m_NumberOfVertices*3*sizeof(float), m_Normals, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		if(m_Vertices)
 		{
@@ -318,16 +299,16 @@ bool OpenGLSphereRenderer::prepareBuffers()
 // client states must be set already. All data must be set up!
 void OpenGLSphereRenderer::renderOnce()
 {
-	if(m_Extensions)
+	if(GLEW_VERSION_1_5)
 	{
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 		glVertexPointer(3, GL_FLOAT, 0, 0);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_ColorBuffer);
 		glColorPointer(3, GL_FLOAT, 0, 0);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, m_NormalBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_NormalBuffer);
 		glNormalPointer(GL_FLOAT, 0, 0);
 		glDrawArrays(GL_TRIANGLES, 0, m_NumberOfVertices);
-		m_Extensions->glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	else
 	{

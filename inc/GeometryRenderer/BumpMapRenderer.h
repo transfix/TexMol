@@ -24,7 +24,6 @@
 #define CCV_TEXMOL_GEOMETRY_RENDERER_BUMP_MAP_RENDERER_H
 
 class Geometry;
-class MyExtensions;
 
 #ifdef CG
 #include <Cg/cgGL.h>
@@ -42,7 +41,6 @@ namespace CCVTexMolGeometryRenderer
 			bool render(Geometry* geometry, float* surfaceColors);
 
 		protected:
-			MyExtensions* m_Extensions;
 			bool m_Initialized;
 
 			#ifdef CG

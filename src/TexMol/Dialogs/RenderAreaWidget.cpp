@@ -18,14 +18,8 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#define GL_GLEXT_PROTOTYPES
+#include <GL/glew.h>
 
-#if defined(__APPLE__)
-#include <OpenGL/gl.h>
-#else
-#include <GL/gl.h>
-#endif
-//#include <GL/gl.h>
 #include <TexMol/Dialogs/glext.h>
 #include <QElapsedTimer>
 
@@ -33,7 +27,6 @@
 #include <math.h>
 #include <OpenGL_Viewer/OrthographicView.h>
 #include <OpenGL_Viewer/PerspectiveView.h>
-#include <OpenGL_Viewer/MyExtensions.h>
 #include <qdatetime.h>
 #include <qfile.h>
 #include <qimage.h>
@@ -860,80 +853,16 @@ bool RenderAreaWidget::saveTiledImages(QString imageFileName, bool saveAll, QStr
     m_OpenGL_Viewer.m_View->saveCurrentViewport();
     glPushMatrix();
 
-    // arand, 8-23-2011: you need the following line to build in windows...
-#ifdef _WIN32
-#define USE_MY_EXTENSION
-#endif
-
-#ifdef USE_MY_EXTENSION
-    //==============================================================================
-    MyExtensions *myExtensions = NULL;
-    myExtensions = new MyExtensions();
-    if( !myExtensions )
+    // Check for FBO support (provided by GLEW)
+    if (!GLEW_EXT_framebuffer_object)
     {
-	fprintf( stderr, "my extension allocation fail\n");
-	return false;
+        fprintf(stderr, "GL_EXT_framebuffer_object not supported\n");
+        return false;
     }
-    if ( !myExtensions->initExtensions("GL_EXT_framebuffer_object ") )
-	{
-		printf("init extensions fail\n");
-		return false;
-	}
-    //==============================================================================
-#else
-
-    std::vector <std::string> extensions;
-    char *str = (char*)glGetString(GL_EXTENSIONS);
-    char *tok;
-    // split extensions
-    if(str)
-    {
-        tok = strtok((char*)str, " ");
-        while(tok)
-        {
-            extensions.push_back(tok);    // put a extension into struct
-            tok = strtok(0, " ");         // next token
-        }
-    }
-    const std::string& ext("GL_EXT_framebuffer_object");
-    std::vector<std::string>::const_iterator iter = extensions.begin();
-    std::vector<std::string>::const_iterator endIter = extensions.end();
-
-    while(iter != endIter)
-    {
-        if(ext == *iter) {
-            cout << "GL_EXT_framebuffer_object is supported" << endl; break; }
-        else
-            ++iter;
-    }
-#endif
-    //==============================================================================
 
     printf("tileResol = [%d %d], nTileWidth = %d\n", _tileWidth, _tileWidth, _nTilesW);
 
     GLuint fboId, color_rb, depth_rb;
-#ifdef USE_MY_EXTENSION
-    myExtensions->glGenFramebuffersEXT(1, &fboId);
-    myExtensions->glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboId);
-
-    myExtensions->glGenRenderbuffersEXT(1, &color_rb);
-    myExtensions->glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, color_rb);
-    //The storage format is RGBA8
-    myExtensions->glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGBA8, _tileWidth, _tileWidth);
-    //Attach color buffer to FBO
-    myExtensions->glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, color_rb);
-
-    myExtensions->glGenRenderbuffersEXT(1, &depth_rb);
-    myExtensions->glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depth_rb);
-    myExtensions->glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT, _tileWidth, _tileWidth);
-    // attach a renderbuffer to depth attachment point
-    myExtensions->glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, depth_rb);
-
-    myExtensions->glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
-    //==============================================================================
-
-    myExtensions->glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboId);
-#else
     glGenFramebuffersEXT(1, &fboId);
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboId);
 
@@ -951,10 +880,8 @@ bool RenderAreaWidget::saveTiledImages(QString imageFileName, bool saveAll, QStr
     glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, depth_rb);
 
     glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
-    //==============================================================================
 
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboId);
-#endif
 
     glDrawBuffer(GL_FRONT_LEFT);
     glReadBuffer(GL_FRONT_LEFT);
@@ -1035,21 +962,11 @@ bool RenderAreaWidget::saveTiledImages(QString imageFileName, bool saveAll, QStr
     delete[] tbuf;
 
     //Delete resources
-#ifdef USE_MY_EXTENSION
-    myExtensions->glDeleteRenderbuffersEXT(1, &color_rb);
-    myExtensions->glDeleteRenderbuffersEXT(1, &depth_rb);
-    //Bind 0, which means render to back buffer, as a result, fb is unbound
-    myExtensions->glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-    myExtensions->glDeleteFramebuffersEXT(1, &fboId);
-    // delete extension
-    delete myExtensions;
-#else
     glDeleteRenderbuffersEXT(1, &color_rb);
     glDeleteRenderbuffersEXT(1, &depth_rb);
     //Bind 0, which means render to back buffer, as a result, fb is unbound
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
     glDeleteFramebuffersEXT(1, &fboId);
-#endif
     glPopMatrix();
     m_OpenGL_Viewer.m_View->resetSavedViewport();
     m_OpenGL_Viewer.m_View->SetView( );

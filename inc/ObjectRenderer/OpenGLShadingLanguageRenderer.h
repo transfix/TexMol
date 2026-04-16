@@ -25,15 +25,7 @@
 #include <windows.h>
 #endif
 
-#if defined(__APPLE__)
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
-#else
-# include <GL/gl.h>
-# include <GL/glu.h>
-#endif
-
-class MyExtensions;
+#include <GL/glew.h>
 
 namespace ObjectRendererLibrary
 {
@@ -59,7 +51,6 @@ namespace ObjectRendererLibrary
 			GLuint m_Program;
 			GLuint m_VertexShader;
 			GLuint m_FragmentShader;
-			MyExtensions* m_Extensions;
 			bool m_Initialized;
 	};
 };

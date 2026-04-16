@@ -104,12 +104,8 @@ endif()
 # OpenGL
 find_package(OpenGL REQUIRED)
 
-# GLEW
-find_package(GLEW QUIET)
-if(NOT GLEW_FOUND)
-  # Fallback: use bundled glew in src/glew/
-  message(STATUS "System GLEW not found, using bundled version")
-endif()
+# GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
+find_package(GLEW REQUIRED)
 
 # GSL (for molecular analysis modules)
 find_package(GSL QUIET)

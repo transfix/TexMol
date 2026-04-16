@@ -21,7 +21,7 @@
 #if !defined(AFX_GLOBALCGCONTEXT_H__37EBD53C_2758_4A18_9DD1_7FDF0DB7D705__INCLUDED_)
 #define AFX_GLOBALCGCONTEXT_H__37EBD53C_2758_4A18_9DD1_7FDF0DB7D705__INCLUDED_
 
-#include <glew/glew.h>
+#include <GL/glew.h>
 #ifdef CG
 #include <Cg/cgGL.h>
 #endif

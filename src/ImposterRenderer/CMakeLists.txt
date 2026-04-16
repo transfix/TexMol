@@ -10,7 +10,7 @@ INCLUDE_DIRECTORIES(
   ../../inc
 )
 
-set(LIBS "glew")
+set(LIBS GLEW::GLEW)
 
 option(USING_AO "option for using ambient occusion for ball rendering" ON)
 if(USING_AO)
