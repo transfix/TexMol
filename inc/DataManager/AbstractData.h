@@ -22,7 +22,7 @@
 #define AFX_ABSTRACTDATA_H__AC40E7D2_6499_4265_B23B_97DF82E2B171__INCLUDED_
 
 #include <qobject.h>
-#include <qstring.h>
+#include <QString>
 #include <qstringlist.h>
 #include <qwidget.h>
 //Added by qt3to4:
@@ -96,7 +96,7 @@ class AbstractData  : public QObject
 
 	public slots:
 		void renderEnabledSlot(bool renderMe);
-		bool updateGL();
+		bool update();
 		void roverExploringSlot();
 		void roverReleasedSlot();
 

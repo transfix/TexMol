@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <functional> //compose2, etc
 #include <boost/lambda/lambda.hpp>
-#include <boost/utility.hpp> //for prior()
+#include <boost/utility.hpp> //for std::prev()
 #include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -33,7 +33,7 @@ namespace CVCColorTable
 #if QT_VERSION < 0x040000
                       const char *name
 #else
-                      Qt::WFlags flags
+                      Qt::WindowFlags flags
 #endif
                       )
     : QFrame( parent, 
@@ -53,7 +53,7 @@ namespace CVCColorTable
 #else
     new QBoxLayout( QBoxLayout::Down, this );
 #endif
-    layout->setMargin(3);
+    layout->setContentsMargins(3, 3, 3, 3);
     layout->setSpacing(3);
 
 #if QT_VERSION < 0x040000
@@ -91,7 +91,7 @@ namespace CVCColorTable
 #if QT_VERSION < 0x040000
     connect(_xoomedIn,SIGNAL(changed()),_xoomedOut,SLOT(update()));
 #else
-    connect(_xoomedIn,SIGNAL(changed()),_xoomedOut,SLOT(updateGL()));
+    connect(_xoomedIn,SIGNAL(changed()),_xoomedOut,SLOT(update()));
 #endif
     connect(_xoomedIn,SIGNAL(changed()),SIGNAL(changed()));
 
@@ -141,12 +141,12 @@ namespace CVCColorTable
 	if(high_itr == info().colorNodes().end()) //we're past the defined nodes! just return what we have 
 	  return table;
 	color_nodes::const_iterator low_itr = 
-	  high_itr == info().colorNodes().begin() ? high_itr : boost::prior(high_itr);
+	  high_itr == info().colorNodes().begin() ? high_itr : std::prev(high_itr);
 	opacity_nodes::const_iterator high_opac_itr = info().opacityNodes().lower_bound(opacity_node(pos));
 	if(high_opac_itr == info().opacityNodes().end()) //past defined nodes!
 	  return table;
 	opacity_nodes::const_iterator low_opac_itr =
-	  high_opac_itr == info().opacityNodes().begin() ? high_opac_itr : boost::prior(high_opac_itr);
+	  high_opac_itr == info().opacityNodes().begin() ? high_opac_itr : std::prev(high_opac_itr);
 
 	color_node high = *high_itr;
 	color_node low = *low_itr;
@@ -167,10 +167,10 @@ namespace CVCColorTable
 #endif
 
     for(color_nodes::const_iterator cur = info().colorNodes().begin();
-	cur != boost::prior(info().colorNodes().end());
+	cur != std::prev(info().colorNodes().end());
 	cur++)
       {
-	color_nodes::const_iterator next = boost::next(cur);
+	color_nodes::const_iterator next = std::next(cur);
 	unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	//unsigned int next_idx = cur_idx + ((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0;
 	unsigned int next_idx = static_cast<unsigned int>(((next->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -185,10 +185,10 @@ namespace CVCColorTable
 
     unsigned int last_idx = -1;
     for(opacity_nodes::const_iterator cur = info().opacityNodes().begin();
-	cur != boost::prior(info().opacityNodes().end());
+	cur != std::prev(info().opacityNodes().end());
 	cur++)
       {
-	opacity_nodes::const_iterator next = boost::next(cur);
+	opacity_nodes::const_iterator next = std::next(cur);
 	unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	unsigned int next_idx = cur_idx + 
 	  static_cast<unsigned int>(((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -248,10 +248,10 @@ namespace CVCColorTable
       }
 
     for(color_nodes::const_iterator cur = info().colorNodes().begin();
-	cur != boost::prior(info().colorNodes().end());
+	cur != std::prev(info().colorNodes().end());
 	cur++)
       {
-	color_nodes::const_iterator next = boost::next(cur);
+	color_nodes::const_iterator next = std::next(cur);
 	unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	//unsigned int next_idx = cur_idx + ((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0;
 	unsigned int next_idx = static_cast<unsigned int>(((next->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -265,10 +265,10 @@ namespace CVCColorTable
       }
 
     for(opacity_nodes::const_iterator cur = info().opacityNodes().begin();
-	cur != boost::prior(info().opacityNodes().end());
+	cur != std::prev(info().opacityNodes().end());
 	cur++)
       {
-	opacity_nodes::const_iterator next = boost::next(cur);
+	opacity_nodes::const_iterator next = std::next(cur);
 	unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	unsigned int next_idx = cur_idx + 
 	  static_cast<unsigned int>(((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -344,12 +344,12 @@ namespace CVCColorTable
 	if(high_itr == info().colorNodes().end()) //we're past the defined nodes! just return what we have 
 	  return table;
 	color_nodes::const_iterator low_itr = 
-	  high_itr == info().colorNodes().begin() ? high_itr : boost::prior(high_itr);
+	  high_itr == info().colorNodes().begin() ? high_itr : std::prev(high_itr);
 	opacity_nodes::const_iterator high_opac_itr = info().opacityNodes().lower_bound(opacity_node(pos));
 	if(high_opac_itr == info().opacityNodes().end()) //past defined nodes!
 	  return table;
 	opacity_nodes::const_iterator low_opac_itr =
-	  high_opac_itr == info().opacityNodes().begin() ? high_opac_itr : boost::prior(high_opac_itr);
+	  high_opac_itr == info().opacityNodes().begin() ? high_opac_itr : std::prev(high_opac_itr);
 
 	color_node high = *high_itr;
 	color_node low = *low_itr;
@@ -372,10 +372,10 @@ namespace CVCColorTable
     // arand: BUG warning.. I think the table size of 256 may be hardcoded below...
     // the general case is above?
     for(color_nodes::const_iterator cur = info().colorNodes().begin();
-	cur != boost::prior(info().colorNodes().end());
+	cur != std::prev(info().colorNodes().end());
 	cur++)
       {
-	color_nodes::const_iterator next = boost::next(cur);
+	color_nodes::const_iterator next = std::next(cur);
 	unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 
 	unsigned int next_idx = static_cast<unsigned int>(((next->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -390,10 +390,10 @@ namespace CVCColorTable
 
     unsigned int last_idx = -1;
     for(opacity_nodes::const_iterator cur = info().opacityNodes().begin();
-	cur != boost::prior(info().opacityNodes().end());
+	cur != std::prev(info().opacityNodes().end());
 	cur++)
       {
-	opacity_nodes::const_iterator next = boost::next(cur);
+	opacity_nodes::const_iterator next = std::next(cur);
 	unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	unsigned int next_idx = cur_idx + 
 	  static_cast<unsigned int>(((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -515,11 +515,11 @@ namespace CVCColorTable
 
   void ColorTable::update()
   {
-    _xoomedIn->updateGL();
+    _xoomedIn->update();
 #if QT_VERSION < 0x040000
     _xoomedOut->update();
 #else
-    _xoomedOut->updateGL();
+    _xoomedOut->update();
 #endif
   }
 
@@ -590,7 +590,7 @@ namespace CVCColorTable
   ColorTable::color_table_info ColorTable::read_transfer_function(const std::string& filename)
   {
     using namespace std;
-    using namespace boost;
+    using boost::any_cast;
 
     color_table_info cti;
 
@@ -606,11 +606,11 @@ namespace CVCColorTable
     {									\
       getline(inf, line); line_num++;					\
       if(!inf)								\
-	std::cout << str(format("Error reading file %1%, line %2%")	\
+	std::cout << boost::str(boost::format("Error reading file %1%, line %2%")	\
 				% filename				\
 		    % line_num) << std::endl;				\
       if(line != check_str)						\
-	std::cout << str(format("Error reading file %1%, line %2%: "	\
+	std::cout << boost::str(boost::format("Error reading file %1%, line %2%: "	\
 				       "string '%3%' not found")	\
 				% filename				\
 				% line_num				\
@@ -619,11 +619,11 @@ namespace CVCColorTable
 
     /* // arand: old version crashed when a bad vinay is loaded
       if(!inf)								\
-	throw runtime_error(str(format("Error reading file %1%, line %2%") \
+	throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%") \
 				% filename				\
 				% line_num));				\
       if(line != check_str)						\
-	throw runtime_error(str(format("Error reading file %1%, line %2%: " \
+	throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%: " \
 				       "string '%3%' not found")	\
 				% filename				\
 				% line_num				\
@@ -636,7 +636,7 @@ namespace CVCColorTable
       {
 	line_num++;
 	if(!inf)
-	  throw runtime_error(str(format("Error reading file %1%, line %2%")
+	  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 				  % filename
 				  % line_num));
 	
@@ -646,10 +646,10 @@ namespace CVCColorTable
 	    
 	    getline(inf, line); line_num++;
 	    if(!inf)
-	      throw runtime_error(str(format("Error reading file %1%, line %2%")
+	      throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 				      % filename
 				      % line_num));
-	    unsigned int num_nodes = lexical_cast<unsigned int>(line);
+	    unsigned int num_nodes = boost::lexical_cast<unsigned int>(line);
 	    
 	    CHECK_LINE("Position and opacity");
 
@@ -657,17 +657,17 @@ namespace CVCColorTable
 	      {
 		getline(inf, line); line_num++;
 		if(!inf)
-		  throw runtime_error(str(format("Error reading file %1%, line %2%")
+		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 					  % filename
 					  % line_num));
-		split(split_line,line,is_any_of(" "));
+		boost::algorithm::split(split_line,line,boost::algorithm::is_any_of(" "));
 		if(split_line.size() != 2)
-		  throw runtime_error(str(format("Error reading file %1%, line %2%: "
+		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%: "
 						 "Invalid position and opacity")
 					  % filename
 					  % line_num));
-		cti.opacityNodes().insert(ColorTable::opacity_node(lexical_cast<double>(split_line[0]),
-								   lexical_cast<double>(split_line[1])));
+		cti.opacityNodes().insert(ColorTable::opacity_node(boost::lexical_cast<double>(split_line[0]),
+								   boost::lexical_cast<double>(split_line[1])));
 	      }
 	  }
 	else if(line == "ColorMap")
@@ -676,10 +676,10 @@ namespace CVCColorTable
 	    
 	    getline(inf, line); line_num++;
 	    if(!inf)
-	      throw runtime_error(str(format("Error reading file %1%, line %2%")
+	      throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 				      % filename
 				      % line_num));
-	    unsigned int num_nodes = lexical_cast<unsigned int>(line);
+	    unsigned int num_nodes = boost::lexical_cast<unsigned int>(line);
 	    
 	    CHECK_LINE("Position and RGB");
 	    
@@ -687,19 +687,19 @@ namespace CVCColorTable
 	      {
 		getline(inf, line); line_num++;
 		if(!inf)
-		  throw runtime_error(str(format("Error reading file %1%, line %2%")
+		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 					  % filename
 					  % line_num));
-		split(split_line,line,is_any_of(" "));
+		boost::algorithm::split(split_line,line,boost::algorithm::is_any_of(" "));
 		if(split_line.size() != 4)
-		  throw runtime_error(str(format("Error reading file %1%, line %2%: "
+		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%: "
 						 "Invalid position and RGB values")
 					  % filename
 					  % line_num));
-		cti.colorNodes().insert(ColorTable::color_node(lexical_cast<double>(split_line[0]),
-							       lexical_cast<double>(split_line[1]),
-							       lexical_cast<double>(split_line[2]),
-							       lexical_cast<double>(split_line[3])));
+		cti.colorNodes().insert(ColorTable::color_node(boost::lexical_cast<double>(split_line[0]),
+							       boost::lexical_cast<double>(split_line[1]),
+							       boost::lexical_cast<double>(split_line[2]),
+							       boost::lexical_cast<double>(split_line[3])));
 	      }
 	  }
 	else if(line == "IsocontourMap")
@@ -708,10 +708,10 @@ namespace CVCColorTable
 	    
 	    getline(inf, line); line_num++;
 	    if(!inf)
-	      throw runtime_error(str(format("Error reading file %1%, line %2%")
+	      throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 				      % filename
 				      % line_num));
-	    unsigned int num_nodes = lexical_cast<unsigned int>(line);
+	    unsigned int num_nodes = boost::lexical_cast<unsigned int>(line);
 	    
 	    CHECK_LINE("Position");
 	    
@@ -719,10 +719,10 @@ namespace CVCColorTable
 	      {
 		getline(inf, line); line_num++;
 		if(!inf)
-		  throw runtime_error(str(format("Error reading file %1%, line %2%")
+		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
 					  % filename
 					  % line_num));
-		cti.isocontourNodes().insert(ColorTable::isocontour_node(lexical_cast<double>(line)));
+		cti.isocontourNodes().insert(ColorTable::isocontour_node(boost::lexical_cast<double>(line)));
 	      }
 	  }
       }
@@ -738,7 +738,7 @@ namespace CVCColorTable
 					   const ColorTable::color_table_info& cti)
   {
     using namespace std;
-    using namespace boost;
+    using boost::any_cast;
 
     color_table_info local_cti = cti;
     local_cti.normalize();
@@ -756,11 +756,11 @@ namespace CVCColorTable
     //write out the beginning and ending first
     outf << local_cti.opacityNodes().begin()->position << " "
 	 << local_cti.opacityNodes().begin()->value << endl;
-    outf << prior(local_cti.opacityNodes().end())->position << " "
-	 << prior(local_cti.opacityNodes().end())->value << endl;
+    outf << std::prev(local_cti.opacityNodes().end())->position << " "
+	 << std::prev(local_cti.opacityNodes().end())->value << endl;
     if(local_cti.opacityNodes().size() > 2)
-      for(opacity_nodes::iterator i = next(local_cti.opacityNodes().begin());
-	  i != prior(local_cti.opacityNodes().end());
+      for(opacity_nodes::iterator i = std::next(local_cti.opacityNodes().begin());
+	  i != std::prev(local_cti.opacityNodes().end());
 	  i++)
 	outf << i->position << " " << i->value << endl;
     
@@ -773,13 +773,13 @@ namespace CVCColorTable
 	 << local_cti.colorNodes().begin()->r << " "
 	 << local_cti.colorNodes().begin()->g << " "
 	 << local_cti.colorNodes().begin()->b << endl;
-    outf << prior(local_cti.colorNodes().end())->position << " "
-	 << prior(local_cti.colorNodes().end())->r << " "
-	 << prior(local_cti.colorNodes().end())->g << " "
-	 << prior(local_cti.colorNodes().end())->b << endl;
+    outf << std::prev(local_cti.colorNodes().end())->position << " "
+	 << std::prev(local_cti.colorNodes().end())->r << " "
+	 << std::prev(local_cti.colorNodes().end())->g << " "
+	 << std::prev(local_cti.colorNodes().end())->b << endl;
     if(local_cti.colorNodes().size() > 2)
-      for(color_nodes::iterator i = next(local_cti.colorNodes().begin());
-	  i != prior(local_cti.colorNodes().end());
+      for(color_nodes::iterator i = std::next(local_cti.colorNodes().begin());
+	  i != std::prev(local_cti.colorNodes().end());
 	  i++)
 	outf << i->position << " "
 	     << i->r << " "
@@ -826,10 +826,10 @@ namespace CVCColorTable
      else
       {
          for(color_nodes::const_iterator cur = local_cti.colorNodes().begin();
-	    cur != boost::prior(local_cti.colorNodes().end());
+	    cur != std::prev(local_cti.colorNodes().end());
 	    cur++)
           {
-	    color_nodes::const_iterator next = boost::next(cur);
+	    color_nodes::const_iterator next = std::next(cur);
 	    unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	    //unsigned int next_idx = cur_idx + ((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0;
 	    unsigned int next_idx = static_cast<unsigned int>(((next->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
@@ -845,10 +845,10 @@ namespace CVCColorTable
          bool opacityCubed = true; // default setting for test, this must be fixed
 
          for(opacity_nodes::const_iterator cur = local_cti.opacityNodes().begin();
-   	    cur != boost::prior(local_cti.opacityNodes().end());
+   	    cur != std::prev(local_cti.opacityNodes().end());
 	    cur++)
           {
-	    opacity_nodes::const_iterator next = boost::next(cur);
+	    opacity_nodes::const_iterator next = std::next(cur);
 	    unsigned int cur_idx = static_cast<unsigned int>(((cur->position - MIN_RANGE)/(MAX_RANGE - MIN_RANGE))*255.0);
 	    unsigned int next_idx = cur_idx + 
 	      static_cast<unsigned int>(((next->position - cur->position)/(MAX_RANGE - MIN_RANGE))*255.0);

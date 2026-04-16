@@ -24,7 +24,7 @@
 
 #include "ui_GeneralizedBornDialogBase.h"
 
-GeneralizedBornDialog::GeneralizedBornDialog(QWidget *parent,Qt::WFlags flags) 
+GeneralizedBornDialog::GeneralizedBornDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::GeneralizedBornDialogBase;
@@ -46,7 +46,7 @@ void GeneralizedBornDialog::gbPqrFileNameSlot()
 {
   _ui->gbPqrLineEdit->setText(QFileDialog::getOpenFileName(this,
                                                          "Load PQR File",
-                                                         QString::null,
+                                                         QString(),
                                                          "PQR (*.pqr)"));
 }
 
@@ -54,7 +54,7 @@ void GeneralizedBornDialog::gbRawnFileNameSlot()
 {
   _ui->gbRawnLineEdit->setText(QFileDialog::getOpenFileName(this,
                                                          "Load RAWN File",
-                                                         QString::null,
+                                                         QString(),
                                                          "RAWN (*.rawn)"));
 }
 
@@ -63,8 +63,8 @@ void GeneralizedBornDialog::gbOutputPrefixSlot()
 {
   _ui->gbOutputLineEdit->setText(QFileDialog::getSaveFileName(this,
                                                          "Output Filename Prefix",
-                                                         QString::null,
-							      QString::null));
+                                                         QString(),
+							      QString()));
 }
 
 

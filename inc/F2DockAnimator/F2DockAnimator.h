@@ -12,7 +12,7 @@
 #include <DataManager/DataManager.h>
 #include <TexMol/RendererSet.h>
 #include <string>
-#include <qstring.h>
+#include <QString>
 #include <cmath>
 
 class F2DockAnimator

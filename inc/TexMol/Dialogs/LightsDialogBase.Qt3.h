@@ -115,11 +115,11 @@ public:
         LightsDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(LightsDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         Horizontal_Spacing2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -145,7 +145,7 @@ public:
         m_AttenuationGroupBox->setObjectName(QString::fromUtf8("m_AttenuationGroupBox"));
         m_AttenuationGroupBox->setColumnLayout(0, Qt::Vertical);
         m_AttenuationGroupBox->layout()->setSpacing(6);
-        m_AttenuationGroupBox->layout()->setMargin(11);
+        m_AttenuationGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(m_AttenuationGroupBox->layout());
         if (boxlayout)
@@ -196,7 +196,7 @@ public:
         m_SpotLightGroupBox->setObjectName(QString::fromUtf8("m_SpotLightGroupBox"));
         m_SpotLightGroupBox->setColumnLayout(0, Qt::Vertical);
         m_SpotLightGroupBox->layout()->setSpacing(6);
-        m_SpotLightGroupBox->layout()->setMargin(11);
+        m_SpotLightGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(m_SpotLightGroupBox->layout());
         if (boxlayout1)
@@ -265,7 +265,7 @@ public:
         m_ColorsGroupBox->setObjectName(QString::fromUtf8("m_ColorsGroupBox"));
         m_ColorsGroupBox->setColumnLayout(0, Qt::Vertical);
         m_ColorsGroupBox->layout()->setSpacing(6);
-        m_ColorsGroupBox->layout()->setMargin(11);
+        m_ColorsGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout3 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(m_ColorsGroupBox->layout());
         if (boxlayout2)
@@ -377,7 +377,7 @@ public:
         m_PositionGroupBox->setObjectName(QString::fromUtf8("m_PositionGroupBox"));
         m_PositionGroupBox->setColumnLayout(0, Qt::Vertical);
         m_PositionGroupBox->layout()->setSpacing(6);
-        m_PositionGroupBox->layout()->setMargin(11);
+        m_PositionGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(m_PositionGroupBox->layout());
         if (boxlayout3)
@@ -507,7 +507,7 @@ class LightsDialogBase : public QDialog, public Ui::LightsDialogBase
     Q_OBJECT
 
 public:
-    LightsDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    LightsDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~LightsDialogBase();
 
 public slots:

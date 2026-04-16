@@ -34,7 +34,7 @@
 
 using namespace std;
 
-RerankDialog::RerankDialog(QWidget *parent,Qt::WFlags flags) 
+RerankDialog::RerankDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::rerankUI;
@@ -102,7 +102,7 @@ void RerankDialog::updateDialog()
 
 void RerankDialog::inputFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load Input File", QString::null, "INP (*.inp)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load Input File", QString(), "INP (*.inp)");
 
 	if(!filename.isNull()) 
 	{
@@ -118,7 +118,7 @@ void RerankDialog::inputFileNameSlot()
 
 void RerankDialog::receptorPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull()) 
 	{
@@ -133,7 +133,7 @@ void RerankDialog::receptorPDBFileNameSlot()
 
 void RerankDialog::ligandPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull()) 
 	{
@@ -148,7 +148,7 @@ void RerankDialog::ligandPDBFileNameSlot()
 
 void RerankDialog::receptorPQRFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PQR File", QString::null, "PQR (*.pqr)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PQR File", QString(), "PQR (*.pqr)");
 
 	if(!filename.isNull()) 
 	{
@@ -163,7 +163,7 @@ void RerankDialog::receptorPQRFileNameSlot()
 
 void RerankDialog::ligandPQRFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PQR File", QString::null, "PQR (*.pqr)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PQR File", QString(), "PQR (*.pqr)");
 
 	if(!filename.isNull()) 
 	{
@@ -178,7 +178,7 @@ void RerankDialog::ligandPQRFileNameSlot()
 
 void RerankDialog::receptorRAWNFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor RAWN File", QString::null, "RAWN (*.rawn)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor RAWN File", QString(), "RAWN (*.rawn)");
 
 	if(!filename.isNull()) 
 	{
@@ -193,7 +193,7 @@ void RerankDialog::receptorRAWNFileNameSlot()
 
 void RerankDialog::ligandRAWNFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand RAWN File", QString::null, "RAWN (*.rawn)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand RAWN File", QString(), "RAWN (*.rawn)");
 
 	if(!filename.isNull()) 
 	{
@@ -208,7 +208,7 @@ void RerankDialog::ligandRAWNFileNameSlot()
 
 void RerankDialog::receptorQuadFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor Quad File", QString::null, "Quad (*.quad)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor Quad File", QString(), "Quad (*.quad)");
 
 	if(!filename.isNull()) 
 	{
@@ -223,7 +223,7 @@ void RerankDialog::receptorQuadFileNameSlot()
 
 void RerankDialog::ligandQuadFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand Quad File", QString::null, "Quad (*.quad)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand Quad File", QString(), "Quad (*.quad)");
 
 	if(!filename.isNull()) 
 	{
@@ -238,7 +238,7 @@ void RerankDialog::ligandQuadFileNameSlot()
 
 void RerankDialog::dockingOutputFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load Docking Output File", QString::null, "Out (*.out)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load Docking Output File", QString(), "Out (*.out)");
 
 	if(!filename.isNull())
 	{

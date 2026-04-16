@@ -162,7 +162,7 @@ class MainWindow : public QMainWindow
 		F2DockMasterDialog *masterDial;
 
 	public:
-		MainWindow(QWidget* parent = 0, const char* name = 0, Qt::WFlags f = Qt::WType_TopLevel);
+		MainWindow(QWidget* parent = nullptr, const char* name = 0, Qt::WindowFlags f = Qt::Window);
 		virtual ~MainWindow();
 
 	public slots:
@@ -408,6 +408,7 @@ class MainWindow : public QMainWindow
     		QMenu *menuAnimation;
     		QMenu *menuOptions;
     		QMenu *m_Menu_LightingPopup;
+		QList<QAction*> m_LightActions;
     		QMenu *menuUtilities;
     		QMenu *menuHelp;
 		//*****************************

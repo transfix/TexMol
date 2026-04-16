@@ -41,7 +41,7 @@ class RerankDialog : public QDialog
 {
   Q_OBJECT
   public:
-  RerankDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  RerankDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   virtual ~RerankDialog();
 
   // get methods

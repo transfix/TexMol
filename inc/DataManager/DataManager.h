@@ -29,12 +29,12 @@
 #include <UsefulMath/Ray.h>
 #include <DataManager/BoundingBox.h>
 #include <OpenGL_Viewer/View.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <q3ptrlist.h>
-#include <qwidget.h>
-#include <q3textedit.h>
-#include <qlabel.h>
+#include <QString>
+#include <QStringList>
+#include <QWidget>
+#include <QTextEdit>
+#include <QLabel>
+#include <QList>
 //Added by qt3to4:
 #include <QMouseEvent>
 
@@ -44,7 +44,7 @@
 #include <GL/gl.h>
 #endif
 
-class Q3ListBox;
+class QListWidget;
 class VolumeRendererExtn;
 class SplattingRendererExtn;
 class GLImposter;
@@ -72,7 +72,7 @@ static QString strDataTypes[26] =
 class DataManager
 {
 	public:
-		DataManager(QSProject* qSProject, QWidget* parentWidget, Q3ListBox* dataSetsListBox,
+	DataManager(QSProject* qSProject, QWidget* parentWidget, QListWidget* dataSetsListBox,
 					bool renderGlobalBoundingBox, bool renderDataBoundingBox, RendererSet* rendererSet);
 		virtual ~DataManager();
 		virtual void init();
@@ -139,7 +139,7 @@ class DataManager
 
 	public slots:
 		void functionChangedSlot();
-		bool updateGL();
+		bool update();
 		void globalBoundingBoxSlot(bool);
 		void dataBoundingBoxSlot(bool);
 
@@ -147,18 +147,18 @@ class DataManager
 		GLImposter* m_GLImposter;
 		VolumeRendererExtn* m_VolumeRendererExtn;
 		SplattingRendererExtn* m_SplattingRendererExtn;
-		Q3PtrList<DataSetMap> m_DataSetMapList;
+		QList<DataSetMap*> m_DataSetMapList;
 		int m_CurrentDataType;
 		int m_CurrentDataSet;
-		Q3PtrList<BallAndStickData> m_BallAndStickDataArray;
-		Q3PtrList<VolumeData> m_ScalarVolumeArray;
-		Q3PtrList<VolumeData> m_VectorVolumeArray;
-		Q3PtrList<SurfaceData> m_SurfaceArray;
-		Q3PtrList<SecondaryStructureData> m_SecondaryStructureArray;
-		Q3PtrList<NURBSData> m_NURBSArray;
+		QList<BallAndStickData*> m_BallAndStickDataArray;
+		QList<VolumeData*> m_ScalarVolumeArray;
+		QList<VolumeData*> m_VectorVolumeArray;
+		QList<SurfaceData*> m_SurfaceArray;
+		QList<SecondaryStructureData*> m_SecondaryStructureArray;
+		QList<NURBSData*> m_NURBSArray;
 		bool m_Initialized;
 		int m_CurrentRendererId;
-		Q3ListBox* m_DataSetsListBox;
+		QListWidget* m_DataSetsListBox;
 		int m_SelectedIndex;
 		BoundingBox m_GlobalBoundingBox;
 		bool m_RenderGlobalBoundingBox;

@@ -20,7 +20,7 @@
 */
 // BallAndStickData.cpp: implementation of the BallAndStickData class.
 
-#include <q3filedialog.h>
+#include <QFileDialog>
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlineedit.h>
@@ -40,7 +40,7 @@
 #include <PDBParser/Atom.h>
 #include <DataManager/DataManager.h>
 #include <PDBParser/ResidueHeader.h>
-#include "../../../inc/DataManager/BallAndStickDataManager/AnglesDialog.Qt3.h"
+// AnglesDialog.Qt3.h removed — needs Qt6 port
 #include <ObjectRenderer/TransformationParameters.h>
 #include <ObjectRenderer/Sphere/SphereRenderer.h>
 #include <DataManager/BallAndStickDataManager/ColorLegend.h>
@@ -176,7 +176,7 @@ void BallAndStickData::renderEnabledSlot(bool render)
 {
 	AbstractData::renderEnabledSlot(render);
 	prepareRenderer();
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 void BallAndStickData::setVisibilityInPropertiesWidget()
@@ -195,7 +195,7 @@ void BallAndStickData::structureLODSlot(int index)
 	// here we also need to do something about the combo box items
 	m_ObjectLod = index;
 	prepareRenderer();
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 void BallAndStickData::colorLODSlot(int index)
@@ -236,9 +236,11 @@ void BallAndStickData::colorLODSlot(int index)
 
 
   prepareRenderer();
-  m_DataManager->updateGL();
+  m_DataManager->update();
 }
 
+// AnglesDialog is Qt3-only; stub until ported
+#if 0
 void recursivePlotAngles(AnglesDialog* anglesDialog, PDBParser::GroupOfAtoms* molecule)
 {
 	int i;
@@ -266,6 +268,12 @@ bool BallAndStickData::plotAnglesSlot()
 	anglesDialog->show();
 	return true;
 }
+#else
+bool BallAndStickData::plotAnglesSlot()
+{
+	return false; // AnglesDialog not yet ported to Qt6
+}
+#endif
 
 bool BallAndStickData::getAtomColorRadius(PDBParser::Atom* atom, GLfloat* r, GLfloat* g, GLfloat* b, GLfloat* radius, int colorLOD)
 {
@@ -1291,7 +1299,7 @@ void BallAndStickData::selectFunctionSlot()
 
 	QString m_Filter = "";
 	m_Filter.append("Volume files (*.rawiv *.rawv);; Rawiv (*.rawiv);; RawV (*.rawv);; All files (*.*)");
-	QString fileName = Q3FileDialog::getOpenFileName("../DataSet", m_Filter);
+	QString fileName = QFileDialog::getOpenFileName(nullptr, "Open", "../DataSet", m_Filter);
 /*Q3Err:C
 	if(fileName != 0)
 */
@@ -1301,7 +1309,7 @@ void BallAndStickData::selectFunctionSlot()
 		SimpleVolumeData* simpleVolumeData = 0;
 		{
 			VolumeLoader* vLoader = new VolumeLoader();
-			simpleVolumeData = vLoader->loadFile(fileName.latin1());
+			simpleVolumeData = vLoader->loadFile(fileName.toLatin1().constData());
 			delete vLoader;
 
 			if(!simpleVolumeData)
@@ -1349,7 +1357,7 @@ void BallAndStickData::selectColorMapSlot()
 
 	QString m_Filter = "";
 	m_Filter.append("Color map files (*.txt *.cmap);; All files (*.*)");
-	QStringList colorMapfileNames = Q3FileDialog::getOpenFileNames(m_Filter, "../DataSet");
+	QStringList colorMapfileNames = QFileDialog::getOpenFileNames(nullptr, "Open", "../DataSet", m_Filter);
 
 	if(colorMapfileNames.size() < 1)
 	{
@@ -1371,7 +1379,7 @@ void BallAndStickData::selectColorMapSlot()
 		}
 
 		PDBParser::GOAColor* goaColor = new PDBParser::GOAColor();
-		goaColor->parseColormapFile((char*)(colorMapfileNames[i].latin1()));
+		goaColor->parseColormapFile((char*)(colorMapfileNames[i].toLatin1().constData()));
 		goaColor->ApplyColormap(m_GroupOfAtoms[i]);
 		delete goaColor;
 		m_BallAndStickRenderingProperties->_ui->m_LineEdit_ColorMap->setText(colorMapfileNames[0]);
@@ -1402,7 +1410,7 @@ QString BallAndStickData::getSelection(CCVOpenGLMath::Ray targetVector)
 							QString::number(selectedAtom->getResidueNum()) +
 							QString::number(selectedAtom->getChain()) +
 							m_FileName;
-		//fprintf(stderr, "Got an atom %s\n", selString.latin1());
+		//fprintf(stderr, "Got an atom %s\n", selString.toLatin1().constData());
 		return selString;
 	}
 
@@ -1412,7 +1420,7 @@ QString BallAndStickData::getSelection(CCVOpenGLMath::Ray targetVector)
 void BallAndStickData::solventRadiusSlot(bool useSolventRadii)
 {
 	prepareRenderer();
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 // see if the solvent enlarged radius is enabled.
@@ -1450,7 +1458,7 @@ bool BallAndStickData::read(QStringList fileNames)
 		return false;
 	}
 
-	const char* fileName = (fileNames[0]).latin1();
+	const char* fileName = (fileNames[0]).toLatin1().constData();
 
 	{
 		std::vector<PDBParser::GroupOfAtoms*>::iterator iter = m_GroupOfAtoms.begin(), end = m_GroupOfAtoms.end();
@@ -1468,7 +1476,7 @@ bool BallAndStickData::read(QStringList fileNames)
 	for(i=0; i<fileNames.size(); i++)
 	{
 		GOALoader* goaLoader = new GOALoader();
-		m_GroupOfAtoms.push_back(goaLoader->loadFile(fileNames[i].latin1()));
+		m_GroupOfAtoms.push_back(goaLoader->loadFile(fileNames[i].toLatin1().constData()));
 
 		if(!m_GroupOfAtoms[i])
 		{
@@ -1491,15 +1499,15 @@ bool BallAndStickData::read(QStringList fileNames)
 	{
 		if(m_GroupOfAtoms.size() > 1)
 		{
-			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMinValue(0);
-			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMaxValue(m_GroupOfAtoms.size()-1);
+			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMinimum(0);
+			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMaximum(m_GroupOfAtoms.size()-1);
 			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setTickInterval(1);
 			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setEnabled(true);
 		}
 		else
 		{
-			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMinValue(0);
-			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMaxValue(0);
+			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMinimum(0);
+			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setMaximum(0);
 			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setTickInterval(1);
 			m_BallAndStickRenderingProperties->_ui->m_Slider_Frame->setEnabled(false);
 		}
@@ -1560,15 +1568,15 @@ void BallAndStickData::clipValueChangedSlot(int value)
 		return;
 	}
 
-	int minVal = m_BallAndStickRenderingProperties->_ui->m_Slider_Clip->minValue();
-	int maxVal = m_BallAndStickRenderingProperties->_ui->m_Slider_Clip->maxValue();
+	int minVal = m_BallAndStickRenderingProperties->_ui->m_Slider_Clip->minimum();
+	int maxVal = m_BallAndStickRenderingProperties->_ui->m_Slider_Clip->maximum();
 	int clamped = (value>minVal ? value : minVal);
 	clamped = (clamped<maxVal ? clamped: maxVal);
 	m_ClippingPlane = (double)clamped/((double)(maxVal - minVal));
 
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 
@@ -1618,7 +1626,7 @@ void BallAndStickData::frameValueChangedSlot(int value)
 
 	prepareRenderer();
 	// if( m_ColorMapInterface && m_GroupOfAtoms.size() > m_Frame ) m_ColorMapInterface->setGOAData( m_GroupOfAtoms[m_Frame] );
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 bool BallAndStickData::getMinMax(float* min, float* max)
@@ -1652,7 +1660,7 @@ void BallAndStickData::colorMapInterfaceSlot()
 void BallAndStickData::resetRenderer()
 {
 	prepareRenderer();
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 double BallAndStickData::correlate()
@@ -1820,7 +1828,7 @@ void BallAndStickData::roverExploringSlot()
 	// powei recompute the surface
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 
@@ -1841,20 +1849,20 @@ void BallAndStickData::roverReleasedSlot()
 	//BlurMapsDataManager::flattenGOA(m_GroupOfAtoms[m_Frame], m_AtomList, 0, 0, 0, 0, VDV_RADIUS, PDBParser::ATOM_TYPE  );
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 
 void BallAndStickData::replicateSlot()
 {
-	QString transFile = Q3FileDialog::getOpenFileName("", "Transformations (*.txt);;All files (*.*)");
+	QString transFile = QFileDialog::getOpenFileName(nullptr, "Open", QString(), "Transformations (*.txt);;All files (*.*)");
 
 	if(transFile.length() < 1)
 	{
 		return;
 	}
 
-	readTransformations(transFile.latin1());
+	readTransformations(transFile.toLatin1().constData());
 }
 
 bool BallAndStickData::parseAnimationCommand(QStringList commands, int curCommand)

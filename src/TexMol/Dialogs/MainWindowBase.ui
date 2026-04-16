@@ -131,7 +131,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
-         <widget class="Q3ListBox" name="m_DataSetsListBox">
+         <widget class="QListWidget" name="m_DataSetsListBox">
           <property name="minimumSize">
            <size>
             <width>118</width>
@@ -177,15 +177,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Q3Frame</class>
+   <class>QFrame</class>
    <extends>QFrame</extends>
-   <header>Qt3Support/Q3Frame</header>
+   <header>Qt3Support/QFrame</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Q3ListBox</class>
-   <extends>Q3Frame</extends>
-   <header>q3listbox.h</header>
+   <class>QListWidget</class>
+   <extends>QFrame</extends>
+   <header>QListWidget</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -33,7 +33,7 @@ class GLControlWidget : public QGLWidget
 		Q_OBJECT
 
 	public:
-		GLControlWidget(QWidget* parent, const char* name = 0, QGLWidget* share = 0, Qt::WFlags f = 0);
+		GLControlWidget(QWidget* parent, const char* name = nullptr, QGLWidget* share = nullptr, Qt::WindowFlags f = {});
 		~GLControlWidget() {}
 		virtual void	transform();
 

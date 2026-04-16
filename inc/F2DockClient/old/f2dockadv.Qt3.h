@@ -89,7 +89,7 @@ public:
         skinGB = new Q3GroupBox(F2DockAdv);
         skinGB->setObjectName(QString::fromUtf8("skinGB"));
         skinGB->setGeometry(QRect(20, 10, 390, 180));
-        skinGB->setMargin(0);
+        skinGB->setContentsMargins(0, 0, 0, 0);
         SLS_CB = new QCheckBox(skinGB);
         SLS_CB->setObjectName(QString::fromUtf8("SLS_CB"));
         SLS_CB->setGeometry(QRect(290, 20, 16, 20));
@@ -131,7 +131,7 @@ public:
         fftGB = new Q3GroupBox(F2DockAdv);
         fftGB->setObjectName(QString::fromUtf8("fftGB"));
         fftGB->setGeometry(QRect(20, 210, 390, 90));
-        fftGB->setMargin(0);
+        fftGB->setContentsMargins(0, 0, 0, 0);
         NBF_CB = new QCheckBox(fftGB);
         NBF_CB->setObjectName(QString::fromUtf8("NBF_CB"));
         NBF_CB->setGeometry(QRect(290, 20, 16, 20));
@@ -151,7 +151,7 @@ public:
         rotGB = new Q3GroupBox(F2DockAdv);
         rotGB->setObjectName(QString::fromUtf8("rotGB"));
         rotGB->setGeometry(QRect(20, 320, 390, 120));
-        rotGB->setMargin(0);
+        rotGB->setContentsMargins(0, 0, 0, 0);
         RRI_CB = new QCheckBox(rotGB);
         RRI_CB->setObjectName(QString::fromUtf8("RRI_CB"));
         RRI_CB->setGeometry(QRect(290, 20, 16, 20));
@@ -180,7 +180,7 @@ public:
         clashGB->setGeometry(QRect(450, 180, 390, 130));
         clashGB->setFrameShape(Q3GroupBox::GroupBoxPanel);
         clashGB->setFrameShadow(Q3GroupBox::Sunken);
-        clashGB->setMargin(0);
+        clashGB->setContentsMargins(0, 0, 0, 0);
         CF_CB = new QCheckBox(clashGB);
         CF_CB->setObjectName(QString::fromUtf8("CF_CB"));
         CF_CB->setGeometry(QRect(290, 20, 16, 20));
@@ -207,7 +207,7 @@ public:
         miscGB = new Q3GroupBox(F2DockAdv);
         miscGB->setObjectName(QString::fromUtf8("miscGB"));
         miscGB->setGeometry(QRect(450, 330, 390, 110));
-        miscGB->setMargin(0);
+        miscGB->setContentsMargins(0, 0, 0, 0);
         MSC_CB = new QCheckBox(miscGB);
         MSC_CB->setObjectName(QString::fromUtf8("MSC_CB"));
         MSC_CB->setGeometry(QRect(290, 20, 16, 20));
@@ -219,7 +219,7 @@ public:
         vdwGB = new Q3GroupBox(F2DockAdv);
         vdwGB->setObjectName(QString::fromUtf8("vdwGB"));
         vdwGB->setGeometry(QRect(450, 10, 390, 150));
-        vdwGB->setMargin(0);
+        vdwGB->setContentsMargins(0, 0, 0, 0);
         vdwCutoffLabel = new QLabel(vdwGB);
         vdwCutoffLabel->setObjectName(QString::fromUtf8("vdwCutoffLabel"));
         vdwCutoffLabel->setGeometry(QRect(17, 50, 124, 20));
@@ -253,7 +253,7 @@ public:
         hbondGB = new Q3GroupBox(F2DockAdv);
         hbondGB->setObjectName(QString::fromUtf8("hbondGB"));
         hbondGB->setGeometry(QRect(20, 460, 390, 90));
-        hbondGB->setMargin(0);
+        hbondGB->setContentsMargins(0, 0, 0, 0);
         HBW_TB = new QLineEdit(hbondGB);
         HBW_TB->setObjectName(QString::fromUtf8("HBW_TB"));
         HBW_TB->setGeometry(QRect(290, 20, 70, 22));
@@ -367,7 +367,7 @@ class F2DockAdv : public QDialog, public Ui::F2DockAdv
     Q_OBJECT
 
 public:
-    F2DockAdv(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    F2DockAdv(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~F2DockAdv();
 
 public slots:

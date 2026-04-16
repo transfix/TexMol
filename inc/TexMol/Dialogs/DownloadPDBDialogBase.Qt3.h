@@ -66,11 +66,11 @@ public:
         DownloadPDBDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(DownloadPDBDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         buttonHelp = new QPushButton(DownloadPDBDialogBase);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
@@ -181,7 +181,7 @@ class DownloadPDBDialogBase : public QDialog, public Ui::DownloadPDBDialogBase
     Q_OBJECT
 
 public:
-    DownloadPDBDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    DownloadPDBDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~DownloadPDBDialogBase();
 
 protected slots:

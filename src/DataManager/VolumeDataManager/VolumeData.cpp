@@ -23,7 +23,7 @@
 #include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
-#include <q3filedialog.h>
+#include <QFileDialog>
 #include <qmessagebox.h>
 #include <qradiobutton.h>
 #include <qslider.h>
@@ -163,7 +163,7 @@ bool VolumeData::read(QStringList fileNames)
 		return false;
 	}
 
-	const char* fileName = (fileNames[0]).latin1();
+	const char* fileName = (fileNames[0]).toLatin1().constData();
 
 	delete m_SimpleVolumeData;
 
@@ -233,7 +233,7 @@ void VolumeData::functionChangedSlot()
 		isocontourChangedSlot();
 
 		loadColorMap();
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 
@@ -370,7 +370,7 @@ void VolumeData::isocontourNodeDeletedSlot(int index)
 
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 
 	if(m_CurrentIsocontourSelected == index)
@@ -393,7 +393,7 @@ void VolumeData::isocontourNodeChangedSlot(int index, double isovalue, double R,
 	}
 
 	m_MultiContour->setIsovalue(index, isovalue*255.0);
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 void VolumeData::isocontourNodeColorChangedSlot(int node, double R, double G, double B)
@@ -404,7 +404,7 @@ void VolumeData::isocontourNodeColorChangedSlot(int node, double R, double G, do
 	}
 
 	m_MultiContour->setColor(node, R,G,B);
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 void VolumeData::renderEnabledSlot(bool enabled)
@@ -519,14 +519,14 @@ void VolumeData::isocontourNodeSavedSlot()
 	QString filter;
 	string s = loader.getSaveFilterString() + ";;C2C (*.c2c)";
 	QString fileExtensionsSupported = (QString)(s.c_str());
-	QString filename = Q3FileDialog::getSaveFileName(QString::null, fileExtensionsSupported, NULL, "Save As", "Save As", &filter);
-	string str_filename = (string)(filename.latin1());
-	string str_filter = (string)(filter.latin1());
+	QString filename = QFileDialog::getSaveFileName(nullptr, "Save As", QString(), fileExtensionsSupported, &filter);
+	string str_filename = (string)(filename.toLatin1().constData());
+	string str_filter = (string)(filter.toLatin1().constData());
 
 	if(!filename.isNull())
 	{
 		//////// if c2c , save using c2c code ///////
-		if(strstr(filter, "c2c"))
+		if(filter.contains("c2c"))
 		{
 			if(!m_SimpleVolumeData)
 			{
@@ -565,7 +565,7 @@ void VolumeData::isocontourNodeSavedSlot()
 			unsigned char type = 2;
 			float isoval = 0.5;
 			writeC2CFile(data, red, green,
-						 blue, type, filename.latin1(),
+						 blue, type, filename.toLatin1().constData(),
 						 isoval, dim, orig, span);
 			return;
 		}
@@ -768,15 +768,15 @@ void VolumeData::clipValueChangedSlot(int value)
 	{
 		return;
 	}
-	int minVal = m_VolumeRenderingProperties->_ui->m_ClipSlider->minValue();
-	int maxVal = m_VolumeRenderingProperties->_ui->m_ClipSlider->maxValue();
+	int minVal = m_VolumeRenderingProperties->_ui->m_ClipSlider->minimum();
+	int maxVal = m_VolumeRenderingProperties->_ui->m_ClipSlider->maximum();
 	int clamped = (value>minVal ? value : minVal);
 	clamped = (clamped<maxVal ? clamped: maxVal);
 	m_ClippingPlane = (double)clamped/((double)(maxVal - minVal));
 
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 
@@ -791,7 +791,7 @@ void VolumeData::transparencyValueChangedSlot(int value)
 
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 

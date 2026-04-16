@@ -27,7 +27,7 @@
 #include <qcolor.h>
 //Added by qt3to4:
 #include <QLabel>
-#include <Q3PtrList>
+#include <QList>
 #include <QGridLayout>
 
 class DataManager;
@@ -50,7 +50,7 @@ class RendererSet
 		void pan(int dx, int dy);
 		void setNewMousePos(int x, int y);
 		void resetCurrent();
-		void updateGL();
+		void update();
 		void showGrids(bool displayGrid);
 		void setViewType(int viewType, bool sync);
 		void setShiftPressed(bool shiftPressed);
@@ -87,7 +87,7 @@ class RendererSet
 		bool m_ShiftPressed;
 
 	protected:
-		Q3PtrList<RenderAreaWidget> m_RendererList;
+		QList<RenderAreaWidget*> m_RendererList;
 		bool m_ShowGrid;
 		bool m_Select;
 		QLabel* m_ViewInformationLabel;

@@ -1,24 +1,38 @@
 cmake_minimum_required(VERSION 3.16)
 
 # ===========================================================================
-# Phase 1: Modules REMOVED — fully replaced by libcvc
+# Internal compatibility libraries (restored from Phase 1 deletion)
+# These modules are kept as internal code until consumers are adapted
+# to use libcvc APIs directly.  Will be removed in future phases.
 # ===========================================================================
-# SimpleVolumeData    → cvc::voxels, cvc::volume
-# VolMagick           → cvc::volume_file_io
+ADD_SUBDIRECTORY(ByteOrder)
+ADD_SUBDIRECTORY(Utility)
+ADD_SUBDIRECTORY(SimpleVolumeData)
+ADD_SUBDIRECTORY(Geometry)
+ADD_SUBDIRECTORY(ComputeNormals)
+ADD_SUBDIRECTORY(GeometryFileTypes)
+ADD_SUBDIRECTORY(LBIE_lib)
+ADD_SUBDIRECTORY(SignDistanceFunction_v2)
+ADD_SUBDIRECTORY(VolumeFileTypes)
+ADD_SUBDIRECTORY(VolumeLibrary)
+ADD_SUBDIRECTORY(Contouring)
+ADD_SUBDIRECTORY(Contour)
+ADD_SUBDIRECTORY(XmlRPC)
+ADD_SUBDIRECTORY(libCG)
+ADD_SUBDIRECTORY(CVC)
+ADD_SUBDIRECTORY(VolMagick)
+
+# ===========================================================================
+# Phase 1: Modules FULLY REMOVED — replaced by libcvc
+# ===========================================================================
+# VolMagick           → cvc::volume_file_io (shim header in inc/)
 # VolumeFileTypes     → cvc::volume_file_io
 # VolumeLibrary       → cvc::algorithm + cvc::voxels filters
-# SignDistanceFunction    → cvc::sdf(SDF_V1)
-# SignDistanceFunction_v2 → cvc::sdf(SDF_V2)
+# SignDistanceFunction (v1) → cvc::sdf(SDF_V1)
 # Contouring          → cvc::iso()
 # Contour             → cvc::iso()
-# LBIE_lib            → cvc::iso(LBIE) via cvc-mesher
-# Geometry            → cvc::geometry
-# ComputeNormals      → cvc::geometry::calculate_surf_normals()
-# ByteOrder           → cvc::endians.h
 # CVC (App/State)     → cvc::app, cvc::state
-# Utility             → cvc::utility.h
 # XmlRPC              → deprecated; replaced by cvc serve (Phase 14)
-# GeometryFileTypes   → cvc::geometry_file_io
 # GraphicsPrimitives  → cvc::utility (affine, color)
 # ===========================================================================
 
@@ -50,7 +64,6 @@ ADD_SUBDIRECTORY(HLevelSet)
 ADD_SUBDIRECTORY(ImposterRenderer)
 ADD_SUBDIRECTORY(Interface)
 ADD_SUBDIRECTORY(levmar-2.5)
-ADD_SUBDIRECTORY(libCG)
 ADD_SUBDIRECTORY(MolecularCharacteristics)
 ADD_SUBDIRECTORY(Nurbs)
 ADD_SUBDIRECTORY(ObjectRenderer)

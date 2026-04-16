@@ -3,7 +3,7 @@
 
 // SecondaryStructureData.h: interface for the SecondaryStructureData class.
 
-#include <qstring.h>
+#include <QString>
 #include <qcolor.h>
 #include <vector>
 #include "../AbstractData.h"

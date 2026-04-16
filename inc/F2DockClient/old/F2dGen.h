@@ -20,7 +20,7 @@ class F2dGen : public f2dGen
 		bool paramsFound;
 
 	public:
-		F2dGen(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		F2dGen(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~F2dGen();
 		void prepareParams();
 		bool submitJob();

@@ -64,7 +64,7 @@ public:
         NURBSRenderingPropertiesBase->setMaximumSize(QSize(32767, 180));
         gridLayout = new QGridLayout(NURBSRenderingPropertiesBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
@@ -135,7 +135,7 @@ class NURBSRenderingPropertiesBase : public QWidget, public Ui::NURBSRenderingPr
     Q_OBJECT
 
 public:
-    NURBSRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = 0);
+    NURBSRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
     ~NURBSRenderingPropertiesBase();
 
 protected slots:

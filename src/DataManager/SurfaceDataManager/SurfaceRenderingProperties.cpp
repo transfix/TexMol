@@ -25,7 +25,7 @@
 #include <DataManager/SurfaceDataManager/SurfaceRenderingProperties.h>
 #include "qcombobox.h"
 
-SurfaceRenderingProperties::SurfaceRenderingProperties(QWidget* parent, const char* name, Qt::WFlags fl)
+SurfaceRenderingProperties::SurfaceRenderingProperties(QWidget* parent, const char* name, Qt::WindowFlags fl)
 	: QWidget(parent, fl)
 {
 	m_BaseBox = new QFrame(this);
@@ -43,5 +43,5 @@ SurfaceRenderingProperties::~SurfaceRenderingProperties()
 
 void SurfaceRenderingProperties::addNewRenderingTypeInOrder(const char* name, int index)
 {
-	_ui->m_ComboBox_SurfaceRenderingTypes->insertItem(name, index);
+	_ui->m_ComboBox_SurfaceRenderingTypes->insertItem(index, QString(name));
 }

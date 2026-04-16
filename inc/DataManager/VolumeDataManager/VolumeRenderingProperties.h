@@ -35,7 +35,7 @@ namespace Ui
 class VolumeRenderingProperties : public QWidget
 {
 	public:
-		VolumeRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
+		VolumeRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
 		virtual ~VolumeRenderingProperties();
 
 		CVCColorTable::ColorTable* m_ColorTable;

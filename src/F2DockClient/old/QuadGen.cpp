@@ -9,8 +9,8 @@
 #include "QuadGen.h"
 
 // Constructs a QuadGen which is a child of 'parent', with the name 'name' and widget flags set to 'f'
-// The dialog will by default be modeless, unless you set 'modal' to TRUE to construct a modal dialog.
-QuadGen::QuadGen(QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+// The dialog will by default be modeless, unless you set 'modal' to true to construct a modal dialog.
+QuadGen::QuadGen(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: quadGen(parent, name, modal, fl)
 {
 	resultAvailable = false;

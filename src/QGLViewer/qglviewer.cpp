@@ -609,7 +609,7 @@ void QGLViewer::setDefaultMouseBindings() {
         (mh == FRAME) ? frameKeyboardModifiers : cameraKeyboardModifiers;
 
     setMouseBinding(modifiers, Qt::LeftButton, mh, ROTATE);
-    setMouseBinding(modifiers, Qt::MidButton, mh, ZOOM);
+    setMouseBinding(modifiers, Qt::MiddleButton, mh, ZOOM);
     setMouseBinding(modifiers, Qt::RightButton, mh, TRANSLATE);
 
     setMouseBinding(Qt::Key_R, modifiers, Qt::LeftButton, mh, SCREEN_ROTATE);
@@ -618,7 +618,7 @@ void QGLViewer::setDefaultMouseBindings() {
   }
 
   // Z o o m   o n   r e g i o n
-  setMouseBinding(Qt::ShiftModifier, Qt::MidButton, CAMERA, ZOOM_ON_REGION);
+  setMouseBinding(Qt::ShiftModifier, Qt::MiddleButton, CAMERA, ZOOM_ON_REGION);
 
   // S e l e c t
   setMouseBinding(Qt::ShiftModifier, Qt::LeftButton, SELECT);
@@ -626,7 +626,7 @@ void QGLViewer::setDefaultMouseBindings() {
   setMouseBinding(Qt::ShiftModifier, Qt::RightButton, RAP_FROM_PIXEL);
   // D o u b l e   c l i c k
   setMouseBinding(Qt::NoModifier, Qt::LeftButton, ALIGN_CAMERA, true);
-  setMouseBinding(Qt::NoModifier, Qt::MidButton, SHOW_ENTIRE_SCENE, true);
+  setMouseBinding(Qt::NoModifier, Qt::MiddleButton, SHOW_ENTIRE_SCENE, true);
   setMouseBinding(Qt::NoModifier, Qt::RightButton, CENTER_SCENE, true);
 
   setMouseBinding(frameKeyboardModifiers, Qt::LeftButton, ALIGN_FRAME, true);
@@ -1244,7 +1244,7 @@ static QString mouseButtonsString(Qt::MouseButtons b) {
     result += QGLViewer::tr("Left", "left mouse button");
     addAmpersand = true;
   }
-  if (b & Qt::MidButton) {
+  if (b & Qt::MiddleButton) {
     if (addAmpersand)
       result += " & ";
     result += QGLViewer::tr("Middle", "middle mouse button");
@@ -1800,7 +1800,7 @@ Mouse tab.
 \c Qt::AltModifier, \c Qt::ShiftModifier, \c Qt::MetaModifier). Possibly
 combined using the \c "|" operator.
 
-\p button is one of the Qt::MouseButtons (\c Qt::LeftButton, \c Qt::MidButton,
+\p button is one of the Qt::MouseButtons (\c Qt::LeftButton, \c Qt::MiddleButton,
 \c Qt::RightButton...).
 
 \p doubleClick indicates whether or not the user has to double click this button
@@ -3352,27 +3352,27 @@ void QGLViewer::toggleCameraMode() {
     camera()->frame()->stopSpinning();
 
     setMouseBinding(modifiers, Qt::LeftButton, CAMERA, MOVE_FORWARD);
-    setMouseBinding(modifiers, Qt::MidButton, CAMERA, LOOK_AROUND);
+    setMouseBinding(modifiers, Qt::MiddleButton, CAMERA, LOOK_AROUND);
     setMouseBinding(modifiers, Qt::RightButton, CAMERA, MOVE_BACKWARD);
 
     setMouseBinding(Qt::Key_R, modifiers, Qt::LeftButton, CAMERA, ROLL);
 
     setMouseBinding(Qt::NoModifier, Qt::LeftButton, NO_CLICK_ACTION, true);
-    setMouseBinding(Qt::NoModifier, Qt::MidButton, NO_CLICK_ACTION, true);
+    setMouseBinding(Qt::NoModifier, Qt::MiddleButton, NO_CLICK_ACTION, true);
     setMouseBinding(Qt::NoModifier, Qt::RightButton, NO_CLICK_ACTION, true);
 
     setWheelBinding(modifiers, CAMERA, MOVE_FORWARD);
   } else {
     // Should stop flyTimer. But unlikely and not easy.
     setMouseBinding(modifiers, Qt::LeftButton, CAMERA, ROTATE);
-    setMouseBinding(modifiers, Qt::MidButton, CAMERA, ZOOM);
+    setMouseBinding(modifiers, Qt::MiddleButton, CAMERA, ZOOM);
     setMouseBinding(modifiers, Qt::RightButton, CAMERA, TRANSLATE);
 
     setMouseBinding(Qt::Key_R, modifiers, Qt::LeftButton, CAMERA,
                     SCREEN_ROTATE);
 
     setMouseBinding(Qt::NoModifier, Qt::LeftButton, ALIGN_CAMERA, true);
-    setMouseBinding(Qt::NoModifier, Qt::MidButton, SHOW_ENTIRE_SCENE, true);
+    setMouseBinding(Qt::NoModifier, Qt::MiddleButton, SHOW_ENTIRE_SCENE, true);
     setMouseBinding(Qt::NoModifier, Qt::RightButton, CENTER_SCENE, true);
 
     setWheelBinding(modifiers, CAMERA, ZOOM);
@@ -3711,7 +3711,7 @@ This is the name of the XML file where saveStateToFile() saves the viewer state
 restoreStateFromFile() to restore this state later (usually in your init()
 method).
 
-Setting this value to \c QString::null will disable the automatic state file
+Setting this value to \c QString() will disable the automatic state file
 saving that normally occurs on exit.
 
 If more than one viewer are created by the application, this function will
@@ -3742,7 +3742,7 @@ Use restoreStateFromFile() to restore this viewer state.
 
 This method is automatically called when a viewer is closed (using Escape or
 using the window's upper right \c x close button). setStateFileName() to \c
-QString::null to prevent this. */
+QString() to prevent this. */
 void QGLViewer::saveStateToFile() {
   QString name = stateFileName();
 

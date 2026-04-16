@@ -23,12 +23,14 @@
 
 #include <qstringlist.h>
 #include <UsefulMath/Matrix.h>
-#include "TransformationsDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog TransformationsDialogBase;
 
 class TransformationsDialog : public TransformationsDialogBase
 {
 	public:
-		TransformationsDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		TransformationsDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~TransformationsDialog();
 		CCVOpenGLMath::Matrix getTransformations();
 		float getScale();

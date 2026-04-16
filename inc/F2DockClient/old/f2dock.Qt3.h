@@ -298,7 +298,7 @@ class F2Dock : public QDialog, public Ui::F2Dock
     Q_OBJECT
 
 public:
-    F2Dock(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    F2Dock(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~F2Dock();
 
 public slots:

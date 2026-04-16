@@ -62,7 +62,7 @@ public:
         layout5->setGeometry(QRect(10, 20, 510, 221));
         vboxLayout = new QVBoxLayout(layout5);
         vboxLayout->setSpacing(6);
-        vboxLayout->setMargin(11);
+        vboxLayout->setContentsMargins(11, 11, 11, 11);
         vboxLayout->setObjectName(QString::fromUtf8("vboxLayout"));
         vboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout = new QHBoxLayout();
@@ -88,7 +88,7 @@ public:
 
         hboxLayout1 = new QHBoxLayout();
         hboxLayout1->setSpacing(6);
-        hboxLayout1->setMargin(0);
+        hboxLayout1->setContentsMargins(0, 0, 0, 0);
         hboxLayout1->setObjectName(QString::fromUtf8("hboxLayout1"));
         Horizontal_Spacing2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -8860,7 +8860,7 @@ class AboutDialogBase : public QDialog, public Ui::AboutDialogBase
     Q_OBJECT
 
 public:
-    AboutDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    AboutDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~AboutDialogBase();
 
 protected slots:

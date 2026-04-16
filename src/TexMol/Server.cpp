@@ -18,12 +18,12 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <Qt3Support>	// by cha
+// Qt3Support removed
 
 #include <ColorTable2/ColorTable.h>
 
 #include <qfile.h>
-#include <q3textstream.h>
+#include <QTextStream>
 #include <TexMol/Dialogs/MainWindow.h>
 
 #include <Blurmaps/AreaVolume.h>
@@ -55,7 +55,7 @@
 #include <PDBParser/GroupOfAtoms.h>
 #include <PDBParser/MoleculeMorph.h>
 #include <Pocket/Pocket.h>
-#include <SignDistanceFunction/sdfLib.h>
+// #include <SignDistanceFunction/sdfLib.h> // removed in Phase 1
 #include <SimpleVolumeData/SimpleVolumeData.h>
 #include <SimpleVolumeData/SimpleVolumeDataIsocontourer.h>
 #include <stdio.h>
@@ -71,8 +71,10 @@
 #include <UsefulMath/Quaternion.h>
 #include <UsefulMath/Vector.h>
 #include <VolumeFileTypes/VolumeLoader.h>
-#include <VolMagick/VolMagick.h>
-#include <MolSurfAPI/pqr.h>
+// VolMagick disabled — depends on CVC/Types.h from libcvc
+// #include <VolMagick/VolMagick.h>
+// Disabled — depends on MOLECULE namespace from libCG
+// #include <MolSurfAPI/pqr.h>
 
 #include <F2DockClient/commandLineControl.h>
 
@@ -1872,7 +1874,8 @@ bool Server::getVolume(int argc, char* argv[])
 	}
 	// construct sdf function
 	int size = 64;
-	SimpleVolumeData* sData = SDFLibrary::getSDF(surfaceData->getGeometry(), size);
+// SDFLibrary disabled
+	SimpleVolumeData* sData = nullptr; // SDFLibrary::getSDF removed
 	if (!sData)
 	{
 		return false;
@@ -2739,7 +2742,8 @@ bool Server::getSignDistanceFunction(int argc, char* argv[])
 	{
 		return false;
 	}
-	SimpleVolumeData* sData = SDFLibrary::getSDF(geometry, size);
+// SDFLibrary disabled
+	SimpleVolumeData* sData = nullptr; // SDFLibrary::getSDF removed
 	if (!sData)
 	{
 		return false;
@@ -3858,73 +3862,7 @@ bool Server::quadGenRequest(int argc, char* argv[])
 
 bool Server::shrinkPQRintoSurface(int argc, char* argv[])
 {
-
-	if (argc != 7)
-	{
-		printUsage();
-		return false;
-	}
-
-	char inputPQRFileName[256];
-	char inputVolumeFileName[256];
-
-	char outputPQRFileName[256];
-	strcpy(inputPQRFileName, argv[2]);
-	FILE* fpqr = fopen(inputPQRFileName, "r");
-
-	strcpy(outputPQRFileName, argv[6]);
-	FILE* fsavepqr = fopen(outputPQRFileName, "w");
-
-	MOLECULE::RADIUS_TYPE radiusType;
-	radiusType = MOLECULE::PQR_RADIUS;
-
-
-	MOLECULE::GroupOfAtoms* molecule = ParsePQR(fpqr, radiusType );
-	fclose(fpqr);
-
-	VolMagick::Volume v;
-	VolMagick::readVolumeFile(v, string(argv[3]));
-
-	vector<VolMagick::Volume> gradient;
-	VolMagick::calcGradient(gradient, v);
-
-	float dx = atof(argv[5]);
-
-	float d_hls[3];
-	float abs_grad;
-	double p[3];
-
-	for(int i = 0; i< molecule->numOfAtoms; i++)
-	{
-		p[0] = molecule->m_Atoms[i]->position[0];
-		p[1] = molecule->m_Atoms[i]->position[1];
-		p[2] = molecule->m_Atoms[i]->position[2];
-
-		for(int iteration=0; iteration < atoi(argv[4]); iteration ++)
-		{
-
-			d_hls[0] = gradient[0].interpolate(p[0], p[1], p[2]);
-			d_hls[1] = gradient[1].interpolate(p[0], p[1], p[2]);
-			d_hls[2] = gradient[2].interpolate(p[0], p[1], p[2]);
-			
-			abs_grad = d_hls[0]*d_hls[0]+d_hls[1]*d_hls[1]+d_hls[2]*d_hls[2];
-			if(abs_grad >= 0.0001) {
-				d_hls[0] /= sqrtf(abs_grad);
-				d_hls[1] /= sqrtf(abs_grad);
-				d_hls[2] /= sqrtf(abs_grad);
-			}
-			p[0] -= dx*d_hls[0];
-			p[1] -= dx*d_hls[1];
-			p[2] -= dx*d_hls[2];
-		}
-
-		molecule->m_Atoms[i]->setPosition(p);
-
-//		cout<<molecule->m_Atoms[i]->radius << endl;
-			
-	}
-
-	savePQR(molecule, fsavepqr);
-	fclose(fsavepqr);
-	return 1;
+	// Disabled — requires VolMagick which depends on CVC/Types.h
+	fprintf(stderr, "shrinkPQRintoSurface: disabled (VolMagick dependency removed)\n");
+	return false;
 }

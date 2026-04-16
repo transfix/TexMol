@@ -18,7 +18,7 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <Qt3Support>	//by cha
+// Qt3Support removed
 
 #include <TexMol/Dialogs/MainWindow.h>
 #include <TexMol/Server.h>
@@ -37,7 +37,6 @@ int main(int argc, char** argv)
      {
       QApplication app(argc, argv);
       MainWindow mainwindow;
-      app.setMainWidget(&mainwindow);
       mainwindow.show();
       return app.exec();
        }

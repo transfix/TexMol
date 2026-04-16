@@ -43,7 +43,7 @@ class F2DockMasterDialog : public QDialog
 {
   Q_OBJECT
   public:
-  F2DockMasterDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  F2DockMasterDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   virtual ~F2DockMasterDialog();
 
   // get methods

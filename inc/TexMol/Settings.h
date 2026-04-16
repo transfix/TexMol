@@ -22,12 +22,12 @@
 #define CCV_TEXMOL_SETTINGS_H
 
 #include <qsettings.h>
-#include <qstring.h>
+#include <QString>
 #include <qstringlist.h>
 //Added by qt3to4:
-#include <Q3PopupMenu>
+#include <QMenu>
 
-class Q3PopupMenu;
+class QMenu;
 
 class Settings : public QSettings
 {
@@ -35,8 +35,8 @@ class Settings : public QSettings
 		Settings();
 		virtual ~Settings();
 		virtual int getNumberOfRecentFiles() const;
-		virtual void loadPreviousFiles(Q3PopupMenu* recentFilesPopupMenu, QWidget* parent);
-		virtual void pushRecentFile(QString filename, Q3PopupMenu* recentFilesPopupMenu, QWidget* parent);
+		virtual void loadPreviousFiles(QMenu* recentFilesPopupMenu, QWidget* parent);
+		virtual void pushRecentFile(QString filename, QMenu* recentFilesPopupMenu, QWidget* parent);
 		virtual bool userSettingsChanged();
 		virtual void saveUserSettings();
 		virtual void save();

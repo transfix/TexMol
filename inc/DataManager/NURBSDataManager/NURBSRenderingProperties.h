@@ -31,7 +31,7 @@ namespace Ui
 class NURBSRenderingProperties : public QWidget
 {
 	public:
-		NURBSRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
+		NURBSRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
 		virtual ~NURBSRenderingProperties();
 
 		Ui::NURBSRenderingPropertiesBase* _ui;

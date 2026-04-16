@@ -20,7 +20,7 @@
 */
 // BallAndStickData.h: interface for the BallAndStickData class.
 #include <qobject.h>
-#include <qstring.h>
+#include <QString>
 #include <vector>
 #include <DataManager/AbstractData.h>
 #include <UsefulMath/Ray.h>

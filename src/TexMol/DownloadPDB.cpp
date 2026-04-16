@@ -19,7 +19,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #include <qfile.h>
-#include <q3http.h>
+#include <QNetworkAccessManager>
 #include <q3network.h>
 #include <TexMol/DownloadPDB.h>
 

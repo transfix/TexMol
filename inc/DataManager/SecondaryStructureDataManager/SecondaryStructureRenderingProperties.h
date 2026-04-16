@@ -33,7 +33,7 @@ namespace Ui
 class SecondaryStructureRenderingProperties : public QWidget 
 {
 	public:
-		SecondaryStructureRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
+		SecondaryStructureRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
 		virtual ~SecondaryStructureRenderingProperties();
 		void addNewRenderingTypeInOrder(const char* name, int index);
 

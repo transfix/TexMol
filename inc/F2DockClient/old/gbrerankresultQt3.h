@@ -96,13 +96,13 @@ public:
         gbRerankResult->resize(1022, 693);
         gridLayout = new QGridLayout(gbRerankResult);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         JobDescriptionGB = new Q3ButtonGroup(gbRerankResult);
         JobDescriptionGB->setObjectName(QString::fromUtf8("JobDescriptionGB"));
         JobDescriptionGB->setColumnLayout(0, Qt::Vertical);
         JobDescriptionGB->layout()->setSpacing(6);
-        JobDescriptionGB->layout()->setMargin(11);
+        JobDescriptionGB->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(JobDescriptionGB->layout());
         if (boxlayout)
@@ -260,7 +260,7 @@ public:
         resultsSummaryBox->setObjectName(QString::fromUtf8("resultsSummaryBox"));
         resultsSummaryBox->setColumnLayout(0, Qt::Vertical);
         resultsSummaryBox->layout()->setSpacing(6);
-        resultsSummaryBox->layout()->setMargin(11);
+        resultsSummaryBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(resultsSummaryBox->layout());
         if (boxlayout1)
@@ -271,7 +271,7 @@ public:
         peaksGB->setObjectName(QString::fromUtf8("peaksGB"));
         peaksGB->setColumnLayout(0, Qt::Vertical);
         peaksGB->layout()->setSpacing(6);
-        peaksGB->layout()->setMargin(11);
+        peaksGB->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout3 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(peaksGB->layout());
         if (boxlayout2)
@@ -362,7 +362,7 @@ public:
         bestRMSDGB->setObjectName(QString::fromUtf8("bestRMSDGB"));
         bestRMSDGB->setColumnLayout(0, Qt::Vertical);
         bestRMSDGB->layout()->setSpacing(6);
-        bestRMSDGB->layout()->setMargin(11);
+        bestRMSDGB->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(bestRMSDGB->layout());
         if (boxlayout3)
@@ -409,7 +409,7 @@ public:
         bestRankGB->setObjectName(QString::fromUtf8("bestRankGB"));
         bestRankGB->setColumnLayout(0, Qt::Vertical);
         bestRankGB->layout()->setSpacing(6);
-        bestRankGB->layout()->setMargin(11);
+        bestRankGB->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout5 = new QGridLayout();
         QBoxLayout *boxlayout4 = qobject_cast<QBoxLayout *>(bestRankGB->layout());
         if (boxlayout4)
@@ -526,7 +526,7 @@ class gbRerankResult : public QDialog, public Ui::gbRerankResult
     Q_OBJECT
 
 public:
-    gbRerankResult(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    gbRerankResult(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~gbRerankResult();
 
 public slots:

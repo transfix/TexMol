@@ -18,7 +18,7 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <Qt3Support>	//by cha
+// Qt3Support removed
 #include <QFileDialog>
 
 #include <TexMol/Dialogs/ConstructCurvaturesDialog.h>
@@ -39,7 +39,7 @@
 #include <PDBParser/GroupOfAtoms.h>
 #include <GOAFileTypes/GOALoader.h>
 
-ConstructCurvaturesDialog::ConstructCurvaturesDialog(QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+ConstructCurvaturesDialog::ConstructCurvaturesDialog(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: ConstructCurvaturesDialogBase(parent, name, modal, fl)
 {
 }
@@ -149,10 +149,10 @@ bool ConstructCurvaturesDialog::constructCurvature()
 		}
 
 		QString inputIsocontourFileName = m_IsocontourFileLineEdit->text();
-		return BlurMapsDataManager::getCurvaturesFromIsocontourFile(inputPDBFileName.latin1(), dim1, dim2, dim3,
-				blobby, inputIsocontourFileName.latin1(), outputMeanCurvatureSurfaceFileName.latin1(),
-				outputGaussianCurvatureSurfaceFileName.latin1(),
-				outputMeanCurvatureFileName.latin1(),
+		return BlurMapsDataManager::getCurvaturesFromIsocontourFile(inputPDBFileName.toLatin1().constData(), dim1, dim2, dim3,
+				blobby, inputIsocontourFileName.toLatin1().constData(), outputMeanCurvatureSurfaceFileName.toLatin1().constData(),
+				outputGaussianCurvatureSurfaceFileName.toLatin1().constData(),
+				outputMeanCurvatureFileName.toLatin1().constData(),
 				numberOfGridDivisions, maxFunctionError, radiusType, PDBParser::ATOM_TYPE);
 	}
 	else
@@ -168,7 +168,7 @@ bool ConstructCurvaturesDialog::constructCurvature()
 		SimpleVolumeData* sData;
 		{
 			GOALoader* goaLoader = new GOALoader();
-			PDBParser::GroupOfAtoms* molecule = goaLoader->loadFile(inputPDBFileName.latin1());
+			PDBParser::GroupOfAtoms* molecule = goaLoader->loadFile(inputPDBFileName.toLatin1().constData());
 			delete goaLoader;
 
 			if(!molecule)
@@ -192,10 +192,10 @@ bool ConstructCurvaturesDialog::constructCurvature()
 		}
 
 		// get curvatures
-		return BlurMapsDataManager::getCurvatures(inputPDBFileName.latin1(), dim1, dim2, dim3,
-				blobby, geometry, outputMeanCurvatureSurfaceFileName.latin1(),
-				outputGaussianCurvatureSurfaceFileName.latin1(),
-				outputMeanCurvatureFileName.latin1(),
+		return BlurMapsDataManager::getCurvatures(inputPDBFileName.toLatin1().constData(), dim1, dim2, dim3,
+				blobby, geometry, outputMeanCurvatureSurfaceFileName.toLatin1().constData(),
+				outputGaussianCurvatureSurfaceFileName.toLatin1().constData(),
+				outputMeanCurvatureFileName.toLatin1().constData(),
 				numberOfGridDivisions, maxFunctionError, radiusType, PDBParser::ATOM_TYPE);
 	}
 

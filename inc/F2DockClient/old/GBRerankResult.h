@@ -35,7 +35,7 @@ class GBRerankResult : public gbRerankResult
 		bool getValues();
 
 	public:
-		GBRerankResult(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		GBRerankResult(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~GBRerankResult();
 		void setParams(RerankBasicParams* rbp);
 

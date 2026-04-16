@@ -72,7 +72,7 @@ class gbrerankresultdetails : public QDialog, public Ui::gbrerankresultdetails
     Q_OBJECT
 
 public:
-    gbrerankresultdetails(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    gbrerankresultdetails(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~gbrerankresultdetails();
 
 public slots:

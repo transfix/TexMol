@@ -90,11 +90,11 @@ public:
         MouseHandlerDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(MouseHandlerDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         Horizontal_Spacing2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -120,7 +120,7 @@ public:
         groupBox4->setObjectName(QString::fromUtf8("groupBox4"));
         groupBox4->setColumnLayout(0, Qt::Vertical);
         groupBox4->layout()->setSpacing(6);
-        groupBox4->layout()->setMargin(11);
+        groupBox4->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(groupBox4->layout());
         if (boxlayout)
@@ -338,7 +338,7 @@ class MouseHandlerDialogBase : public QDialog, public Ui::MouseHandlerDialogBase
     Q_OBJECT
 
 public:
-    MouseHandlerDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    MouseHandlerDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~MouseHandlerDialogBase();
 
 protected slots:

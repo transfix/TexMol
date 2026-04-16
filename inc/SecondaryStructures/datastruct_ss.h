@@ -558,6 +558,16 @@ class VC_cell : public Cb
 			}
 		}
 
+		// CGAL 5.x+ requires cell to provide circumcenter()
+		Point circumcenter(const Gt& gt = Gt()) const
+		{
+			return gt.construct_circumcenter_3_object()(
+				this->vertex(0)->point(),
+				this->vertex(1)->point(),
+				this->vertex(2)->point(),
+				this->vertex(3)->point());
+		}
+
 	private:
 		Point c_voronoi;
 		bool  c_cocone_flag[4];

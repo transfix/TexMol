@@ -39,7 +39,7 @@
 # include <GL/glu.h>
 #endif
 
-LightsDialog::LightsDialog(int light, LightSet* lightSet, QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+LightsDialog::LightsDialog(int light, LightSet* lightSet, QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: LightsDialogBase(parent, name, modal, fl)
 {
 	m_XPositionLineEdit->setValidator(new QDoubleValidator(this));

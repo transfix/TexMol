@@ -34,7 +34,7 @@
 
 using namespace std;
 
-DockDialog::DockDialog(QWidget *parent,Qt::WFlags flags) 
+DockDialog::DockDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::dockUI;
@@ -150,7 +150,7 @@ void DockDialog::updateDialog()
 
 void DockDialog::inputFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load Input File", QString::null, "INP (*.inp)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load Input File", QString(), "INP (*.inp)");
 
 	if(!filename.isNull()) 
 	{
@@ -166,7 +166,7 @@ void DockDialog::inputFileNameSlot()
 
 void DockDialog::rmsdFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load RMSD Atoms File", QString::null, "txt (*.txt)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load RMSD Atoms File", QString(), "txt (*.txt)");
 
 	if(!filename.isNull()) 
 	{
@@ -182,7 +182,7 @@ void DockDialog::rmsdFileNameSlot()
 
 void DockDialog::receptorPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull()) 
 	{
@@ -197,7 +197,7 @@ void DockDialog::receptorPDBFileNameSlot()
 
 void DockDialog::ligandPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull()) 
 	{
@@ -212,7 +212,7 @@ void DockDialog::ligandPDBFileNameSlot()
 
 void DockDialog::receptorPQRFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PQR File", QString::null, "PQR (*.pqr)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PQR File", QString(), "PQR (*.pqr)");
 
 	if(!filename.isNull()) 
 	{
@@ -227,7 +227,7 @@ void DockDialog::receptorPQRFileNameSlot()
 
 void DockDialog::ligandPQRFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PQR File", QString::null, "PQR (*.pqr)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PQR File", QString(), "PQR (*.pqr)");
 
 	if(!filename.isNull()) 
 	{
@@ -242,7 +242,7 @@ void DockDialog::ligandPQRFileNameSlot()
 
 void DockDialog::receptorF2dFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor F2d File", QString::null, "F2d (*.f2d)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor F2d File", QString(), "F2d (*.f2d)");
 
 	if(!filename.isNull()) 
 	{
@@ -257,7 +257,7 @@ void DockDialog::receptorF2dFileNameSlot()
 
 void DockDialog::ligandF2dFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand F2d File", QString::null, "F2d (*.f2d)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand F2d File", QString(), "F2d (*.f2d)");
 
 	if(!filename.isNull()) 
 	{
@@ -272,7 +272,7 @@ void DockDialog::ligandF2dFileNameSlot()
 
 void DockDialog::receptorRAWNFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor RAWN File", QString::null, "RAWN (*.rawn)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor RAWN File", QString(), "RAWN (*.rawn)");
 
 	if(!filename.isNull()) 
 	{
@@ -287,7 +287,7 @@ void DockDialog::receptorRAWNFileNameSlot()
 
 void DockDialog::ligandRAWNFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand RAWN File", QString::null, "RAWN (*.rawn)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand RAWN File", QString(), "RAWN (*.rawn)");
 
 	if(!filename.isNull()) 
 	{
@@ -302,7 +302,7 @@ void DockDialog::ligandRAWNFileNameSlot()
 
 void DockDialog::receptorQuadFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor Quad File", QString::null, "Quad (*.quad)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor Quad File", QString(), "Quad (*.quad)");
 
 	if(!filename.isNull()) 
 	{
@@ -317,7 +317,7 @@ void DockDialog::receptorQuadFileNameSlot()
 
 void DockDialog::ligandQuadFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand Quad File", QString::null, "Quad (*.quad)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand Quad File", QString(), "Quad (*.quad)");
 
 	if(!filename.isNull()) 
 	{

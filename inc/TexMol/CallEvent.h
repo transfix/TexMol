@@ -32,18 +32,17 @@
 #include <qapplication.h>
 #include <qevent.h>
 #include <qwidget.h>
-//Added by qt3to4:
-#include <QCustomEvent>
+
 #include <string>
 #include <vector>
 #include <boost/any.hpp>
 
-class CallEvent : public QCustomEvent
+class CallEvent : public QEvent
 {
 	public:
 		static const int TypeId = QEvent::User+256;
 		CallEvent(const std::string& funcName, const std::vector<boost::any>& args)
-			: QCustomEvent(TypeId), _funcName(funcName), _args(args) {}
+			: QEvent(static_cast<QEvent::Type>(TypeId)), _funcName(funcName), _args(args) {}
 		const std::string& funcName() const
 		{
 			return _funcName;
@@ -63,7 +62,7 @@ class CallEvent : public QCustomEvent
 			while ((w=it.current()) != 0)      // for each widget...
 			{
 				++it;
-				if (std::string(w->name()) == widgetName)
+				if (std::string(w->objectName().toStdString()) == widgetName)
 				{
 					call(w,funcName,args);
 				}
@@ -77,7 +76,7 @@ class CallEvent : public QCustomEvent
 			while ((w=list.back()) != 0)   // for each widget...
 			{
 				list.pop_back();
-				if (std::string(w->name()) == widgetName)
+				if (std::string(w->objectName().toStdString()) == widgetName)
 				{
 					call(w,funcName,args);
 				}

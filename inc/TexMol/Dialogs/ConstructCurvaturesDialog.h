@@ -21,13 +21,15 @@
 #ifndef CONSTRUCT_CURVATURES_DIALOG_H
 #define CONSTRUCT_CURVATURES_DIALOG_H
 
-#include "ConstructCurvaturesDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog ConstructCurvaturesDialogBase;
 
 class ConstructCurvaturesDialog : public ConstructCurvaturesDialogBase
 {
 		Q_OBJECT
 	public:
-		ConstructCurvaturesDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		ConstructCurvaturesDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~ConstructCurvaturesDialog();
 		bool constructCurvature();
 	public slots:

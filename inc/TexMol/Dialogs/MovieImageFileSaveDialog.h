@@ -21,12 +21,14 @@
 #ifndef MOVIE_IMAGE_FILE_SAVE_DIALOG_H
 #define MOVIE_IMAGE_FILE_SAVE_DIALOG_H
 
-#include "MovieImageFileSaveDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog MovieImageFileSaveDialogBase;
 
 class MovieImageFileSaveDialog : public MovieImageFileSaveDialogBase
 {
 	public:
-		MovieImageFileSaveDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		MovieImageFileSaveDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~MovieImageFileSaveDialog();
 		virtual void getSelectedFileNames(QString* animationFileName, QString* imageFileName, QString* formatSelected);
 

@@ -229,8 +229,8 @@ void write_sheet_wrl(Geometry* geom, char* filename)
 		fout<<geom->m_TriVerts[3*i+0] <<" " << geom->m_TriVerts[3*i+1] <<" " << geom->m_TriVerts[3*i+2] << endl;
 	fout<<"\t\t\t ]"<<endl;
 	fout<<"\t\t }" <<endl;
-	fout<<"\t solid FALSE" << endl;
-	fout<<"\t colorPerVertex TRUE" << endl;
+	fout<<"\t solid false" << endl;
+	fout<<"\t colorPerVertex true" << endl;
 	fout<<"\t\t color Color { " << endl;
 	fout<<"\t\t\t color [" <<endl;
 /*	map<int, int> mymap;
@@ -254,7 +254,7 @@ void write_sheet_wrl(Geometry* geom, char* filename)
 	 	fout<<mit->second <<" ";
 	}	
 	fout<<"\n\t\t ]"<<endl;
-*/   //Doesn't work. It seems it doesn't support colorPerVertex TRUE.
+*/   //Doesn't work. It seems it doesn't support colorPerVertex true.
 
 	for(int i = 0; i < geom->m_NumTriVerts; i++)
 		fout<<geom->m_TriVertColorsTransparent[4*i+0]<<" " << geom->m_TriVertColorsTransparent[4*i+1]<<" " << geom->m_TriVertColorsTransparent[4*i+2]<< endl;

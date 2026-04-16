@@ -26,6 +26,19 @@
 #include <qspinbox.h>
 #include <qslider.h>
 #include <qpushbutton.h>
+#include <QPalette>
+#include <QColorDialog>
+
+// Qt6 helper for setPaletteBackgroundColor
+static void setBtnBgColor(QPushButton* btn, const QColor& c) {
+	QPalette p = btn->palette();
+	p.setColor(QPalette::Button, c);
+	btn->setAutoFillBackground(true);
+	btn->setPalette(p);
+}
+static QColor getBtnBgColor(QPushButton* btn) {
+	return btn->palette().color(QPalette::Button);
+}
 
 #ifdef CVC_USE_QSA
 #include <qsproject.h>
@@ -225,7 +238,7 @@ void SecondaryStructureData::lineColorSlot()
 
 	if(color.isValid())
 	{
-		m_SecondaryStructureRenderingProperties->_ui->m_LineColorPushButton->setPaletteBackgroundColor(color);
+		setBtnBgColor(m_SecondaryStructureRenderingProperties->_ui->m_LineColorPushButton, color);
 		m_SheetGeometry->m_UniqueLineColors[0] = color.red()/255.0;
 		m_SheetGeometry->m_UniqueLineColors[1] = color.green()/255.0;
 		m_SheetGeometry->m_UniqueLineColors[2] = color.blue()/255.0;
@@ -234,17 +247,17 @@ void SecondaryStructureData::lineColorSlot()
 
 const QColor& SecondaryStructureData::getUserSelectedSecondaryStructureColor()
 {
-	return m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureColorPushButton->paletteBackgroundColor();
+	return getBtnBgColor(m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureColorPushButton);
 }
 
 const QColor& SecondaryStructureData::getUserSelectedLineColor()
 {
-	return m_SecondaryStructureRenderingProperties->_ui->m_LineColorPushButton->paletteBackgroundColor();
+	return getBtnBgColor(m_SecondaryStructureRenderingProperties->_ui->m_LineColorPushButton);
 }
 
 void SecondaryStructureData::setUserSelectedSecondaryStructureColor(const QColor& color)
 {
-	m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureColorPushButton->setPaletteBackgroundColor(color);
+	setBtnBgColor(m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureColorPushButton, color);
 }
 
 bool SecondaryStructureData::supportsFileNames(QStringList fileNames)
@@ -373,7 +386,7 @@ void SecondaryStructureData::renderTrianglesSlot()
 		m_HelixGeometry->m_RenderTriangles = m_SecondaryStructureRenderingProperties->_ui->m_RenderSecondaryStructureCheckBox->isChecked();
 	}
 
-	updateGL();
+	update();
 }
 
 
@@ -396,7 +409,7 @@ void SecondaryStructureData::renderLinesSlot()
 		m_HelixGeometry->m_RenderPoints = m_SecondaryStructureRenderingProperties->_ui->m_RenderLinesCheckBox->isChecked();
 	}
 
-	updateGL();
+	update();
 }
 
 void SecondaryStructureData::secondaryStructureColorTypeSlot()
@@ -416,7 +429,7 @@ void SecondaryStructureData::secondaryStructureColorTypeSlot()
 		m_SheetGeometry->m_UseTriangleColors = m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureColorCheckBox->isChecked();
 	}
 
-	updateGL();
+	update();
 }
 
 void SecondaryStructureData::lineColorTypeSlot()
@@ -431,7 +444,7 @@ void SecondaryStructureData::lineColorTypeSlot()
 		m_SheetGeometry->m_UseLineColors = m_SecondaryStructureRenderingProperties->_ui->m_LineColorCheckBox->isChecked();
 	}
 
-	updateGL();
+	update();
 }
 
 void SecondaryStructureData::lineThicknessChangedSlot(int thickness)
@@ -442,7 +455,7 @@ void SecondaryStructureData::lineThicknessChangedSlot(int thickness)
 		m_HelixGeometry->m_PointSize = thickness;
 	}
 
-	updateGL();
+	update();
 }
 
 void SecondaryStructureData::transparencySliderSlot(int value)
@@ -450,7 +463,7 @@ void SecondaryStructureData::transparencySliderSlot(int value)
 	// set the alpha component of SecondaryStructureColor
 	m_SecondaryStructureAlpha = value/100.0f;
 	// updateGL so user can track how the alpha changes look
-	updateGL();
+	update();
 }
 
 void SecondaryStructureData::rebuildGeometry(bool alphaHistogramChanged, bool betaHistogramChanged)
@@ -468,14 +481,14 @@ void SecondaryStructureData::rebuildGeometry(bool alphaHistogramChanged, bool be
 		// when we change the helix histogram, set the cylinders widget to max so we can see the updates
 		if(alphaHistogramChanged)
 		{
-			int max =  m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureAlphaSpinBox->maxValue();
+			int max =  m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureAlphaSpinBox->maximum();
 			m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureAlphaSpinBox->setValue(max);
 		}
 
 		// when we change the sheet histogram, set the sheet widget to max so we can see the updates
 		if(betaHistogramChanged)
 		{
-			int max =  m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureBetaSpinBox->maxValue();
+			int max =  m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureBetaSpinBox->maximum();
 			m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureBetaSpinBox->setValue(max);
 		}
 
@@ -527,7 +540,7 @@ void SecondaryStructureData::rebuildGeometry(bool alphaHistogramChanged, bool be
 		}
 	}
 	m_SpinBoxesInitialized = true;
-	updateGL();
+	update();
 #endif
 #endif
 }

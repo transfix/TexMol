@@ -30,7 +30,7 @@
 
 using namespace std;
 
-QuadGenDialog::QuadGenDialog(QWidget *parent,Qt::WFlags flags) 
+QuadGenDialog::QuadGenDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::quadGenUI;
@@ -71,7 +71,7 @@ void QuadGenDialog::init()
 
 void QuadGenDialog::receptorPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull())
 	{
@@ -86,7 +86,7 @@ void QuadGenDialog::receptorPDBFileNameSlot()
 
 void QuadGenDialog::ligandPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull()) 
 	{

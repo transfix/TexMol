@@ -34,7 +34,7 @@
 #include <PDBParser/CollectionData.h>
 #include <Blurmaps/BlurMapsDataManager.h>
 
-ConstructVolumes::ConstructVolumes(QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+ConstructVolumes::ConstructVolumes(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: ConstructVolumesDialogBase(parent, name, modal, fl)
 {
 }
@@ -148,7 +148,7 @@ bool ConstructVolumes::constructVolume(DataManager* dataManager, PDBParser::Grou
 	// create volume
 	SimpleVolumeData* sData = 0;
 	{
-		sData = BlurMapsDataManager::getVolume(groupOfAtoms, 0, dim1, dim2, dim3, densityType, rawV, blobby, colorType, m_ColormapFileLineEdit->text().latin1(), 0, radiusType, PDBParser::ATOM_TYPE);
+		sData = BlurMapsDataManager::getVolume(groupOfAtoms, 0, dim1, dim2, dim3, densityType, rawV, blobby, colorType, m_ColormapFileLineEdit->text().toLatin1().constData(), 0, radiusType, PDBParser::ATOM_TYPE);
 
 		if(sData == 0)
 		{

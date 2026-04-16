@@ -23,7 +23,7 @@
 #include "ui_NURBSRenderingPropertiesBase.h"
 #include <DataManager/NURBSDataManager/NURBSRenderingProperties.h>
 
-NURBSRenderingProperties::NURBSRenderingProperties(QWidget* parent, const char* name, Qt::WFlags fl)
+NURBSRenderingProperties::NURBSRenderingProperties(QWidget* parent, const char* name, Qt::WindowFlags fl)
 	: QWidget(parent, fl)
 {
 	_ui = new Ui::NURBSRenderingPropertiesBase();

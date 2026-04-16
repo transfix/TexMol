@@ -20,7 +20,7 @@
 */
 #include <TexMol/Dialogs/AboutDialog.h>
 
-AboutDialog::AboutDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+AboutDialog::AboutDialog(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
 	: AboutDialogBase(parent, name, modal, fl)
 {
 }

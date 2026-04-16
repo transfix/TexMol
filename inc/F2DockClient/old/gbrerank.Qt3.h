@@ -71,13 +71,13 @@ public:
         GBRerank->resize(662, 374);
         gridLayout = new QGridLayout(GBRerank);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         groupBox2 = new Q3GroupBox(GBRerank);
         groupBox2->setObjectName(QString::fromUtf8("groupBox2"));
         groupBox2->setColumnLayout(0, Qt::Vertical);
         groupBox2->layout()->setSpacing(6);
-        groupBox2->layout()->setMargin(11);
+        groupBox2->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(groupBox2->layout());
         if (boxlayout)
@@ -187,7 +187,7 @@ public:
         groupBox3->setObjectName(QString::fromUtf8("groupBox3"));
         groupBox3->setColumnLayout(0, Qt::Vertical);
         groupBox3->layout()->setSpacing(6);
-        groupBox3->layout()->setMargin(11);
+        groupBox3->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(groupBox3->layout());
         if (boxlayout1)
@@ -237,7 +237,7 @@ public:
         groupBox4->setObjectName(QString::fromUtf8("groupBox4"));
         groupBox4->setColumnLayout(0, Qt::Vertical);
         groupBox4->layout()->setSpacing(6);
-        groupBox4->layout()->setMargin(11);
+        groupBox4->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout3 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(groupBox4->layout());
         if (boxlayout2)
@@ -273,7 +273,7 @@ public:
         groupBox5->setObjectName(QString::fromUtf8("groupBox5"));
         groupBox5->setColumnLayout(0, Qt::Vertical);
         groupBox5->layout()->setSpacing(6);
-        groupBox5->layout()->setMargin(11);
+        groupBox5->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(groupBox5->layout());
         if (boxlayout3)
@@ -368,7 +368,7 @@ class GBRerank : public QDialog, public Ui::GBRerank
     Q_OBJECT
 
 public:
-    GBRerank(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    GBRerank(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~GBRerank();
 
 public slots:

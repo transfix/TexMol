@@ -78,7 +78,7 @@ public:
         SurfaceDialogBase->setModal(true);
         hboxLayout = new QHBoxLayout(SurfaceDialogBase);
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(11);
+        hboxLayout->setContentsMargins(11, 11, 11, 11);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         hboxLayout->setResizeMode(QHBoxLayout::Fixed);
         gridLayout = new QGridLayout();
@@ -291,7 +291,7 @@ class SurfaceDialogBase : public QDialog, public Ui::SurfaceDialogBase
     Q_OBJECT
 
 public:
-    SurfaceDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    SurfaceDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~SurfaceDialogBase();
 
 public slots:

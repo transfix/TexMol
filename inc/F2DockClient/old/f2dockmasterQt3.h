@@ -121,7 +121,7 @@ class f2dockmaster : public QDialog, public Ui::f2dockmaster
     Q_OBJECT
 
 public:
-    f2dockmaster(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    f2dockmaster(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~f2dockmaster();
 
 public slots:

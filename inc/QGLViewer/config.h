@@ -98,7 +98,7 @@ Error : libQGLViewer requires a minimum Qt version of 5.4 Error
 // operator << on QStrings #if defined(__GNUC__) && defined(__GNUC_MINOR__) &&
 // (__GNUC__ < 3) && (__GNUC_MINOR__ < 96) # include <iostream> # include
 // <qstring.h> std::ostream& operator<<(std::ostream& out, const QString& str)
-// { out << str.latin1();  return out; }
+// { out << str.toLatin1().constData();  return out; }
 // #endif
 
 #endif // QGLVIEWER_CONFIG_H

@@ -41,7 +41,7 @@ class ResultDialog : public QDialog
 {
   Q_OBJECT
   public:
-  ResultDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  ResultDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   virtual ~ResultDialog();
 
   // get methods

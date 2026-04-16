@@ -28,7 +28,7 @@ class F2DockForm : public F2Dock
 		bool jobSubmitted;
 
 	public:
-		F2DockForm(QWidget* parent = 0, const char* name = 0, bool modal = TRUE, Qt::WFlags fl = 0);
+		F2DockForm(QWidget* parent = 0, const char* name = 0, bool modal = true, Qt::WindowFlags fl = {});
 		~F2DockForm();
 		void setDefaults();
 		bool checkValidity();

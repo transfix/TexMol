@@ -23,7 +23,9 @@
 
 #include <QFutureWatcher>
 
-#include "SurfaceDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog SurfaceDialogBase;
 #include <Geometry/Geometry.h>
 #include <PDBParser/GroupOfAtoms.h>
 
@@ -57,7 +59,7 @@ Geometry* getSurfaceExtern(GetSurfaceData d);
 class SurfaceDialog : public SurfaceDialogBase
 {
 	public:
-		SurfaceDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		SurfaceDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~SurfaceDialog();
 		Geometry* getSurface(PDBParser::GroupOfAtoms* molecule);
 

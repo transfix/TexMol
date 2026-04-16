@@ -41,8 +41,8 @@
 #define MAX_CNODE 10000
 #define MAX_CEDGE 10000
 #define MAX_STACK_SIZE 100000
-#define TRUE 1
-#define FALSE 0
+#define true 1
+#define false 0
 #define CAJT 1
 #define CAST 2
 #define JT_ID 1

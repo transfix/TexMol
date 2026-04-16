@@ -38,6 +38,45 @@ file(GLOB INCLUDE_FILES
   ../../inc/TexMol/Dialogs/*.[Hh]
 )
 
+# Exclude Qt3 source and header files
+file(GLOB QT3_SOURCES ./Dialogs/*.Qt3.cpp ./*.Qt3.cpp)
+file(GLOB QT3_HEADERS ../../inc/TexMol/*.Qt3.h ../../inc/TexMol/Dialogs/*.Qt3.h ../../inc/TexMol/*.Qt3.H ../../inc/TexMol/Dialogs/*.Qt3.H)
+if(QT3_SOURCES)
+  list(REMOVE_ITEM SOURCE_FILES ${QT3_SOURCES})
+endif()
+if(QT3_HEADERS)
+  list(REMOVE_ITEM INCLUDE_FILES ${QT3_HEADERS})
+  set_source_files_properties(${QT3_HEADERS} PROPERTIES SKIP_AUTOMOC ON SKIP_AUTOUIC ON HEADER_FILE_ONLY ON)
+endif()
+
+# Exclude dialogs with unported Qt3 base classes (Phase 6 TODO)
+set(QT3_DIALOG_BASENAMES
+  AboutDialog
+  ConstructCurvaturesDialog
+  ConstructDepthColoredVolumesDialog
+  ConstructVolumesDialog
+  FileSaveDialog
+  LightsDialog
+  MouseHandlerDialog
+  MovieImageFileSaveDialog
+  ScriptsDialog
+  SetViewingParametersDialog
+  SliceDialog
+  SurfaceAreaAndVolumeDialog
+  SurfaceDialog
+  TransformationsDialog
+)
+foreach(_dlg ${QT3_DIALOG_BASENAMES})
+  list(FILTER SOURCE_FILES EXCLUDE REGEX "/${_dlg}\\.cpp$")
+  list(FILTER INCLUDE_FILES EXCLUDE REGEX "/${_dlg}\\.h$")
+endforeach()
+
+# Exclude files with deep Qt3 dependencies (Phase 6 TODO)
+list(FILTER SOURCE_FILES EXCLUDE REGEX "/DownloadPDB\\.cpp$")
+list(FILTER SOURCE_FILES EXCLUDE REGEX "/MouseHandlerHelper\\.cpp$")
+list(FILTER INCLUDE_FILES EXCLUDE REGEX "/DownloadPDB\\.h$")
+list(FILTER INCLUDE_FILES EXCLUDE REGEX "/MouseHandlerHelper\\.h$")
+
 # .ui files (renamed from .Qt4.ui in Phase 3)
 file(GLOB UI_FORMS ./Dialogs/*.ui)
 
@@ -58,6 +97,11 @@ add_executable(TexMol MACOSX_BUNDLE
   ${SOURCE_FILES}
   ${INCLUDE_FILES}
   ${UI_FORMS}
+)
+
+# AUTOUIC needs to find .ui files for headers in inc/ that reference ui_ headers
+set_target_properties(TexMol PROPERTIES
+  AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/Dialogs"
 )
 
 # ---------------------------------------------------------------------------
@@ -111,6 +155,28 @@ set(TEXMOL_LINK_LIBS
   ColorTable2
   ColorManager
   MolEnergyUtil
+
+  # Internal compatibility libraries (restored from removed modules)
+  Geometry
+  GeometryFileTypes
+  SimpleVolumeData
+  Utility
+  ByteOrder
+  ComputeNormals
+  LBIE_lib
+  SignDistanceFunction_v2
+  VolumeFileTypes
+  VolumeLibrary
+  Contouring
+  Contour
+  XmlRPC
+  ARM
+  OptimizerLib
+  CoarseGrain
+  VolMagick
+  CVC
+  contourtree
+  levmar
 
   # System
   Qt6::Widgets
@@ -173,6 +239,9 @@ if(TARGET GLEW::GLEW)
 else()
   list(APPEND TEXMOL_LINK_LIBS glew)
 endif()
+
+# Legacy GL for extension function pointers (glBindFramebufferEXT etc.)
+list(APPEND TEXMOL_LINK_LIBS GL)
 
 target_link_libraries(TexMol ${TEXMOL_LINK_LIBS})
 

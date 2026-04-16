@@ -31,7 +31,7 @@ class Histogram : public GLControlWidget
 {
 		Q_OBJECT
 	public:
-		Histogram(QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0, HistogramData data = HistogramData());
+		Histogram(QWidget* parent = nullptr, const char* name = nullptr, Qt::WindowFlags f = {}, HistogramData data = HistogramData());
 		~Histogram() {}
 		void setData(const HistogramData& newData);
 		float getMinWidth();

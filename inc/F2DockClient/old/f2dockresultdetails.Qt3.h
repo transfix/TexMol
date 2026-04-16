@@ -80,7 +80,7 @@ class f2dockresultdetails : public QDialog, public Ui::f2dockresultdetails
     Q_OBJECT
 
 public:
-    f2dockresultdetails(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    f2dockresultdetails(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~f2dockresultdetails();
 
 public slots:

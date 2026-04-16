@@ -24,7 +24,7 @@ class F2DockResultDetails : public f2dockresultdetails
 		bool displaySurface;
 
 	public:
-		F2DockResultDetails(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		F2DockResultDetails(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~F2DockResultDetails();
 		void setParams(std::vector<DetailResults*> *dr, BasicParams* baspar);
 

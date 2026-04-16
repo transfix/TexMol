@@ -45,7 +45,7 @@ class F2DockResult : public f2DockResult
 		bool getValues();
 
 	public:
-		F2DockResult(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		F2DockResult(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~F2DockResult();
 		void setParams(BasicParams* bp);
 

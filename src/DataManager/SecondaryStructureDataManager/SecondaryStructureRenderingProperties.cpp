@@ -24,7 +24,7 @@
 #include <DataManager/SecondaryStructureDataManager/SecondaryStructureRenderingProperties.h>
 #include "qcombobox.h"
 
-SecondaryStructureRenderingProperties::SecondaryStructureRenderingProperties(QWidget* parent, const char* name, Qt::WFlags fl)
+SecondaryStructureRenderingProperties::SecondaryStructureRenderingProperties(QWidget* parent, const char* name, Qt::WindowFlags fl)
 	: QWidget(parent, fl)
 {
 	_ui = new Ui::SecondaryStructureRenderingPropertiesBase();

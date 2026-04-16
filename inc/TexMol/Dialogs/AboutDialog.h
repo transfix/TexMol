@@ -21,13 +21,15 @@
 #ifndef ABOUT_DIALOG_H
 #define ABOUT_DIALOG_H
 
-#include "AboutDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog AboutDialogBase;
 
 class AboutDialog : public AboutDialogBase
 {
 		Q_OBJECT
 	public:
-		AboutDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		AboutDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~AboutDialog();
 };
 

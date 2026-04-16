@@ -30,7 +30,6 @@
 RendererSet::RendererSet(bool showGrid, QLabel* viewInformationLabel, QLabel* mouseInformationLabel, QLabel* selectionInformationLabel, bool select)
 {
 	m_ShowGrid = showGrid;
-	m_RendererList.setAutoDelete(true);
 	m_ViewInformationLabel = viewInformationLabel;
 	m_MouseInformationLabel = mouseInformationLabel;
 	m_SelectionInformationLabel = selectionInformationLabel;
@@ -42,6 +41,7 @@ RendererSet::RendererSet(bool showGrid, QLabel* viewInformationLabel, QLabel* mo
 
 RendererSet::~RendererSet()
 {
+	qDeleteAll(m_RendererList);
 	m_RendererList.clear();
 }
 
@@ -64,11 +64,11 @@ bool RendererSet::addNewRenderer(QWidget *parent, QSplitter* viewSplitter, DataM
 	return true;
 }
 
-void RendererSet::updateGL()
+void RendererSet::update()
 {
 	for (int c=0; c<m_RendererList.count(); c++)
 	{
-		(m_RendererList.at(c))->updateGL();
+		(m_RendererList.at(c))->update();
 	}
 }
 
@@ -195,7 +195,7 @@ void RendererSet::splitView(int renderer, QWidget *parent, QSplitter* viewSplitt
 	
         QWidget *newWindow = new QWidget();
 
-	RenderAreaWidget* renderer2 = new RenderAreaWidget(prevcontext, (QWidget*)r,"Renderer", NULL, 0, this, syncView, false, m_RendererList.count(), m_ShowGrid, mouseHandler, lightSet);
+	RenderAreaWidget* renderer2 = new RenderAreaWidget(prevcontext, (QWidget*)r,"Renderer", NULL, Qt::WindowFlags{}, this, syncView, false, m_RendererList.count(), m_ShowGrid, mouseHandler, lightSet);
 //	RenderAreaWidget* renderer2 = new RenderAreaWidget((QWidget*)newWindow,"Renderer", this, syncView, false, m_RendererList.count(), m_ShowGrid, mouseHandler, lightSet);
 //	RenderAreaWidget* renderer2 = new RenderAreaWidget((QWidget*)r, "Renderer", this, syncView, false, m_RendererList.count(), m_ShowGrid, mouseHandler, lightSet);
 
@@ -496,14 +496,17 @@ bool RendererSet::makeFullScreen(bool maximise, QWidget* qwidget)
 	}
 	if (maximise)
 	{
-		(m_RendererList.at(0))->reparent(NULL, Qt::WType_TopLevel, QPoint(0, 0), true);  // You may want other widget flags/positions...
+		(m_RendererList.at(0))->setParent(nullptr, Qt::Window);
+		(m_RendererList.at(0))->move(0, 0);
 		(m_RendererList.at(0))->saveParentWidget( qwidget );
 		(m_RendererList.at(0))->showFullScreen();
 	}
 	else
 	{
 		(m_RendererList.at(0))->showNormal();
-		(m_RendererList.at(0))->reparent(qwidget, 0, QPoint(0, 0), true);  // You may want other widget flags/positions...
+		(m_RendererList.at(0))->setParent(qwidget);
+		(m_RendererList.at(0))->move(0, 0);
+		(m_RendererList.at(0))->show();
 	}
 	return true;
 }

@@ -21,7 +21,9 @@
 #ifndef CCV_TEXMOL_SLICE_DIALOG_H
 #define CCV_TEXMOL_SLICE_DIALOG_H
 
-#include "SliceDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog SliceDialogBase;
 
 namespace PDBParser
 {
@@ -31,7 +33,7 @@ namespace PDBParser
 class SliceDialog : public SliceDialogBase
 {
 	public:
-		SliceDialog(PDBParser::GroupOfAtoms* molecule, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		SliceDialog(PDBParser::GroupOfAtoms* molecule, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~SliceDialog();
 		bool printParameterization();
 

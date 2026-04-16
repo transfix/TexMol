@@ -35,83 +35,21 @@
 const float RenderAreaWidgetBase::defaultBackgroundColor[3] = {0.0f, 0.0f, 0.0f};
 
 RenderAreaWidgetBase::RenderAreaWidgetBase(QWidget* parent, const char* name)
-	: QGLWidget(parent, name)
+	: QGLWidget(parent)
 {
+	if (name) setObjectName(QString::fromLatin1(name));
 	if(parent)
 	{
-	/*Q3Err:CS
-		QObjectList* l = parent->queryList("RenderAreaWidgetBase");
-		QObjectListIt It(*l);
-		QObject* obj;
-		
-		//m_OpenGL_Viewer.m_GeometryScene = 0;
-		while((obj = it.current()) != 0)
-		{
-			// for each found object...
-			++it;
-
-			if(this!=obj)
-			{
-				((QGLContext*)context())->reset();
-				((QGLContext*)context())->create(((RenderAreaWidgetBase*)obj)->context());
-				//m_OpenGL_Viewer.m_GeometryScene = ((RenderAreaWidgetBase*)obj)->m_OpenGL_Viewer.m_GeometryScene;
-				//m_OpenGL_Viewer.m_GeometryScene->addMe();
-				break;
-			}
-		}
-		delete l; // delete the list, not the objects
-	*/
-
-#ifdef TEST_MSG_CHA
-        cout << "in  RenderAreaWidgetiBase" << endl;
-#endif
-		QObjectList l = parent->queryList("RenderAreaWidgetBase");
-
-#ifdef TEST_MSG_CHA
-        cout << "after  queryList" << endl;
-#endif
-
-		if(!l.isEmpty()) {
-			QObject* obj	= l.back();
-			l.pop_back();
-			
-			//m_OpenGL_Viewer.m_GeometryScene = 0;
-			while(obj != NULL)
-			{
-				// for each found object...
-				if(this!=obj)
-				{
-					((QGLContext*)context())->reset();
-					((QGLContext*)context())->create(((RenderAreaWidgetBase*)obj)->context());
-					//m_OpenGL_Viewer.m_GeometryScene = ((RenderAreaWidgetBase*)obj)->m_OpenGL_Viewer.m_GeometryScene;
-					//m_OpenGL_Viewer.m_GeometryScene->addMe();
-					break;
-				}
-				if(!l.isEmpty()) {
-					obj	= l.back();
-					l.pop_back();
-				}
-				else
-					obj	= NULL;
-			}
-			l.clear();
-		}
-#ifdef TEST_MSG_CHA
-        cout << "in  RenderAreaWidgetiBase" << endl;
-#endif
-	}
-	else
-	{
-		//m_OpenGL_Viewer.m_GeometryScene = new GeometryScene();
+		// Context sharing handled by Qt6 automatically via QOpenGLWidget
 	}
 
 	initParams();
 }
 
-RenderAreaWidgetBase::RenderAreaWidgetBase(QGLContext* prevcontext, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WFlags f)
-	: QGLWidget(parent, name, shareWidget, f)
+RenderAreaWidgetBase::RenderAreaWidgetBase(QGLContext* prevcontext, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WindowFlags f)
+	: QGLWidget(parent)
 {
-	//m_GeometryScene = new GeometryScene();
+	if (name) setObjectName(QString::fromLatin1(name));
 	initParams();
 }
 
@@ -132,7 +70,7 @@ void RenderAreaWidgetBase::initParams()
 void RenderAreaWidgetBase::initializeGL()
 {
 	m_OpenGL_Viewer.initializeGL();
-	setAutoBufferSwap(true);
+	// setAutoBufferSwap removed in Qt6 — QOpenGLWidget always double-buffers
 }
 
 void RenderAreaWidgetBase::resizeGL(int w, int h)
@@ -148,7 +86,7 @@ void RenderAreaWidgetBase::protectedSetBackground(float r, float g, float b)
 void RenderAreaWidgetBase::setBackground(float r, float g, float b)
 {
 	protectedSetBackground(r,g,b);
-	updateGL();
+	update();
 }
 
 void RenderAreaWidgetBase::setBackgroundColor(const QColor& color)
@@ -171,25 +109,25 @@ void RenderAreaWidgetBase::resetBackgroundColor()
 void RenderAreaWidgetBase::setFieldOfView(double fieldOfView)
 {
 	m_OpenGL_Viewer.setFieldOfView(fieldOfView);
-	updateGL();
+	update();
 }
 
 void RenderAreaWidgetBase::resetFieldOfView()
 {
 	m_OpenGL_Viewer.resetFieldOfView();
-	updateGL();
+	update();
 }
 
 void RenderAreaWidgetBase::setViewDirection(OpenGL_Viewer::Views view)
 {
 	m_OpenGL_Viewer.setViewDirection(view);
-	updateGL();
+	update();
 }
 
 void RenderAreaWidgetBase::resetViewDirection()
 {
 	m_OpenGL_Viewer.resetViewDirection();
-	updateGL();
+	update();
 }
 
 void RenderAreaWidgetBase::setVolumeNearPlane(int nearPlane)
@@ -198,7 +136,7 @@ void RenderAreaWidgetBase::setVolumeNearPlane(int nearPlane)
 	clamped = (clamped<99 ? clamped: 99);
 	// SKVINAY another place where it is not cleanly separated
 	//m_VolumeRenderer.setNearPlane((double)clamped/99.0);
-	updateGL();
+	update();
 }
 
 QSizePolicy RenderAreaWidgetBase::sizePolicy() const
@@ -226,7 +164,7 @@ void RenderAreaWidgetBase::setView(const RenderAreaWidgetBase* viewer)
 	//delete m_View;
 	//m_View = viewer->m_View->clone();
 	m_OpenGL_Viewer.setView(&(viewer->m_OpenGL_Viewer));
-	updateGL();
+	update();
 }
 
 QSize RenderAreaWidgetBase::sizeHint() const
@@ -242,14 +180,12 @@ void RenderAreaWidgetBase::dontShare()
 void RenderAreaWidgetBase::shareWith(RenderAreaWidgetBase* RenderAreaWidgetBase)
 {
 	m_OpenGL_Viewer.shareWith(&(RenderAreaWidgetBase->m_OpenGL_Viewer));
-	((QGLContext*)context())->reset();
-	((QGLContext*)context())->create(RenderAreaWidgetBase->context());
-	glInit();
+	// Context sharing handled by Qt6 automatically
 }
 
 void RenderAreaWidgetBase::redraw()
 {
-	updateGL();
+	update();
 }
 
 /* View related information */
@@ -284,8 +220,8 @@ void RenderAreaWidgetBase::mouseReleaseEvent(QMouseEvent* q)
 
 void RenderAreaWidgetBase::wheelEvent(QWheelEvent* q)
 {
-	m_OpenGL_Viewer.zoom(-q->delta()/3);
-	updateGL();
+	m_OpenGL_Viewer.zoom(-q->angleDelta().y()/3);
+	update();
 }
 
 void RenderAreaWidgetBase::saveParentWidget( QWidget *widget )
@@ -302,7 +238,9 @@ void RenderAreaWidgetBase::keyPressEvent( QKeyEvent *e )
 		if( m_savedParentWidget )
 		{
 			showNormal();
-			reparent(m_savedParentWidget, 0, QPoint(0, 0), true);
+			setParent(m_savedParentWidget);
+			move(0, 0);
+			show();
 			m_savedParentWidget = NULL;
 		} 
 	}

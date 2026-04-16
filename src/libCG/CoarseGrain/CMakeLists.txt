@@ -21,4 +21,6 @@ INCLUDE_DIRECTORIES(
 
 ADD_LIBRARY (CoarseGrain STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
-SetupNFFT(CoarseGrain)
+if(HAVE_NFFT)
+  SetupNFFT(CoarseGrain)
+endif()

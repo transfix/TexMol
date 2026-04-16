@@ -6,8 +6,8 @@
 using namespace std;
 
 // Constructs a GBRerankResultDetails which is a child of 'parent', with the name 'name' and widget flags set to 'f'
-// The dialog will by default be modeless, unless you set 'modal' to TRUE to construct a modal dialog.
-GBRerankResultDetails::GBRerankResultDetails(QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+// The dialog will by default be modeless, unless you set 'modal' to true to construct a modal dialog.
+GBRerankResultDetails::GBRerankResultDetails(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: gbrerankresultdetails(parent, name, modal, fl)
 {
 	numCol = 23;

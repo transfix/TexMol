@@ -370,7 +370,7 @@ class f2DockResult : public QDialog, public Ui::f2DockResult
     Q_OBJECT
 
 public:
-    f2DockResult(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    f2DockResult(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~f2DockResult();
 
 public slots:

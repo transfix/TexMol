@@ -56,7 +56,7 @@ public:
         ColorMapInterfaceBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(ColorMapInterfaceBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         Horizontal_Spacing2 = new QSpacerItem(225, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -118,7 +118,7 @@ class ColorMapInterfaceBase : public QDialog, public Ui::ColorMapInterfaceBase
     Q_OBJECT
 
 public:
-    ColorMapInterfaceBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    ColorMapInterfaceBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~ColorMapInterfaceBase();
 
 protected slots:

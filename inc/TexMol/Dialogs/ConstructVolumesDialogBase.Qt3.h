@@ -106,7 +106,7 @@ public:
         ConstructVolumesDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(ConstructVolumesDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         vboxLayout = new QVBoxLayout();
         vboxLayout->setSpacing(6);
@@ -186,7 +186,7 @@ public:
         m_RadiusTypeButtonGroup->setObjectName(QString::fromUtf8("m_RadiusTypeButtonGroup"));
         m_RadiusTypeButtonGroup->setColumnLayout(0, Qt::Vertical);
         m_RadiusTypeButtonGroup->layout()->setSpacing(6);
-        m_RadiusTypeButtonGroup->layout()->setMargin(11);
+        m_RadiusTypeButtonGroup->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(m_RadiusTypeButtonGroup->layout());
         if (boxlayout)
@@ -209,7 +209,7 @@ public:
 
         hboxLayout3 = new QHBoxLayout();
         hboxLayout3->setSpacing(6);
-        hboxLayout3->setMargin(0);
+        hboxLayout3->setContentsMargins(0, 0, 0, 0);
         hboxLayout3->setObjectName(QString::fromUtf8("hboxLayout3"));
         Horizontal_Spacing2 = new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -246,7 +246,7 @@ public:
         m_RawVGroupBox->setObjectName(QString::fromUtf8("m_RawVGroupBox"));
         m_RawVGroupBox->setColumnLayout(0, Qt::Vertical);
         m_RawVGroupBox->layout()->setSpacing(6);
-        m_RawVGroupBox->layout()->setMargin(11);
+        m_RawVGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(m_RawVGroupBox->layout());
         if (boxlayout1)
@@ -281,7 +281,7 @@ public:
         m_ColoringTypeButtonGroup->setEnabled(false);
         m_ColoringTypeButtonGroup->setColumnLayout(0, Qt::Vertical);
         m_ColoringTypeButtonGroup->layout()->setSpacing(6);
-        m_ColoringTypeButtonGroup->layout()->setMargin(11);
+        m_ColoringTypeButtonGroup->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout3 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(m_ColoringTypeButtonGroup->layout());
         if (boxlayout2)
@@ -329,7 +329,7 @@ public:
         functionTypeButtonGroup->setObjectName(QString::fromUtf8("functionTypeButtonGroup"));
         functionTypeButtonGroup->setColumnLayout(0, Qt::Vertical);
         functionTypeButtonGroup->layout()->setSpacing(6);
-        functionTypeButtonGroup->layout()->setMargin(11);
+        functionTypeButtonGroup->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(functionTypeButtonGroup->layout());
         if (boxlayout3)
@@ -340,7 +340,7 @@ public:
         m_HydrophobicityTypeGroupBox->setObjectName(QString::fromUtf8("m_HydrophobicityTypeGroupBox"));
         m_HydrophobicityTypeGroupBox->setColumnLayout(0, Qt::Vertical);
         m_HydrophobicityTypeGroupBox->layout()->setSpacing(6);
-        m_HydrophobicityTypeGroupBox->layout()->setMargin(11);
+        m_HydrophobicityTypeGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout5 = new QGridLayout();
         QBoxLayout *boxlayout4 = qobject_cast<QBoxLayout *>(m_HydrophobicityTypeGroupBox->layout());
         if (boxlayout4)
@@ -464,7 +464,7 @@ class ConstructVolumesDialogBase : public QDialog, public Ui::ConstructVolumesDi
     Q_OBJECT
 
 public:
-    ConstructVolumesDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    ConstructVolumesDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~ConstructVolumesDialogBase();
 
 public slots:

@@ -22,7 +22,7 @@
 #include <UsefulMath/Vector.h>
 #include <qlineedit.h>
 
-SetViewingParametersDialog::SetViewingParametersDialog(CCVOpenGLMath::Quaternion orientation, CCVOpenGLMath::Vector translation, float windowSize, QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+SetViewingParametersDialog::SetViewingParametersDialog(CCVOpenGLMath::Quaternion orientation, CCVOpenGLMath::Vector translation, float windowSize, QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: setViewingParametersDialogBase(parent, name, modal, fl)
 {
 	translationXLineEdit->setText(QString::number(translation[0]));

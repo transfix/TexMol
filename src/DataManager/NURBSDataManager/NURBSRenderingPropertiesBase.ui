@@ -20,10 +20,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2" >
    <item row="0" column="0" >
-    <widget class="Q3GroupBox" name="groupBox" >
-     <property name="frameShape" >
-      <enum>Q3GroupBox::Panel</enum>
-     </property>
+    <widget class="QGroupBox" name="groupBox" >
      <layout class="QGridLayout" name="gridLayout_3" >
       <item row="0" column="0" >
        <spacer name="verticalSpacer" >
@@ -103,9 +100,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Q3GroupBox</class>
+   <class>QGroupBox</class>
    <extends>QGroupBox</extends>
-   <header>Qt3Support/Q3GroupBox</header>
+   <header>Qt3Support/QGroupBox</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

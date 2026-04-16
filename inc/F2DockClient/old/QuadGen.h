@@ -20,7 +20,7 @@ class QuadGen : public quadGen
 		bool paramsFound;
 
 	public:
-		QuadGen(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		QuadGen(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~QuadGen();
 		void prepareParams();
 		bool submitJob();

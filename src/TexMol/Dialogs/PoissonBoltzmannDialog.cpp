@@ -24,7 +24,7 @@
 
 #include "ui_PoissonBoltzmannDialogBase.h"
 
-PoissonBoltzmannDialog::PoissonBoltzmannDialog(QWidget *parent,Qt::WFlags flags) 
+PoissonBoltzmannDialog::PoissonBoltzmannDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::PoissonBoltzmannDialogBase;
@@ -46,7 +46,7 @@ void PoissonBoltzmannDialog::pbPqrFileNameSlot()
 {
   _ui->pbPqrLineEdit->setText(QFileDialog::getOpenFileName(this,
                                                          "Load PQR File",
-                                                         QString::null,
+                                                         QString(),
                                                          "PQR (*.pqr)"));
 }
 
@@ -54,7 +54,7 @@ void PoissonBoltzmannDialog::pbRawnFileNameSlot()
 {
   _ui->pbRawnLineEdit->setText(QFileDialog::getOpenFileName(this,
                                                          "Load RAWN File",
-                                                         QString::null,
+                                                         QString(),
                                                          "RAWN (*.rawn)"));
 }
 
@@ -63,8 +63,8 @@ void PoissonBoltzmannDialog::pbOutputPrefixSlot()
 {
   _ui->pbOutputLineEdit->setText(QFileDialog::getSaveFileName(this,
                                                          "Output Filename Prefix",
-                                                         QString::null,
-							      QString::null));
+                                                         QString(),
+							      QString()));
 }
 
 

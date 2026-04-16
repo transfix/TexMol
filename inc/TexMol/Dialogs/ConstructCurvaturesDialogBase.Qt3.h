@@ -105,7 +105,7 @@ public:
         ConstructCurvaturesDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(ConstructCurvaturesDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
@@ -207,7 +207,7 @@ public:
         m_IsocontourChoiceButtonGroup->setObjectName(QString::fromUtf8("m_IsocontourChoiceButtonGroup"));
         m_IsocontourChoiceButtonGroup->setColumnLayout(0, Qt::Vertical);
         m_IsocontourChoiceButtonGroup->layout()->setSpacing(6);
-        m_IsocontourChoiceButtonGroup->layout()->setMargin(11);
+        m_IsocontourChoiceButtonGroup->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(m_IsocontourChoiceButtonGroup->layout());
         if (boxlayout)
@@ -312,7 +312,7 @@ public:
 
         hboxLayout12 = new QHBoxLayout();
         hboxLayout12->setSpacing(6);
-        hboxLayout12->setMargin(0);
+        hboxLayout12->setContentsMargins(0, 0, 0, 0);
         hboxLayout12->setObjectName(QString::fromUtf8("hboxLayout12"));
         buttonHelp = new QPushButton(ConstructCurvaturesDialogBase);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
@@ -376,7 +376,7 @@ public:
         m_RadiusTypeButtonGroup->setObjectName(QString::fromUtf8("m_RadiusTypeButtonGroup"));
         m_RadiusTypeButtonGroup->setColumnLayout(0, Qt::Vertical);
         m_RadiusTypeButtonGroup->layout()->setSpacing(6);
-        m_RadiusTypeButtonGroup->layout()->setMargin(11);
+        m_RadiusTypeButtonGroup->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(m_RadiusTypeButtonGroup->layout());
         if (boxlayout1)
@@ -476,7 +476,7 @@ class ConstructCurvaturesDialogBase : public QDialog, public Ui::ConstructCurvat
     Q_OBJECT
 
 public:
-    ConstructCurvaturesDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    ConstructCurvaturesDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~ConstructCurvaturesDialogBase();
 
 public slots:

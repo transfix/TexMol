@@ -18,7 +18,7 @@ class GBRerankResultDetails : public gbrerankresultdetails
 		bool transform_pdb(double* trans, FILE* ifp, char* ofname);
 
 	public:
-		GBRerankResultDetails(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		GBRerankResultDetails(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~GBRerankResultDetails();
 		void setParams(std::vector<RerankDetailResults*> *dr,RerankBasicParams* rbaspar);
 

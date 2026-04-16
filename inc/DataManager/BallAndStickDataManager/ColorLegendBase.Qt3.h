@@ -494,7 +494,7 @@ class ColorLegendBase : public QWidget, public Ui::ColorLegendBase
     Q_OBJECT
 
 public:
-    ColorLegendBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = 0);
+    ColorLegendBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
     ~ColorLegendBase();
 
 protected slots:

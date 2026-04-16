@@ -69,7 +69,7 @@ class F2DockMaster : public f2dockmaster
 		GBRerankResult* gbresDialog;
 
 	public:
-		F2DockMaster(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		F2DockMaster(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~F2DockMaster();
 
 	public slots:

@@ -107,7 +107,7 @@ bool NURBSData::read(QStringList fileNames)
 
 	for(i=0; i<numModels; i++)
 	{
-		const char* fileName = (fileNames[i]).latin1();
+		const char* fileName = (fileNames[i]).toLatin1().constData();
 
 		if(!fileName)
 		{
@@ -139,15 +139,15 @@ bool NURBSData::read(QStringList fileNames)
 	{
 		if(m_NURBS.size() > 1)
 		{
-			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMinValue(0);
-			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMaxValue(m_NURBS.size()-1);
+			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMinimum(0);
+			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMaximum(m_NURBS.size()-1);
 			m_NURBSRenderingProperties->_ui->m_FrameSlider->setTickInterval(1);
 			m_NURBSRenderingProperties->_ui->m_FrameSlider->setEnabled(true);
 		}
 		else
 		{
-			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMinValue(0);
-			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMaxValue(0);
+			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMinimum(0);
+			m_NURBSRenderingProperties->_ui->m_FrameSlider->setMaximum(0);
 			m_NURBSRenderingProperties->_ui->m_FrameSlider->setTickInterval(1);
 			m_NURBSRenderingProperties->_ui->m_FrameSlider->setEnabled(false);
 		}

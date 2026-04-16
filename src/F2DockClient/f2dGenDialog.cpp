@@ -30,7 +30,7 @@
 
 using namespace std;
 
-F2dGenDialog::F2dGenDialog(QWidget *parent,Qt::WFlags flags) 
+F2dGenDialog::F2dGenDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::f2dGenUI;
@@ -69,7 +69,7 @@ void F2dGenDialog::init()
 
 void F2dGenDialog::receptorPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load receptor PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull())
 	{
@@ -84,7 +84,7 @@ void F2dGenDialog::receptorPDBFileNameSlot()
 
 void F2dGenDialog::ligandPDBFileNameSlot()
 {
-	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString::null, "PDB (*.pdb)");
+	QString filename = QFileDialog::getOpenFileName(this, "Load ligand PDB File", QString(), "PDB (*.pdb)");
 
 	if(!filename.isNull()) 
 	{

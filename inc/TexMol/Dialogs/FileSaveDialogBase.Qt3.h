@@ -69,11 +69,11 @@ public:
         FileSaveDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(FileSaveDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         buttonHelp = new QPushButton(FileSaveDialogBase);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
@@ -187,7 +187,7 @@ class FileSaveDialogBase : public QDialog, public Ui::FileSaveDialogBase
     Q_OBJECT
 
 public:
-    FileSaveDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    FileSaveDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~FileSaveDialogBase();
 
 public slots:

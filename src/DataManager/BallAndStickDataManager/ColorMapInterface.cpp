@@ -25,13 +25,14 @@
 #include <PDBParser/CollectionData.h>
 #include <PDBParser/GOAColor.h>
 #include <PDBParser/Residues.h>
-#include <q3textedit.h>
-#include <q3scrollview.h>
-#include <q3groupbox.h>
+#include <QTextEdit>
+#include <QTextBlock>
+#include <QScrollArea>
+#include <QGroupBox>
 #include <qlayout.h>
 #include <qcolordialog.h>
-//Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
+#include <QPushButton>
 
 ColorMapInterface::ColorMapInterface(int maximumRowLength)
 {
@@ -42,49 +43,58 @@ ColorMapInterface::ColorMapInterface(int maximumRowLength)
 		m_MaximumRowLength = DEFAULT_MINIMUM_ROW_LENGTH;
 	}
 
-	m_ScrollView = new Q3ScrollView(m_MainGroupBox, "m_ScrollView");
+	QGroupBox* m_MainGroupBox = new QGroupBox(this);
+	QVBoxLayout* topLayout = new QVBoxLayout(this);
+	topLayout->addWidget(m_MainGroupBox);
+
+	m_ScrollView = new QScrollArea(m_MainGroupBox);
 	m_ScrollView->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 	m_ScrollView->setMinimumWidth(200);
 	m_ScrollView->setMinimumHeight(200);
-	m_MainGroupBox->setColumnLayout(0, Qt::Vertical);
-	m_MainGroupBox->layout()->setSpacing(6);
-	m_MainGroupBox->layout()->setMargin(11);
-	Q3GridLayout* m_MainGroupBoxLayout = new Q3GridLayout(m_MainGroupBox->layout());
+	m_ScrollView->setWidgetResizable(true);
+
+	QWidget* scrollContent = new QWidget;
+	QHBoxLayout* scrollLayout = new QHBoxLayout(scrollContent);
+
+	QGridLayout* m_MainGroupBoxLayout = new QGridLayout(m_MainGroupBox);
+	m_MainGroupBoxLayout->setSpacing(6);
+	m_MainGroupBoxLayout->setContentsMargins(11, 11, 11, 11);
 	m_MainGroupBoxLayout->setAlignment(Qt::AlignTop);
 	m_MainGroupBoxLayout->addWidget(m_ScrollView, 0, 0);
-	m_ChainIDListTextEdit = new Q3TextEdit(m_ScrollView->viewport(), "m_ChainIDListTextEdit");
+
+	m_ChainIDListTextEdit = new QTextEdit(scrollContent);
 	m_ChainIDListTextEdit->setFont(QFont("Courier"));
-	//m_ChainIDListTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 	m_ChainIDListTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 	m_ChainIDListTextEdit->setMinimumWidth(40);
 	m_ChainIDListTextEdit->setMaximumWidth(40);
 	m_ChainIDListTextEdit->setReadOnly(true);
-	m_ScrollView->addChild(m_ChainIDListTextEdit, 10, 10);
-	m_ResidueStartIDListTextEdit = new Q3TextEdit(m_ScrollView->viewport(), "m_ResidueStartIDListTextEdit");
+	scrollLayout->addWidget(m_ChainIDListTextEdit);
+
+	m_ResidueStartIDListTextEdit = new QTextEdit(scrollContent);
 	m_ResidueStartIDListTextEdit->setFont(QFont("Courier"));
 	m_ResidueStartIDListTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 	m_ResidueStartIDListTextEdit->setMinimumWidth(80);
 	m_ResidueStartIDListTextEdit->setMaximumWidth(80);
 	m_ResidueStartIDListTextEdit->setReadOnly(true);
-	m_ScrollView->addChild(m_ResidueStartIDListTextEdit, 60, 10);
-	m_ResidueListTextEdit = new Q3TextEdit(m_ScrollView->viewport(), "m_ResidueListTextEdit");
-	m_ResidueListTextEdit->setFont(QFont("Courier"));
-	//m_ResidueListTextEdit->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-	m_ResidueListTextEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	int cW = (m_ResidueListTextEdit->fontMetrics()).width('W');
-	int widthRequired = (m_ResidueListTextEdit->fontMetrics()).width('W') * (m_MaximumRowLength+1);
-	// arand, 9-6-2011: fixing the widths in these boxes...
-	//m_ResidueListTextEdit->setWidth( widthRequired );
+	scrollLayout->addWidget(m_ResidueStartIDListTextEdit);
 
+	m_ResidueListTextEdit = new QTextEdit(scrollContent);
+	m_ResidueListTextEdit->setFont(QFont("Courier"));
+	m_ResidueListTextEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	int widthRequired = m_ResidueListTextEdit->fontMetrics().horizontalAdvance('W') * (m_MaximumRowLength+1);
 	m_ResidueListTextEdit->setMinimumWidth(widthRequired);
 	m_ResidueListTextEdit->setMaximumWidth(widthRequired);
-
 	m_ResidueListTextEdit->setReadOnly(true);
-	m_ScrollView->addChild(m_ResidueListTextEdit, 150, 10);
-	m_ScrollView->resizeContents(150 + m_ResidueListTextEdit->width() + 10, 50+40);
+	scrollLayout->addWidget(m_ResidueListTextEdit);
+
+	m_ScrollView->setWidget(scrollContent);
+
 	connect(m_ResidueListTextEdit, SIGNAL(selectionChanged()), this, SLOT(residueListTextEditSelectionColorSlot()));
 	connect(m_ChainIDListTextEdit, SIGNAL(selectionChanged()), this, SLOT(chainIDTextEditSelectionColorSlot()));
-	connect((QWidget*)m_ClearColorMapPushButton, SIGNAL(clicked()), this, SLOT(clearColorMapSlot()));
+
+	QPushButton* m_ClearColorMapPushButton = new QPushButton("Clear", this);
+	topLayout->addWidget(m_ClearColorMapPushButton);
+	connect(m_ClearColorMapPushButton, SIGNAL(clicked()), this, SLOT(clearColorMapSlot()));
 }
 
 ColorMapInterface::~ColorMapInterface()
@@ -99,7 +109,7 @@ bool ColorMapInterface::setNewHeights(int numRows)
 	}
 
 	int height = (m_ResidueListTextEdit->fontMetrics()).lineSpacing() * (numRows+1);
-	m_ScrollView->resizeContents(150 + m_ResidueListTextEdit->width() + 10, height+40);
+	// Qt6: QScrollArea auto-sizes from widget content, just set min heights
 	m_ChainIDListTextEdit->setMinimumHeight(height);
 	m_ResidueStartIDListTextEdit->setMinimumHeight(height);
 	m_ResidueListTextEdit->setMinimumHeight(height);
@@ -321,7 +331,7 @@ bool ColorMapInterface::addResidueToColorMap(int residueIndex, int chainIndex, d
 /*Q3Err:CS
 	const char* resNameC = PDBParser::Residues::lookupLongResID(resShortId);
 */
-	const char* resNameC = PDBParser::Residues::lookupLongResID(resShortId.toAscii());	//by cha
+	const char* resNameC = PDBParser::Residues::lookupLongResID(resShortId.toLatin1());	//by cha
 
 	QString resName(resNameC);
 	int resSeq = m_Molecule->m_CollectionData->m_ResidueIds[cumulativeResidueIndex*3+1];
@@ -357,14 +367,14 @@ bool ColorMapInterface::addResidueToColorMap(int residueIndex, int chainIndex, d
 	colorMapLine +=	" \"";
 	colorMapLine +=	QString::number(a);
 	colorMapLine +=	"\"";
-	m_ColorMap.push_back(string(colorMapLine.latin1()));
-	//printf("%s\n", colorMapLine.latin1());
+	m_ColorMap.push_back(string(colorMapLine.toLatin1().constData()));
+	//printf("%s\n", colorMapLine.toLatin1().constData());
 	return true;
 }
 
 void ColorMapInterface::residueListTextEditSelectionColorSlot()
 {
-	if(!m_ResidueListTextEdit->hasSelectedText())
+	if(!m_ResidueListTextEdit->textCursor().hasSelection())
 	{
 		return;
 	}
@@ -388,7 +398,11 @@ void ColorMapInterface::residueListTextEditSelectionColorSlot()
 	int indexFrom = 0;
 	int paraTo = 0;
 	int indexTo = 0;
-	m_ResidueListTextEdit->getSelection(&paraFrom, &indexFrom, &paraTo, &indexTo);
+	{
+		QTextCursor cur = m_ResidueListTextEdit->textCursor();
+		paraFrom = m_ResidueListTextEdit->document()->findBlock(cur.selectionStart()).blockNumber();
+		paraTo = m_ResidueListTextEdit->document()->findBlock(cur.selectionEnd()).blockNumber();
+	}
 	int startChainIndex = 0;
 	int endChainIndex = 0;
 	// find the start and end chain Index
@@ -469,7 +483,7 @@ void ColorMapInterface::colorGOA() {
 
 void ColorMapInterface::chainIDTextEditSelectionColorSlot()
 {
-	if(!m_ChainIDListTextEdit->hasSelectedText())
+	if(!m_ChainIDListTextEdit->textCursor().hasSelection())
 	{
 		return;
 	}
@@ -493,7 +507,11 @@ void ColorMapInterface::chainIDTextEditSelectionColorSlot()
 	int indexFrom = 0;
 	int paraTo = 0;
 	int indexTo = 0;
-	m_ChainIDListTextEdit->getSelection(&paraFrom, &indexFrom, &paraTo, &indexTo);
+	{
+		QTextCursor cur = m_ChainIDListTextEdit->textCursor();
+		paraFrom = m_ChainIDListTextEdit->document()->findBlock(cur.selectionStart()).blockNumber();
+		paraTo = m_ChainIDListTextEdit->document()->findBlock(cur.selectionEnd()).blockNumber();
+	}
 	// go through the list of chain positions and see if any are selected
 	{
 	  //printf("Chains selected:\n");
@@ -530,7 +548,7 @@ void ColorMapInterface::chainIDTextEditSelectionColorSlot()
 				colorMapLine +=	" \"";
 				colorMapLine +=	QString::number(a);
 				colorMapLine +=	"\"";
-				m_ColorMap.push_back(string(colorMapLine.latin1()));
+				m_ColorMap.push_back(string(colorMapLine.toLatin1().constData()));
 			}
 		}
 	}

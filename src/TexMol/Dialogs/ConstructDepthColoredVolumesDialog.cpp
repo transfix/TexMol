@@ -30,7 +30,7 @@
 #include <DataManager/DataManager.h>
 #include <VolumeFileTypes/VolumeLoader.h>
 
-ConstructDepthColoredVolumesDialog::ConstructDepthColoredVolumesDialog(QString inputVolumeFileName, QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+ConstructDepthColoredVolumesDialog::ConstructDepthColoredVolumesDialog(QString inputVolumeFileName, QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: ConstructDepthColoredVolumesDialogBase(parent, name, modal, fl)
 {
 	m_InputVolumeFileNameLextLabel->setText(inputVolumeFileName);
@@ -68,7 +68,7 @@ VolumeData* ConstructDepthColoredVolumesDialog::constructDepthColoredVolumes(Dat
 
 	VolumeData* volumeData = new VolumeData(dataManager);
 /*Q3Err:CS
-	if(!volumeData->read(volumeFileName.latin1()))
+	if(!volumeData->read(volumeFileName.toLatin1().constData()))
 */
 	if(!volumeData->read(QStringList(QString(volumeFileName.toLatin1()))))
 	{
@@ -131,7 +131,7 @@ VolumeData* ConstructDepthColoredVolumesDialog::constructDepthColoredVolumesFrom
 			bool ret = false;
 			{
 				VolumeLoader* volumeLoader = new VolumeLoader();
-				ret = volumeLoader->saveFile(volFileName.latin1(), sData);
+				ret = volumeLoader->saveFile(volFileName.toLatin1().constData(), sData);
 				delete volumeLoader;
 			}
 			vData->setFileName(m_RawVFileNameLineEdit->text());

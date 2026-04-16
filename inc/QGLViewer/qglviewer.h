@@ -77,13 +77,13 @@ public:
                      Qt::WindowFlags flags = Qt::WindowFlags());
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
   explicit QGLViewer(QWidget *parent, const QGLWidget *shareWidget,
-                     Qt::WindowFlags flags = 0);
+                     Qt::WindowFlags flags = {});
   explicit QGLViewer(QGLContext *context, QWidget *parent = 0,
                      const QGLWidget *shareWidget = 0,
-                     Qt::WindowFlags flags = 0);
+                     Qt::WindowFlags flags = {});
   explicit QGLViewer(const QGLFormat &format, QWidget *parent = 0,
                      const QGLWidget *shareWidget = 0,
-                     Qt::WindowFlags flags = 0);
+                     Qt::WindowFlags flags = {});
 #endif
   virtual ~QGLViewer();
 
@@ -377,7 +377,7 @@ public:
   /*! Returns \c true if the viewer displays in stereo.
 
   The QGLViewer object must be created with a stereo format to handle
-  stereovision: \code QGLFormat format; format.setStereoDisplay( TRUE );
+  stereovision: \code QGLFormat format; format.setStereoDisplay( true );
   QGLViewer viewer(format);
   \endcode
   The hardware needs to support stereo display. Try the <a
@@ -829,7 +829,7 @@ protected:
   Note that initializeGL() modifies the standard OpenGL context. These values
   can be restored back in this method.
 
-  \attention You should not call updateGL() (or any method that calls it) in
+  \attention You should not call update() (or any method that calls it) in
   this method, as it will result in an infinite loop. The different QGLViewer
   set methods (setAxisIsDrawn(), setFPSIsDisplayed()...) are protected against
   this problem and can safely be called.

@@ -38,7 +38,7 @@ class SaveTiledImageDialog : public QDialog
 {
   Q_OBJECT
     public:
-  SaveTiledImageDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  SaveTiledImageDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   
   virtual ~SaveTiledImageDialog();
   void getParameters(QString* fileName, QString* format, int *resol, int *ntiles, bool *saveAll, bool *mergeToSingleImage);

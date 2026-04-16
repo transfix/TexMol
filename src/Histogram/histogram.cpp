@@ -28,6 +28,9 @@
 
 
 #include <Histogram/histogram.h>
+
+// Qt6 removed qglColor — inline helper to set GL color from QColor
+static inline void qglColor(const QColor& c) { glColor3f(c.redF(), c.greenF(), c.blueF()); }
 //Added by qt3to4:
 #include <QWheelEvent>
 #include <QMouseEvent>
@@ -44,7 +47,7 @@ const QColor Histogram::BKGND_ACTIVE = QColor(128, 128, 128);
 const QColor Histogram::LINE_INACTIVE = QColor(0, 128, 0);
 const QColor Histogram::LINE_ACTIVE = QColor(0, 255, 0);
 
-Histogram::Histogram(QWidget* parent, const char* name, Qt::WFlags f, HistogramData data)
+Histogram::Histogram(QWidget* parent, const char* name, Qt::WindowFlags f, HistogramData data)
 	: GLControlWidget(parent, name, 0, f)
 {
 	_data = data;
@@ -116,7 +119,8 @@ void Histogram::draw()
 		qglColor(Qt::green);
 		glLineWidth(1.0);
 		QString cursorString = QString::number(_cursorWidth, 'f', 5);
-		renderText(FONT_BORDER_X, FONT_BORDER_Y, 0.0, cursorString, QFont("courier", FONT_SIZE, QFont::Bold, FALSE));
+		// renderText removed in Qt6 — need QPainter overlay instead
+		// renderText(FONT_BORDER_X, FONT_BORDER_Y, 0.0, cursorString, QFont("courier", FONT_SIZE, QFont::Bold, false));
 	}
 	glPopAttrib();
 }
@@ -151,7 +155,7 @@ void Histogram::paintGL()
 
 void Histogram::animate()
 {
-	updateGL();
+	update();
 }
 
 void Histogram::mousePressEvent(QMouseEvent* e)

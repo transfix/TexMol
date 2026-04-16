@@ -72,7 +72,7 @@ public:
         ConstructDepthColoredVolumesDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(ConstructDepthColoredVolumesDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
@@ -92,7 +92,7 @@ public:
 
         hboxLayout1 = new QHBoxLayout();
         hboxLayout1->setSpacing(6);
-        hboxLayout1->setMargin(0);
+        hboxLayout1->setContentsMargins(0, 0, 0, 0);
         hboxLayout1->setObjectName(QString::fromUtf8("hboxLayout1"));
         buttonHelp = new QPushButton(ConstructDepthColoredVolumesDialogBase);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
@@ -213,7 +213,7 @@ class ConstructDepthColoredVolumesDialogBase : public QDialog, public Ui::Constr
     Q_OBJECT
 
 public:
-    ConstructDepthColoredVolumesDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    ConstructDepthColoredVolumesDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~ConstructDepthColoredVolumesDialogBase();
 
 public slots:

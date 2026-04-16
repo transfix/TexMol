@@ -25,7 +25,7 @@
 #include <QGridLayout>
 #include <QFrame>
 
-VolumeRenderingProperties::VolumeRenderingProperties(QWidget* parent, const char* name, Qt::WFlags fl)
+VolumeRenderingProperties::VolumeRenderingProperties(QWidget* parent, const char* name, Qt::WindowFlags fl)
 	:QWidget(parent, fl)
 {
 	m_Layout = new QGridLayout(this);
@@ -36,7 +36,7 @@ VolumeRenderingProperties::VolumeRenderingProperties(QWidget* parent, const char
 	m_Layout->addWidget(m_ColorTable,0,0);
 
 	m_RenderProperties = new QFrame(this);
-	m_RenderProperties->setSizePolicy( QSizePolicy ( QSizePolicy::Fixed, QSizePolicy::Fixed, 0, 0));
+	m_RenderProperties->setSizePolicy( QSizePolicy ( QSizePolicy::Fixed, QSizePolicy::Fixed));
 	m_RenderProperties->setMinimumSize(240,190);
 	m_RenderProperties->setMaximumSize(240,190);
  	m_RenderProperties->setFrameShape(QFrame::Panel);

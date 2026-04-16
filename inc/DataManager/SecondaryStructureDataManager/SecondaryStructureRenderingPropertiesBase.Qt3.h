@@ -82,7 +82,7 @@ public:
         SecondaryStructureRenderingPropertiesBase->setMaximumSize(QSize(32767, 180));
         gridLayout = new QGridLayout(SecondaryStructureRenderingPropertiesBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         m_TransparencySlider = new QSlider(SecondaryStructureRenderingPropertiesBase);
         m_TransparencySlider->setObjectName(QString::fromUtf8("m_TransparencySlider"));
@@ -106,7 +106,7 @@ public:
         m_LinesGgroupBox->setSizePolicy(sizePolicy1);
         m_LinesGgroupBox->setColumnLayout(0, Qt::Vertical);
         m_LinesGgroupBox->layout()->setSpacing(6);
-        m_LinesGgroupBox->layout()->setMargin(11);
+        m_LinesGgroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(m_LinesGgroupBox->layout());
         if (boxlayout)
@@ -144,7 +144,7 @@ public:
         m_SecondaryStructureGroupBox->setSizePolicy(sizePolicy1);
         m_SecondaryStructureGroupBox->setColumnLayout(0, Qt::Vertical);
         m_SecondaryStructureGroupBox->layout()->setSpacing(6);
-        m_SecondaryStructureGroupBox->layout()->setMargin(11);
+        m_SecondaryStructureGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(m_SecondaryStructureGroupBox->layout());
         if (boxlayout1)
@@ -184,7 +184,7 @@ public:
         groupBox8->setSizePolicy(sizePolicy3);
         groupBox8->setColumnLayout(0, Qt::Vertical);
         groupBox8->layout()->setSpacing(6);
-        groupBox8->layout()->setMargin(11);
+        groupBox8->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout3 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(groupBox8->layout());
         if (boxlayout2)
@@ -219,7 +219,7 @@ public:
         groupBox7->setSizePolicy(sizePolicy3);
         groupBox7->setColumnLayout(0, Qt::Vertical);
         groupBox7->layout()->setSpacing(6);
-        groupBox7->layout()->setMargin(11);
+        groupBox7->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(groupBox7->layout());
         if (boxlayout3)
@@ -391,7 +391,7 @@ class SecondaryStructureRenderingPropertiesBase : public QWidget, public Ui::Sec
     Q_OBJECT
 
 public:
-    SecondaryStructureRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = 0);
+    SecondaryStructureRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
     ~SecondaryStructureRenderingPropertiesBase();
 
 protected slots:

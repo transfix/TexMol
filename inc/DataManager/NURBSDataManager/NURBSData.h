@@ -23,7 +23,7 @@
 #ifndef CCV_TEXMOL_DATA_MANAGER_NURBS_DATA_H
 #define CCV_TEXMOL_DATA_MANAGER_NURBS_DATA_H
 
-#include <qstring.h>
+#include <QString>
 #include <vector>
 
 #include <DataManager/AbstractData.h>

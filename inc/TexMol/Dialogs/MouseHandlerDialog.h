@@ -21,12 +21,14 @@
 #ifndef MOUSE_HANDLER_DIALOG_H
 #define MOUSE_HANDLER_DIALOG_H
 
-#include "MouseHandlerDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog MouseHandlerDialogBase;
 
 class MouseHandlerDialog : public MouseHandlerDialogBase
 {
 	public:
-		MouseHandlerDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		MouseHandlerDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~MouseHandlerDialog();
 };
 

@@ -21,9 +21,9 @@
 #ifndef RENDER_AREA_WIDGET_H
 #define RENDER_AREA_WIDGET_H
 
-#include <qstring.h>
-#include <q3textstream.h>
-#include <q3ptrlist.h>
+#include <QString>
+#include <QTextStream>
+#include <QList>
 #include <qcolor.h>
 //Added by qt3to4:
 #include <QMouseEvent>
@@ -50,7 +50,7 @@ class RenderAreaWidget : public RenderAreaWidgetBase
 {
 	public:
 		RenderAreaWidget(QWidget* parent, const char* name, RendererSet* rendererSet, bool syncView, bool current, unsigned int uniqueId, bool showGrid, MouseHandler* mouseHandler, LightSet* lightSet);
-		RenderAreaWidget(QGLContext* prevcontext, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WFlags f, RendererSet* rendererSet, bool syncView, bool current, unsigned int uniqueId, bool showGrid, MouseHandler* mouseHandler, LightSet* lightSet);
+		RenderAreaWidget(QGLContext* prevcontext, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WindowFlags f, RendererSet* rendererSet, bool syncView, bool current, unsigned int uniqueId, bool showGrid, MouseHandler* mouseHandler, LightSet* lightSet);
 		void initParams(RendererSet* rendererSet, bool syncView, bool current, unsigned int uniqueId, bool showGrid, MouseHandler* mouseHandler, LightSet* lightSet);
 		virtual ~RenderAreaWidget();
 		virtual void setDataManager(DataManager* dataManager);

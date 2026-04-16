@@ -115,7 +115,7 @@ class quadGen : public QDialog, public Ui::quadGen
     Q_OBJECT
 
 public:
-    quadGen(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    quadGen(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~quadGen();
 
 public slots:

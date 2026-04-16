@@ -23,10 +23,16 @@
 #ifndef CCV_COLOR_MAP_INTERFACE_H
 #define CCV_COLOR_MAP_INTERFACE_H
 
-#include "ColorMapInterfaceBase.Qt3.h"
-#include <qstring.h>
+#include <QWidget>
+#include <QGroupBox>
+
+// ColorMapInterfaceBase was a Qt3 Designer class — stub it as QWidget for Qt6
+typedef QWidget ColorMapInterfaceBase;
+#include <QString>
 //Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
+#include <QScrollArea>
+#include <QTextEdit>
 #include <vector>
 #include <string>
 
@@ -39,9 +45,6 @@ namespace PDBParser
 	class Atom;
 };
 
-class Q3TextEdit;
-class Q3ScrollView;
-
 const int DEFAULT_MINIMUM_ROW_LENGTH = 20;
 class ColorMapInterface : public ColorMapInterfaceBase
 {
@@ -53,11 +56,11 @@ class ColorMapInterface : public ColorMapInterfaceBase
 		bool setGOAData(PDBParser::GroupOfAtoms* molecule);
 		void colorGOA();
 
-		Q3GridLayout* m_ScrollViewLayout;
-		Q3ScrollView* m_ScrollView;
-		Q3TextEdit* m_ResidueListTextEdit;
-		Q3TextEdit* m_ResidueStartIDListTextEdit;
-		Q3TextEdit* m_ChainIDListTextEdit;
+		QGridLayout* m_ScrollViewLayout;
+		QScrollArea* m_ScrollView;
+		QTextEdit* m_ResidueListTextEdit;
+		QTextEdit* m_ResidueStartIDListTextEdit;
+		QTextEdit* m_ChainIDListTextEdit;
 
 
 

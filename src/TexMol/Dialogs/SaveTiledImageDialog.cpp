@@ -24,7 +24,7 @@
 
 #include "ui_SaveTiledImageDialogBase.h"
 
-SaveTiledImageDialog::SaveTiledImageDialog(QWidget *parent,Qt::WFlags flags) 
+SaveTiledImageDialog::SaveTiledImageDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::SaveTiledImageDialogBase;
@@ -55,7 +55,7 @@ SaveTiledImageDialog::~SaveTiledImageDialog()
 
 void SaveTiledImageDialog::baseImageFileSlot()
 {
-  QString baseImageFileName = QFileDialog::getSaveFileName("","(*.*)",this,"save file dialog","Save as",0);
+  QString baseImageFileName = QFileDialog::getSaveFileName(this, "Save as", QString(), "(*.*)");
   _ui->m_fileName->setText(baseImageFileName);
 }
 

@@ -45,7 +45,8 @@
 
 #include <Utility/utility.h>
 
-#define    EPS  0.00001
+#undef TRIMESH_EPS
+#define    TRIMESH_EPS  0.00001
 
 typedef  int     Triangle[3];
 typedef  float   Position[3];
@@ -108,16 +109,16 @@ struct EqPos
 {
 	bool operator()(const VPosition& p1, const VPosition& p2) const
 	{
-		return (fabs(p1.cord[0]-p2.cord[0]) < EPS &&
-				fabs(p1.cord[1]-p2.cord[1]) < EPS &&
-				fabs(p1.cord[2]-p2.cord[2]) < EPS);
+		return (fabs(p1.cord[0]-p2.cord[0]) < TRIMESH_EPS &&
+				fabs(p1.cord[1]-p2.cord[1]) < TRIMESH_EPS &&
+				fabs(p1.cord[2]-p2.cord[2]) < TRIMESH_EPS);
 	}
 
 	bool operator()(const Position& p1, const Position& p2) const
 	{
-		return (fabs(p1[0]-p2[0]) < EPS &&
-				fabs(p1[1]-p2[1]) < EPS &&
-				fabs(p1[2]-p2[2]) < EPS);
+		return (fabs(p1[0]-p2[0]) < TRIMESH_EPS &&
+				fabs(p1[1]-p2[1]) < TRIMESH_EPS &&
+				fabs(p1[2]-p2[2]) < TRIMESH_EPS);
 	}
 };
 
@@ -126,16 +127,16 @@ struct DiffPos
 
 	bool operator()(const VPosition& p1, const VPosition& p2) const
 	{
-		return (fabs(p1.cord[0]-p2.cord[0]) >= EPS ||
-				fabs(p1.cord[1]-p2.cord[1]) >= EPS ||
-				fabs(p1.cord[2]-p2.cord[2]) >= EPS);
+		return (fabs(p1.cord[0]-p2.cord[0]) >= TRIMESH_EPS ||
+				fabs(p1.cord[1]-p2.cord[1]) >= TRIMESH_EPS ||
+				fabs(p1.cord[2]-p2.cord[2]) >= TRIMESH_EPS);
 	}
 
 	bool operator()(const Position& p1, const Position& p2) const
 	{
-		return (fabs(p1[0]-p2[0]) >= EPS ||
-				fabs(p1[1]-p2[1]) >= EPS ||
-				fabs(p1[2]-p2[2]) >= EPS);
+		return (fabs(p1[0]-p2[0]) >= TRIMESH_EPS ||
+				fabs(p1[1]-p2[1]) >= TRIMESH_EPS ||
+				fabs(p1[2]-p2[2]) >= TRIMESH_EPS);
 	}
 };
 
@@ -143,19 +144,19 @@ struct LtPos
 {
 	bool operator()(const VPosition& p1, const VPosition& p2) const
 	{
-		if(p1.cord[2] < p2.cord[2]-EPS)
+		if(p1.cord[2] < p2.cord[2]-TRIMESH_EPS)
 		{
 			return true;
 		}
-		else if(fabs(p1.cord[2] - p2.cord[2]) < EPS)
+		else if(fabs(p1.cord[2] - p2.cord[2]) < TRIMESH_EPS)
 		{
-			if(p1.cord[1] < p2.cord[1]-EPS)
+			if(p1.cord[1] < p2.cord[1]-TRIMESH_EPS)
 			{
 				return true;
 			}
-			else if(fabs(p1.cord[1] - p2.cord[1]) < EPS)
+			else if(fabs(p1.cord[1] - p2.cord[1]) < TRIMESH_EPS)
 			{
-				if(p1.cord[0] < p2.cord[0] - EPS)
+				if(p1.cord[0] < p2.cord[0] - TRIMESH_EPS)
 				{
 					return true;
 				}
@@ -167,8 +168,8 @@ struct LtPos
 	bool operator()(const Position& p1, const Position& p2) const
 	{
 		return ((p1[2] < p2[2]) ||
-				((fabs(p1[2] - p2[2]) < EPS) && (p1[1] < p2[1])) ||
-				((fabs(p1[2] - p2[2]) < EPS) && (fabs(p1[1] - p2[1]) < EPS) && (p1[0] < p2[0])));
+				((fabs(p1[2] - p2[2]) < TRIMESH_EPS) && (p1[1] < p2[1])) ||
+				((fabs(p1[2] - p2[2]) < TRIMESH_EPS) && (fabs(p1[1] - p2[1]) < TRIMESH_EPS) && (p1[0] < p2[0])));
 	}
 };
 

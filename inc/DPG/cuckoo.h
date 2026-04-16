@@ -78,8 +78,8 @@ void rehash(dict_ptr D, int new_size);
 #define DETAIL 5 /* 0 = no output trace, 1 = output trace */ 
 
 // arand: commented these to eliminate warnings...
-//#define TRUE 1
-//#define FALSE 0
+//#define true 1
+//#define false 0
 
 
 

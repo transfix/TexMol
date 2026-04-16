@@ -23,7 +23,7 @@
 #if !defined(AFX_VOLUMEDATA_H__7385C4A8_3689_40F0_BCD5_626863EDC619__INCLUDED_)
 #define AFX_VOLUMEDATA_H__7385C4A8_3689_40F0_BCD5_626863EDC619__INCLUDED_
 
-#include <qstring.h>
+#include <QString>
 
 #include <DataManager/VolumeDataManager/VolumeRenderingProperties.h>
 #include <DataManager/AbstractData.h>

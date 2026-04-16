@@ -30,7 +30,7 @@
 #include <Q3StrList>
 #include <QImageWriter>
 
-FileSaveDialog::FileSaveDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+FileSaveDialog::FileSaveDialog(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
 	: FileSaveDialogBase(parent, name, modal, fl)
 {
 /*Q3Err:CS

@@ -5,6 +5,13 @@ cmake_minimum_required(VERSION 3.16)
 
 file(GLOB SOURCE_FILES ./*.cpp)
 
+# Exclude standalone executables from library sources
+list(REMOVE_ITEM SOURCE_FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/GetResults.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/CheckStatus.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/SubmitDockingJob.cpp
+)
+
 if(BUILD_INTERFACESTATS)
   add_definitions(-DWITH_INTERFACE_STATS)
 endif()
@@ -37,8 +44,6 @@ target_link_libraries(F2DockClient
   Qt6::Xml
 )
 
-# NOTE: SubmitDockingJob and CheckStatus executables removed — they depended on
-# XmlRPC which was deleted in Phase 1. These will be replaced by cvc serve (Phase 14).
-
-ADD_EXECUTABLE (GetResults GetResults.cpp)
-TARGET_LINK_LIBRARIES(GetResults ${FDOCK_LINK_LIBS})
+# NOTE: SubmitDockingJob, CheckStatus, and GetResults executables removed —
+# they depend on XmlRPC which was deleted in Phase 1.
+# These will be replaced by cvc serve (Phase 14).

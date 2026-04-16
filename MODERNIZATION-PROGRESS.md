@@ -70,12 +70,168 @@ The following modules remain in TexMol after Phase 1:
 
 ---
 
-## Phase 2: Integrate libcvc as Core Dependency 🔄
+## Phase 2+3: CMake Modernization + libcvc Integration ✅
 
-**Status:** In progress
+**Commit:** `74b8691c` — Phase 2+3: CMake modernization + libcvc integration
+
+### Top-Level CMakeLists.txt (complete rewrite)
+- [x] `cmake_minimum_required(VERSION 3.16)`, C++17
+- [x] libcvc via `add_subdirectory(LIBCVC_SOURCE_DIR)` or `FetchContent` (SHA `573a89bf...`)
+- [x] `AUTOMOC`, `AUTOUIC`, `AUTORCC` enabled globally
+- [x] Qt6 `find_package` (Core, Gui, Widgets, Xml, OpenGL, OpenGLWidgets)
+- [x] Modern `find_package` for OpenGL, GLEW, GSL, FFTW, CGAL, LAPACK
+- [x] Removed Cg shader support (NVIDIA discontinued)
+- [x] Removed 19 obsolete CMake Find/Setup modules
+- [x] Created `CMake/LegacyCompat.cmake` — bridge macros for old `SetupBoost()` / `SetupQt()` / etc. calls
+- [x] Feature flag options: `HAVE_CGAL`, `HAVE_LAPACK`, `HAVE_NFFT`, `HAVE_PETSC`, etc.
+- [x] CPack packaging preserved
+
+### Per-Module Qt6 Migration (6 modules)
+- [x] `Histogram` — removed Qt3/Qt4 wrapping, added Qt6 targets
+- [x] `ColorTable2` — disabled contour tree/spectrum (depended on deleted modules), Qt6 targets
+- [x] `QGLViewer` — AUTOMOC/AUTOUIC, Qt6 targets, VRender optional
+- [x] `DataManager` — removed Qt3/Qt4 conditional blocks, AUTOMOC/AUTOUIC, Qt6 targets
+- [x] `F2DockClient` — removed Qt3/Qt4 blocks, removed SubmitDockingJob/CheckStatus (XmlRPC deleted)
+- [x] `TexMol` (main) — link list updated: deleted modules → `cvc`, Qt6 targets
+
+### .ui File Renames (22 files)
+- [x] Renamed all `.Qt4.ui` → `.ui` across QGLViewer, DataManager, F2DockClient, TexMol/Dialogs
+
+### libcvc Integration Fixes
+- [x] Fixed `CMAKE_SOURCE_DIR` → `PROJECT_SOURCE_DIR` in libcvc (3 files) — enables `add_subdirectory` use
+- [x] Disabled `volrover3` build when used as subdirectory
+- [x] Added libcvc include paths globally for compatibility shims
+
+### Compatibility Shim Headers (Phase 5 bridge, `inc/`)
+| Shim | Redirects To |
+|------|-------------|
+| `Geometry/Geometry.h` | `cvc/geometry.h` |
+| `SimpleVolumeData/SimpleVolumeData.h` | `cvc/voxels.h` + `cvc/volume.h` |
+| `LBIE_lib/Geoframe.h` | `cvc/geometry.h` |
+| `GeometryFileTypes/GeometryLoader.h` | `cvc/geometry_file_io.h` |
+| `XmlRPC/XmlRpc.h` | `xmlrpc/XmlRpc.h` (case fix) |
+| `Utility/utility.h` | `cvc/utility.h` |
+| `qgl.h` | `QOpenGLWidget` / `QOpenGLContext` (Qt6 compat) |
+
+Restored from git (still needed by remaining modules):
+- `Utility/utils.h`, `Geometry/MyExtensions.h`, `Geometry/GeometryScene.h`
+- `LBIE_lib/normalspline.h`, `SimpleVolumeData/SimpleVolumeDataIsocontourer.h`
+
+### Status
+- cmake configures successfully ✅
+- Compilation blocked by Phase 5 (#include rewiring) and Phase 6 (Qt6 source migration)
 
 ---
 
-## Phases 3–9: Pending
+## QGLViewer Upgrade: v2.3.6 → v3.0.0 ✅
+
+**Commit:** `9e84e7aa` — Replace QGLViewer v2.3.6 (2008) with v3.0.0 from volrover
+
+- [x] Replaced TexMol's ancient QGLViewer v2.3.6 (2008, GPL) with volrover's v3.0.0 (2025, LGPL)
+- [x] Native `QOpenGLWidget` base class (no `QGLWidget` compatibility shim needed in QGLViewer itself)
+- [x] Qt 5.4+ / Qt 6 support built-in
+- [x] No bundled GLEW dependency in headers
+- [x] Modern CMake with explicit file lists and proper target exports
+- [x] Builds cleanly ✅
+
+---
+
+## Phase 5: Qt6 Migration ✅
+
+**No single commit yet — staged on `modernization` branch**
+
+### Compile Fixes (Qt3/Qt4 → Qt6 API migration)
+
+#### MainWindow.cpp (4024 lines — 66 compile errors → 0)
+- [x] Added `#include <QFileDialog>`, `#include <QColorDialog>`
+- [x] `setCaption()` → `setWindowTitle()`
+- [x] `addWidget(label, 0, true)` → `addPermanentWidget(label)` (5 status bar widgets)
+- [x] `Q3ListBoxItem` rightButtonClicked signal → commented out (needs QListWidget port)
+- [x] `highlighted(int)` → `currentRowChanged(int)` for QListWidget
+- [x] Q3Http constructor and connects → commented out (stubbed `downloadPDBSlot`)
+- [x] QFileDialog old API (6-arg) → new API (parent, caption, dir, filter)
+- [x] `currentItem()` → `currentRow()` for QListWidget
+- [x] `insertItem(text, -1)` → `addItem(text)` for QListWidget
+- [x] `.ascii()` → `.toLatin1().constData()`
+- [x] `QGridLayout::remove()` → `removeWidget()`
+- [x] `createLightsMenu()`: `insertItem`/`connectItem`/`setItemParameter` → `addAction()` + lambda connects + `m_LightActions` QList
+- [x] `enableFirstLight()`/`editLight()`: `changeItem()` → `m_LightActions[i]->setText()`
+- [x] `showPopup()`: `insertItem` → `addAction()`, `exec()` returns `QAction*`
+- [x] `ViewRowEventMain`: `QCustomEvent` → `QEvent`, `static_cast<QEvent::Type>(QEvent::User+105)`
+- [x] QFileDialog::getSaveFileName old 5-arg → new 4-arg order
+- [x] `atoi(dataTypes[c])` → `dataTypes[c].toInt()`
+- [x] `surfaceDialogSlot` fully stubbed (SurfaceDialog member references removed)
+- [x] `finishedop` stubbed (Q3Http code removed)
+- [x] `dataSetSelectedRightMouse` stubbed (Q3ListBoxItem param type removed)
+
+#### Server.cpp
+- [x] VolMagick include → commented out (VolMagick now restored as compat lib)
+- [x] pqr.h include → commented out
+- [x] `shrinkPQRintoSurface()` fully stubbed (was VolMagick-dependent)
+- [x] `SDFLibrary::getSDF()` calls → `nullptr` (sdfLib.h removed)
+
+#### Other Header/Source Fixes
+- [x] `inc/SignDistanceFunction_v2/geom.h`: `EPS` → `SDF_GEOM_EPS` (macro conflict)
+- [x] `inc/TexMol/Dialogs/SetViewingParametersDialog.h`: `setViewingParametersDialogBase` → `SetViewingParametersDialogBase` (case fix)
+- [x] `inc/TexMol/Dialogs/MainWindow.h`: Added `QList<QAction*> m_LightActions` member
+- [x] `src/TexMol/MainWindowBase.ui`: `Q3ListBox` → `QListWidget`, `Q3Frame` → `QFrame`
+
+### Modules Restored as Internal Compatibility Libraries
+Modules deleted in Phase 1 that remaining code still depends on were restored from git (`359cc89d~1`) as internal static libraries:
+
+| Module | Reason Restored |
+|--------|----------------|
+| `VolumeFileTypes` | DataManager, VolumeLibrary file loading |
+| `VolumeLibrary` | Volume rendering pipeline |
+| `Contouring` | User requested contour re-enablement |
+| `Contour` | User requested contour re-enablement |
+| `contourtree` | ColorTable2 computeCT dependency |
+| `XmlRPC` | CVC::State networking (optional) |
+| `libCG` (ARM, OptimizerLib, CoarseGrain) | MOLECULE namespace, GEOMETRY::Surface |
+| `CVC` (App, State) | VolMagick, log4cplus integration |
+| `VolMagick` | ColorTable2 volume type system |
+| `ByteOrder` | VolumeFileTypes endian handling |
+| `Utility` | Various module utility functions |
+| `SimpleVolumeData` | VolumeFileTypes, DataManager |
+| `Geometry` | GeometryFileTypes, ComputeNormals |
+| `ComputeNormals` | GEOMETRY::Surface mesh normals |
+| `GeometryFileTypes` | Geometry file I/O |
+| `LBIE_lib` | Mesh generation |
+| `SignDistanceFunction_v2` | SDF computation |
+
+### C++17 Compatibility Fixes (in restored modules)
+- [x] `inc/CVC/BoundingBox.h`: Removed dynamic exception specifications (`throw(...)`)
+- [x] `inc/CVC/Exception.h`: `throw()` → `noexcept`
+- [x] `inc/VolMagick/VolumeCache.h`: `dimcmp::operator()` → `const`
+- [x] `src/CVC/State.cpp`: `_1` → `boost::placeholders::_1`
+- [x] `src/CVC/CMakeLists.txt`: `CVC_USING_HDF5` default → `OFF`
+- [x] `src/libCG/CoarseGrain/groupOfAtoms.cpp`: FastSummation guarded with `#ifdef HAVE_NFFT`
+- [x] `src/libCG/CoarseGrain/CMakeLists.txt`: `SetupNFFT()` guarded with `if(HAVE_NFFT)`
+- [x] `src/VolumeFileTypes/RawVFile.cpp`: `return false` → `return nullptr` (pointer-returning functions)
+- [x] `src/levmar-2.5/lm.h`: Fixed for C++17 compatibility
+
+### Dialog Stub System
+Created `src/TexMol/Dialogs/dialog_stubs.cpp` — provides link-time symbols for 14 Qt3 dialog classes excluded from compilation (Phase 6 TODO: full Qt6 port):
+
+**Stubbed dialogs:** AboutDialog, ConstructCurvaturesDialog, ConstructDepthColoredVolumesDialog, ConstructVolumes, FileSaveDialog, LightsDialog, MouseHandlerDialog, MovieImageFileSaveDialog, ScriptsDialog, SetViewingParametersDialog, SliceDialog, SurfaceAreaAndVolumeDialog, SurfaceDialog, TransformationsDialog
+
+**Also stubbed:** DownloadPDB (constructor/destructor/blockedDownload/finishedop), MouseHandler (constructor/destructor/updateUserPreferences/getUserSelectedTransformation)
+
+**Moc integration:** Explicitly includes moc output for Q_OBJECT dialog classes (AboutDialog, ConstructCurvaturesDialog, ConstructVolumesDialog, DownloadPDB)
+
+### Link Resolution
+- [x] TexMol executable links 28+ internal static libraries
+- [x] Explicit `-lGL` for `glBindFramebufferEXT`
+- [x] All dialog slot stubs for AUTOMOC vtable resolution
+
+### Build Status
+- **Compile errors:** 0 ✅
+- **Linker errors:** 0 ✅
+- **Executable:** `build/bin/TexMol` (19.6 MB) ✅
+- **Configure:** `cmake -B build -DLIBCVC_SOURCE_DIR=... -DHAVE_PETSC=OFF -DHAVE_NFFT=OFF -DCVC_ENABLE_CUDA=OFF -DCVC_USING_HDF5=OFF`
+
+---
+
+## Phases 6–9: Pending
 
 See [CVC-modernization-plan.md](CVC-modernization-plan.md) for details.

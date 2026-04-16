@@ -23,7 +23,7 @@
 #ifndef __SURFACEDATA_H__
 #define __SURFACEDATA_H__
 
-#include <qstring.h>
+#include <QString>
 #include <qcolor.h>
 #include <vector>
 

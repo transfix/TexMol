@@ -18,7 +18,7 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <q3popupmenu.h>
+#include <QMenu>
 #include <TexMol/Settings.h>
 
 Settings::Settings():m_MaxRecentFiles(10)
@@ -36,9 +36,9 @@ int Settings::getNumberOfRecentFiles() const
 	return m_RecentFiles.count();
 }
 
-void Settings::pushRecentFile(QString filename, Q3PopupMenu* recentFilesPopupMenu, QWidget* parent)
+void Settings::pushRecentFile(QString filename, QMenu* recentFilesPopupMenu, QWidget* parent)
 {
-	if (m_RecentFiles.find(filename) != m_RecentFiles.end())
+	if (m_RecentFiles.contains(filename))
 	{
 		return;
 	}
@@ -54,8 +54,8 @@ bool Settings::loadSettings()
 {
 	for (int i = 0; i < m_MaxRecentFiles; ++i)
 	{
-		QString filename = readEntry("RecentFiles/FileName" +
-									 QString::number(i));
+		QString filename = value("RecentFiles/FileName" +
+									 QString::number(i)).toString();
 		if (!filename.isEmpty())
 		{
 			m_RecentFiles.push_back(filename);
@@ -78,7 +78,7 @@ void Settings::initDefaults()
 	}
 	m_Dirty = false;
 	m_UserSettingsChanged = false;
-	setPath("ccv.ices.utexas.edu","MoleculeViz");
+	// setPath removed in Qt6 — use QCoreApplication::setOrganizationName/setApplicationName instead
 }
 
 bool Settings::userSettingsChanged()
@@ -93,11 +93,11 @@ void Settings::saveUserSettings()
 void Settings::save()
 {
 	for (int i = 0; i < int(m_RecentFiles.count()); ++i)
-		writeEntry("RecentFiles/FileName" + QString::number(i),
+		setValue("RecentFiles/FileName" + QString::number(i),
 				   m_RecentFiles[i]);
 }
 
-void Settings::loadPreviousFiles(Q3PopupMenu* recentFilesPopupMenu, QWidget* parent)
+void Settings::loadPreviousFiles(QMenu* recentFilesPopupMenu, QWidget* parent)
 {
 	if (!m_RecentFiles.count())
 	{
@@ -106,7 +106,7 @@ void Settings::loadPreviousFiles(Q3PopupMenu* recentFilesPopupMenu, QWidget* par
 	recentFilesPopupMenu->clear();
 	for (int i=0; i<(int)(m_RecentFiles.count()); i++)
 	{
-		recentFilesPopupMenu->insertItem(m_RecentFiles[i], parent, SLOT(readPrevioslyOpenedFile(int)), 0, i);
+		recentFilesPopupMenu->addAction(m_RecentFiles[i]);
 	}
 }
 

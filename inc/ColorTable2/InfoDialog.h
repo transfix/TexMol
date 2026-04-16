@@ -46,11 +46,11 @@ namespace CVCColorTable
    Q_OBJECT
 
    public:
-     InfoDialog( QWidget *parent = 0, 
+     InfoDialog( QWidget *parent = nullptr, 
 #if QT_VERSION < 0x040000
                 const char *name = 0
 #else
-                Qt::WFlags flags=0
+                Qt::WindowFlags flags={}
 #endif
                 );
     ~InfoDialog();

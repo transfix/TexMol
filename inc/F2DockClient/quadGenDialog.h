@@ -41,7 +41,7 @@ class QuadGenDialog : public QDialog
 {
   Q_OBJECT
   public:
-  QuadGenDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  QuadGenDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   virtual ~QuadGenDialog();
 
   // get methods

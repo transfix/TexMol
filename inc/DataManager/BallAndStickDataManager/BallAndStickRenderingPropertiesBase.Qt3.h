@@ -105,13 +105,13 @@ public:
         BallAndStickRenderingPropertiesBase->setMaximumSize(QSize(32767, 180));
         gridLayout = new QGridLayout(BallAndStickRenderingPropertiesBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         RenderGroupBox = new Q3GroupBox(BallAndStickRenderingPropertiesBase);
         RenderGroupBox->setObjectName(QString::fromUtf8("RenderGroupBox"));
         RenderGroupBox->setColumnLayout(0, Qt::Vertical);
         RenderGroupBox->layout()->setSpacing(6);
-        RenderGroupBox->layout()->setMargin(11);
+        RenderGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(RenderGroupBox->layout());
         if (boxlayout)
@@ -122,7 +122,7 @@ public:
         groupBox2->setObjectName(QString::fromUtf8("groupBox2"));
         groupBox2->setColumnLayout(0, Qt::Vertical);
         groupBox2->layout()->setSpacing(6);
-        groupBox2->layout()->setMargin(11);
+        groupBox2->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(groupBox2->layout());
         if (boxlayout1)
@@ -397,7 +397,7 @@ class BallAndStickRenderingPropertiesBase : public QWidget, public Ui::BallAndSt
     Q_OBJECT
 
 public:
-    BallAndStickRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = 0);
+    BallAndStickRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
     ~BallAndStickRenderingPropertiesBase();
 
 public slots:

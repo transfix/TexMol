@@ -23,7 +23,7 @@
 #ifndef __SECONDARYSTRUCTUREDATA_H__
 #define __SECONDARYSTRUCTUREDATA_H__
 
-#include <qstring.h>
+#include <QString>
 #include <qcolor.h>
 #include <vector>
 

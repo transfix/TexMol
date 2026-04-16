@@ -63,11 +63,11 @@ public:
         AnglesDialog->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(AnglesDialog);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         buttonHelp = new QPushButton(AnglesDialog);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
@@ -126,7 +126,7 @@ class AnglesDialog : public QDialog, public Ui::AnglesDialog
     Q_OBJECT
 
 public:
-    AnglesDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    AnglesDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~AnglesDialog();
 
 protected slots:

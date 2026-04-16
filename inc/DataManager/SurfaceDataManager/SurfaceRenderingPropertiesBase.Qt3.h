@@ -120,13 +120,13 @@ public:
         SurfaceRenderingPropertiesBase->setMaximumSize(QSize(32767, 180));
         gridLayout = new QGridLayout(SurfaceRenderingPropertiesBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         groupBox4 = new Q3GroupBox(SurfaceRenderingPropertiesBase);
         groupBox4->setObjectName(QString::fromUtf8("groupBox4"));
         groupBox4->setColumnLayout(0, Qt::Vertical);
         groupBox4->layout()->setSpacing(6);
-        groupBox4->layout()->setMargin(11);
+        groupBox4->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(groupBox4->layout());
         if (boxlayout)
@@ -148,7 +148,7 @@ public:
         buttonGroup7->setObjectName(QString::fromUtf8("buttonGroup7"));
         buttonGroup7->setColumnLayout(0, Qt::Vertical);
         buttonGroup7->layout()->setSpacing(6);
-        buttonGroup7->layout()->setMargin(11);
+        buttonGroup7->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(buttonGroup7->layout());
         if (boxlayout1)
@@ -192,7 +192,7 @@ public:
         m_LinesGgroupBox->setObjectName(QString::fromUtf8("m_LinesGgroupBox"));
         m_LinesGgroupBox->setColumnLayout(0, Qt::Vertical);
         m_LinesGgroupBox->layout()->setSpacing(6);
-        m_LinesGgroupBox->layout()->setMargin(11);
+        m_LinesGgroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(m_LinesGgroupBox->layout());
         if (boxlayout2)
@@ -203,7 +203,7 @@ public:
         buttonGroup6->setObjectName(QString::fromUtf8("buttonGroup6"));
         buttonGroup6->setColumnLayout(0, Qt::Vertical);
         buttonGroup6->layout()->setSpacing(6);
-        buttonGroup6->layout()->setMargin(11);
+        buttonGroup6->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout5 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(buttonGroup6->layout());
         if (boxlayout3)
@@ -265,7 +265,7 @@ public:
         m_WireframeGroupBox->setObjectName(QString::fromUtf8("m_WireframeGroupBox"));
         m_WireframeGroupBox->setColumnLayout(0, Qt::Vertical);
         m_WireframeGroupBox->layout()->setSpacing(6);
-        m_WireframeGroupBox->layout()->setMargin(11);
+        m_WireframeGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout7 = new QGridLayout();
         QBoxLayout *boxlayout4 = qobject_cast<QBoxLayout *>(m_WireframeGroupBox->layout());
         if (boxlayout4)
@@ -300,7 +300,7 @@ public:
         buttonGroup5->setObjectName(QString::fromUtf8("buttonGroup5"));
         buttonGroup5->setColumnLayout(0, Qt::Vertical);
         buttonGroup5->layout()->setSpacing(6);
-        buttonGroup5->layout()->setMargin(11);
+        buttonGroup5->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout8 = new QGridLayout();
         QBoxLayout *boxlayout5 = qobject_cast<QBoxLayout *>(buttonGroup5->layout());
         if (boxlayout5)
@@ -345,7 +345,7 @@ public:
         m_SurfaceGroupBox->setObjectName(QString::fromUtf8("m_SurfaceGroupBox"));
         m_SurfaceGroupBox->setColumnLayout(0, Qt::Vertical);
         m_SurfaceGroupBox->layout()->setSpacing(6);
-        m_SurfaceGroupBox->layout()->setMargin(11);
+        m_SurfaceGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout9 = new QGridLayout();
         QBoxLayout *boxlayout6 = qobject_cast<QBoxLayout *>(m_SurfaceGroupBox->layout());
         if (boxlayout6)
@@ -373,7 +373,7 @@ public:
         buttonGroup4->setObjectName(QString::fromUtf8("buttonGroup4"));
         buttonGroup4->setColumnLayout(0, Qt::Vertical);
         buttonGroup4->layout()->setSpacing(6);
-        buttonGroup4->layout()->setMargin(11);
+        buttonGroup4->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout10 = new QGridLayout();
         QBoxLayout *boxlayout7 = qobject_cast<QBoxLayout *>(buttonGroup4->layout());
         if (boxlayout7)
@@ -534,7 +534,7 @@ class SurfaceRenderingPropertiesBase : public QWidget, public Ui::SurfaceRenderi
     Q_OBJECT
 
 public:
-    SurfaceRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = 0);
+    SurfaceRenderingPropertiesBase(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
     ~SurfaceRenderingPropertiesBase();
 
 protected slots:

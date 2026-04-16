@@ -31,7 +31,7 @@ namespace Ui
 class BallAndStickRenderingProperties : public QWidget
 {
 	public:
-		BallAndStickRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WFlags fl = 0);
+		BallAndStickRenderingProperties(QWidget* parent = 0, const char* name = 0, Qt::WindowFlags fl = {});
 		virtual ~BallAndStickRenderingProperties();
 
 	Ui::BallAndStickRenderingProperties* _ui;

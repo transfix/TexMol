@@ -97,9 +97,9 @@ using namespace std ;
 ===========================================================================
 */
 
-#ifndef TRUE
-#define FALSE              0
-#define TRUE               1
+#ifndef true
+#define false              0
+#define true               1
 #endif
 
 #define LEFT               0
@@ -111,7 +111,7 @@ using namespace std ;
 #define CLIP               0
 #define SUBJ               1
 
-#define INVERT_TRISTRIPS   FALSE
+#define INVERT_TRISTRIPS   false
 
 
 /*
@@ -542,8 +542,8 @@ static edge_node *build_lmt(lmt_node **lmt, sb_tree **sbtree,
 		  e_index+= num_edges;
 		  v= min;
 		  e[0].bstate[BELOW]= UNBUNDLED;
-		  e[0].bundle[BELOW][CLIP]= FALSE;
-		  e[0].bundle[BELOW][SUBJ]= FALSE;
+		  e[0].bundle[BELOW][CLIP]= false;
+		  e[0].bundle[BELOW][SUBJ]= false;
 		  for (i= 0; i < num_edges; i++)
 		  {
 			e[i].xb= edge_table[v].vertex.x;
@@ -592,8 +592,8 @@ static edge_node *build_lmt(lmt_node **lmt, sb_tree **sbtree,
 		  e_index+= num_edges;
 		  v= min;
 		  e[0].bstate[BELOW]= UNBUNDLED;
-		  e[0].bundle[BELOW][CLIP]= FALSE;
-		  e[0].bundle[BELOW][SUBJ]= FALSE;
+		  e[0].bundle[BELOW][CLIP]= false;
+		  e[0].bundle[BELOW][SUBJ]= false;
 		  for (i= 0; i < num_edges; i++)
 		  {
 			e[i].xb= edge_table[v].vertex.x;
@@ -848,7 +848,7 @@ static void merge_left(polygon_node *p, polygon_node *q, polygon_node *list)
   if(q == nullptr) throw runtime_error("GPC: Something's wrong.") ;
 
   /* Label contour as a hole */
-  q->proxy->hole= TRUE;
+  q->proxy->hole= true;
 
   if (p->proxy != q->proxy)
   {
@@ -862,7 +862,7 @@ static void merge_left(polygon_node *p, polygon_node *q, polygon_node *list)
 	{
 	  if (list->proxy == target)
 	  {
-		list->active= FALSE;
+		list->active= false;
 		list->proxy= q->proxy;
 	  }
 	}
@@ -899,7 +899,7 @@ static void merge_right(polygon_node *p, polygon_node *q, polygon_node *list)
 
 
   /* Label contour as external */
-  q->proxy->hole= FALSE;
+  q->proxy->hole= false;
 
   if (p->proxy != q->proxy)
   {
@@ -912,7 +912,7 @@ static void merge_right(polygon_node *p, polygon_node *q, polygon_node *list)
 	{
 	  if (list->proxy == target)
 	  {
-		list->active= FALSE;
+		list->active= false;
 		list->proxy= q->proxy;
 	  }
 	}
@@ -941,7 +941,7 @@ static void add_local_min(polygon_node **p, edge_node *edge,
 
   /* Initialise proxy to point to p itself */
   (*p)->proxy= (*p);
-  (*p)->active= TRUE;
+  (*p)->active= true;
   (*p)->next= existing_min;
 
   /* Make v[LEFT] and v[RIGHT] point to new vertex nv */
@@ -1118,7 +1118,7 @@ void gpc_read_polygon(FILE *fp, int read_hole_flags, gpc_polygon *p)
 	if (read_hole_flags)
 	  fscanf(fp, "%d", &(p->hole[c]));
 	else
-	  p->hole[c]= FALSE; // Assume all contours to be external
+	  p->hole[c]= false; // Assume all contours to be external
 
 	MALLOC(p->contour[c].vertex, p->contour[c].num_vertices
 		   * sizeof(gpc_vertex), "vertex creation", gpc_vertex);
@@ -1291,14 +1291,14 @@ void gpc_polygon_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 
 	/* Set up bundle fields of first edge */
 	aet->bundle[ABOVE][ aet->type]= (aet->top.y != yb);
-	aet->bundle[ABOVE][!aet->type]= FALSE;
+	aet->bundle[ABOVE][!aet->type]= false;
 	aet->bstate[ABOVE]= UNBUNDLED;
 
 	for (next_edge= aet->next; next_edge; next_edge= next_edge->next)
 	{
 	  /* Set up bundle fields of next edge */
 	  next_edge->bundle[ABOVE][ next_edge->type]= (next_edge->top.y != yb);
-	  next_edge->bundle[ABOVE][!next_edge->type]= FALSE;
+	  next_edge->bundle[ABOVE][!next_edge->type]= false;
 	  next_edge->bstate[ABOVE]= UNBUNDLED;
 
 	  /* Bundle edges above the scanbeam boundary if they coincide */
@@ -1312,8 +1312,8 @@ void gpc_polygon_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 		  next_edge->bundle[ABOVE][!next_edge->type]=
 			e0->bundle[ABOVE][!next_edge->type];
 		  next_edge->bstate[ABOVE]= BUNDLE_HEAD;
-		  e0->bundle[ABOVE][CLIP]= FALSE;
-		  e0->bundle[ABOVE][SUBJ]= FALSE;
+		  e0->bundle[ABOVE][CLIP]= false;
+		  e0->bundle[ABOVE][SUBJ]= false;
 		  e0->bstate[ABOVE]= BUNDLE_TAIL;
 		}
 		e0= next_edge;
@@ -1704,17 +1704,17 @@ void gpc_polygon_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 
 		if (e0->bstate[ABOVE] == BUNDLE_HEAD)
 		{
-		  search= TRUE;
+		  search= true;
 		  while (search)
 		  {
 			prev_edge= prev_edge->prev;
 			if (prev_edge)
 			{
 			  if (prev_edge->bstate[ABOVE] != BUNDLE_TAIL)
-				search= FALSE;
+				search= false;
 			}
 			else
-			  search= FALSE;
+			  search= false;
 		  }
 		}
 		if (!prev_edge)
@@ -1944,14 +1944,14 @@ void gpc_tristrip_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 
 	/* Set up bundle fields of first edge */
 	aet->bundle[ABOVE][ aet->type]= (aet->top.y != yb);
-	aet->bundle[ABOVE][!aet->type]= FALSE;
+	aet->bundle[ABOVE][!aet->type]= false;
 	aet->bstate[ABOVE]= UNBUNDLED;
 
 	for (next_edge= aet->next; next_edge; next_edge= next_edge->next)
 	{
 	  /* Set up bundle fields of next edge */
 	  next_edge->bundle[ABOVE][ next_edge->type]= (next_edge->top.y != yb);
-	  next_edge->bundle[ABOVE][!next_edge->type]= FALSE;
+	  next_edge->bundle[ABOVE][!next_edge->type]= false;
 	  next_edge->bstate[ABOVE]= UNBUNDLED;
 
 	  /* Bundle edges above the scanbeam boundary if they coincide */
@@ -1965,8 +1965,8 @@ void gpc_tristrip_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 		  next_edge->bundle[ABOVE][!next_edge->type]=
 			e0->bundle[ABOVE][!next_edge->type];
 		  next_edge->bstate[ABOVE]= BUNDLE_HEAD;
-		  e0->bundle[ABOVE][CLIP]= FALSE;
-		  e0->bundle[ABOVE][SUBJ]= FALSE;
+		  e0->bundle[ABOVE][CLIP]= false;
+		  e0->bundle[ABOVE][SUBJ]= false;
 		  e0->bstate[ABOVE]= BUNDLE_TAIL;
 		}
 		e0= next_edge;
@@ -2393,7 +2393,7 @@ void gpc_tristrip_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 
 		if (e0->bstate[ABOVE] == BUNDLE_HEAD)
 		{
-		  search= TRUE;
+		  search= true;
 		  while (search)
 		  {
 			prev_edge= prev_edge->prev;
@@ -2402,10 +2402,10 @@ void gpc_tristrip_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
 			  if (prev_edge->bundle[ABOVE][CLIP]
 			   || prev_edge->bundle[ABOVE][SUBJ]
 			   || (prev_edge->bstate[ABOVE] == BUNDLE_HEAD))
-				search= FALSE;
+				search= false;
 			}
 			else
-			  search= FALSE;
+			  search= false;
 		  }
 		}
 		if (!prev_edge)

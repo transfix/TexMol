@@ -27,7 +27,7 @@
 #include <q3listbox.h>
 #include <qpushbutton.h>
 
-TransformationsDialog::TransformationsDialog(QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+TransformationsDialog::TransformationsDialog(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: TransformationsDialogBase(parent, name, modal, fl)
 {
 	m_CurrentTransformationsListBox->clear();

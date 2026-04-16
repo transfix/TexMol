@@ -38,7 +38,7 @@ class GeneralizedBornDialog : public QDialog
 {
   Q_OBJECT
     public:
-  GeneralizedBornDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  GeneralizedBornDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   
   virtual ~GeneralizedBornDialog();
   

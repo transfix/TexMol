@@ -30,7 +30,7 @@ ArgumentList::~ArgumentList()
 
 bool ArgumentList::addNewCommand(QString command)
 {
-	QStringList str = QStringList::split(' ', command);
+	QStringList str = command.split(QChar(' '));
 	if (str.size() < 1)
 	{
 		return false;

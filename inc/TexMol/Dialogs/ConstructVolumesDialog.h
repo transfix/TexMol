@@ -20,7 +20,9 @@
 */
 #ifndef ConstructVOLUMES_H
 #define ConstructVOLUMES_H
-#include "ConstructVolumesDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog ConstructVolumesDialogBase;
 
 class VolumeData;
 class DataManager;
@@ -35,7 +37,7 @@ class ConstructVolumes : public ConstructVolumesDialogBase
 		Q_OBJECT
 
 	public:
-		ConstructVolumes(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		ConstructVolumes(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~ConstructVolumes();
 		bool constructVolume(DataManager* dataManager, PDBParser::GroupOfAtoms* groupOfAtoms, VolumeData* vData);
 		bool loadFile();

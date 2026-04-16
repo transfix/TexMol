@@ -20,7 +20,7 @@
 */
 #include <TexMol/Dialogs/MouseHandlerDialog.h>
 
-MouseHandlerDialog::MouseHandlerDialog(QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+MouseHandlerDialog::MouseHandlerDialog(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: MouseHandlerDialogBase(parent, name, modal, fl)
 {
 }

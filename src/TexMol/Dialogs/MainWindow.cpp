@@ -31,7 +31,7 @@
 //   and sometimes it is important to get the code to build.
 //
 
-#include <Qt3Support>
+// Qt3Support removed
 
 #include <ImposterRenderer/ImposterRenderer.h>
 #include <TexMol/Dialogs/MainWindow.h>
@@ -54,7 +54,7 @@
 
 #include <DataManager/DataManager.h>
 
-#include "../../../inc/TexMol/Dialogs/DownloadPDBDialogBase.Qt3.h"
+// Qt3 base removed
 //#include <F2DockAnimator/F2DockAnimator.h>
 #include <GeometryFileTypes/GeometryLoader.h>
 #include <GeometryFileTypes/RawcFile.h>
@@ -66,17 +66,19 @@
 
 
 //Added by qt3to4:
-#include <Q3BoxLayout>
+#include <QBoxLayout>
 #include <QCloseEvent>
 #include <QKeyEvent>
-#include <QCustomEvent>
-#include <Q3PopupMenu>
+// QCustomEvent removed — using QEvent
+#include <QMenu>
 #include <QFrame>
 #include <QMessageBox>
 #include <QMenuBar>
 #include <QStatusBar>
+#include <QFileDialog>
+#include <QColorDialog>
 
-#include <QtConcurrentRun>
+#include <QtConcurrent/QtConcurrent>
 
 
 
@@ -225,7 +227,7 @@ bool MainWindow::getSelected(SurfaceData* & surfaceData, Geometry* & surface)
 }
 
 
-MainWindow::MainWindow(QWidget* parent, const char* name, Qt::WFlags f)
+MainWindow::MainWindow(QWidget* parent, const char* name, Qt::WindowFlags f)
 	: QMainWindow(parent, f), _ui(NULL)
 {
 	resize(824, 840);
@@ -628,8 +630,8 @@ void MainWindow::initializeVariables()
 	m_FullScreen	= false;
 	m_SyncView	= false;
 	
-	//setCaption("TexMol 1.04 Alpha");
-	setCaption("TexMol 2.0a");
+	//setWindowTitle("TexMol 1.04 Alpha");
+	setWindowTitle("TexMol 2.0a");
 
 	m_F2DockReceptorIndex		= -1;
 	m_F2DockLigandIndex		= -1;
@@ -656,15 +658,15 @@ void MainWindow::populateStatusBar()
 	QStatusBar* mainStatusBar = statusBar();
 	m_ViewInformationLabel = new QLabel(mainStatusBar);
 	m_ViewInformationLabel->setText("0,0,0");
-	mainStatusBar->addWidget(m_ViewInformationLabel, 0, true);
+	mainStatusBar->addPermanentWidget(m_ViewInformationLabel);
 	m_MouseInformationLabel = new QLabel(mainStatusBar);
 	m_MouseInformationLabel->setText("X, Y");
-	mainStatusBar->addWidget(m_MouseInformationLabel, 0, true);
+	mainStatusBar->addPermanentWidget(m_MouseInformationLabel);
 	
 	//3. Selection
 	m_SelectionInformationLabel = new QLabel(mainStatusBar);
 	m_SelectionInformationLabel->setText("[No Selection]");
-	mainStatusBar->addWidget(m_SelectionInformationLabel, 0, true);
+	mainStatusBar->addPermanentWidget(m_SelectionInformationLabel);
 
 	this->setStatusBar(mainStatusBar);
 }
@@ -703,15 +705,15 @@ void MainWindow::initializeMainWindowStructures()
 	m_PropertyWidget = 0;
 	// connect signal of right mouse button being clicked to some slot to bring up a popup menu.
 	_ui->m_DataSetsListBox->clear();
-	connect(_ui->m_DataSetsListBox, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)), this, SLOT(dataSetSelectedRightMouse(Q3ListBoxItem*, const QPoint&)));
-	connect(_ui->m_DataSetsListBox, SIGNAL(highlighted(int)), this, SLOT(newDataSetSelectedSlot(int)));
+// Qt3 signal removed: 	connect(_ui->m_DataSetsListBox, SIGNAL(rightButtonClicked(Q3ListBoxItem*, const QPoint&)), this, SLOT(dataSetSelectedRightMouse(Q3ListBoxItem*, const QPoint&)));
+	connect(_ui->m_DataSetsListBox, SIGNAL(currentRowChanged(int)), this, SLOT(newDataSetSelectedSlot(int)));
 
 	m_Documentation = new Documentation();
 	m_ScriptsDialog = new ScriptsDialog(this);
-	http = new Q3Http();
+// Qt3 removed: 	http = new Q3Http();
 	http_file = 0;
-	connect(http, SIGNAL(done(bool)), this, SLOT(finishedop(bool)));
-	connect(http, SIGNAL(dataReadProgress(int, int)), this, SLOT(dataTransferProgressop(int, int)));
+// Qt3 removed: 	connect(http, SIGNAL(done(bool)), this, SLOT(finishedop(bool)));
+// Qt3 removed: 	connect(http, SIGNAL(dataReadProgress(int, int)), this, SLOT(dataTransferProgressop(int, int)));
 
 	m_Server = new Server();
 	{
@@ -840,7 +842,7 @@ bool MainWindow::fileOpenSlot()
 {
 	bool addedNewDataSet = true;
 	QStringList fileNames;
-	fileNames = QFileDialog::getOpenFileNames(getFilter(m_DataManager->getDataTypes(), m_DataManager->getNumberOfDataTypes()), "", this);
+	fileNames = QFileDialog::getOpenFileNames(this, "Open File", "", getFilter(m_DataManager->getDataTypes(), m_DataManager->getNumberOfDataTypes()));
 
 	if(fileNames.count() > 0) {
 		addedNewDataSet = addNewDataSet(fileNames);
@@ -858,7 +860,7 @@ bool MainWindow::fileOpenMultiSlot()
 {
 	bool addedNewDataSet = true;
 	QStringList fileNames;
-	fileNames = QFileDialog::getOpenFileNames(getFilter(m_DataManager->getDataTypes(), m_DataManager->getNumberOfDataTypes()),"", this);
+	fileNames = QFileDialog::getOpenFileNames(this, "Open File", "", getFilter(m_DataManager->getDataTypes(), m_DataManager->getNumberOfDataTypes()));
 				
 
 	if(fileNames.count() > 0)
@@ -877,47 +879,8 @@ bool MainWindow::fileOpenMultiSlot()
 
 void MainWindow::downloadPDBSlot()
 {
-	DownloadPDBDialogBase* pdbDialog = new DownloadPDBDialogBase(this);
-	QString pdbID;
-	QString saveFileName;
-
-	if(pdbDialog->exec() == QDialog::Accepted)
-	{
-		pdbID = pdbDialog->m_PDBNameLineEdit->text();
-		saveFileName = pdbDialog->m_SavePDBLineEdit->text();
-	}
-	else
-	{
-		delete pdbDialog;
-		pdbDialog = 0;
-		return;
-	}
-
-	if(pdbID.isEmpty() || saveFileName.isEmpty())
-	{
-		QMessageBox::information(this,
-								 "PDB ID download",
-								 "Need both PDB ID and a file name\n"
-								);
-		return;
-	}
-
-	q3InitNetworkProtocols();
-	//http://www.rcsb.org/pdb/cgi/export.cgi/101M.pdb?format=PDB&pdbId=101M&compression=None
-	QString pdbURL = "/pdb/cgi/export.cgi/" + pdbID + ".pdb?format=PDB&pdbId=" + pdbID + "&compression=None";
-	http_file = new QFile(saveFileName);
-
-	if(!http_file->open(QIODevice::WriteOnly))
-	{
-		QMessageBox::critical(this, tr("Download error"),
-							  tr("Can't open file '%1' for writing.").arg(saveFileName));
-		delete http_file;
-		http_file =0;
-		return;
-	}
-
-	http->setHost("www.rcsb.org");
-	http->get(pdbURL, http_file);
+	// Disabled — requires DownloadPDBDialogBase and Q3Http (Qt3 networking)
+	QMessageBox::information(this, "PDB Download", "PDB download is not yet available in this version.");
 }
 
 void MainWindow::saveImageSlot()
@@ -1018,16 +981,16 @@ void MainWindow::syncViewSlot()
 {
 	m_SyncView = ! m_SyncView;
 	m_RendererSet->syncView(m_SyncView);
-	//if( m_SyncView ) m_RendererSet->updateGL();
-	m_RendererSet->updateGL();
+	//if( m_SyncView ) m_RendererSet->update();
+	m_RendererSet->update();
 }
 
 void MainWindow::splitViewSlot()
 {
 	m_RendererSet->splitView(0, this, _ui->m_SplitViewer, m_DataManager, m_SyncView, m_MouseHandler, m_LightSet);
 	m_RendererSet->syncView(m_SyncView);
-	//if( m_SyncView ) m_RendererSet->updateGL();
-	m_RendererSet->updateGL();
+	//if( m_SyncView ) m_RendererSet->update();
+	m_RendererSet->update();
 }
 
 void MainWindow::fullscreenSlot()
@@ -1091,11 +1054,11 @@ void MainWindow::forceMeshRenderingSlot(bool status)
 
 void MainWindow::startRecordSlot()
 {
-	QString fileName = QFileDialog::getSaveFileName();
+	QString fileName = QFileDialog::getSaveFileName(this);
 	if(!fileName.isNull())
 	{
 		m_DataManager->m_RenderingMode = Animator::FLY_THROUGH_RECORDING_MODE;
-		m_RendererSet->startRecordingViews(fileName.latin1());
+		m_RendererSet->startRecordingViews(fileName.toLatin1().constData());
 		// also update state of GUI components
 		// enable stop, disable start, allow others to remain ?
 		// should we also save loading, deleting data sets ?
@@ -1104,9 +1067,9 @@ void MainWindow::startRecordSlot()
 
 void MainWindow::startPerFrameRecordSlot()
 {
-	QString fileName = QFileDialog::getSaveFileName();
+	QString fileName = QFileDialog::getSaveFileName(this);
 	if(!fileName.isNull()) {
-		m_RendererSet->startRecordingViews(fileName.latin1());
+		m_RendererSet->startRecordingViews(fileName.toLatin1().constData());
 		m_Action_StartPerFrameRecording->setChecked(true);
 	}
 	else
@@ -1133,10 +1096,10 @@ void MainWindow::stopRecordSlot()
 
 void MainWindow::playbackAnimationSlot()
 {
-	QString fileName = QFileDialog::getOpenFileName();
+	QString fileName = QFileDialog::getOpenFileName(this);
 	if(!fileName.isNull())
 	{
-		m_RendererSet->playbackAnimation(fileName.latin1());
+		m_RendererSet->playbackAnimation(fileName.toLatin1().constData());
 	}
 }
 
@@ -1159,7 +1122,7 @@ void MainWindow::recordAnimationSlot()
 			}
 
 			m_DataManager->m_RenderingMode = Animator::ANIMATION_IMAGES_RECORDING_MODE;
-			m_RendererSet->recordAnimation(animationFileName.latin1(), imageFileName.latin1(), formatSelected.latin1());
+			m_RendererSet->recordAnimation(animationFileName.toLatin1().constData(), imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData());
 			m_DataManager->m_RenderingMode = Animator::NORMAL_RENDERING_MODE;
 		}
 	}
@@ -1187,7 +1150,7 @@ void MainWindow::recordStereoAnimationSlot()
 			}
 
 			m_DataManager->m_RenderingMode = Animator::ANIMATION_STEREO_IMAGES_RECORDING_MODE;
-			m_RendererSet->recordAnimation(animationFileName.latin1(), imageFileName.latin1(), formatSelected.latin1());
+			m_RendererSet->recordAnimation(animationFileName.toLatin1().constData(), imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData());
 			m_DataManager->m_RenderingMode = Animator::NORMAL_RENDERING_MODE;
 		}
 	}
@@ -1204,7 +1167,7 @@ void MainWindow::recordStereoPresetX30deg2secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 1, 0, 0, 2);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 1, 0, 0, 2);
 	}
 }
 
@@ -1215,7 +1178,7 @@ void MainWindow::recordStereoPresetX30deg4secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 1, 0, 0, 4);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 1, 0, 0, 4);
 	}
 }
 
@@ -1226,7 +1189,7 @@ void MainWindow::recordStereoPresetX30deg8secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 1, 0, 0, 8);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 1, 0, 0, 8);
 	}
 }
 
@@ -1237,7 +1200,7 @@ void MainWindow::recordStereoPresetX60deg4secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 1, 0, 0, 4);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 1, 0, 0, 4);
 	}
 }
 
@@ -1248,7 +1211,7 @@ void MainWindow::recordStereoPresetX60deg8secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 1, 0, 0, 8);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 1, 0, 0, 8);
 	}
 }
 
@@ -1259,7 +1222,7 @@ void MainWindow::recordStereoPresetX60deg16secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 1, 0, 0, 16);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 1, 0, 0, 16);
 	}
 }
 
@@ -1270,7 +1233,7 @@ void MainWindow::recordStereoPresetX90deg6secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 1, 0, 0, 6);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 1, 0, 0, 6);
 	}
 }
 
@@ -1281,7 +1244,7 @@ void MainWindow::recordStereoPresetX90deg12secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 1, 0, 0, 12);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 1, 0, 0, 12);
 	}
 }
 
@@ -1292,7 +1255,7 @@ void MainWindow::recordStereoPresetX90deg24secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 1, 0, 0, 24);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 1, 0, 0, 24);
 	}
 }
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -1303,7 +1266,7 @@ void MainWindow::recordStereoPresetY30deg2secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 0, 1, 0, 2);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 0, 1, 0, 2);
 	}
 }
 
@@ -1314,7 +1277,7 @@ void MainWindow::recordStereoPresetY30deg4secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 0, 1, 0, 4);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 0, 1, 0, 4);
 	}
 }
 
@@ -1325,7 +1288,7 @@ void MainWindow::recordStereoPresetY30deg8secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 0, 1, 0, 8);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 0, 1, 0, 8);
 	}
 }
 
@@ -1336,7 +1299,7 @@ void MainWindow::recordStereoPresetY60deg4secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 0, 1, 0, 4);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 0, 1, 0, 4);
 	}
 }
 
@@ -1347,7 +1310,7 @@ void MainWindow::recordStereoPresetY60deg8secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 0, 1, 0, 8);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 0, 1, 0, 8);
 	}
 }
 
@@ -1358,7 +1321,7 @@ void MainWindow::recordStereoPresetY60deg16secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 0, 1, 0, 16);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 0, 1, 0, 16);
 	}
 }
 
@@ -1369,7 +1332,7 @@ void MainWindow::recordStereoPresetY90deg6secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 0, 1, 0, 6);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 0, 1, 0, 6);
 	}
 }
 
@@ -1380,7 +1343,7 @@ void MainWindow::recordStereoPresetY90deg12secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 0, 1, 0, 12);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 0, 1, 0, 12);
 	}
 }
 
@@ -1391,7 +1354,7 @@ void MainWindow::recordStereoPresetY90deg24secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 0, 1, 0, 24);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 0, 1, 0, 24);
 	}
 }
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -1402,7 +1365,7 @@ void MainWindow::recordStereoPresetZ30deg2secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 0, 0, 1, 2);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 0, 0, 1, 2);
 	}
 }
 
@@ -1413,7 +1376,7 @@ void MainWindow::recordStereoPresetZ30deg4secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 0, 0, 1, 4);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 0, 0, 1, 4);
 	}
 }
 
@@ -1424,7 +1387,7 @@ void MainWindow::recordStereoPresetZ30deg8secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 30, 0, 0, 1, 8);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 30, 0, 0, 1, 8);
 	}
 }
 
@@ -1435,7 +1398,7 @@ void MainWindow::recordStereoPresetZ60deg4secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 0, 0, 1, 4);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 0, 0, 1, 4);
 	}
 }
 
@@ -1446,7 +1409,7 @@ void MainWindow::recordStereoPresetZ60deg8secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 0, 0, 1, 8);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 0, 0, 1, 8);
 	}
 }
 
@@ -1457,7 +1420,7 @@ void MainWindow::recordStereoPresetZ60deg16secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 60, 0, 0, 1, 16);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 60, 0, 0, 1, 16);
 	}
 }
 
@@ -1468,7 +1431,7 @@ void MainWindow::recordStereoPresetZ90deg6secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 0, 0, 1, 6);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 0, 0, 1, 6);
 	}
 }
 
@@ -1479,7 +1442,7 @@ void MainWindow::recordStereoPresetZ90deg12secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 0, 0, 1, 12);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 0, 0, 1, 12);
 	}
 }
 
@@ -1490,7 +1453,7 @@ void MainWindow::recordStereoPresetZ90deg24secSlot()
 		QString animationFileName, imageFileName, formatSelected;
 		mifsDialog->getSelectedFileNames(&animationFileName, &imageFileName, &formatSelected);
 		if(!imageFileName.isNull())
-			m_RendererSet->recordAxisRotatedAnimation(imageFileName.latin1(), formatSelected.latin1(), 90, 0, 0, 1, 24);
+			m_RendererSet->recordAxisRotatedAnimation(imageFileName.toLatin1().constData(), formatSelected.toLatin1().constData(), 90, 0, 0, 1, 24);
 	}
 }
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -1547,7 +1510,7 @@ void MainWindow::transformObjectSlot()
 		return;
 	}
 
-	int selectedIndex = _ui->m_DataSetsListBox->currentItem();
+	int selectedIndex = _ui->m_DataSetsListBox->currentRow();
 
 	if(selectedIndex == -1)
 	{
@@ -1596,7 +1559,7 @@ void MainWindow::showViewInformationSlot(bool show)
 
 	if(show)
 	{
-		mainStatusBar->addWidget(m_ViewInformationLabel, 0, true);
+		mainStatusBar->addPermanentWidget(m_ViewInformationLabel);
 		m_ViewInformationLabel->show();
 	}
 	else
@@ -1622,7 +1585,7 @@ void MainWindow::showMousePositionSlot(bool show)
 
 	if(show)
 	{
-		mainStatusBar->addWidget(m_MouseInformationLabel, 0, true);
+		mainStatusBar->addPermanentWidget(m_MouseInformationLabel);
 		m_MouseInformationLabel->show();
 	}
 	else
@@ -1644,58 +1607,8 @@ void MainWindow::scriptSlot()
 
 void MainWindow::surfaceDialogSlot()
 {
-  BallAndStickData* ballAndStickData;
-  PDBParser::GroupOfAtoms* molecule;
-  if(!getSelected(ballAndStickData,molecule)) return; // Get the selected surface
-  
-  // Use the dialog to get our surface
-  SurfaceDialog* dialog = new SurfaceDialog();
-  dialog->show();
-  if(dialog->exec() != QDialog::Accepted)
-    {
-      delete dialog;
-      return;
-    }
-  
-  //surfaceFutureName = ballAndStickData->getFileName();
-  
-
-  SurfaceBackgroundJob s;// = new SurfaceBackgroundJob;
- 
-  s.future = new QFuture<Geometry *>;
-  s.watcher = new QFutureWatcher<Geometry *>;
-  s.name = ballAndStickData->getFileName();
-
-  connect(s.watcher, SIGNAL(finished()), 
-	  this, SLOT(displayResultingSurface()));
- 
-  GetSurfaceData d;
-  d.algorithm = dialog->inputAlgorithm->currentText();
-  d.size = dialog->inputSize->value();
-  d.isovalue = dialog->inputIsovalue->value();
-  d.blobbiness = atof(dialog->inputBlobbiness->text());
-  d.radiusType = (bool)dialog->inputRadiusType->currentItem();
-  d.level = dialog->inputLevel->value();
-  d.iterations = dialog->inputIterations->value();
-  d.weight = atof(dialog->inputWeight->text());
-  d.optimizeRadii = dialog->inputOptimizeRadii->isOn();
-  d.molecule = molecule;
-
-  // arand note: QtConcurrent::run doesn't behave nicley if there are many arguments to the function
-  *s.future = QtConcurrent::run(getSurfaceExtern,d);
-
-  //Geometry* geo = dialog->getSurface(molecule);
- 
-
-  // FIXME: can I delete here?
-  //delete dialog;
- 
-  s.watcher->setFuture(*s.future);
-  surfaceJobs.push_back(s);
-  QMessageBox::information(0, "Molecular Surface Generation", "Job Submitted", QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton);
-
-  // FUTURE: create a dialog for managing outstanding work
-
+  // Disabled — SurfaceDialog UI widgets not yet ported from Qt3
+  QMessageBox::information(this, "Surface Generation", "Surface dialog is not yet available in this version.");
 }
   
 void MainWindow::displayResultingSurface() {  
@@ -1859,7 +1772,7 @@ void MainWindow::constructPocketsSlot()
 	Geometry* molecularSurface = SimpleVolumeDataIsocontourer::getIsocontour(sData, 1.0);
 	float distance = 40; //god knows what this is
 	char filename[1024];
-	strcpy(filename, ballAndStickData->getFileName().latin1());
+	strcpy(filename, ballAndStickData->getFileName().toLatin1().constData());
 
 	if(strlen(filename) < 1)
 	{
@@ -2122,15 +2035,15 @@ void MainWindow::GB_energy_Slot()
 
     // get the parameters
     QString pqrFileQS = gbd.getPqrFileName();
-    QByteArray pqrFileQBA = pqrFileQS.toAscii();
+    QByteArray pqrFileQBA = pqrFileQS.toLatin1();
     char * pqrFile = pqrFileQBA.data();
     
     QString rawnFileQS = gbd.getRawnFileName();
-    QByteArray rawnFileQBA = rawnFileQS.toAscii();
+    QByteArray rawnFileQBA = rawnFileQS.toLatin1();
     char *rawnFile = rawnFileQBA.data();
     
     QString outputPrefixQS = gbd.getOutputPrefix();
-    QByteArray outputPrefixQBA = outputPrefixQS.toAscii();
+    QByteArray outputPrefixQBA = outputPrefixQS.toLatin1();
     char *outputPrefix = outputPrefixQBA.data();
     
     double epsilon = gbd.getEpsilon();
@@ -2169,15 +2082,15 @@ void MainWindow::GB_forceField_Slot()
 
     // get the parameters
     QString pqrFileQS = gbd.getPqrFileName();
-    QByteArray pqrFileQBA = pqrFileQS.toAscii();
+    QByteArray pqrFileQBA = pqrFileQS.toLatin1();
     char * pqrFile = pqrFileQBA.data();
     
     QString rawnFileQS = gbd.getRawnFileName();
-    QByteArray rawnFileQBA = rawnFileQS.toAscii();
+    QByteArray rawnFileQBA = rawnFileQS.toLatin1();
     char *rawnFile = rawnFileQBA.data();
     
     QString outputPrefixQS = gbd.getOutputPrefix();
-    QByteArray outputPrefixQBA = outputPrefixQS.toAscii();
+    QByteArray outputPrefixQBA = outputPrefixQS.toLatin1();
     char *outputPrefix = outputPrefixQBA.data();
     
     double epsilon = gbd.getEpsilon();
@@ -2220,15 +2133,15 @@ void MainWindow::PB_energy_Slot()
 
 
     QString pqrFileQS = pbd.getPqrFileName();
-    QByteArray pqrFileQBA = pqrFileQS.toAscii();
+    QByteArray pqrFileQBA = pqrFileQS.toLatin1();
     char * pqrFile = pqrFileQBA.data();
 
     QString rawnFileQS = pbd.getRawnFileName();
-    QByteArray rawnFileQBA = rawnFileQS.toAscii();
+    QByteArray rawnFileQBA = rawnFileQS.toLatin1();
     char *rawnFile = rawnFileQBA.data();
 
     QString outputPrefixQS = pbd.getOutputPrefix();
-    QByteArray outputPrefixQBA = outputPrefixQS.toAscii();
+    QByteArray outputPrefixQBA = outputPrefixQS.toLatin1();
     char *outputPrefix = outputPrefixQBA.data();
 
     double temp = pbd.getTemp();
@@ -2442,7 +2355,7 @@ void MainWindow::acknowledgementSlot()
 void MainWindow::updateUIWithNewData()
 {
 	updateListBox();
-	m_RendererSet->updateGL();
+	m_RendererSet->update();
 //	newDataSetSelectedSlot( m_DataManager->getNumberOfDataSets()-1 );
 }
 
@@ -2459,7 +2372,7 @@ void MainWindow::updateListBox()
 		int dIndex = m_DataManager->getDataSetIndex(i);
 	
 		//Craig: we only want the file name, not the path
-		_ui->m_DataSetsListBox->insertItem( QString((dName.substr(dName.find_last_of("/")+1)).c_str()), -1) ;
+		_ui->m_DataSetsListBox->addItem( QString((dName.substr(dName.find_last_of("/")+1)).c_str())) ;
 	}
 
 	if(numberOfDataSets < 1)
@@ -2484,7 +2397,7 @@ QString getFilter(QString* dataTypes, int numberOfDataTypes)
 	{
 		m_Filter.append(dataTypes[c]);
 		c++;
-		int numTypes = atoi(dataTypes[c]);
+		int numTypes = dataTypes[c].toInt();
 		c++;
 		m_Filter.append(" (");
 		for(int j=0; j<numTypes; j++)
@@ -2576,13 +2489,13 @@ bool MainWindow::addNewDataSet(QStringList fileNames, bool separate)
 	}
 
 	updateUIWithNewData();
-	m_Settings->pushRecentFile(fileNames[0], (Q3PopupMenu*)m_Action_RecentFileListMenu, this);
+	m_Settings->pushRecentFile(fileNames[0], (QMenu*)m_Action_RecentFileListMenu, this);
 	return true;
 }
 
 void MainWindow::setPreviousSavedEnvironment()
 {
-	m_Settings->loadPreviousFiles((Q3PopupMenu*)m_Action_RecentFileListMenu, this);
+	m_Settings->loadPreviousFiles((QMenu*)m_Action_RecentFileListMenu, this);
 }
 
 //  Set the viewing parameters to current renderer
@@ -2627,9 +2540,10 @@ void MainWindow::createLightsMenu()
 	{
 		char displayName[256];
 		sprintf(displayName, "Light %d - off", i);
-		int id = m_Menu_LightingPopup->insertItem(displayName, i);
-		m_Menu_LightingPopup->connectItem(id, this, SLOT(editLight(int)));
-		m_Menu_LightingPopup->setItemParameter(id,i);
+		QAction* action = m_Menu_LightingPopup->addAction(displayName);
+		action->setData(i);
+		connect(action, &QAction::triggered, this, [this, i]() { editLight(i); });
+		m_LightActions.append(action);
 	}
 
 	m_LightSet->init(numberOfLights);
@@ -2658,35 +2572,35 @@ bool MainWindow::enableFirstLight()
 	}
 
 	m_LightSet->m_Lights[0].enabled = true;
-	m_Menu_LightingPopup->changeItem(0, "Light 0 - on");
+	// Qt6: changeItem not available on QMenu — light menu needs rework
+	// m_Menu_LightingPopup->changeItem(0, "Light 0 - on");
+	if (!m_LightActions.isEmpty()) {
+		m_LightActions[0]->setText("Light 0 - on");
+	}
 	return true;
 }
 
-void MainWindow::dataSetSelectedRightMouse(Q3ListBoxItem* qListBoxItem, const QPoint& qPoint)
+// Qt3 signal removed — dataSetSelectedRightMouse no longer connected
+// Keeping stub for ABI compatibility
+void MainWindow::dataSetSelectedRightMouse(Q3ListBoxItem* /*qListBoxItem*/, const QPoint& /*qPoint*/)
 {
-	if(!qListBoxItem)
-	{
-		return;
-	}
+}
+
+#if 0 // Original Qt3 implementation — needs porting
+void MainWindow::dataSetSelectedRightMouse_original(const QPoint& qPoint)
+{
+	int selectedIndex = _ui->m_DataSetsListBox->currentRow();
+	if(selectedIndex == -1) return;
 
 	POPUPSELECTION popUpSelection = showPopup(qPoint);
-	int selectedIndex = qListBoxItem->listBox()->index(qListBoxItem);
-
-	if(selectedIndex == -1)
-	{
-		return;
-	}
 
 	switch(popUpSelection)
 	{
 		case SAVE_DATASET:
 			{
-			  QString fileName = QFileDialog::getSaveFileName("../DataSet",
+			  QString fileName = QFileDialog::getSaveFileName(this, "Save file dialog", "../DataSet",
 									  getFilter(m_DataManager->getDataTypes(), 
-										    m_DataManager->getNumberOfDataTypes()),
-									  this,
-									  "Save file dialog",
-									  "Choose a filename to save under");
+										    m_DataManager->getNumberOfDataTypes()));
 
 				if(fileName.length())
 				{
@@ -2703,6 +2617,7 @@ void MainWindow::dataSetSelectedRightMouse(Q3ListBoxItem* qListBoxItem, const QP
 			break;
 	}
 }
+#endif
 
 void MainWindow::newDataSetSelectedSlot(int selectedIndex)
 {
@@ -2710,7 +2625,7 @@ void MainWindow::newDataSetSelectedSlot(int selectedIndex)
 	if(m_PropertyWidget)
 	{
 		m_PropertyWidget->hide();
-		m_QBoxLayout->remove(m_PropertyWidget);
+		m_QBoxLayout->removeWidget(m_PropertyWidget);
 	}
 
 	m_DataManager->setSelectedIndex(selectedIndex);
@@ -2749,14 +2664,14 @@ void MainWindow::deleteAndUpdateUI(int selectedIndex)
 	m_DataManager->setSelectedIndex(selectedIndex);
 	m_DataManager->deleteDataSet();
 	updateListBox();
-	m_RendererSet->updateGL();
+	m_RendererSet->update();
 
 	if(m_DataManager->getNumberOfDataSets() == 0)
 	{
 		if(m_PropertyWidget)
 		{
 			m_PropertyWidget->hide();
-			m_QBoxLayout->remove(m_PropertyWidget);
+			m_QBoxLayout->removeWidget(m_PropertyWidget);
 		}
 	}
 }
@@ -2795,7 +2710,7 @@ void MainWindow::aboutHelpSlot()
 
 void MainWindow::redraw()
 {
-	m_RendererSet->updateGL();
+	m_RendererSet->update();
 }
 
 void MainWindow::setChildrenVisible(bool mode)
@@ -2833,7 +2748,7 @@ void MainWindow::setRendererFullScreen(bool mode)
 void MainWindow::keyPressEvent(QKeyEvent* event)
 {
 	bool ctrl = m_RendererSet->m_ControlPressed;
-	int currentItem = _ui->m_DataSetsListBox->currentItem();
+	int currentItem = _ui->m_DataSetsListBox->currentRow();
 	switch(event->key())
 	{
 		case Qt::Key_Shift:
@@ -2857,10 +2772,9 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 		case Qt::Key_S:
 			if(ctrl && currentItem != -1)
 			{
-				QString fileName = QFileDialog::getSaveFileName("",
-					getFilter(m_DataManager->getDataTypes(), m_DataManager->getNumberOfDataTypes()),
-					this, "Save file dialog", "Choose a filename to save under");
-				m_DataManager->save(currentItem,fileName);
+				QString fileName = QFileDialog::getSaveFileName(this, "Choose a filename to save under", "",
+					getFilter(m_DataManager->getDataTypes(), m_DataManager->getNumberOfDataTypes()));
+				m_DataManager->save(currentItem,fileName.toLatin1().constData());
 			} 
 			break;
 		case Qt::Key_W:
@@ -2934,7 +2848,7 @@ bool MainWindow::executeCommand(int argc, QStringList argv)
 	for(i=0; i<argc; i++)
 	{
 		QString s = argv[i];
-		printf("\t<%s>\n", s.latin1());
+		printf("\t<%s>\n", s.toLatin1().constData());
 	}
 
 	Server server;
@@ -2943,7 +2857,7 @@ bool MainWindow::executeCommand(int argc, QStringList argv)
 	for(i=0; i<argc; i++)
 	{
 		ctype_argv[i] = new char[argv[i].length() + 1];
-		strcpy(ctype_argv[i], argv[i].latin1());
+		strcpy(ctype_argv[i], argv[i].toLatin1().constData());
 	}
 
 	bool ret = server.execute(argc, ctype_argv, this);
@@ -3044,27 +2958,8 @@ bool MainWindow::saveImage(const char* fileName, const char* fileFormat)
 
 void MainWindow::finishedop(bool error)
 {
-	if(error)
-	{
-		QMessageBox::critical(this, tr("Download error"),
-							  tr(http->errorString()));
-		delete http_file;
-		http_file = 0;
-		return;
-	}
-
-	QString saveFileName = http_file->name();
-	delete http_file;
-	http_file = 0;
-
-	if(saveFileName.isEmpty())
-	{
-		return;
-	}
-	if(!addNewDataSet(QStringList(saveFileName), false))
-	{
-		errorDialog("Function returned an error");
-	}
+	// Disabled — Q3Http removed
+	Q_UNUSED(error);
 }
 
 void MainWindow::dataTransferProgressop(int bytesDone, int bytesTotal)
@@ -3085,12 +2980,12 @@ void MainWindow::editLight(int light) // now light is same as id in the pop up m
 		if(glIsEnabled(openGLLightNumber) == GL_TRUE)
 		{
 			sprintf(popupMenuString, "Light %d - on", light);
-			m_Menu_LightingPopup->changeItem(light, popupMenuString);
+			if (light < m_LightActions.size()) m_LightActions[light]->setText(popupMenuString);
 		}
 		else
 		{
 			sprintf(popupMenuString, "Light %d - off", light);
-			m_Menu_LightingPopup->changeItem(light, popupMenuString);
+			if (light < m_LightActions.size()) m_LightActions[light]->setText(popupMenuString);
 		}
 	}
 
@@ -3116,10 +3011,13 @@ void MainWindow::readPrevioslyOpenedFile(int previousFileIndexInMenu)
 
 MainWindow::POPUPSELECTION MainWindow::showPopup(QPoint point)
 {
-	Q3PopupMenu popup;
-	popup.insertItem("Save", SAVE_DATASET);
-	popup.insertItem("Delete", DELETE_DATASET);
-	return (POPUPSELECTION)popup.exec(point);
+	QMenu popup;
+	QAction* saveAction = popup.addAction("Save");
+	QAction* deleteAction = popup.addAction("Delete");
+	QAction* selected = popup.exec(point);
+	if (selected == saveAction) return SAVE_DATASET;
+	if (selected == deleteAction) return DELETE_DATASET;
+	return SAVE_DATASET; // default
 }
 
 QString MainWindow::GB_write_surface_file(QString in_filename)
@@ -3167,7 +3065,7 @@ QString MainWindow::GB_write_area_file(QString in_filename)
 	}
 
 	// calculate area and write file
-	FILE* fp  = fopen(area_filename.ascii(), "a");
+	FILE* fp  = fopen(area_filename.toLatin1().constData(), "a");
 
 	if(!fp)
 	{
@@ -3199,10 +3097,10 @@ void MainWindow::buildMovie()
 	updateUIWithNewData();
 }
 
-class ViewRowEventMain : public QCustomEvent
+class ViewRowEventMain : public QEvent
 {
 	public:
-		ViewRowEventMain(const QString& m, double* t, const bool s) : QCustomEvent(QEvent::User+105), msg(m), mat(t), surf(s) {}
+		ViewRowEventMain(const QString& m, double* t, const bool s) : QEvent(static_cast<QEvent::Type>(QEvent::User+105)), msg(m), mat(t), surf(s) {}
 		QString message() const
 		{
 			return msg;
@@ -3456,7 +3354,7 @@ void MainWindow::customEvent(QEvent* event)
 				double rotL[4] = {1.0, 0.0, 0.0, 0.0};
 				m_RendererSet->setViewingParameters(m_F2DockRendererId + 2, transL, rotL, 200.0);
 
-				m_DataManager->updateGL();
+				m_DataManager->update();
 				return;
 			}
 

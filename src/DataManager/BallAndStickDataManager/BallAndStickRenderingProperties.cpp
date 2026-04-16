@@ -24,35 +24,35 @@
 #include <DataManager/BallAndStickDataManager/BallAndStickRenderingProperties.h>
 #include <qcombobox.h>
 
-BallAndStickRenderingProperties::BallAndStickRenderingProperties(QWidget* parent, const char* name, Qt::WFlags fl)
+BallAndStickRenderingProperties::BallAndStickRenderingProperties(QWidget* parent, const char* name, Qt::WindowFlags fl)
 	: QWidget(parent, fl)
 {
 	_ui = new Ui::BallAndStickRenderingProperties();
 	_ui->setupUi(this);
 
-	_ui->m_ComboBox_StructureLOD->insertItem("Atomic - Space filling");
+	_ui->m_ComboBox_StructureLOD->addItem("Atomic - Space filling");
 	// arand, 9-8-2011: restoring the ball and stick renderer
 	//                  I think it should work again?
-	_ui->m_ComboBox_StructureLOD->insertItem("Atomic - Ball and Stick");
-	_ui->m_ComboBox_StructureLOD->insertItem("Atomic - Backbone");
-	_ui->m_ComboBox_StructureLOD->insertItem("Residues");
-	_ui->m_ComboBox_StructureLOD->insertItem("Secondary Structures");
-	_ui->m_ComboBox_StructureLOD->insertItem("Chains");
-	_ui->m_ComboBox_StructureLOD->insertItem("Proteins");
-	_ui->m_ComboBox_StructureLOD->insertItem("HBond - all");
-	_ui->m_ComboBox_StructureLOD->insertItem("HBond - internal");
-	_ui->m_ComboBox_StructureLOD->insertItem("HBond - external");
-	//_ui->m_ComboBox_StructureLOD->insertItem("Multiresolution Surface");
+	_ui->m_ComboBox_StructureLOD->addItem("Atomic - Ball and Stick");
+	_ui->m_ComboBox_StructureLOD->addItem("Atomic - Backbone");
+	_ui->m_ComboBox_StructureLOD->addItem("Residues");
+	_ui->m_ComboBox_StructureLOD->addItem("Secondary Structures");
+	_ui->m_ComboBox_StructureLOD->addItem("Chains");
+	_ui->m_ComboBox_StructureLOD->addItem("Proteins");
+	_ui->m_ComboBox_StructureLOD->addItem("HBond - all");
+	_ui->m_ComboBox_StructureLOD->addItem("HBond - internal");
+	_ui->m_ComboBox_StructureLOD->addItem("HBond - external");
+	//_ui->m_ComboBox_StructureLOD->addItem("Multiresolution Surface");
 	// these should correspond to the set of const ints definining the structures.
-	_ui->m_ComboBox_ColorLOD->insertItem("Atoms");
-	_ui->m_ComboBox_ColorLOD->insertItem("Residues");
-	_ui->m_ComboBox_ColorLOD->insertItem("Secondary Structures");
-	_ui->m_ComboBox_ColorLOD->insertItem("Chains");
-	_ui->m_ComboBox_ColorLOD->insertItem("Proteins");
-	_ui->m_ComboBox_ColorLOD->insertItem("Function");
-	_ui->m_ComboBox_ColorLOD->insertItem("Boundary / Interior");
-	_ui->m_ComboBox_ColorLOD->insertItem("User defined color map");
-	_ui->m_ComboBox_ColorLOD->insertItem("User defined color");
+	_ui->m_ComboBox_ColorLOD->addItem("Atoms");
+	_ui->m_ComboBox_ColorLOD->addItem("Residues");
+	_ui->m_ComboBox_ColorLOD->addItem("Secondary Structures");
+	_ui->m_ComboBox_ColorLOD->addItem("Chains");
+	_ui->m_ComboBox_ColorLOD->addItem("Proteins");
+	_ui->m_ComboBox_ColorLOD->addItem("Function");
+	_ui->m_ComboBox_ColorLOD->addItem("Boundary / Interior");
+	_ui->m_ComboBox_ColorLOD->addItem("User defined color map");
+	_ui->m_ComboBox_ColorLOD->addItem("User defined color");
 }
 
 BallAndStickRenderingProperties::~BallAndStickRenderingProperties()

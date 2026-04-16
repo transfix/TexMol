@@ -59,7 +59,7 @@ public:
         layout2->setGeometry(QRect(11, 11, 210, 70));
         gridLayout = new QGridLayout(layout2);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
         outputVolume = new QLabel(layout2);
@@ -129,7 +129,7 @@ class SurfaceAreaAndVolumeDialogBase : public QDialog, public Ui::SurfaceAreaAnd
     Q_OBJECT
 
 public:
-    SurfaceAreaAndVolumeDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    SurfaceAreaAndVolumeDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~SurfaceAreaAndVolumeDialogBase();
 
 protected slots:

@@ -21,7 +21,7 @@
 #include <TexMol/Dialogs/SliceDialog.h>
 #include <PDBParser/GroupOfAtoms.h>
 
-SliceDialog::SliceDialog(PDBParser::GroupOfAtoms* molecule, QWidget* parent,  const char* name, bool modal, Qt::WFlags fl)
+SliceDialog::SliceDialog(PDBParser::GroupOfAtoms* molecule, QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
 	: SliceDialogBase(parent, name, modal, fl)
 {
 	m_Molecule = molecule;

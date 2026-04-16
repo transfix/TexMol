@@ -23,6 +23,19 @@ file(GLOB SOURCE_FILES
   ./VolumeDataManager/*.cpp
 )
 
+# Exclude Qt3 source files — these need Qt3Support which is not available in Qt6
+# To be ported in Phase 6 (Qt6 source migration)
+file(GLOB QT3_FILES ./*/*.Qt3.cpp)
+list(REMOVE_ITEM SOURCE_FILES ${QT3_FILES})
+
+# Also exclude Qt3 header files from AUTOMOC processing
+file(GLOB QT3_HEADERS ../../inc/DataManager/*/*.Qt3.h)
+set_source_files_properties(${QT3_HEADERS} PROPERTIES SKIP_AUTOMOC ON SKIP_AUTOUIC ON HEADER_FILE_ONLY ON)
+
+# Exclude duplicate headers in src/ that conflict with inc/ (AUTOMOC picks up both)
+file(GLOB SRC_DUP_HEADERS ./*/*.h ./*/*.H)
+set_source_files_properties(${SRC_DUP_HEADERS} PROPERTIES SKIP_AUTOMOC ON)
+
 # .ui files (renamed from .Qt4.ui in Phase 3)
 file(GLOB UI_FORMS
   ./SurfaceDataManager/*.ui

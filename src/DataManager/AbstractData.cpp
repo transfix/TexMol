@@ -94,14 +94,14 @@ bool AbstractData::isEnabled(int rendererId)
 void AbstractData::renderEnabledSlot(bool renderMe)
 {
 	renderEnabled[m_DataManager->getCurrentRenderer()] = renderMe;
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
-bool AbstractData::updateGL()
+bool AbstractData::update()
 {
 	if (m_DataManager)
 	{
-		return m_DataManager->updateGL();
+		return m_DataManager->update();
 	}
 	return false;
 }

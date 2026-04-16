@@ -30,7 +30,7 @@
 
 using namespace std;
 
-ResultDialog::ResultDialog(QWidget *parent,Qt::WFlags flags) 
+ResultDialog::ResultDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::resultUI;

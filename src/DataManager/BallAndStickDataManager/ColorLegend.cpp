@@ -25,9 +25,46 @@
 #include <PDBParser/GroupOfAtoms.h>
 #include <qlabel.h>
 #include <qcolor.h>
+#include <QPalette>
+#include <QFrame>
+
+// Qt6 helper: set widget background color via palette
+static void setWidgetBgColor(QWidget* w, const QColor& c) {
+	QPalette pal = w->palette();
+	pal.setColor(QPalette::Window, c);
+	pal.setColor(QPalette::WindowText, c);
+	w->setAutoFillBackground(true);
+	w->setPalette(pal);
+}
 
 ColorLegend::ColorLegend()
 {
+	// Create named widgets (were Qt3 Designer-generated)
+	residueText0 = new QLabel(this); residueText1 = new QLabel(this); residueText2 = new QLabel(this);
+	residueText3 = new QLabel(this); residueText4 = new QLabel(this); residueText5 = new QLabel(this);
+	residueText6 = new QLabel(this); residueText7 = new QLabel(this); residueText8 = new QLabel(this);
+	residueText9 = new QLabel(this); residueText10 = new QLabel(this); residueText11 = new QLabel(this);
+	residueText12 = new QLabel(this); residueText13 = new QLabel(this); residueText14 = new QLabel(this);
+	residueText15 = new QLabel(this); residueText16 = new QLabel(this); residueText17 = new QLabel(this);
+	residueText18 = new QLabel(this); residueText19 = new QLabel(this); residueText20 = new QLabel(this);
+	residueText21 = new QLabel(this); residueText22 = new QLabel(this); residueText23 = new QLabel(this);
+	residueText24 = new QLabel(this); residueText25 = new QLabel(this); residueText26 = new QLabel(this);
+	residueText27 = new QLabel(this); residueText28 = new QLabel(this);
+	residueColor0 = new QFrame(this); residueColor1 = new QFrame(this); residueColor2 = new QFrame(this);
+	residueColor3 = new QFrame(this); residueColor4 = new QFrame(this); residueColor5 = new QFrame(this);
+	residueColor6 = new QFrame(this); residueColor7 = new QFrame(this); residueColor8 = new QFrame(this);
+	residueColor9 = new QFrame(this); residueColor10 = new QFrame(this); residueColor11 = new QFrame(this);
+	residueColor12 = new QFrame(this); residueColor13 = new QFrame(this); residueColor14 = new QFrame(this);
+	residueColor15 = new QFrame(this); residueColor16 = new QFrame(this); residueColor17 = new QFrame(this);
+	residueColor18 = new QFrame(this); residueColor19 = new QFrame(this); residueColor20 = new QFrame(this);
+	residueColor21 = new QFrame(this); residueColor22 = new QFrame(this); residueColor23 = new QFrame(this);
+	residueColor24 = new QFrame(this); residueColor25 = new QFrame(this); residueColor26 = new QFrame(this);
+	residueColor27 = new QFrame(this); residueColor28 = new QFrame(this);
+	ssText0 = new QLabel(this); ssText1 = new QLabel(this); ssText2 = new QLabel(this); ssText3 = new QLabel(this);
+	ssColor0 = new QFrame(this); ssColor1 = new QFrame(this); ssColor2 = new QFrame(this); ssColor3 = new QFrame(this);
+	moleculeText = new QLabel(this);
+	moleculeColorFrame = new QFrame(this);
+
 	// Initialize the arrays.  This routine is kind of a hack because it
 	// does not use the #define's to figure out the size of the arrays.
 	residueTexts[0] = residueText0;
@@ -140,8 +177,7 @@ void ColorLegend::setColors()
 		g = PDBParser::resColorG[i] * 255;
 		b = PDBParser::resColorB[i] * 255;
 		currColor.setRgb(r,g,b);
-		residueColors[i]->setPaletteForegroundColor(currColor);
-		residueColors[i]->setPaletteBackgroundColor(currColor);
+		setWidgetBgColor(residueColors[i], currColor);
 	}
 
 	// Set ss colors
@@ -153,8 +189,7 @@ void ColorLegend::setColors()
 		g = PDBParser::ssColorG[i] * 255;
 		b = PDBParser::ssColorB[i] * 255;
 		currColor.setRgb(r,g,b);
-		ssColors[i]->setPaletteForegroundColor(currColor);
-		ssColors[i]->setPaletteBackgroundColor(currColor);
+		setWidgetBgColor(ssColors[i], currColor);
 	}
 
 	// Set molecule color
@@ -162,6 +197,5 @@ void ColorLegend::setColors()
 	g = PDBParser::moleculeColor[1] * 255;
 	b = PDBParser::moleculeColor[2] * 255;
 	currColor.setRgb(r,g,b);
-	moleculeColorFrame->setPaletteForegroundColor(currColor);
-	moleculeColorFrame->setPaletteBackgroundColor(currColor);
+	setWidgetBgColor(moleculeColorFrame, currColor);
 }

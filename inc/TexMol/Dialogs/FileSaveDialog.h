@@ -21,12 +21,14 @@
 #ifndef FILE_SAVE_DIALOG_H
 #define FILE_SAVE_DIALOG_H
 
-#include "FileSaveDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog FileSaveDialogBase;
 
 class FileSaveDialog : public FileSaveDialogBase
 {
 	public:
-		FileSaveDialog(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		FileSaveDialog(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~FileSaveDialog();
 		virtual bool getSaveAll();
 		virtual void getSelectedFileName(QString* imageFileName, QString* formatSelected);

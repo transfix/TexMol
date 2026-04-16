@@ -21,13 +21,15 @@
 #ifndef SET_VIEWING_PARAMETERS_DIALOG_H
 #define SET_VIEWING_PARAMETERS_DIALOG_H
 
-#include "SetViewingParametersDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog SetViewingParametersDialogBase;
 #include <UsefulMath/Quaternion.h>
 
-class SetViewingParametersDialog : public setViewingParametersDialogBase
+class SetViewingParametersDialog : public SetViewingParametersDialogBase
 {
 	public:
-		SetViewingParametersDialog(CCVOpenGLMath::Quaternion orientation, CCVOpenGLMath::Vector translation, float windowSize, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		SetViewingParametersDialog(CCVOpenGLMath::Quaternion orientation, CCVOpenGLMath::Vector translation, float windowSize, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~SetViewingParametersDialog();
 		bool getParams(double* translationParams, double* rotationParams, double* windowSize);
 

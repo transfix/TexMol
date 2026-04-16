@@ -38,8 +38,9 @@
 #include <boost/cstdint.hpp>
 #include <boost/array.hpp>
 #include <boost/tuple/tuple.hpp>
+#include <cstdint>
 
-#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE_DISABLE_CONTOUR_SPECTRUM)    
+#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
 #include <VolMagick/VolMagick.h>
 #endif
 
@@ -53,7 +54,7 @@ namespace CVCColorTable
 #if QT_VERSION < 0x040000 || defined QT3_SUPPORT
               const char *name=0
 #else
-              Qt::WFlags flags=0
+              Qt::WindowFlags flags={}
 #endif
               );
 
@@ -62,7 +63,7 @@ namespace CVCColorTable
 #if QT_VERSION < 0x040000 || defined QT3_SUPPORT
               const char *name=0
 #else
-              Qt::WFlags flags=0
+              Qt::WindowFlags flags={}
 #endif
               );
 
@@ -94,7 +95,7 @@ namespace CVCColorTable
     boost::uint64_t visibleComponents() const { return _visibleComponents; }
     void visibleComponents(boost::uint64_t components);
 
-#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE_DISABLE_CONTOUR_SPECTRUM)    
+#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
     void setContourVolume(const VolMagick::Volume& vol);
 #endif
 
@@ -131,12 +132,16 @@ namespace CVCColorTable
     virtual void mouseReleaseEvent(QMouseEvent* e);
     virtual void contextMenuEvent(QContextMenuEvent* e);
 
+#ifndef COLORTABLE2_DISABLE_CONTOUR_TREE
     void computeContourTree();
+#endif
+#ifndef COLORTABLE2_DISABLE_CONTOUR_SPECTRUM
     void computeContourSpectrum();
     void computeInformation( const double pos, float *isoval, float *area, float *minvol, float *maxvol, float *grad, int *nComp);
 
     void allocateInformDialg(void);
     void updateInformDialog( const int _id, const double _newpos, CONTOURSTATUS _status );
+#endif
 
     // arand, 8-24, 2011: added DO_NOTHING as the default element in the list
     //                    this fixes a bug that caused alpha nodes to be inserted
@@ -193,7 +198,11 @@ namespace CVCColorTable
     bool _dirtyContourSpectrum;
 
     //Histogram stuff
+#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
     boost::tuple<const VolMagick::uint64 *,VolMagick::uint64> _histogram;
+#else
+    boost::tuple<const uint64_t *, uint64_t> _histogram;
+#endif
     bool _dirtyHistogram;
 
     //Information dialog

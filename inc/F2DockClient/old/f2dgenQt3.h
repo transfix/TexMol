@@ -95,7 +95,7 @@ class f2dGen : public QDialog, public Ui::f2dGen
     Q_OBJECT
 
 public:
-    f2dGen(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    f2dGen(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~f2dGen();
 
 public slots:

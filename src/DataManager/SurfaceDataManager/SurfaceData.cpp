@@ -33,9 +33,10 @@
 #include <qimage.h>
 #include <qgl.h>
 //Added by qt3to4:
-#include <Q3StrList>
+#include <QStringList>
+#include <QImageWriter>
 #include <QColorDialog>	//by cha
-#include <Q3FileDialog>
+#include <QFileDialog>
 #include <QImageWriter>
 #include <QPalette>
 #include <QStyleFactory>
@@ -295,7 +296,7 @@ void SurfaceData::frameValueChangedSlot(int value)
 		m_Frame = m_Geometry.size() - 1;
 	}
 
-	m_DataManager->updateGL();
+	m_DataManager->update();
 }
 
 double dot(double* v1, double* v2, int i)
@@ -322,7 +323,7 @@ void SurfaceData::setCurvatureVectors(QStringList curvFileNames)
 			return;
 		}
 
-		const char* fileName = (curvFileNames[i]).latin1();
+		const char* fileName = (curvFileNames[i]).toLatin1().constData();
 
 		if(!fileName || !(m_Geometry[i]))
 		{
@@ -552,7 +553,7 @@ bool SurfaceData::read(QStringList fileNames)
 
 	for(i=0; i<numModels; i++)
 	{
-		const char* fileName = (fileNames[i]).latin1();
+		const char* fileName = (fileNames[i]).toLatin1().constData();
 
 		if(!fileName)
 		{
@@ -615,15 +616,15 @@ bool SurfaceData::read(QStringList fileNames)
 	{
 		if(m_Geometry.size() > 1)
 		{
-			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMinValue(0);
-			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMaxValue(m_Geometry.size()-1);
+			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMinimum(0);
+			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMaximum(m_Geometry.size()-1);
 			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setTickInterval(1);
 			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setEnabled(true);
 		}
 		else
 		{
-			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMinValue(0);
-			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMaxValue(0);
+			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMinimum(0);
+			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setMaximum(0);
 			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setTickInterval(1);
 			m_SurfaceRenderingProperties->_ui->m_Slider_Frame->setEnabled(false);
 		}
@@ -676,7 +677,7 @@ const char* SurfaceData::getRenderingTypeName()
 		return "Smooth";
 	}
 
-	return (m_SurfaceRenderingProperties->_ui->m_ComboBox_SurfaceRenderingTypes->currentText()).latin1();
+	return (m_SurfaceRenderingProperties->_ui->m_ComboBox_SurfaceRenderingTypes->currentText()).toLatin1().constData();
 }
 
 float* SurfaceData::getWireframeColors()
@@ -1044,15 +1045,15 @@ void SurfaceData::clipValueChangedSlot(int value)
 		return;
 	}
 
-	int minVal = m_SurfaceRenderingProperties->_ui->m_Slider_Clip->minValue();
-	int maxVal = m_SurfaceRenderingProperties->_ui->m_Slider_Clip->maxValue();
+	int minVal = m_SurfaceRenderingProperties->_ui->m_Slider_Clip->minimum();
+	int maxVal = m_SurfaceRenderingProperties->_ui->m_Slider_Clip->maximum();
 	int clamped = (value>minVal ? value : minVal);
 	clamped = (clamped<maxVal ? clamped: maxVal);
 	m_ClippingPlane = (double)clamped/((double)(maxVal - minVal));
 
 	if(m_DataManager)
 	{
-		m_DataManager->updateGL();
+		m_DataManager->update();
 	}
 }
 
@@ -1612,14 +1613,14 @@ Geometry* SurfaceData::getGeometry(int index)
 
 void SurfaceData::replicateSlot()
 {
-	QString transFile = Q3FileDialog::getOpenFileName("", "Transformations (*.txt);;All files (*.*)");
+	QString transFile = QFileDialog::getOpenFileName(nullptr, QString(), QString(), "Transformations (*.txt);;All files (*.*)");
 
 	if(transFile.length() < 1)
 	{
 		return;
 	}
 
-	readTransformations(transFile.latin1());
+	readTransformations(transFile.toLatin1().constData());
 }
 
 bool SurfaceData::parseAnimationCommand(QStringList commands, int curCommand)
@@ -1645,7 +1646,7 @@ void SurfaceData::renderTrianglesSlot()
 	}
 
 	m_Geometry[m_Frame]->m_RenderTriangles = m_SurfaceRenderingProperties->_ui->m_CheckBox_RenderSurface->isChecked();
-	updateGL();
+	update();
 }
 
 void SurfaceData::renderWireframesSlot()
@@ -1666,7 +1667,7 @@ void SurfaceData::renderWireframesSlot()
 	}
 
 	m_Geometry[m_Frame]->m_RenderWireframe = m_SurfaceRenderingProperties->_ui->m_CheckBox_RenderWireframe->isChecked();
-	updateGL();
+	update();
 }
 
 void SurfaceData::renderLinesSlot()
@@ -1687,7 +1688,7 @@ void SurfaceData::renderLinesSlot()
 	}
 
 	m_Geometry[m_Frame]->m_RenderLines = m_SurfaceRenderingProperties->_ui->m_CheckBox_RenderLines->isChecked();
-	updateGL();
+	update();
 }
 
 void SurfaceData::renderPointsSlot()
@@ -1710,7 +1711,7 @@ void SurfaceData::renderPointsSlot()
 	{
 		m_Geometry[m_Frame]->m_Points[i] = m_Geometry[m_Frame]->m_TriVerts[i];
 	}
-	updateGL();
+	update();
 }
 
 
@@ -1735,7 +1736,7 @@ void SurfaceData::wireframeUniqueColorRadioButtonSlot()
 		m_Geometry[m_Frame]->m_UniqueWireframeColors[1] = color.green()/255.0;
 		m_Geometry[m_Frame]->m_UniqueWireframeColors[2] = color.blue()/255.0;
 	}
-	updateGL();
+	update();
 }
 
 void SurfaceData::wireframeDefaultColorRadioButtonSlot()
@@ -1756,7 +1757,7 @@ void SurfaceData::wireframeDefaultColorRadioButtonSlot()
 	m_Geometry[m_Frame]->m_UniqueWireframeColors[1] = 0.5f;
 	m_Geometry[m_Frame]->m_UniqueWireframeColors[2] = 0.5f;
 
-	updateGL();
+	update();
 }
 
 void SurfaceData::lineUniqueColorRadioButtonSlot()
@@ -1782,7 +1783,7 @@ void SurfaceData::lineUniqueColorRadioButtonSlot()
 		m_Geometry[m_Frame]->m_UniqueLineColors[2] = color.blue()/255.0;
 	}
 
-	updateGL();
+	update();
 }
 
 void SurfaceData::lineDefaultColorRadioButtonSlot()
@@ -1803,7 +1804,7 @@ void SurfaceData::lineDefaultColorRadioButtonSlot()
 	m_Geometry[m_Frame]->m_UniqueLineColors[1] = 0.5f;
 	m_Geometry[m_Frame]->m_UniqueLineColors[2] = 0.5f;
 
-	updateGL();
+	update();
 }
 
 void SurfaceData::pointUniqueColorRadioButtonSlot()
@@ -1829,7 +1830,7 @@ void SurfaceData::pointUniqueColorRadioButtonSlot()
 		m_Geometry[m_Frame]->m_UniquePointColors[2] = color.blue()/255.0;
 	}
 
-	updateGL();
+	update();
 }
 
 void SurfaceData::pointDefaultColorRadioButtonSlot()
@@ -1850,7 +1851,7 @@ void SurfaceData::pointDefaultColorRadioButtonSlot()
 	m_Geometry[m_Frame]->m_UniquePointColors[1] = 0.5f;
 	m_Geometry[m_Frame]->m_UniquePointColors[2] = 0.5f;
 
-	updateGL();
+	update();
 }
 
 void SurfaceData::wireframeThicknessChangedSlot(int thickness)
@@ -1866,7 +1867,7 @@ void SurfaceData::wireframeThicknessChangedSlot(int thickness)
 	}
 
 	m_Geometry[m_Frame]->SetWireframeWidth(thickness);
-	updateGL();
+	update();
 }
 
 void SurfaceData::pointThicknessChangedSlot(int thickness)
@@ -1882,7 +1883,7 @@ void SurfaceData::pointThicknessChangedSlot(int thickness)
 	}
 
 	m_Geometry[m_Frame]->setPointSize(thickness);
-	updateGL();
+	update();
 }
 
 void SurfaceData::lineThicknessChangedSlot(int thickness)
@@ -1898,7 +1899,7 @@ void SurfaceData::lineThicknessChangedSlot(int thickness)
 	}
 
 	m_Geometry[m_Frame]->SetLineWidth(thickness);
-	updateGL();
+	update();
 }
 
 void SurfaceData::renderingTypeSlot(int renderingMode)
@@ -1945,18 +1946,18 @@ void SurfaceData::renderingTypeSlot(int renderingMode)
 	case SurfRenderType_Texture:
 	   if( !hasTextureImage ) {
                if( readSurfaceTexture() )
-	          m_Geometry[m_Frame]->set2DTexture(m_opengl_qimage.width(), m_opengl_qimage.height(), m_opengl_qimage.bits(), m_opengl_qimage.numBytes()/(m_opengl_qimage.width()*m_opengl_qimage.height()));
+	          m_Geometry[m_Frame]->set2DTexture(m_opengl_qimage.width(), m_opengl_qimage.height(), m_opengl_qimage.bits(), m_opengl_qimage.sizeInBytes()/(m_opengl_qimage.width()*m_opengl_qimage.height()));
 	   }
 	   m_Geometry[m_Frame]->enable2DTriangleTexture( true );
 	   break;
         }
-	updateGL();
+	update();
 }
 
 
 bool SurfaceData::readSurfaceTexture()
 {
-	Q3StrList imgList = QImageWriter::supportedImageFormats();
+	QList<QByteArray> imgList = QImageWriter::supportedImageFormats();
 	QString filter = QString("Images (");
 	int i;
 
@@ -1976,19 +1977,19 @@ bool SurfaceData::readSurfaceTexture()
 
 	filter.append(")");
 	int n = imgList.count();
-	QString filename = Q3FileDialog::getOpenFileName("../Dataset",
-					   filter,
+	QString filename = QFileDialog::getOpenFileName(
 					   m_DataManager->m_ParentPropertiesWidget,
-					   "open file dialog",
-					   "Choose texture map");
+					   "Choose texture map",
+					   "../Dataset",
+					   filter);
 	QImage qimage;
 
-	if(!qimage.load(filename.latin1()))
+	if(!qimage.load(filename.toLatin1().constData()))
 	{
 		return false;
 	}
 
-	m_opengl_qimage = QGLWidget::convertToGLFormat(qimage);
+	m_opengl_qimage = qimage.mirrored().convertToFormat(QImage::Format_RGBA8888);
 	hasTextureImage = true;
 	return true;
 }
@@ -2006,8 +2007,8 @@ void SurfaceData::surfaceTexturePushButtonSlot()
 	}
 	
 	if( readSurfaceTexture() )
-	   m_Geometry[m_Frame]->set2DTexture(m_opengl_qimage.width(), m_opengl_qimage.height(), m_opengl_qimage.bits(), m_opengl_qimage.numBytes()/(m_opengl_qimage.width()*m_opengl_qimage.height()));
-	updateGL();
+	   m_Geometry[m_Frame]->set2DTexture(m_opengl_qimage.width(), m_opengl_qimage.height(), m_opengl_qimage.bits(), m_opengl_qimage.sizeInBytes()/(m_opengl_qimage.width()*m_opengl_qimage.height()));
+	update();
 }
 
 
@@ -2016,7 +2017,7 @@ void SurfaceData::transparencySliderSlot(int value)
 	// set the alpha component of SurfaceColor
 	m_SurfaceAlpha = value/99.0f;
 	// updateGL so user can track how the alpha changes look
-	updateGL();
+	update();
 }
 //  This functions needs to be improved a lot to copy all members of the original triangle SKVINAY
 Geometry* SurfaceData::createDuplicates()

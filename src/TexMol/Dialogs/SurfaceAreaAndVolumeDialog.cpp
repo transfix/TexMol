@@ -24,7 +24,7 @@
 
 using std::string;
 
-SurfaceAreaAndVolumeDialog::SurfaceAreaAndVolumeDialog(double area, double volume, QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+SurfaceAreaAndVolumeDialog::SurfaceAreaAndVolumeDialog(double area, double volume, QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
 	: SurfaceAreaAndVolumeDialogBase(parent, name, modal, fl)
 {
 	m_Parent = parent;

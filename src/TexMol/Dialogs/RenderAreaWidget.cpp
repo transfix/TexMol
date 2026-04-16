@@ -27,6 +27,7 @@
 #endif
 //#include <GL/gl.h>
 #include <TexMol/Dialogs/glext.h>
+#include <QElapsedTimer>
 
 #include <DataManager/DataManager.h>
 #include <math.h>
@@ -57,7 +58,7 @@ RenderAreaWidget::RenderAreaWidget(QWidget* parent, const char* name, RendererSe
 	initParams(rendererSet, syncView, current, uniqueId, showGrid, mouseHandler, lightSet);
 }
 
-RenderAreaWidget::RenderAreaWidget(QGLContext* prevcontext, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WFlags f, RendererSet* rendererSet, bool syncView, bool current, unsigned int uniqueId, bool showGrid, MouseHandler* mouseHandler, LightSet* lightSet)
+RenderAreaWidget::RenderAreaWidget(QGLContext* prevcontext, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WindowFlags f, RendererSet* rendererSet, bool syncView, bool current, unsigned int uniqueId, bool showGrid, MouseHandler* mouseHandler, LightSet* lightSet)
 	: RenderAreaWidgetBase(prevcontext, parent, name, shareWidget, f)
 {
 	initParams(rendererSet, syncView, current, uniqueId, showGrid, mouseHandler, lightSet);
@@ -105,11 +106,11 @@ void RenderAreaWidget::paintGL()
 		if(!initDone && m_StereoMode)
 		{
 			/*	QGLFormat fmt; // Double buffered by default
-				fmt.setRgba (TRUE);
-				fmt.setDepth (TRUE);
-				fmt.setAlpha (TRUE);
-				fmt.setStereo (TRUE);
-				fmt.setDoubleBuffer (TRUE);
+				fmt.setRgba (true);
+				fmt.setDepth (true);
+				fmt.setAlpha (true);
+				fmt.setStereo (true);
+				fmt.setDoubleBuffer (true);
 
 				this->setFormat (fmt);*/
 			initDone = true;
@@ -233,9 +234,9 @@ bool RenderAreaWidget::getNext(FILE* fp, int& t, CCVOpenGLMath::Quaternion& q, C
 		}
 
 		// break up the line into a set of strings. Someday convert this to C++ from QT.
-		QStringList commands = QStringList::split(" ", QString(line));
+		QStringList commands = QString(line).split(" ");
 
-		if(strstr(commands[0].latin1(), "DATAMANAGER"))
+		if(strstr(commands[0].toLatin1().constData(), "DATAMANAGER"))
 		{
 			// got a command for the DATAMANAGER
 			if(m_DataManager)
@@ -265,9 +266,9 @@ void RenderAreaWidget::captureNextImage(QString imageBaseFileName, QString fileT
 {
 	static int imageNo = 0;
 	char path[256];
-	sprintf(path, "%s%05d.%s", imageBaseFileName.latin1(), imageNo, fileType.latin1());
-	QImage qimage = grabFrameBuffer();
-	bool ret = qimage.save(path, fileType.upper());
+	sprintf(path, "%s%05d.%s", imageBaseFileName.toLatin1().constData(), imageNo, fileType.toLatin1().constData());
+	QImage qimage = grabFramebuffer();
+	bool ret = qimage.save(path, fileType.toUpper().toLatin1().constData());
 	//bool ret = qimage.save( path, "BMP" );
 	imageNo++;
 }
@@ -334,11 +335,11 @@ bool RenderAreaWidget::recordOrPlaybackAnimation(FILE* fp, QString imageBaseFile
 
 			//rendering
 			if(m_SyncView)
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 			else
-				updateGL();
+				update();
 
-			QImage lqimage = grabFrameBuffer();
+			QImage lqimage = grabFramebuffer();
 			unsigned char *limg = lqimage.bits();
 
 			//================================
@@ -348,11 +349,11 @@ bool RenderAreaWidget::recordOrPlaybackAnimation(FILE* fp, QString imageBaseFile
 
 			//rendering
 			if(m_SyncView)
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 			else
-				updateGL();
+				update();
 
-			QImage rqimage = grabFrameBuffer();
+			QImage rqimage = grabFramebuffer();
 			unsigned char *rimg = rqimage.bits();
 
 			//================================
@@ -379,8 +380,8 @@ bool RenderAreaWidget::recordOrPlaybackAnimation(FILE* fp, QString imageBaseFile
 
 			QImage mqimage(mergeBuffer, _w*2, _h, _format);
 			char path[512];
-			sprintf(path, "%s%05d.%s", imageBaseFileName.latin1(), imageNumber, fileType.latin1());
-			if( !mqimage.save(path, fileType.upper()) )
+			sprintf(path, "%s%05d.%s", imageBaseFileName.toLatin1().constData(), imageNumber, fileType.toLatin1().constData());
+			if( !mqimage.save(path, fileType.toUpper().toLatin1().constData()) )
 			{
 				fprintf( stderr, "Stereo image dump failed\n" ); return false;
 			}
@@ -389,9 +390,9 @@ bool RenderAreaWidget::recordOrPlaybackAnimation(FILE* fp, QString imageBaseFile
 		else
 		{			
 			if(m_SyncView)
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 			else
-				updateGL();
+				update();
 
 			// either save images or just show them on screen
 			if(m_DataManager->m_RenderingMode == Animator::ANIMATION_IMAGES_RECORDING_MODE)
@@ -455,11 +456,11 @@ bool RenderAreaWidget::recordAxisRotatedAnimation(QString imageBaseFileName, QSt
 
 		//rendering
 		if(m_SyncView)
-			m_RendererSet->updateGL();
+			m_RendererSet->update();
 		else
-			updateGL();
+			update();
 
-		QImage lqimage = grabFrameBuffer();
+		QImage lqimage = grabFramebuffer();
 		unsigned char *limg = lqimage.bits();
 
 		//================================
@@ -469,11 +470,11 @@ bool RenderAreaWidget::recordAxisRotatedAnimation(QString imageBaseFileName, QSt
 
 		//rendering
 		if(m_SyncView)
-			m_RendererSet->updateGL();
+			m_RendererSet->update();
 		else
-			updateGL();
+			update();
 
-		QImage rqimage = grabFrameBuffer();
+		QImage rqimage = grabFramebuffer();
 		unsigned char *rimg = rqimage.bits();
 
 		q.postMultiply(CCVOpenGLMath::Quaternion::rotation( makeCenterView, 0, 1, 0 ));
@@ -503,8 +504,8 @@ bool RenderAreaWidget::recordAxisRotatedAnimation(QString imageBaseFileName, QSt
 
 		QImage mqimage(mergeBuffer, _w*2, _h, _format);
 		char path[512];
-		sprintf(path, "%s%05d.%s", imageBaseFileName.latin1(), imageNumber, fileType.latin1());
-		if( !mqimage.save(path, fileType.upper()) )
+		sprintf(path, "%s%05d.%s", imageBaseFileName.toLatin1().constData(), imageNumber, fileType.toLatin1().constData());
+		if( !mqimage.save(path, fileType.toUpper().toLatin1().constData()) )
 		{
 			fprintf( stderr, "Stereo image dump failed\n" ); return false;
 		}
@@ -514,7 +515,7 @@ bool RenderAreaWidget::recordAxisRotatedAnimation(QString imageBaseFileName, QSt
 
 bool RenderAreaWidget::recordAnimation(QString animationFileName, QString imageBaseFileName, QString fileType)
 {
-	FILE* fp = fopen(animationFileName, "r");
+	FILE* fp = fopen(animationFileName.toLatin1().constData(), "r");
 
 	if(fp == 0)
 	{
@@ -598,11 +599,11 @@ void RenderAreaWidget::defaultTransformation(int dx, int dy)
 
 	if(m_SyncView)
 	{
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 	else
 	{
-		updateGL();
+		update();
 	}
 }
 
@@ -612,11 +613,11 @@ void RenderAreaWidget::rotate(int dx, int dy)
 
 	if(m_SyncView)
 	{
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 	else
 	{
-		updateGL();
+		update();
 	}
 }
 
@@ -626,11 +627,11 @@ void RenderAreaWidget::zoom(int dx, int dy)
 
 	if(m_SyncView)
 	{
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 	else
 	{
-		updateGL();
+		update();
 	}
 }
 
@@ -640,11 +641,11 @@ void RenderAreaWidget::pan(int dx, int dy)
 
 	if(m_SyncView)
 	{
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 	else
 	{
-		updateGL();
+		update();
 	}
 }
 
@@ -665,7 +666,7 @@ void RenderAreaWidget::mouseMoveEvent(QMouseEvent* q)
 			return;
 		}
 
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 
 	if(m_MyButtonFlag)
@@ -693,20 +694,20 @@ void RenderAreaWidget::mouseMoveEvent(QMouseEvent* q)
 				break;
 			case MouseHandler::OBJECT_TRANSLATE:
 				m_DataManager->pan(m_OpenGL_Viewer.m_View->getPan(xChange, yChange));
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 				break;
 			case MouseHandler::OBJECT_ZOOM:
 				m_DataManager->scale(m_OpenGL_Viewer.m_View->getScale(xChange, yChange));
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 				break;
 			case MouseHandler::OBJECT_ROTATE:
 				m_DataManager->rotate(m_OpenGL_Viewer.m_View->getRotation(xChange, yChange));	// rotate based on orientation
 		//		m_DataManager->rotate(m_OpenGL_Viewer.m_View->getRotationTC(xChange, yChange));	// rotate based on object center
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 				break;
 			case MouseHandler::OBJECT_SELECT:
 				m_SyncView ? m_RendererSet->pan(xChange, yChange) : pan(xChange, yChange);
-				m_RendererSet->updateGL();
+				m_RendererSet->update();
 				break;
 			case MouseHandler::NO_TRANSFORM:
 				break;
@@ -733,9 +734,9 @@ void RenderAreaWidget::mouseMoveEvent(QMouseEvent* q)
 					(q->state() & MidButton) ||
 					(q->state() & LeftButton))
 		*/
-			if((q->state() & Qt::RightButton) ||
-					(q->state() & Qt::MidButton) ||
-					(q->state() & Qt::LeftButton))
+			if((q->buttons() & Qt::RightButton) ||
+					(q->buttons() & Qt::MiddleButton) ||
+					(q->buttons() & Qt::LeftButton))
 			{
 				recordViewInformation();
 			}
@@ -764,7 +765,7 @@ void RenderAreaWidget::mouseReleaseEvent(QMouseEvent* q)
 			return;
 		}
 
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 }
 
@@ -777,7 +778,7 @@ void RenderAreaWidget::mousePressEvent(QMouseEvent* q)
 			return;
 		}
 
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 
 	// request current status on shift and control presses.
@@ -812,11 +813,11 @@ void RenderAreaWidget::mousePressEvent(QMouseEvent* q)
 
 	if(m_SyncView)
 	{
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 	else
 	{
-		updateGL();
+		update();
 	}
 
 	if(m_DataManager)
@@ -833,7 +834,7 @@ void RenderAreaWidget::resetCurrent()
 void RenderAreaWidget::showGrids(bool displayGrid)
 {
 	m_OpenGL_Viewer.m_bShowGrid = displayGrid;
-	updateGL();
+	update();
 }
 
 void RenderAreaWidget::cloneView()
@@ -848,9 +849,9 @@ bool RenderAreaWidget::isCurrent()
 
 bool RenderAreaWidget::saveImages(QString imageFileName, bool saveAll, QString imgFormat)
 {
-	QImage qimage = grabFrameBuffer();
-	qimage.save(imageFileName, imgFormat);
-	qimage.save(imageFileName, imgFormat);
+	QImage qimage = grabFramebuffer();
+	qimage.save(imageFileName, imgFormat.toLatin1().constData());
+	qimage.save(imageFileName, imgFormat.toLatin1().constData());
 	return true;
 }
 
@@ -974,7 +975,7 @@ bool RenderAreaWidget::saveTiledImages(QString imageFileName, bool saveAll, QStr
        fullImage =  new unsigned char[ _nTilesW * _nTilesH * _tileWidth * _tileWidth * 4 ];
 
     do {
-       updateGL();
+       update();
 
        glReadPixels(0, 0, _tileWidth, _tileWidth, GL_RGBA, GL_UNSIGNED_BYTE, buf );
 
@@ -1009,8 +1010,8 @@ bool RenderAreaWidget::saveTiledImages(QString imageFileName, bool saveAll, QStr
        {
           QImage qimage((uchar*)tbuf, _tileWidth, _tileWidth, QImage::Format_ARGB32);
           char path[512];
-          sprintf(path, "%s_%d_%d.%s", imageFileName.latin1(), ti, tj, imgFormat.latin1());
-          if( !qimage.save(path, imgFormat) )
+          sprintf(path, "%s_%d_%d.%s", imageFileName.toLatin1().constData(), ti, tj, imgFormat.toLatin1().constData());
+          if( !qimage.save(path, imgFormat.toLatin1().constData()) )
               fprintf( stderr, "tiled image dump failed\n" );
           else
               fprintf( stderr, "[%d %d] tile image saved\n", ti, tj );
@@ -1021,8 +1022,8 @@ bool RenderAreaWidget::saveTiledImages(QString imageFileName, bool saveAll, QStr
     {
        QImage qimage((uchar*)fullImage, _nTilesW * _tileWidth, _nTilesH * _tileWidth, QImage::Format_ARGB32);
        char path[512];
-       sprintf(path, "%s_full_%dx%d.%s", imageFileName.latin1(), _nTilesW*_tileWidth, _nTilesH*_tileWidth, imgFormat.latin1());
-       if( !qimage.save(path, imgFormat) )
+       sprintf(path, "%s_full_%dx%d.%s", imageFileName.toLatin1().constData(), _nTilesW*_tileWidth, _nTilesH*_tileWidth, imgFormat.toLatin1().constData());
+       if( !qimage.save(path, imgFormat.toLatin1().constData()) )
            fprintf( stderr, "full tiled image save failed\n" );
        else
            fprintf( stderr, "full tiled image saved\n" );
@@ -1065,7 +1066,7 @@ void RenderAreaWidget::recordViewInformation()
 		return;
 	}
 
-	static QTime t;
+	static QElapsedTimer t;
 	static bool started = false;
 	printf("%s\n", m_AnimationFileName);
 
@@ -1085,7 +1086,7 @@ void RenderAreaWidget::recordViewInformation()
 	CCVOpenGLMath::Quaternion q = m_OpenGL_Viewer.m_View->getOrientation();
 	CCVOpenGLMath::Vector v = m_OpenGL_Viewer.m_View->getTarget();
 	float w = m_OpenGL_Viewer.m_View->GetWindowSize();
-	fprintf(fp, "%d %f %f %f %f %f %f %f %f %f\n", t.elapsed(),
+	fprintf(fp, "%d %f %f %f %f %f %f %f %f %f\n", (int)t.elapsed(),
 			q[0], q[1], q[2], q[3], v[0], v[1], v[2], v[3], w);
 	fclose(fp);
 }
@@ -1143,11 +1144,11 @@ bool RenderAreaWidget::setViewingParameters(double* translationParams, double* r
 
 	if(m_SyncView)
 	{
-		m_RendererSet->updateGL();
+		m_RendererSet->update();
 	}
 	else
 	{
-		updateGL();
+		update();
 	}
 
 	return true;

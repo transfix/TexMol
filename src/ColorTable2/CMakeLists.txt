@@ -25,9 +25,8 @@ SetupBoost(ColorTable2)
 #          "BOOST_INCLUDEDIR and BOOST_LIBRARYDIR to the appropriate paths")
 #endif(Boost_FOUND)
 
-# Contour tree and contour spectrum depend on removed modules (now in libcvc)
-# Disable these features until integration with libcvc is complete
-add_compile_definitions(COLORTABLE2_DISABLE_CONTOUR_TREE COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
+# Contour tree and contour spectrum re-enabled (modules restored)
+# add_compile_definitions(COLORTABLE2_DISABLE_CONTOUR_TREE COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
 
 set(LIBS QGLViewer)
 

@@ -36,7 +36,7 @@ class RenderAreaWidgetBase : public QGLWidget
 
 	public:
 		RenderAreaWidgetBase(QWidget* parent, const char* name);
-		RenderAreaWidgetBase(QGLContext* context, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WFlags f);
+		RenderAreaWidgetBase(QGLContext* context, QWidget* parent, const char* name, const QGLWidget* shareWidget, Qt::WindowFlags f);
 		~RenderAreaWidgetBase();
 		void setBackground(float r, float g, float b);
 		void getBackgroundColor(float* r, float* g, float* b);

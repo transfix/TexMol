@@ -28,11 +28,12 @@
 #include <QHideEvent>
 #include <QMouseEvent>
 
-GLControlWidget::GLControlWidget(QWidget* parent, const char* name, QGLWidget* share, Qt::WFlags f)
-	: QGLWidget(parent, name, share, f),
-	  xRot(0),yRot(0),zRot(0),xTrans(0),yTrans(0),zTrans(-10.0),scale(5.0), animation(TRUE), wasAnimated(FALSE), delay(50)
+GLControlWidget::GLControlWidget(QWidget* parent, const char* name, QGLWidget* share, Qt::WindowFlags f)
+	: QGLWidget(parent, f),
+	  xRot(0),yRot(0),zRot(0),xTrans(0),yTrans(0),zTrans(-10.0),scale(5.0), animation(true), wasAnimated(false), delay(50)
 {
-	setCursor(Qt::pointingHandCursor);
+	setCursor(Qt::PointingHandCursor);
+	(void)name; (void)share;
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), SLOT(animate()));
 	timer->start(delay);
@@ -52,19 +53,20 @@ void GLControlWidget::drawText()
 	glPushAttrib(GL_LIGHTING_BIT | GL_TEXTURE_BIT);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
-	qglColor(Qt::white);
+	glColor3f(1.0f, 1.0f, 1.0f);
 	QString str("Rendering text in OpenGL is easy with Qt");
 	QFontMetrics fm(font());
-	renderText((width() - fm.width(str)) / 2, 15, str);
+	// renderText removed in Qt6 — text overlay needs QPainter instead
+	// renderText((width() - fm.horizontalAdvance(str)) / 2, 15, str);
 	QFont f("courier", 8);
 	QFontMetrics fmc(f);
-	qglColor(QColor("skyblue"));
+	glColor3f(0.529f, 0.808f, 0.922f);
 	int x, y, z;
-	x = (xRot >= 0) ? (int) xRot % 360 : 359 - (QABS((int) xRot) % 360);
-	y = (yRot >= 0) ? (int) yRot % 360 : 359 - (QABS((int) yRot) % 360);
-	z = (zRot >= 0) ? (int) zRot % 360 : 359 - (QABS((int) zRot) % 360);
-	str.sprintf("Rot X: %03d - Rot Y: %03d - Rot Z: %03d", x, y, z);
-	renderText((width() - fmc.width(str)) / 2, height() - 15, str, f);
+	x = (xRot >= 0) ? (int) xRot % 360 : 359 - (qAbs((int) xRot) % 360);
+	y = (yRot >= 0) ? (int) yRot % 360 : 359 - (qAbs((int) yRot) % 360);
+	z = (zRot >= 0) ? (int) zRot % 360 : 359 - (qAbs((int) zRot) % 360);
+	str = QString::asprintf("Rot X: %03d - Rot Y: %03d - Rot Z: %03d", x, y, z);
+	// renderText((width() - fmc.horizontalAdvance(str)) / 2, height() - 15, str, f);
 	glPopAttrib();
 }
 
@@ -72,45 +74,45 @@ void GLControlWidget::drawText()
 void GLControlWidget::setXRotation(double degrees)
 {
 	xRot = (GLfloat)fmod(degrees, 360.0);
-	updateGL();
+	update();
 }
 
 // Set the rotation angle of the object to \e degrees around the Y axis.
 void GLControlWidget::setYRotation(double degrees)
 {
 	yRot = (GLfloat)fmod(degrees, 360.0);
-	updateGL();
+	update();
 }
 
 // Set the rotation angle of the object to \e degrees around the Z axis.
 void GLControlWidget::setZRotation(double degrees)
 {
 	zRot = (GLfloat)fmod(degrees, 360.0);
-	updateGL();
+	update();
 }
 
 void GLControlWidget::setScale(double s)
 {
 	scale = s;
-	updateGL();
+	update();
 }
 
 void GLControlWidget::setXTrans(double x)
 {
 	xTrans = x;
-	updateGL();
+	update();
 }
 
 void GLControlWidget::setYTrans(double y)
 {
 	yTrans = y;
-	updateGL();
+	update();
 }
 
 void GLControlWidget::setZTrans(double z)
 {
 	zTrans = z;
-	updateGL();
+	update();
 }
 
 void GLControlWidget::setRotationImpulse(double x, double y, double z)
@@ -147,19 +149,19 @@ void GLControlWidget::mouseMoveEvent(QMouseEvent* e)
 	oldPos = e->pos();
 	double rx = dx / width();
 	double ry = dy / height();
-	if (e->state() == Qt::LeftButton)
+	if (e->buttons() == Qt::LeftButton)
 	{
 		setRotationImpulse(ry, rx, 0);
 	}
-	else if (e->state() == Qt::RightButton)
+	else if (e->buttons() == Qt::RightButton)
 	{
 		setRotationImpulse(ry, 0, rx);
 	}
-	else if (e->state() == Qt::MidButton)
+	else if (e->buttons() == Qt::MiddleButton)
 	{
 		setTranslationImpulse(rx, ry, 0);
 	}
-	else if (e->state() == (Qt::LeftButton | Qt::RightButton))
+	else if (e->buttons() == (Qt::LeftButton | Qt::RightButton))
 	{
 		setTranslationImpulse(rx, 0, ry);
 	}
@@ -168,11 +170,11 @@ void GLControlWidget::mouseMoveEvent(QMouseEvent* e)
 void GLControlWidget::wheelEvent(QWheelEvent* e)
 {
 	e->accept();
-	if (scale <= ((double)e->delta() / 1000))
+	if (scale <= ((double)e->angleDelta().y() / 1000))
 	{
 		return;
 	}
-	setScale(scale - ((double)e->delta() / 1000));
+	setScale(scale - ((double)e->angleDelta().y() / 1000));
 }
 
 void GLControlWidget::mouseDoubleClickEvent(QMouseEvent*)
@@ -218,7 +220,7 @@ void GLControlWidget::setAnimationDelay(int ms)
 	delay = ms;
 	if (animation)
 	{
-		wasAnimated = TRUE;
+		wasAnimated = true;
 		timer->start(delay);
 	}
 }

@@ -39,10 +39,10 @@
 #include <qapplication.h>
 #include <qdatastream.h>
 #include <qfile.h>
-#include <q3groupbox.h>
-#include <q3listbox.h>
+#include <QGroupBox>
+#include <QListWidget>
 #include <qmessagebox.h>
-#include <q3textedit.h>
+#include <QTextEdit>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <SimpleVolumeData/SimpleVolumeData.h>
@@ -55,7 +55,7 @@
 #include <DataManager/VolumeDataManager/SplattingRendererExtn.h>
 #endif
 
-DataManager::DataManager(QSProject* qSProject, QWidget* parentWidget, Q3ListBox* dataSetsListBox, bool renderGlobalBoundingBox, bool renderDataBoundingBox, RendererSet* rendererSet)
+DataManager::DataManager(QSProject* qSProject, QWidget* parentWidget, QListWidget* dataSetsListBox, bool renderGlobalBoundingBox, bool renderDataBoundingBox, RendererSet* rendererSet)
 {
 	m_QSProject = qSProject;
 	m_CurrentDataSet = -1;
@@ -68,12 +68,7 @@ DataManager::DataManager(QSProject* qSProject, QWidget* parentWidget, Q3ListBox*
 	m_DataSetsListBox = dataSetsListBox;
 	m_DataSetsAdded = 0;
 	m_NextUniqueAvailableId = 0;
-	m_BallAndStickDataArray.setAutoDelete(true);
-	m_ScalarVolumeArray.setAutoDelete(true);
-	m_VectorVolumeArray.setAutoDelete(true);
-	m_SurfaceArray.setAutoDelete(true);
-	m_NURBSArray.setAutoDelete(true);
-	m_SecondaryStructureArray.setAutoDelete(true);
+
 	m_RenderGlobalBoundingBox = renderGlobalBoundingBox;
 	m_RenderDataBoundingBox = renderDataBoundingBox;
 	m_RendererSet = rendererSet;
@@ -82,6 +77,12 @@ DataManager::DataManager(QSProject* qSProject, QWidget* parentWidget, Q3ListBox*
 
 DataManager::~DataManager()
 {
+	qDeleteAll(m_BallAndStickDataArray);
+	qDeleteAll(m_ScalarVolumeArray);
+	qDeleteAll(m_VectorVolumeArray);
+	qDeleteAll(m_SurfaceArray);
+	qDeleteAll(m_NURBSArray);
+	qDeleteAll(m_SecondaryStructureArray);
 	if( m_VolumeRendererExtn ) delete m_VolumeRendererExtn;
 	m_VolumeRendererExtn = 0;
 #if ! defined(__APPLE__)
@@ -721,7 +722,7 @@ QWidget* DataManager::getPropertiesWidget()
 	return selectedData->getPropertiesWidget();
 }
 
-bool DataManager::updateGL()
+bool DataManager::update()
 {
 //	Q3GroupBox* w = (Q3GroupBox*)m_ParentPropertiesWidget->parentWidget();
 	QWidget* w = (QWidget*)m_ParentPropertiesWidget->parentWidget();
@@ -983,17 +984,17 @@ bool DataManager::parseAnimationCommand(QStringList commands, int curCommand)
 		return false;    // need atleast 1
 	}
 	// now check each data type, if any, send command to appropriate data.
-	if (strstr(commands[curCommand], "BALL_AND_STICK_DATA") ||
-			strstr(commands[curCommand], "SURFACE_DATA") ||
-			strstr(commands[curCommand], "NURBS_DATA") ||
-			strstr(commands[curCommand], "VOLUME_DATA") ||
-			strstr(commands[curCommand], "SECONDARYSTRUCTURE_DATA"))
+	if (commands[curCommand].contains("BALL_AND_STICK_DATA") ||
+			commands[curCommand].contains("SURFACE_DATA") ||
+			commands[curCommand].contains("NURBS_DATA") ||
+			commands[curCommand].contains("VOLUME_DATA") ||
+			commands[curCommand].contains("SECONDARYSTRUCTURE_DATA"))
 	{
 		if (commands.size() < curCommand + 3)
 		{
 			return false;    // need atleast ID and some command
 		}
-		AbstractData* abstractData = getDataFromUniqueID(atoi(commands[curCommand+1].latin1()));
+		AbstractData* abstractData = getDataFromUniqueID(atoi(commands[curCommand+1].toLatin1().constData()));
 		if (!abstractData)
 		{
 			return false;

@@ -160,7 +160,7 @@ void F2DockAnimator::buildFiles()
 
 void F2DockAnimator::saveScreenshot(int& frameNo, RendererSet* rendererSet)
 {
-	rendererSet->updateGL();
+	rendererSet->update();
 /*Q3Err:CS
 	std::ostringstream filenameSS;
 	filenameSS.width(4);

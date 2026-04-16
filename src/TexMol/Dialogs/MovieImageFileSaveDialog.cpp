@@ -29,7 +29,7 @@
 #include <QImageWriter>
 #include <QFileDialog>
 
-MovieImageFileSaveDialog::MovieImageFileSaveDialog(QWidget* parent, const char* name, bool modal, Qt::WFlags fl)
+MovieImageFileSaveDialog::MovieImageFileSaveDialog(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
 	: MovieImageFileSaveDialogBase(parent, name, modal, fl)
 {
 /*Q3Err:CS

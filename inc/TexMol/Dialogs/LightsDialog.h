@@ -21,14 +21,16 @@
 #ifndef LIGHTS_DIALOG_H
 #define LIGHTS_DIALOG_H
 
-#include "LightsDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog LightsDialogBase;
 
 class LightSet;
 
 class LightsDialog : public LightsDialogBase
 {
 	public:
-		LightsDialog(int light, LightSet* lightSet, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		LightsDialog(int light, LightSet* lightSet, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~LightsDialog();
 		bool saveLightInformation(int light, LightSet* lightSet);
 

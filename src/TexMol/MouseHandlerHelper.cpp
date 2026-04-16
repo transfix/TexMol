@@ -29,7 +29,7 @@
 
 #include <qcombobox.h>
 #include <qmessagebox.h>
-#include <q3popupmenu.h>
+#include <QMenu>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <TexMol/Dialogs/MouseHandlerDialog.h>
@@ -70,7 +70,7 @@ MouseHandler::USER_SELECTED_TRANSFORMATION MouseHandler::getUserSelectedTransfor
 	{
 		mButton = LEFT_BUTTON;
 	}
-	if (qMouseEvent->state() & Qt::MidButton)
+	if (qMouseEvent->state() & Qt::MiddleButton)
 	{
 		mButton = MIDDLE_BUTTON;
 	}

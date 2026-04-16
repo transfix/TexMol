@@ -112,11 +112,11 @@ public:
         TransformationsDialogBase->setSizeGripEnabled(true);
         gridLayout = new QGridLayout(TransformationsDialogBase);
         gridLayout->setSpacing(6);
-        gridLayout->setMargin(11);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         hboxLayout = new QHBoxLayout();
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         buttonHelp = new QPushButton(TransformationsDialogBase);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
@@ -148,7 +148,7 @@ public:
         m_CurrentTransformationsGroupBox->setObjectName(QString::fromUtf8("m_CurrentTransformationsGroupBox"));
         m_CurrentTransformationsGroupBox->setColumnLayout(0, Qt::Vertical);
         m_CurrentTransformationsGroupBox->layout()->setSpacing(6);
-        m_CurrentTransformationsGroupBox->layout()->setMargin(11);
+        m_CurrentTransformationsGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout1 = new QGridLayout();
         QBoxLayout *boxlayout = qobject_cast<QBoxLayout *>(m_CurrentTransformationsGroupBox->layout());
         if (boxlayout)
@@ -167,7 +167,7 @@ public:
         m_NewTransformationsGroupBox->setObjectName(QString::fromUtf8("m_NewTransformationsGroupBox"));
         m_NewTransformationsGroupBox->setColumnLayout(0, Qt::Vertical);
         m_NewTransformationsGroupBox->layout()->setSpacing(6);
-        m_NewTransformationsGroupBox->layout()->setMargin(11);
+        m_NewTransformationsGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout2 = new QGridLayout();
         QBoxLayout *boxlayout1 = qobject_cast<QBoxLayout *>(m_NewTransformationsGroupBox->layout());
         if (boxlayout1)
@@ -241,7 +241,7 @@ public:
         m_GeneralRotationGroupBox->setObjectName(QString::fromUtf8("m_GeneralRotationGroupBox"));
         m_GeneralRotationGroupBox->setColumnLayout(0, Qt::Vertical);
         m_GeneralRotationGroupBox->layout()->setSpacing(6);
-        m_GeneralRotationGroupBox->layout()->setMargin(11);
+        m_GeneralRotationGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout3 = new QGridLayout();
         QBoxLayout *boxlayout2 = qobject_cast<QBoxLayout *>(m_GeneralRotationGroupBox->layout());
         if (boxlayout2)
@@ -315,7 +315,7 @@ public:
         m_GeneralTransformationGroupBox->setObjectName(QString::fromUtf8("m_GeneralTransformationGroupBox"));
         m_GeneralTransformationGroupBox->setColumnLayout(0, Qt::Vertical);
         m_GeneralTransformationGroupBox->layout()->setSpacing(6);
-        m_GeneralTransformationGroupBox->layout()->setMargin(11);
+        m_GeneralTransformationGroupBox->layout()->setContentsMargins(11, 11, 11, 11);
         gridLayout4 = new QGridLayout();
         QBoxLayout *boxlayout3 = qobject_cast<QBoxLayout *>(m_GeneralTransformationGroupBox->layout());
         if (boxlayout3)
@@ -511,7 +511,7 @@ class TransformationsDialogBase : public QDialog, public Ui::TransformationsDial
     Q_OBJECT
 
 public:
-    TransformationsDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    TransformationsDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~TransformationsDialogBase();
 
 public slots:

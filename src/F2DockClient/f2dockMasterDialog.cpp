@@ -28,7 +28,7 @@
 
 using namespace std;
 
-F2DockMasterDialog::F2DockMasterDialog(QWidget *parent,Qt::WFlags flags) 
+F2DockMasterDialog::F2DockMasterDialog(QWidget *parent,Qt::WindowFlags flags) 
   : QDialog(parent, flags) {
 
   _ui = new Ui::f2dockMasterUI;
@@ -157,11 +157,11 @@ void F2DockMasterDialog::createButtonSlot()
 		return;
 	}
 
-	QString inputFileName = QFileDialog::getOpenFileName(this, "Select a docking input file (.inp)", QString::null, "inp (*.inp)");
+	QString inputFileName = QFileDialog::getOpenFileName(this, "Select a docking input file (.inp)", QString(), "inp (*.inp)");
 
 	if(!inputFileName.isNull()) 
 	{
-		QString outputFileName = QFileDialog::getOpenFileName(this, "Select the output file (.out)", QString::null, "txt (*.txt)");
+		QString outputFileName = QFileDialog::getOpenFileName(this, "Select the output file (.out)", QString(), "txt (*.txt)");
 
 		if(!outputFileName.isNull())
 		{
@@ -187,7 +187,7 @@ void F2DockMasterDialog::loadButtonSlot()
 		return;
 	}
 
-	if(masterCont->loadJob( (QFileDialog::getOpenFileName(this, "Load job from file", QString::null, "JOB (*.job)")).toStdString() ))
+	if(masterCont->loadJob( (QFileDialog::getOpenFileName(this, "Load job from file", QString(), "JOB (*.job)")).toStdString() ))
 	{
 		QMessageBox::information(this, "Job Loaded",  "Job Loaded");
 		populateTable();

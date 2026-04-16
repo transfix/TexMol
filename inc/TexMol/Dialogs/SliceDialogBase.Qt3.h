@@ -59,7 +59,7 @@ public:
         Layout1->setGeometry(QRect(20, 240, 476, 33));
         hboxLayout = new QHBoxLayout(Layout1);
         hboxLayout->setSpacing(6);
-        hboxLayout->setMargin(0);
+        hboxLayout->setContentsMargins(0, 0, 0, 0);
         hboxLayout->setObjectName(QString::fromUtf8("hboxLayout"));
         hboxLayout->setContentsMargins(0, 0, 0, 0);
         buttonHelp = new QPushButton(Layout1);
@@ -118,7 +118,7 @@ class SliceDialogBase : public QDialog, public Ui::SliceDialogBase
     Q_OBJECT
 
 public:
-    SliceDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = 0);
+    SliceDialogBase(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
     ~SliceDialogBase();
 
 protected slots:

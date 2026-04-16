@@ -41,7 +41,7 @@ class DockDialog : public QDialog
 {
   Q_OBJECT
   public:
-  DockDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  DockDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   virtual ~DockDialog();
 
   // get methods

@@ -3,10 +3,14 @@
 #include <libCG/CoarseGrain/atom2.h>
 #include <libCG/CoarseGrain/geometry.h>
 #include <libCG/CoarseGrain/surface.h>
+#ifdef HAVE_NFFT
 #include <FastSummation/FastSummation.h>
+#endif
 
 //#define _TRIVIAL_
+#ifdef HAVE_NFFT
 #define _FASTSUM_
+#endif
 #define _CORRECTION_
 
 using namespace MOLECULE;
@@ -49,7 +53,9 @@ void GroupOfAtoms::getBornRadii(Surface* surface)
 	double* x, *y, *coeff, *coeffx, *coeffy, *coeffz;
 	double* sum, *sumx, *sumy, *sumz, *c_sum, *c_sumx, *c_sumy, *c_sumz;
 	double A4, A7;
+#ifdef _FASTSUM_
 	FastSummation* m_fastsum;
+#endif
 	const double pi = 3.1415926;
 	int nn = surface->nodes_per_face;
 	int N = surface->numbtris*nn;

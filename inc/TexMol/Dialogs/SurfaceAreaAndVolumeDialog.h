@@ -21,12 +21,14 @@
 #ifndef SURFACE_AREA_AND_VOLUME_DIALOG_H
 #define SURFACE_AREA_AND_VOLUME_DIALOG_H
 
-#include "SurfaceAreaAndVolumeDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog SurfaceAreaAndVolumeDialogBase;
 
 class SurfaceAreaAndVolumeDialog : public SurfaceAreaAndVolumeDialogBase
 {
 	public:
-		SurfaceAreaAndVolumeDialog(double area, double volume, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		SurfaceAreaAndVolumeDialog(double area, double volume, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~SurfaceAreaAndVolumeDialog();
 
  	public slots:

@@ -35,7 +35,7 @@
 using std::cout;
 using std::string;
 
-SurfaceDialog::SurfaceDialog(QWidget* parent,const char* name, bool modal, Qt::WFlags fl)
+SurfaceDialog::SurfaceDialog(QWidget* parent,const char* name, bool modal, Qt::WindowFlags fl)
 	: SurfaceDialogBase(parent,name,modal,fl)
 {
 	m_Parent = parent;

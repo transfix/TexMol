@@ -388,16 +388,16 @@ class GEvent
 
 inline
 GCriticalSection::GCriticalSection()
-	: ok(FALSE)
+	: ok(false)
 {
 	InitializeCriticalSection(&cs);
-	ok=TRUE;
+	ok=true;
 }
 
 inline
 GCriticalSection::~GCriticalSection()
 {
-	ok=FALSE;
+	ok=false;
 	DeleteCriticalSection(&cs);
 }
 
@@ -422,7 +422,7 @@ GCriticalSection::unlock()
 inline
 GEvent::GEvent()
 {
-	hev = CreateEvent(NULL,FALSE,FALSE,NULL);
+	hev = CreateEvent(NULL,false,false,NULL);
 }
 
 inline

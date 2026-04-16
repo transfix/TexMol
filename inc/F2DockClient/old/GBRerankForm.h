@@ -23,7 +23,7 @@ class GBRerankForm : public GBRerank
 		bool jobSubmitted;
 
 	public:
-		GBRerankForm(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		GBRerankForm(QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		~GBRerankForm();
 		void setDefaults();
 		bool checkValidity();

@@ -41,7 +41,7 @@ class F2dGenDialog : public QDialog
 {
   Q_OBJECT
   public:
-  F2dGenDialog(QWidget *parent=0,Qt::WFlags flags=0);
+  F2dGenDialog(QWidget *parent=nullptr,Qt::WindowFlags flags={});
   virtual ~F2dGenDialog();
 
   // get methods

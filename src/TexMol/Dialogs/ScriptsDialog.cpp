@@ -18,7 +18,7 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <Qt3Support>	//by cha
+// Qt3Support removed
 
 #include <q3textedit.h>
 //#include <q3filedialog.h>
@@ -71,7 +71,7 @@ void ScriptsDialog::executeSlot()
 
 		if(!(command.length() == 0) && !((command.length() == 1) && (command.at(0) == '\n')))
 		{
-			printf("Got a command : %s\n", command.latin1());
+			printf("Got a command : %s\n", command.toLatin1().constData());
 
 			if(argumentList == 0)
 			{
@@ -103,7 +103,7 @@ void ScriptsDialog::loadSlot()
 {
   //QString fileName = Q3FileDialog::getOpenFileName("", "(*.*)", this, "open file dialog", "Load file", 0);
 	QString fileName = QFileDialog::getOpenFileName("", "(*.*)", this, "open file dialog", "Load file", 0);
-	FILE* fp = fopen(fileName.latin1(), "r");
+	FILE* fp = fopen(fileName.toLatin1().constData(), "r");
 
 	if(fp == 0)
 	{
@@ -148,7 +148,7 @@ void ScriptsDialog::saveSlot()
 						   0
 						   );
 
-	FILE* fp = fopen(fileName.latin1(), "w");
+	FILE* fp = fopen(fileName.toLatin1().constData(), "w");
 
 	if(fp == 0)
 	{
@@ -171,7 +171,7 @@ void ScriptsDialog::saveSlot()
 
 		if(!(command.length() == 0))
 		{
-			fprintf(fp, "%s\n", command.latin1());
+			fprintf(fp, "%s\n", command.toLatin1().constData());
 		}
 		else
 		{

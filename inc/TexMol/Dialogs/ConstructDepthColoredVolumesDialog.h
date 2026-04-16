@@ -21,7 +21,9 @@
 #ifndef CONSTRUCT_DEPTH_COLORED_VOLUMES_DIALOG_H
 #define CONSTRUCT_DEPTH_COLORED_VOLUMES_DIALOG_H
 
-#include "ConstructDepthColoredVolumesDialogBase.Qt3.h"
+#include <QDialog>
+// Qt3 base removed — stub
+typedef QDialog ConstructDepthColoredVolumesDialogBase;
 
 class VolumeData;
 class DataManager;
@@ -29,7 +31,7 @@ class DataManager;
 class ConstructDepthColoredVolumesDialog : public ConstructDepthColoredVolumesDialogBase
 {
 	public:
-		ConstructDepthColoredVolumesDialog(QString inputVolumeFileName, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, Qt::WFlags fl = 0);
+		ConstructDepthColoredVolumesDialog(QString inputVolumeFileName, QWidget* parent = 0, const char* name = 0, bool modal = false, Qt::WindowFlags fl = {});
 		virtual ~ConstructDepthColoredVolumesDialog();
 		VolumeData* constructDepthColoredVolumes(DataManager* dataManager, QString volumeFileName);
 		VolumeData* constructDepthColoredVolumesFromVolume(DataManager* dataManager, VolumeData* inputVolumeFile);
