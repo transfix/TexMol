@@ -1,101 +1,46 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
-
-SetupQt()
-
-#build static for now (The following define is in config.h)
-#add_definitions(-DQGLVIEWER_STATIC)
+cmake_minimum_required(VERSION 3.16)
 
 if(WIN32)
   add_definitions(-DWIN32)
-endif(WIN32)
+endif()
 
 if(ENABLE_STEREO_DISPLAY)
   add_definitions(-DENABLE_STEREO_DISPLAY)
-endif(ENABLE_STEREO_DISPLAY)
+endif()
 
-FILE(GLOB SOURCE_FILES *.cpp)
-FILE(GLOB INCLUDE_FILES ../../inc/QGLViewer/*.[Hh])
+file(GLOB SOURCE_FILES *.cpp)
+file(GLOB INCLUDE_FILES ../../inc/QGLViewer/*.[Hh])
 
-SOURCE_GROUP("Source Files" FILES ${SOURCE_FILES})
-SOURCE_GROUP("Header Files" FILES ${INCLUDE_FILES})
+source_group("Source Files" FILES ${SOURCE_FILES})
+source_group("Header Files" FILES ${INCLUDE_FILES})
 
-INCLUDE_DIRECTORIES(
-  ../../inc
-  ${CMAKE_BINARY_DIR}/src/QGLViewer  #for generated headers
-)
+set(UI_FORMS ImageInterface.ui)
 
-SET(MOC_HEADERS
-  ../../inc/QGLViewer/qglviewer.h
-  ../../inc/QGLViewer/frame.h
-  ../../inc/QGLViewer/keyFrameInterpolator.h
-  ../../inc/QGLViewer/manipulatedFrame.h
-  ../../inc/QGLViewer/manipulatedCameraFrame.h
-  ../../inc/QGLViewer/camera.h
-)
+option(USING_QGLVIEWER_VECTORIAL_RENDERER "Flag for enabling VRender code for QGLViewer" ON)
+mark_as_advanced(USING_QGLVIEWER_VECTORIAL_RENDERER)
+if(USING_QGLVIEWER_VECTORIAL_RENDERER)
+  file(GLOB VRENDER_SOURCE_FILES VRender/*.cpp)
+  file(GLOB VRENDER_INCLUDE_FILES ../../inc/QGLViewer/VRender/*.h)
+  list(APPEND SOURCE_FILES ${VRENDER_SOURCE_FILES})
+  list(APPEND INCLUDE_FILES ${VRENDER_INCLUDE_FILES})
+  list(APPEND UI_FORMS VRenderInterface.ui)
+else()
+  add_definitions(-DNO_VECTORIAL_RENDER)
+endif()
 
-IF(QT4_FOUND)
-  SET(UI_FORMS ImageInterface.Qt4.ui)
-ELSEIF(QT3_FOUND)
-  SET(UI_FORMS ImageInterface.Qt3.ui)
-ENDIF(QT4_FOUND)
-
-OPTION(USING_QGLVIEWER_VECTORIAL_RENDERER "Flag for enabling VRender code for QGLViewer" ON)
-MARK_AS_ADVANCED(USING_QGLVIEWER_VECTORIAL_RENDERER)
-IF(USING_QGLVIEWER_VECTORIAL_RENDERER)
-  FILE(GLOB VRENDER_SOURCE_FILES VRender/*.cpp)
-  FILE(GLOB VRENDER_INCLUDE_FILES ../../inc/QGLViewer/VRender/*.h)
-  SET(SOURCE_FILES ${SOURCE_FILES} ${VRENDER_SOURCE_FILES})
-  SET(INCLUDE_FILES ${INCLUDE_FILES} ${VRENDER_INCLUDE_FILES})
-  IF(QT4_FOUND)
-    SET(UI_FORMS ${UI_FORMS} VRenderInterface.Qt4.ui)
-  ELSEIF(QT3_FOUND)
-    SET(UI_FORMS ${UI_FORMS} VRenderInterface.Qt3.ui)
-  ENDIF(QT4_FOUND)
-ELSE(USING_QGLVIEWER_VECTORIAL_RENDERER)
-  ADD_DEFINITIONS(-DNO_VECTORIAL_RENDER)
-ENDIF(USING_QGLVIEWER_VECTORIAL_RENDERER)
-
-#Might need glut for some versions of Qt apparently.
-find_package(GLUT)
-
-IF(GLUT_FOUND)
-  INCLUDE_DIRECTORIES(
-    ../../inc
-    ${GLUT_INCLUDE_DIR}
-  )
-ELSE(GLUT_FOUND)
-  INCLUDE_DIRECTORIES(
-    ../../inc
-  )
-ENDIF(GLUT_FOUND)
-
-set(UI_FILES "")
-if(QT4_FOUND)
-  qt4_wrap_cpp(MOC_SOURCES ${MOC_HEADERS})
-  qt4_wrap_ui(UI_FILES ${UI_FORMS})
-elseif(QT3_FOUND)
-  qt_wrap_cpp(QGLViewer MOC_SOURCES ${MOC_HEADERS})
-  qt_wrap_ui(QGLViewer UI_H UI_CPP ${UI_FORMS})
-  set(UI_FILES ${UI_H} ${UI_CPP})
-endif(QT4_FOUND)
-
-ADD_LIBRARY (QGLViewer STATIC 
+add_library(QGLViewer STATIC
   ${SOURCE_FILES}
   ${INCLUDE_FILES}
-  ${UI_FILES}
-  ${MOC_SOURCES}
-  ${MOC_HEADERS}
+  ${UI_FORMS}
 )
 
-IF(GLUT_FOUND)
-  TARGET_LINK_LIBRARIES(QGLViewer
-    ${QT_LIBRARIES}
-    ${GLUT_LIBRARIES}
-    glew
-  )
-ELSE(GLUT_FOUND)
-  TARGET_LINK_LIBRARIES(QGLViewer
-    ${QT_LIBRARIES}
-    glew
-  )
-ENDIF(GLUT_FOUND)
+target_include_directories(QGLViewer PRIVATE
+  ../../inc
+  ${CMAKE_CURRENT_BINARY_DIR}  # for AUTOUIC-generated headers
+)
+
+target_link_libraries(QGLViewer
+  Qt6::Widgets Qt6::OpenGL Qt6::OpenGLWidgets Qt6::Xml
+  OpenGL::GL
+  glew
+)

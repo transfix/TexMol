@@ -1,38 +1,18 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
-SetupQt()
+file(GLOB SOURCE_FILES *.cpp)
+file(GLOB INCLUDE_FILES ../../inc/ColorTable2/*.[Hh])
 
-FILE(GLOB SOURCE_FILES *.cpp)
-FILE(GLOB INCLUDE_FILES ../../inc/ColorTable2/*.[Hh])
+source_group("Source Files" FILES ${SOURCE_FILES})
+source_group("Header Files" FILES ${INCLUDE_FILES})
 
-SOURCE_GROUP("Source Files" FILES ${SOURCE_FILES})
-SOURCE_GROUP("Header Files" FILES ${INCLUDE_FILES})
+add_library(ColorTable2 STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
-INCLUDE_DIRECTORIES(
-  ../../inc
-)
-
-SET(MOC_HEADERS
-  ../../inc/ColorTable2/XoomedOut.h
-  ../../inc/ColorTable2/Table.h
-  ../../inc/ColorTable2/ColorTable.h
-  ../../inc/ColorTable2/InfoDialog.h
-)
-
-if(QT3_FOUND)
-  QT_WRAP_CPP(ColorTable2 MOC_SOURCES ${MOC_HEADERS})
-else(QT4_FOUND)
-  qt4_wrap_cpp(MOC_SOURCES ${MOC_HEADERS})
-endif(QT3_FOUND)
-
-ADD_LIBRARY (ColorTable2 STATIC 
-  ${SOURCE_FILES}
-  ${INCLUDE_FILES}
-  ${MOC_SOURCES}
-)
+target_include_directories(ColorTable2 PRIVATE ../../inc)
+target_link_libraries(ColorTable2 Qt6::Widgets Qt6::OpenGLWidgets)
 
 #Make sure we've got boost
-IncludeBoost()
+SetupBoost(ColorTable2)
 #set(Boost_USE_STATIC_LIBS OFF)
 #set(Boost_USE_MULTITHREADED ON)
 ##find_package(Boost 1.34.0)
@@ -45,22 +25,10 @@ IncludeBoost()
 #          "BOOST_INCLUDEDIR and BOOST_LIBRARYDIR to the appropriate paths")
 #endif(Boost_FOUND)
 
+# Contour tree and contour spectrum depend on removed modules (now in libcvc)
+# Disable these features until integration with libcvc is complete
+add_compile_definitions(COLORTABLE2_DISABLE_CONTOUR_TREE COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
+
 set(LIBS QGLViewer)
-
-option(COLORTABLE2_DISABLE_CONTOUR_TREE "ColorTable2 -- enable/disable contour tree.  Requires contourtree and VolMagick libs" OFF)
-mark_as_advanced(COLORTABLE2_DISABLE_CONTOUR_TREE)
-if(COLORTABLE2_DISABLE_CONTOUR_TREE)
-  add_definitions(-DCOLORTABLE2_DISABLE_CONTOUR_TREE)
-else(COLORTABLE2_DISABLE_CONTOUR_TREE)
-  set(LIBS ${LIBS} contourtree VolMagick)
-endif(COLORTABLE2_DISABLE_CONTOUR_TREE)
-
-option(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM "ColorTable2 -- enable/disable contour spectrum.  Requires libContour and VolMagick libs" OFF)
-mark_as_advanced(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-if(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-  add_definitions(-DCOLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-else(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-  set(LIBS ${LIBS} Contour VolMagick)
-endif(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
 
 TARGET_LINK_LIBRARIES(ColorTable2 ${LIBS})

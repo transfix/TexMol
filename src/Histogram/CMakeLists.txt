@@ -1,25 +1,12 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
-SetupQt()
+file(GLOB SOURCE_FILES *.cpp)
+file(GLOB INCLUDE_FILES ../../inc/Histogram/*.[Hh])
 
-FILE(GLOB SOURCE_FILES *.cpp)
-FILE(GLOB INCLUDE_FILES ../../inc/Histogram/*.[Hh])
-SET(MOC_HEADERS
-  ../../inc/Histogram/histogram.h
-  ../../inc/Histogram/glcontrolwidget.h
-)
+source_group("Source Files" FILES ${SOURCE_FILES})
+source_group("Header Files" FILES ${INCLUDE_FILES})
 
-SOURCE_GROUP("Source Files" FILES ${SOURCE_FILES})
-SOURCE_GROUP("Header Files" FILES ${HEADER_FILES})
+add_library(Histogram STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
-INCLUDE_DIRECTORIES(
-  ../../inc
-)
-
-QT_WRAP_CPP (Histogram MOC_SOURCES ${MOC_HEADERS})
-
-ADD_LIBRARY (Histogram STATIC 
-  ${SOURCE_FILES}
-  ${INCLUDE_FILES}
-  ${MOC_SOURCES}
-)
+target_include_directories(Histogram PRIVATE ../../inc)
+target_link_libraries(Histogram Qt6::Widgets Qt6::OpenGLWidgets)

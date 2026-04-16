@@ -58,6 +58,11 @@ option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use FetchCon
 
 if(LIBCVC_SOURCE_DIR)
   message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
+  # Prepend libcvc's CMake module path so its Setup*.cmake modules are found
+  # (libcvc uses CMAKE_SOURCE_DIR which points to TexMol when used as subdirectory)
+  list(PREPEND CMAKE_MODULE_PATH "${LIBCVC_SOURCE_DIR}/CMake")
+  # Disable volrover3 — it uses CMAKE_SOURCE_DIR for source paths
+  set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
   include(FetchContent)
@@ -72,6 +77,19 @@ else()
   set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
   set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
   FetchContent_MakeAvailable(libcvc)
+endif()
+
+# Legacy compatibility macros for per-module CMakeLists.txt files
+# MUST be included AFTER libcvc so our plain-signature wrappers override
+# libcvc's keyword-signature SetupBoost/SetupCGAL functions.
+include(LegacyCompat)
+
+# ---------------------------------------------------------------------------
+# Make libcvc headers available globally (for compatibility shims in inc/)
+# ---------------------------------------------------------------------------
+if(LIBCVC_SOURCE_DIR)
+  include_directories("${LIBCVC_SOURCE_DIR}/inc")
+  include_directories("${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
 endif()
 
 # ---------------------------------------------------------------------------

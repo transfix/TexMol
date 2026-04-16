@@ -73,7 +73,12 @@
 
 // OpenGL includes - Included here and hence shared by all the files that need OpenGL headers.
 #include <glew/glew.h>
-#if QT_VERSION >= 0x040000
+#if QT_VERSION >= 0x060000
+# include <QOpenGLWidget>
+# include <QSurfaceFormat>
+  // Provide backward-compatible alias for old QGLWidget-based code
+  using QGLWidget = QOpenGLWidget;
+#elif QT_VERSION >= 0x040000
 # include <QGLWidget>
 #else
 # include <qgl.h>
