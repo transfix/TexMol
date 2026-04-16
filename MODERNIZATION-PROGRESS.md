@@ -232,6 +232,40 @@ Created `src/TexMol/Dialogs/dialog_stubs.cpp` — provides link-time symbols for
 
 ---
 
-## Phases 6–9: Pending
+## Phase 6: OpenGL Modernization (Partial) ✅
+
+**Commit:** `72b20f23` — Phase 6: Replace bundled GLEW 1.7.0 with system GLEW 2.2.0
+
+### Completed
+- [x] Replaced bundled GLEW 1.7.0 (`src/glew/`, `inc/glew/`) with system GLEW 2.2.0 via `find_package(GLEW REQUIRED)`
+- [x] Changed `#include <glew/glew.h>` → `#include <GL/glew.h>` in 13 ImposterRenderer/ObjectRenderer files
+- [x] Added `glewInit()` with `glewExperimental = GL_TRUE` in `RenderAreaWidgetBase::initializeGL()`
+- [x] Ported 7 files from `MyExtensions*` wrapper to direct GLEW calls:
+  - `OpenGLShadingLanguageRenderer.cpp/.h` — shader create/compile/link/delete
+  - `BumpMapRenderer.cpp/.h` — extension availability check
+  - `RenderAreaWidget.cpp` — FBO creation/deletion (removed `#ifdef USE_MY_EXTENSION` blocks)
+  - `ImposterSphereRenderer.cpp/.h` — VBO buffer operations
+  - `OpenGLSphereRenderer.cpp/.h` — VBO operations, uses `GLEW_VERSION_1_5` for VBO availability
+  - `PlainImposterSphereRenderer.cpp/.h` — shader program bind/unbind
+  - `FunctionImposterSphereRenderer.cpp/.h` — constructor simplified
+- [x] Removed `m_Extensions` members and `MyExtensions*` constructor parameters from ported classes
+- [x] Fixed `GL/glew.h` include ordering (must precede `GL/gl.h`) in headers and .cpp files
+- [x] Fixed `src/ImposterRenderer/CMakeLists.txt`: `set(LIBS "glew")` → `set(LIBS GLEW::GLEW)`
+- [x] Removed `ADD_SUBDIRECTORY(glew)` from `src/CMakeLists.txt`
+
+### Deferred
+- [ ] Port remaining MyExtensions consumers: Geometry, VolumeLibrary modules (~10 files)
+- [ ] Remove `StaticExtensionPointers.h` files (2 copies, ~1400 function pointers each)
+- [ ] Remove Cg shader remnants (`GlobalCGContext.h`)
+- [ ] Set GL compatibility profile via `QSurfaceFormat`
+- [ ] Convert fixed-function GL (`glBegin`/`glEnd`) to modern GL (44 call sites across 17 files)
+
+### Build Status
+- **Errors:** 0
+- **Net change:** 31 files, +120 −337 lines
+
+---
+
+## Phases 7–9: Pending
 
 See [CVC-modernization-plan.md](CVC-modernization-plan.md) for details.
