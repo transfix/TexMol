@@ -6,10 +6,12 @@
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
+#include <QOpenGLContext>
 #include <QSurfaceFormat>
 
-// Backward-compatible alias
+// Backward-compatible aliases
 using QGLWidget = QOpenGLWidget;
 using QGLFormat = QSurfaceFormat;
+using QGLContext = QOpenGLContext;
 
 #endif
