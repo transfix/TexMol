@@ -109,7 +109,7 @@ class clashFilter
    
    bool printStatus;
 
-   void printError( char *format, ... );
+   void printError( const char *format, ... );
    double getTime( void );   
    void freeMemory( void );
    void setDefaults( void );
@@ -153,6 +153,7 @@ class clashFilter
         tR->nSevereClashes += nSevereClashes;
         tR->interactionValue += interactionValue;
        }
+      return nullptr;
     }
 
     

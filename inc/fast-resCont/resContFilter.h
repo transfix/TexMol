@@ -45,8 +45,8 @@ using DPG::Point;
 using namespace std;
 // The following table is from ( Table III, page 94 ): 
 //     Fabian Glaser, David M. Steinberg, Ilya A. Vakser, and Nir Ben-Tal,
-//     "Residue Frequencies and Pairing Preferences at Protein–Protein Interfaces",
-//     PROTEINS: Structure, Function, and Genetics 43:89–102 (2001)
+//     "Residue Frequencies and Pairing Preferences at Proteinï¿½Protein Interfaces",
+//     PROTEINS: Structure, Function, and Genetics 43:89ï¿½102 (2001)
 
 // residue order in intValDefault: ILE, VAL, LEU, PHE, CYS, MET, ALA, GLY, THR, SER, TRP, TYR, PRO, HIS, GLU, GLN, ASP, ASN, LYS, ARG
 const double intValDefault[ NUM_RESIDUE_TYPES ][ NUM_RESIDUE_TYPES ] 
@@ -140,7 +140,7 @@ class resContFilter
    
    bool printStatus;
 
-   void printError( char *format, ... );
+   void printError( const char *format, ... );
    double getTime( void );   
    void freeMemory( void );
    void setDefaults( void );
@@ -177,6 +177,7 @@ class resContFilter
         tR->interactionValuePos += interactionValuePos;
         tR->interactionValueNeg += interactionValueNeg;        
        }
+      return nullptr;
     }
 
     

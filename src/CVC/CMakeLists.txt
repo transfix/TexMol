@@ -14,6 +14,3 @@ target_include_directories(CVC INTERFACE
 
 # Link libcvc — provides cvc::app, cvc::state, etc.
 target_link_libraries(CVC INTERFACE cvc)
-
-# Link log4cplus (still used by TexMol)
-target_link_libraries(CVC INTERFACE log4cplus)

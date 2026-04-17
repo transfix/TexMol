@@ -98,9 +98,9 @@ class SecondaryStructureData : public AbstractData
 		/* poll skel to rebuild the geometry model */
 		void rebuildGeometry(bool alphaHistogramChanged, bool betaHistogramChanged);
 
-		const QColor& getUserSelectedSecondaryStructureColor();
+		QColor getUserSelectedSecondaryStructureColor();
 		void setUserSelectedSecondaryStructureColor(const QColor& color);
-		const QColor& getUserSelectedLineColor();
+		QColor getUserSelectedLineColor();
 
 		void renderOnce();
 

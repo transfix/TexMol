@@ -245,12 +245,12 @@ void SecondaryStructureData::lineColorSlot()
 	}
 }
 
-const QColor& SecondaryStructureData::getUserSelectedSecondaryStructureColor()
+QColor SecondaryStructureData::getUserSelectedSecondaryStructureColor()
 {
 	return getBtnBgColor(m_SecondaryStructureRenderingProperties->_ui->m_SecondaryStructureColorPushButton);
 }
 
-const QColor& SecondaryStructureData::getUserSelectedLineColor()
+QColor SecondaryStructureData::getUserSelectedLineColor()
 {
 	return getBtnBgColor(m_SecondaryStructureRenderingProperties->_ui->m_LineColorPushButton);
 }

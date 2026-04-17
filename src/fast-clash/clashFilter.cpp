@@ -27,7 +27,7 @@
 #include "clashFilter.h"
 
 
-void clashFilter::printError( char *format, ... )
+void clashFilter::printError( const char *format, ... )
 {
    char eMsg[ 500 ];
    va_list args;
@@ -38,7 +38,7 @@ void clashFilter::printError( char *format, ... )
    
    va_end( args );
    
-   printf( (char *)"\nError: %s\n\n", eMsg );   
+   printf( "\nError: %s\n\n", eMsg );   
 }
 
 
@@ -79,7 +79,7 @@ bool clashFilter::allocateMovingAtomsSubtreeRootsArray( int nThreads )
    
    if ( movingAtomsSubtreeRoots == NULL )
      {
-      printError( (char *)"Failed to allocate memory!" );
+      printError( "Failed to allocate memory!" );
       return false;
      }
      
@@ -134,9 +134,9 @@ void clashFilter::setDefaults( void )
 
 void clashFilter::printCurrentSettings( void )
 {
-   printf( (char *)"\nCurrent Parameter Settings:\n" );
-   printf( (char *)"\tminRadius = %lf, maxLeafSize = %d, epsilon = %lf, numThreads = %d\n", minRadius, maxLeafSize, epsilon, numThreads );
-   printf( (char *)"\tclasfFrac = %lf, severeClashFrac = %lf, fuzzyFrac = %lf\n\n", clashFrac, severeClashFrac, fuzzyFrac );   
+   printf( "\nCurrent Parameter Settings:\n" );
+   printf( "\tminRadius = %lf, maxLeafSize = %d, epsilon = %lf, numThreads = %d\n", minRadius, maxLeafSize, epsilon, numThreads );
+   printf( "\tclasfFrac = %lf, severeClashFrac = %lf, fuzzyFrac = %lf\n\n", clashFrac, severeClashFrac, fuzzyFrac );   
 }
 
 
@@ -199,7 +199,7 @@ clashFilter::clashFilter( int numStaticAtoms, double *stAtoms, int numMovingAtom
 clashFilter::~clashFilter( )
 {
    freeMemory( );
-   if ( printStatus ) printf( (char *)"\n" );
+   if ( printStatus ) printf( "\n" );
 }
 
 
@@ -207,36 +207,36 @@ bool clashFilter::setProximityFactors( double clashFactor, double severeClashFac
 {
    if ( clashFactor < 0 )
      {
-      printError( (char *)"clashFactor must be a non-negative real number!" );
+      printError( "clashFactor must be a non-negative real number!" );
       return false;     
      }
      
    clashFrac = clashFactor;
-   if ( printStatus ) printf( (char *)"\nclashFactor is set to %lf\n", clashFactor );
+   if ( printStatus ) printf( "\nclashFactor is set to %lf\n", clashFactor );
 
    if ( severeClashFactor < 0 )
      {
-      printError( (char *)"severeClashFactor must be a non-negative real number!" );
+      printError( "severeClashFactor must be a non-negative real number!" );
       return false;     
      }
 
    if ( severeClashFactor > clashFactor )
      {
-      printError( (char *)"severeClashFactor cannot be larger than clashFactor!" );
+      printError( "severeClashFactor cannot be larger than clashFactor!" );
       return false;     
      }
      
    severeClashFrac = severeClashFactor;
-   if ( printStatus ) printf( (char *)"\nsevereClashFactor is set to %lf\n", severeClashFactor );
+   if ( printStatus ) printf( "\nsevereClashFactor is set to %lf\n", severeClashFactor );
      
    if ( fuzzyFactor < 0 )
      {
-      printError( (char *)"fuzzyFactor must be a non-negative real number!" );
+      printError( "fuzzyFactor must be a non-negative real number!" );
       return false;     
      }
      
    fuzzyFrac = fuzzyFactor;
-   if ( printStatus ) printf( (char *)"\nfuzzyFactor is set to %lf\n", fuzzyFactor );   
+   if ( printStatus ) printf( "\nfuzzyFactor is set to %lf\n", fuzzyFactor );   
    
    return true;
 }
@@ -246,7 +246,7 @@ bool clashFilter::setMinRadius( double minRad )
 {
    if ( minRad < 0 )
      {
-      printError( (char *)"minRadius must be a non-negative real number!" );
+      printError( "minRadius must be a non-negative real number!" );
       return false;     
      }
      
@@ -254,7 +254,7 @@ bool clashFilter::setMinRadius( double minRad )
 
    buildOctrees( );
 
-   if ( printStatus ) printf( (char *)"\nminRadius is set to %lf\n", minRad );
+   if ( printStatus ) printf( "\nminRadius is set to %lf\n", minRad );
    
    return true;
 }
@@ -264,7 +264,7 @@ bool clashFilter::setMaxLeafSize( int maxLfSize )
 {
    if ( maxLfSize <= 0 )
      {
-      printError( (char *)"maxLeafSize must be a positive integer!" );
+      printError( "maxLeafSize must be a positive integer!" );
       return false;     
      }
      
@@ -272,7 +272,7 @@ bool clashFilter::setMaxLeafSize( int maxLfSize )
 
    buildOctrees( );
 
-   if ( printStatus ) printf( (char *)"\nmaxLeafSize is set to %d\n", maxLfSize );
+   if ( printStatus ) printf( "\nmaxLeafSize is set to %d\n", maxLfSize );
 
    return true;
 }
@@ -282,13 +282,13 @@ bool clashFilter::setEpsilon( double eps )
 {
    if ( eps < 0 )
      {
-      printError( (char *)"epsilon must be a non-negative real number!" );
+      printError( "epsilon must be a non-negative real number!" );
       return false;     
      }
      
    epsilon = eps;
 
-   if ( printStatus ) printf( (char *)"\nepsilon is set to %lf\n", eps );
+   if ( printStatus ) printf( "\nepsilon is set to %lf\n", eps );
 
    return true;
 }
@@ -298,7 +298,7 @@ bool clashFilter::setNumThreads( int nThreads )
 {
    if ( nThreads < 1 )
      {
-      printError( (char *)"numThreads must be a positive integer!" );
+      printError( "numThreads must be a positive integer!" );
       return false;     
      }
      
@@ -311,13 +311,13 @@ bool clashFilter::setNumThreads( int nThreads )
       numThreads = nThreads;
       freeMem( movingAtomsSubtreeRootsT );
       if ( movingAtomsOctreeBuilt ) fillMovingAtomsSubtreeRootsArray( movingAtomsOctreeRoot, 1 );   
-      if ( printStatus ) printf( (char *)"\nnumThreads is set to %d\n", numThreads );
+      if ( printStatus ) printf( "\nnumThreads is set to %d\n", numThreads );
       return true;
      }
    else
      {
       movingAtomsSubtreeRoots = movingAtomsSubtreeRootsT;
-      if ( printStatus ) printf( (char *)"\nnumThreads remains unchanged ( %d )\n", numThreads );      
+      if ( printStatus ) printf( "\nnumThreads remains unchanged ( %d )\n", numThreads );      
       return false;
      }            
 }
@@ -330,7 +330,7 @@ bool clashFilter::setTransformationMatrix( Matrix transMat )
    
    if ( printStatus ) 
      {
-       printf( (char *)"\nTransformation Matrix is set to:\n" );
+       printf( "\nTransformation Matrix is set to:\n" );
        transMatrix.print( );
      }  
    
@@ -342,7 +342,7 @@ void clashFilter::setPrintStatus( bool printStat )
 {
    printStatus = printStat;
    
-   if ( printStatus ) printf( (char *)"\nprintStatus is set to true\n" );
+   if ( printStatus ) printf( "\nprintStatus is set to true\n" );
 }
 
 
@@ -387,13 +387,13 @@ void clashFilter::initSubtreeRootServer( void )
 
 bool clashFilter::copyAtomsFromArray( int numAtomsSrc, double *atmsSrc, int *numAtomsDest, ATOM **atmsDest )
 {
-   if ( printStatus ) printf( (char *)"\ncopying atoms from array... " );
+   if ( printStatus ) printf( "\ncopying atoms from array... " );
 
    double startT = getTime( );
    
    if ( numAtomsSrc <= 0 )
      {
-      printError( (char *)"No atoms to copy!" );
+      printError( "No atoms to copy!" );
       return false;
      }
    
@@ -402,7 +402,7 @@ bool clashFilter::copyAtomsFromArray( int numAtomsSrc, double *atmsSrc, int *num
    
    if ( ( *atmsDest ) == NULL )
      {
-      printError( (char *)"Failed to allocate memory for atoms!" );
+      printError( "Failed to allocate memory for atoms!" );
       return false;
      }
 
@@ -419,7 +419,7 @@ bool clashFilter::copyAtomsFromArray( int numAtomsSrc, double *atmsSrc, int *num
      
    double endT = getTime( );
    
-   if ( printStatus ) printf( (char *)"done ( %lf sec, copied %d atoms )\n", endT - startT, numAtomsSrc );
+   if ( printStatus ) printf( "done ( %lf sec, copied %d atoms )\n", endT - startT, numAtomsSrc );
          
    return true;
 }
@@ -614,7 +614,7 @@ void clashFilter::fillMovingAtomsSubtreeRootsArray( int nodeID, int maxNodesInLe
 
 bool clashFilter::buildStaticAtomsOctree( void )
 {  
-   if ( printStatus ) printf( (char *)"\nbuilding static atoms octree... " );
+   if ( printStatus ) printf( "\nbuilding static atoms octree... " );
    
    double startT = getTime( );
    
@@ -623,7 +623,7 @@ bool clashFilter::buildStaticAtomsOctree( void )
    
    if ( atomsT == NULL )
      {
-      printError( (char *)"Failed to allocate temporary memory for static atoms!" );
+      printError( "Failed to allocate temporary memory for static atoms!" );
       if ( !staticAtomsOctreeBuilt ) exit( 1 );
       return false;
      }
@@ -637,7 +637,7 @@ bool clashFilter::buildStaticAtomsOctree( void )
 
    if ( atomsOctreeT == NULL )
      {
-      printError( (char *)"Unable to %s static atoms octree - memory allocation failed!", ( staticAtomsOctreeBuilt ) ? (char *)"rebuild" : (char *)"build" );
+      printError( "Unable to %s static atoms octree - memory allocation failed!", ( staticAtomsOctreeBuilt ) ? "rebuild" : "build" );
       if ( !staticAtomsOctreeBuilt ) exit( 1 );
       return false;
      }
@@ -653,7 +653,7 @@ bool clashFilter::buildStaticAtomsOctree( void )
 
    double endT = getTime( );
    
-   if ( printStatus ) printf( (char *)"done ( %lf sec )\n", endT - startT );
+   if ( printStatus ) printf( "done ( %lf sec )\n", endT - startT );
    
    return true;
 }
@@ -662,7 +662,7 @@ bool clashFilter::buildStaticAtomsOctree( void )
 
 bool clashFilter::buildMovingAtomsOctree( void )
 {  
-   if ( printStatus ) printf( (char *)"\nbuilding moving atoms octree... " );
+   if ( printStatus ) printf( "\nbuilding moving atoms octree... " );
    
    double startT = getTime( );
    
@@ -671,7 +671,7 @@ bool clashFilter::buildMovingAtomsOctree( void )
    
    if ( atomsT == NULL )
      {
-      printError( (char *)"Failed to allocate temporary memory for moving atoms!" );
+      printError( "Failed to allocate temporary memory for moving atoms!" );
       if ( !movingAtomsOctreeBuilt ) exit( 1 );
       return false;
      }
@@ -685,7 +685,7 @@ bool clashFilter::buildMovingAtomsOctree( void )
 
    if ( atomsOctreeT == NULL )
      {
-      printError( (char *)"Unable to %s moving atoms octree - memory allocation failed!", ( movingAtomsOctreeBuilt ) ? (char *)"rebuild" : (char *)"build" );
+      printError( "Unable to %s moving atoms octree - memory allocation failed!", ( movingAtomsOctreeBuilt ) ? "rebuild" : "build" );
       if ( !movingAtomsOctreeBuilt ) exit( 1 );
       return false;
      }
@@ -703,7 +703,7 @@ bool clashFilter::buildMovingAtomsOctree( void )
 
    double endT = getTime( );
    
-   if ( printStatus ) printf( (char *)"done ( %lf sec )\n", endT - startT );
+   if ( printStatus ) printf( "done ( %lf sec )\n", endT - startT );
    
    return true;
 }
@@ -715,9 +715,8 @@ bool clashFilter::buildOctrees( void )
    if ( ( minRadius != minRadiusUsed ) || ( maxLeafSize != maxLeafSizeUsed ) || ( !movingAtomsOctreeBuilt ) ) buildMovingAtomsOctree( );
    minRadiusUsed = minRadius;
    maxLeafSizeUsed = maxLeafSize;
+   return true;
 }
-
-
 void clashFilter::approximateInteractions( Matrix transMat, int nodeS, int nodeM, int *nClashes, int *nSevereClashes, double *interactionValue )
 {
    double sumRad = staticAtomsOctree[ nodeS ].cr + movingAtomsOctree[ nodeM ].cr;
@@ -835,7 +834,7 @@ bool clashFilter::computeInteractions( Matrix transMat, int *nClashes, int *nSev
 {
    if ( !staticAtomsOctreeBuilt || !movingAtomsOctreeBuilt ) return false;
 
-   if ( printStatus ) printf( (char *)"\napproximating interactions and computing clashes... " );
+   if ( printStatus ) printf( "\napproximating interactions and computing clashes... " );
 
    double startT = getTime( );
    
@@ -871,7 +870,7 @@ bool clashFilter::computeInteractions( Matrix transMat, int *nClashes, int *nSev
          
    double endT = getTime( );
    
-   if ( printStatus ) printf( (char *)"done ( %lf sec )\n", endT - startT );
+   if ( printStatus ) printf( "done ( %lf sec )\n", endT - startT );
    
    return true;
 }
@@ -886,7 +885,7 @@ bool clashFilter::computeInteractions( int *nClashes, int *nSevereClashes, doubl
 
 bool clashFilter::computeInteractionsNaively( Matrix transMat, int *nClashes, int *nSevereClashes, double *interactionValue )
 {
-   if ( printStatus ) printf( (char *)"\ncomputing steric interactions naively... " );
+   if ( printStatus ) printf( "\ncomputing steric interactions naively... " );
 
    double startT = getTime( );
    
@@ -953,7 +952,7 @@ bool clashFilter::computeInteractionsNaively( Matrix transMat, int *nClashes, in
 
    double endT = getTime( );
    
-   if ( printStatus ) printf( (char *)"done ( %lf sec )\n", endT - startT );
+   if ( printStatus ) printf( "done ( %lf sec )\n", endT - startT );
    
    return true;
 }

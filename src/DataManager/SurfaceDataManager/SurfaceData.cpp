@@ -1147,7 +1147,7 @@ void SurfaceData::wireframeColorSlot()
 	}
 }
 
-const QColor& SurfaceData::getUserSelectedWireframeColor()
+QColor SurfaceData::getUserSelectedWireframeColor()
 {
 	return m_SurfaceRenderingProperties->_ui->m_PushButton_WireframeColor->palette().color( QPalette::Button );
 }
@@ -1255,17 +1255,17 @@ void SurfaceData::pointColorSlot()
 	}
 }
 
-const QColor& SurfaceData::getUserSelectedSurfaceColor()
+QColor SurfaceData::getUserSelectedSurfaceColor()
 {
 	return m_SurfaceRenderingProperties->_ui->m_PushButton_SurfaceColor->palette().color( QPalette::Button );
 }
 
-const QColor& SurfaceData::getUserSelectedLineColor()
+QColor SurfaceData::getUserSelectedLineColor()
 {
 	return m_SurfaceRenderingProperties->_ui->m_PushButton_LineColor->palette().color( QPalette::Button );
 }
 
-const QColor& SurfaceData::getUserSelectedPointColor()
+QColor SurfaceData::getUserSelectedPointColor()
 {
 	return m_SurfaceRenderingProperties->_ui->m_PushButton_PointColor->palette().color( QPalette::Button );
 }

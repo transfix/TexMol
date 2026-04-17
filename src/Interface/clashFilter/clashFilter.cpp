@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void clashFilter::printError( char *format, ... )
+void clashFilter::printError( const char *format, ... )
 {
    char eMsg[ 500 ];
    va_list args;
@@ -674,6 +674,7 @@ bool clashFilter::buildOctrees( void )
    if ( ( minRadius != minRadiusUsed ) || ( maxLeafSize != maxLeafSizeUsed ) || ( !movingAtomsOctreeBuilt ) ) buildMovingAtomsOctree( );
    minRadiusUsed = minRadius;
    maxLeafSizeUsed = maxLeafSize;
+   return true;
 }
 
 

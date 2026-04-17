@@ -132,12 +132,12 @@ class SurfaceData : public AbstractData
 		void transparencySliderSlot(int value);
 
 	protected:
-		const QColor& getUserSelectedWireframeColor();
+		QColor getUserSelectedWireframeColor();
 		void setUserSelectedWireframeColor(const QColor& color);
-		const QColor& getUserSelectedSurfaceColor();
+		QColor getUserSelectedSurfaceColor();
 		void setUserSelectedSurfaceColor(const QColor& color);
-		const QColor& getUserSelectedLineColor();
-		const QColor& getUserSelectedPointColor();
+		QColor getUserSelectedLineColor();
+		QColor getUserSelectedPointColor();
 
 		bool convertContourGeomToGeometry(ContourGeom* cGeom, Geometry* geometry, bool colorPresent);
 		bool setVectorGeometry(Geometry* geometry, int numberOfVectors, double* vectors, double length, int curGeomIndex);

@@ -164,7 +164,7 @@ SimpleVolumeData* SimVolData;
 //Craig: long lines are annoying, here is a function to pop up your error boxes!
 void errorDialog(string bodyText)
 {
-	QMessageBox::warning((QWidget*)0, QString("Error"), QString(bodyText.c_str()), QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton);
+	QMessageBox::warning(nullptr, QString("Error"), QString(bodyText.c_str()), QMessageBox::Ok);
 }
 
 
@@ -1636,7 +1636,7 @@ void MainWindow::displayResultingSurface() {
 
       surfaceJobs.erase(surfaceJobs.begin() + foundFinished);
 
-      QMessageBox::information(0, "Molecular Surface Generation", "Job Completed", QMessageBox::Ok, QMessageBox::NoButton, QMessageBox::NoButton);
+      QMessageBox::information(nullptr, "Molecular Surface Generation", "Job Completed", QMessageBox::Ok);
 
     }
   }
@@ -2812,18 +2812,18 @@ void MainWindow::closeEvent(QCloseEvent* event)
 
 	if(m_Settings->userSettingsChanged())
 	{
-		int saveChanges = QMessageBox::information(this, "MoleculeViz",
+		int saveChanges = QMessageBox::question(this, "MoleculeViz",
 						  "Save user settings ?",
-						  "Yes", "No", "Cancel"
+						  QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel
 												  );
 
-		if(saveChanges == 0)
+		if(saveChanges == QMessageBox::Yes)
 		{
 			m_Settings->saveUserSettings();
 			m_Settings->save();
 			event->accept();
 		}
-		else if(saveChanges == 1)
+		else if(saveChanges == QMessageBox::No)
 		{
 			m_Settings->save();
 			event->accept();

@@ -208,7 +208,7 @@ void Optimizer::updateChargeData(FunctionData* fdata, double* q)
 
 void Optimizer::radiusOptimize(double* p, double* x, int m, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	atomData* dptr = (atomData*)data;
 	/* 1D least square version (fast) */
 	for(k = 0; k < n; k++)
@@ -228,7 +228,7 @@ void Optimizer::radiusOptimize(double* p, double* x, int m, int n, void* data)
 
 void Optimizer::centerOptimize(double* c, double* x, int mm, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	atomData* dptr = (atomData*)data;
 	double center[3];
 	int m = mm/3;
@@ -253,7 +253,7 @@ void Optimizer::centerOptimize(double* c, double* x, int mm, int n, void* data)
 
 void Optimizer::radiuscenterOptimize(double* c, double* x, int m, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	//  atomData* dptr = (atomData *)data;
 	double center[3];
 	double radius;
@@ -279,7 +279,7 @@ void Optimizer::radiuscenterOptimize(double* c, double* x, int m, int n, void* d
 
 void Optimizer::chargeOptimize(double* q, double* x, int m, int n, void* data)
 {
-	register int i,j;
+	int i,j;
 	double tmp = 0.0;
 	for(j = 0; j < n; j++)
 	{
@@ -294,7 +294,7 @@ void Optimizer::chargeOptimize(double* q, double* x, int m, int n, void* data)
 
 void Optimizer::chargeOptimize2(double* q, double* x, int m, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	double rik2;
 	double tmp = 0.0;
 	for(j = 0; j < n; j++)
@@ -324,7 +324,7 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	// x - f(CG) - f(AA), the chi function
 	double p[1], c[3], cp[4];
 	int m, n;
-	register int i, iter;
+	int i, iter;
 	double start, end;
 	double opts[LM_OPTS_SZ], info[LM_INFO_SZ];
 	int ret;
@@ -415,7 +415,7 @@ void Optimizer::optimizeCharge()
 	// x - f(CG) - f(AA), the chi function
 	double q[numOfUnknown];
 	int m, n;
-	register int i;
+	int i;
 	double start, end;
 	double opts[LM_OPTS_SZ], info[LM_INFO_SZ];
 	int ret;

@@ -20,7 +20,6 @@
 */
 #include <GL/glew.h>
 
-#include <TexMol/Dialogs/glext.h>
 #include <QElapsedTimer>
 
 #include <DataManager/DataManager.h>
@@ -504,6 +503,7 @@ bool RenderAreaWidget::recordAxisRotatedAnimation(QString imageBaseFileName, QSt
 		}
 		imageNumber++;
 	}}
+	return true;
 }
 
 bool RenderAreaWidget::recordAnimation(QString animationFileName, QString imageBaseFileName, QString fileType)
@@ -553,6 +553,7 @@ bool RenderAreaWidget::startRecordingViews(const char* animationFileName)
 bool RenderAreaWidget::recordCurrentView()
 {
 	recordViewInformation();
+	return true;
 }
 
 bool RenderAreaWidget::stopRecordingViews()
@@ -665,8 +666,8 @@ void RenderAreaWidget::mouseMoveEvent(QMouseEvent* q)
 	if(m_MyButtonFlag)
 	{
 		int xChange, yChange;
-		xChange = q->x() - m_OldMouseXPosition;
-		yChange = q->y() - m_OldMouseYPosition;
+		xChange = q->position().x() - m_OldMouseXPosition;
+		yChange = q->position().y() - m_OldMouseYPosition;
 		MouseHandler::USER_SELECTED_TRANSFORMATION transformation = m_MouseHandler->getUserSelectedTransformation(
 					q,
 					m_RendererSet->m_ControlPressed,
@@ -710,11 +711,11 @@ void RenderAreaWidget::mouseMoveEvent(QMouseEvent* q)
 
 		if(m_SyncView)
 		{
-			m_RendererSet->setNewMousePos(q->x(), q->y());
+			m_RendererSet->setNewMousePos(q->position().x(), q->position().y());
 		}
 		else
 		{
-			setNewMousePos(q->x(), q->y());
+			setNewMousePos(q->position().x(), q->position().y());
 		}
 	}
 
@@ -738,7 +739,7 @@ void RenderAreaWidget::mouseMoveEvent(QMouseEvent* q)
 
 	if(m_Current)
 	{
-		m_RendererSet->displayMousePosition(q->x(), q->y());
+		m_RendererSet->displayMousePosition(q->position().x(), q->position().y());
 	}
 
 	if(m_Current)
@@ -782,14 +783,14 @@ void RenderAreaWidget::mousePressEvent(QMouseEvent* q)
 
 	if(m_SyncView)
 	{
-		m_RendererSet->setNewMousePos(q->x(), q->y());
+		m_RendererSet->setNewMousePos(q->position().x(), q->position().y());
 	}
 	else
 	{
-		setNewMousePos(q->x(), q->y());
+		setNewMousePos(q->position().x(), q->position().y());
 	}
 
-	m_OpenGL_Viewer.m_View->startDrag(q->x(), q->y());
+	m_OpenGL_Viewer.m_View->startDrag(q->position().x(), q->position().y());
 	m_MyButtonFlag = 1;
 
 	if(!m_Current)
@@ -815,7 +816,7 @@ void RenderAreaWidget::mousePressEvent(QMouseEvent* q)
 
 	if(m_DataManager)
 	{
-		m_RendererSet->setSelection(m_DataManager->getSelection(m_OpenGL_Viewer.m_View->GetPickRay(q->x(), q->y())));
+		m_RendererSet->setSelection(m_DataManager->getSelection(m_OpenGL_Viewer.m_View->GetPickRay(q->position().x(), q->position().y())));
 	}
 }
 

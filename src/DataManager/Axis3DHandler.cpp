@@ -50,7 +50,7 @@ bool Axis3DHandler::mousePress3DEvent(View* view, QMouseEvent* e)
 	Vector origin = m_Rover3DWidget->getSubVolume().getOrigin();
 	float distance = nearestTOnAxis(view, e);
 	Vector point = nearestPointOnAxis(view, e);
-	Ray deletepickRay = view->GetPickRay(e->x(), e->y());
+	Ray deletepickRay = view->GetPickRay(e->position().x(), e->position().y());
 	Vector screenPoint = view->GetScreenPoint(point);
 	bool isValid1 = m_Rover3DWidget->getSubVolume().withinCube(point);
 	bool isValid2 = closeToMouse(view, e, point);
@@ -165,8 +165,8 @@ bool Axis3DHandler::closeToMouse(View* view, QMouseEvent* e, const Vector& v)
 {
 	Vector screenPoint = view->GetScreenPoint(v);
 	screenPoint[1] = view->m_Height - screenPoint[1] - 1; // SKVINAY
-	double d1 = fabs((float)(screenPoint[0]-(float)e->x()));
-	double d2 = fabs((float)(screenPoint[1]-(float)e->y()));
+	double d1 = fabs((float)(screenPoint[0]-(float)e->position().x()));
+	double d2 = fabs((float)(screenPoint[1]-(float)e->position().y()));
 	return  d1 < 5.0 &&
 			d2 < 5.0;
 }
@@ -174,7 +174,7 @@ bool Axis3DHandler::closeToMouse(View* view, QMouseEvent* e, const Vector& v)
 float Axis3DHandler::nearestTOnAxis(View* view, QMouseEvent* e) const
 {
 	Vector origin = m_Rover3DWidget->getSubVolume().getOrigin();
-	Ray pickRay = view->GetPickRay(e->x(), e->y());
+	Ray pickRay = view->GetPickRay(e->position().x(), e->position().y());
 	if (m_Axis==XAxis)
 	{
 		float xDistance = pickRay.nearestTOnXAxis(origin);
@@ -195,7 +195,7 @@ float Axis3DHandler::nearestTOnAxis(View* view, QMouseEvent* e) const
 Vector Axis3DHandler::nearestPointOnAxis(View* view, QMouseEvent* e) const
 {
 	Vector origin = m_Rover3DWidget->getSubVolume().getOrigin();
-	Ray pickRay = view->GetPickRay(e->x(), e->y());
+	Ray pickRay = view->GetPickRay(e->position().x(), e->position().y());
 	if (m_Axis==XAxis)
 	{
 		Vector xPoint = pickRay.nearestPointOnXAxis(origin);

@@ -179,7 +179,7 @@ void Optimizer::updateFunctionData(FunctionData* fdata, double* c, double p)
 
 void Optimizer::radiusOptimize(double* p, double* x, int m, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	atomData* dptr = (atomData*)data;
 	/* 1D least square version (fast) */
 	for(k = 0; k < n; k++)
@@ -213,7 +213,7 @@ void Optimizer::radiusOptimize(double* p, double* x, int m, int n, void* data)
 
 void Optimizer::centerOptimize(double* c, double* x, int mm, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	atomData* dptr = (atomData*)data;
 	double center[3];
 	int m = mm/3;
@@ -250,7 +250,7 @@ void Optimizer::centerOptimize(double* c, double* x, int mm, int n, void* data)
 
 void Optimizer::radiuscenterOptimize(double* c, double* x, int m, int n, void* data)
 {
-	register int i,j,k;
+	int i,j,k;
 	double tmp = 0.0;
 	//  atomData* dptr = (atomData *)data;
 	double center[3];
@@ -295,7 +295,7 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	// x - f(CG) - f(AA), the chi function
 	double p[1], c[3];
 	int m, n;
-	register int i, iter;
+	int i, iter;
 	double start, end;
 	double opts[LM_OPTS_SZ], info[LM_INFO_SZ];
 	int ret;
@@ -396,7 +396,7 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 //Following two use  ||x-x_0|| - r
 void expfunc(double* p, double* x, int m, int n, void* data)
 {
-	register int i;
+	int i;
 	FunctionData* fdata =(FunctionData*) data;
 	for(i=0; i <n; i++)
 	{
@@ -408,7 +408,7 @@ void expfunc(double* p, double* x, int m, int n, void* data)
 
 void jacexpfunc(double* p, double* jac, int m, int n, void* data)
 {
-	register int i, j;
+	int i, j;
 	FunctionData* fdata =(FunctionData*) data;
 	for(i=j=0; i<n; i++)
 	{
@@ -425,7 +425,7 @@ void jacexpfunc(double* p, double* jac, int m, int n, void* data)
 //Following two use ||x-x_0||^2 - r^2. After optimization, radius seems a little bigger than the above one.
 void expfuncN(double* p, double* x, int m, int n, void* data)
 {
-	register int i;
+	int i;
 	FunctionData* fdata =(FunctionData*) data;
 	for(i=0; i <n; i++)
 	{
@@ -437,7 +437,7 @@ void expfuncN(double* p, double* x, int m, int n, void* data)
 
 void jacexpfuncN(double* p, double* jac, int m, int n, void* data)
 {
-	register int i, j;
+	int i, j;
 	FunctionData* fdata =(FunctionData*) data;
 	for(i=j=0; i<n; i++)
 	{
@@ -464,7 +464,7 @@ void Optimizer::optimizeCenterAndRadiusN(int iteration)
 {
 	int n=numOfSamples, m=4;
 	double p[m], x[n], opts[LM_OPTS_SZ], info[LM_INFO_SZ];
-	register int i;
+	int i;
 	int ret;
 	p[0] = adata[0].center[0];
 	p[1] = adata[0].center[1];

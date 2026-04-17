@@ -5,7 +5,7 @@
 #include <fast-resCont/resContFilter.h>
 #include <stdlib.h>
 
-void resContFilter::printError( char *format, ... )
+void resContFilter::printError( const char *format, ... )
 {
    char eMsg[ 500 ];
    va_list args;
@@ -671,6 +671,7 @@ bool resContFilter::buildOctrees( void )
    minRadiusUsed = minRadius;
    maxLeafSizeUsed = maxLeafSize;
    distCutoffUsed = distCutoff;
+   return true;
 }
 
 void resContFilter::getScores(vector<Point> &sAtoms, vector<Point> &mAtoms, vector<double> &sAtomValues, vector<double> &mAtomValues, double &val) 
