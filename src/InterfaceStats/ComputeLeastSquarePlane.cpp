@@ -109,10 +109,12 @@ bool ComputeLeastSquarePlane::computePlane(vector < DPG::Point* > & pts)
 				a20, 	a21, 	a22 };
 
 	lwork = -1;
-	dsyev_("Vectors", "Upper", &n, a, &lda, w, &wkopt, &lwork, &info);
+	char jobz[] = "Vectors";
+	char uplo[] = "Upper";
+	dsyev_(jobz, uplo, &n, a, &lda, w, &wkopt, &lwork, &info);
 	lwork = (int)wkopt;
 	work = (double*)malloc(lwork*sizeof(double));
-	dsyev_("Vectors", "Upper", &n, a, &lda, w, work, &lwork, &info);
+	dsyev_(jobz, uplo, &n, a, &lda, w, work, &lwork, &info);
 
 	
 	if(info > 0)

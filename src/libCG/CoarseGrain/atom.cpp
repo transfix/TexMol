@@ -20,7 +20,7 @@ Atom::Atom()
 	position[2] = 0;
 	radius = 0;
 	charge = 0;
-	atomID = NULL;
+	atomID = '\0';
 	mass = 0;
 	child = 0;
 	occupancy = 1.00;

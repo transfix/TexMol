@@ -44,9 +44,9 @@ void draw_tetra(const SecondaryStructures::Cell_handle& cell,
 
 void write_wt(const SecondaryStructures::Triangulation& triang,
 			  const char* file_prefix);
-void write_helix_wrl(Geometry* geom, char* filename);
+void write_helix_wrl(Geometry* geom, const char* filename);
 
-void write_sheet_wrl(Geometry* geom, char* filename);
+void write_sheet_wrl(Geometry* geom, const char* filename);
 
 void write_iobdy(const SecondaryStructures::Triangulation& triang,
 				 const char* file_prefix);

@@ -631,7 +631,7 @@ bool decimate(int argc, char* argv[])
 	float innerangle = atof(argv[6]);
 
 	// the NULL argument is no longer used...
-	Decimation().Decimate(input.c_str(), output.c_str(), niter, NULL, variation, innerangle);
+	Decimation().Decimate(input.c_str(), output.c_str(), niter, 0.0f, variation, innerangle);
 	return true;
 }
 

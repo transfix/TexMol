@@ -1356,7 +1356,7 @@ GroupOfAtoms* parserPDBtoGOA::parsePDB(string filename, CollectionData* collecti
 	if( hbond_files.size() == 1 )
 		parseHBOND( molModels.get(0), hbond_files[0].c_str());
 
-	fprintf( stderr, "n hbond: %d\n", molModels.get(0)->getHBond()->size() );
+	fprintf( stderr, "n hbond: %zu\n", molModels.get(0)->getHBond()->size() );
 	// Return the first molecule that was seen
 	return molModels.get(0);
 }

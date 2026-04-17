@@ -78,11 +78,11 @@ T ExpandableBuffer <T>::get(int index) const
 {
 	if (index < 0)
 	{
-		return NULL;
+		return T{};
 	}
 	if (m_NumberOfObjects <= (unsigned int)index)
 	{
-		return NULL;
+		return T{};
 	}
 	return m_Buffer[index];
 }

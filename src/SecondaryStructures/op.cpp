@@ -159,7 +159,7 @@ void write_wt(const Triangulation& triang, const char* file_prefix)
 	fout.close();
 }
 
-void write_helix_wrl(Geometry* geom, char* filename)
+void write_helix_wrl(Geometry* geom, const char* filename)
 {
 	ofstream fout;
 	fout.open(filename);
@@ -200,7 +200,7 @@ void write_helix_wrl(Geometry* geom, char* filename)
 
 
 
-void write_sheet_wrl(Geometry* geom, char* filename)
+void write_sheet_wrl(Geometry* geom, const char* filename)
 {
 	ofstream fout;
 	fout.open(filename);

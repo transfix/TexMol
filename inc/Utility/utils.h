@@ -72,9 +72,9 @@
 
 namespace CVCUtility {
 
-void printError( char *format, ... );
-void flushPrint( char *format, ... );
-void f_printf( FILE *fp, char *format, ... );
+void printError( const char *format, ... );
+void flushPrint( const char *format, ... );
+void f_printf( FILE *fp, const char *format, ... );
 double getTime( void );
 int skipWhiteSpaces( char *buf, int i );
 int skipInitial( char *s1, char *s2, char *p );

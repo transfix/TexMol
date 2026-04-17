@@ -284,7 +284,7 @@ string F2dockMasterControl::getJobStatus(int index)
 int F2dockMasterControl::getJobStatusInt(int index)
 {
 	if(index < jobs.size()) return jobs[index]->getBasicParams()->getJobStatusInt();
-	else return NULL;
+	else return 0;
 }
 
 string F2dockMasterControl::getJobTitle(int index)

@@ -60,3 +60,4 @@ coverage/
 *.gcno
 *.gcda
 *.gcov
+build2/

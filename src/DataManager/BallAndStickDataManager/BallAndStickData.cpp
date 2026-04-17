@@ -451,7 +451,7 @@ void BallAndStickData::prepareHydrogenBondRender(PDBParser::GroupOfAtoms* molecu
 
 	for(int i = 0; i < molecule->m_SubGroups.size(); i++ ) {
 	std::vector<PDBParser::HBOND> *hbond = molecule->m_SubGroups[i]->getHBond();
-	fprintf( stderr, "n hbond: %d\n", hbond->size() );
+	fprintf( stderr, "n hbond: %zu\n", hbond->size() );
 	for( std::vector<PDBParser::HBOND>::iterator it = hbond->begin();  it < hbond->end(); it++ ) {
 		float *p_donor = it->d->getPosition();
 		float *p_accep = it->a->getPosition();
