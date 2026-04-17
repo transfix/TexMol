@@ -149,6 +149,7 @@ bool averagePositions()
 	}
 	fclose(fp);
 	fclose(fpw);
+	return true;
 }
 
 void setZeros(PDBParser::GroupOfAtoms* copyGOA)

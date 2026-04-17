@@ -1849,6 +1849,7 @@ bool Server::getVolumeN(int argc, char* argv[])
 		delete surfaceData;
 		fclose(fp);
 	}
+	return true;
 }
 
 bool Server::getVolume(int argc, char* argv[])
@@ -3826,6 +3827,7 @@ bool Server::geoImprove_LBIE(int argc, char* argv[])
 	mesher.loadMesh(argv[2]);
 	mesher.geoImprove();
 	mesher.saveMesh(argv[3]);
+	return true;
 }
 
 

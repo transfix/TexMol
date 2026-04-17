@@ -87,7 +87,7 @@ int BitVector::size()
 
 void BitVector::empty()
 {
-	m_BitStream.empty();
+	m_BitStream.clear();
 	m_NumberOfElements = 0;
 }
 
