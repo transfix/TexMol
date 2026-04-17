@@ -266,6 +266,34 @@ Created `src/TexMol/Dialogs/dialog_stubs.cpp` — provides link-time symbols for
 
 ---
 
-## Phases 7–9: Pending
+## Phase 7: C++ Modernization (Partial) ✅
+
+**Commit:** `47009446` — Phase 7 (partial): boost::any → std::any, boost::shared_ptr → std::shared_ptr
+
+### Completed
+- [x] `boost::any` / `boost::any_cast` → `std::any` / `std::any_cast` (13 files)
+- [x] `boost::shared_ptr` → `std::shared_ptr` in CVC compat types & ColorTable2
+- [x] `boost::scoped_ptr` → `std::unique_ptr` in ColorTable2/Table.h
+- [x] `boost::any::empty()` → `!std::any::has_value()`
+- [x] Replaced Boost includes with `<any>`, `<memory>` headers
+
+### Deferred (requires non-mechanical changes)
+- [ ] `boost::thread` → std (uses interruption_point — no std equivalent)
+- [ ] `boost::shared_array` → `std::shared_ptr<T[]>` (needs delete[] semantics audit)
+- [ ] `boost::format` (70 uses) → `std::format` or `fmt`
+- [ ] `boost::regex` (7 uses) → `std::regex`
+- [ ] `boost::signals2`, `boost::property_tree` — architectural dependencies
+- [ ] `boost::lexical_cast` (19 uses) → `std::to_string` / `std::stoi`
+- [ ] C header cleanup (`<stdio.h>` → `<cstdio>`, etc.)
+- [ ] Remove `using namespace std` from headers (53 headers)
+- [ ] Replace `malloc()`/`free()` → containers/smart pointers
+
+### Build Status
+- **Errors:** 0
+- **Net change:** 13 files, +51 −51 lines
+
+---
+
+## Phases 8–9: Pending
 
 See [CVC-modernization-plan.md](CVC-modernization-plan.md) for details.
