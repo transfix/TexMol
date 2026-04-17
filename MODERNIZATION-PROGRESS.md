@@ -344,6 +344,49 @@ header and add `namespace CVC { ... }` aliases mapping PascalCase names to libcv
 
 ---
 
-## Phase 9+: Pending
+## Phase 9: Code Cleanup and Warning Reduction ✅
 
-See [CVC-modernization-plan.md](CVC-modernization-plan.md) for details.
+**Commit:** `d24d818b` — Phase 9: Code cleanup — remove dead code, fix warnings (580→291)
+
+### Dead Code Removal
+- [x] Deleted `src/CVC/App.cpp`, `State.cpp`, `HDF5_Utilities.cpp` (3,204 lines — replaced by libcvc in Phase 8)
+- [x] Removed bundled `log4cplus 1.0.4` from build (136 `std::auto_ptr` deprecation warnings)
+- [x] Dropped CVC INTERFACE library log4cplus dependency (only used by dead HDF5 path)
+
+### Warning Fixes (580 → 291, then 4 remaining in TexMol code)
+- [x] **register keyword** removed from 5 files (67 warnings)
+- [x] **GL_GLEXT_VERSION redefinition** guarded in 3 bundled glext.h files (15 warnings)
+- [x] **Return-reference-to-temporary UB** fixed in `SurfaceData` and `SecondaryStructureData` (4 methods)
+- [x] **Missing return statements** fixed in `clashFilter::buildOctrees()`, `resContFilter::buildOctrees()`,
+  `RenderAreaWidget::recordCurrentView()`, `RenderAreaWidget` stereo dump, thread functions (15+ locations)
+- [x] **const-correctness**: `printError(char*)` → `printError(const char*)` in 3 headers + 3 source files
+- [x] **Qt6 deprecated API**: `QMouseEvent::x()/y()` → `position().x()/y()` in Axis3DHandler, RenderAreaWidget
+- [x] **Qt6 deprecated API**: `QMessageBox` old overloads → `StandardButtons` in MainWindow
+- [x] **write-strings**: LAPACK `dsyev_` call fixed with local char arrays in SymmetricPose
+
+### Remaining Warnings (291 full-build, 4 in TexMol code)
+- 92 `-Wwrite-strings` (mostly in modules not yet touched: clashFilter callers, PDBParser, etc.)
+- 45 `-Wreturn-type` (spread across ~30 files in compat modules)
+- 30 `-Wnarrowing` (C-style implicit narrowing in legacy code)
+- 24 `-Wdeprecated-declarations` (BOOST_BIND_GLOBAL_PLACEHOLDERS, Qt APIs)
+- 21 `-Wcpp` (Qt6/GLEW incompatibility warnings from system headers — unfixable)
+- Remaining warnings are in compat modules scheduled for libcvc replacement
+
+### Build Status
+- **Errors:** 0
+- **Binary size:** 16MB (unchanged from Phase 8)
+- **Net change:** 27 files, +137 −3,331 lines
+
+---
+
+## Phase 10+: Pending
+
+Remaining compat modules to replace with libcvc (in priority order):
+1. ByteOrder, ComputeNormals — quick wins, 1–2 consumers each
+2. GeometryFileTypes → `cvc::geometry_file_io`
+3. VolumeFileTypes → `cvc::volume_file_io`
+4. SignDistanceFunction_v2 → `cvc::sdf()` (18–27× faster)
+5. LBIE_lib → `cvc::iso(LBIE)`
+6. SimpleVolumeData → `cvc::voxels` + `cvc::volume`
+7. VolMagick → `cvc::volume_file_io` + `cvc::volume`
+8. Geometry → `cvc::geometry`
