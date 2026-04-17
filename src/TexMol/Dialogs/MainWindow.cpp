@@ -3127,7 +3127,7 @@ void MainWindow::customEvent(QEvent* event)
 
 		if(ce->funcName() == "deleteAndUpdateUI")
 		{
-			deleteAndUpdateUI(boost::any_cast<int>(ce->args()[0]));
+			deleteAndUpdateUI(std::any_cast<int>(ce->args()[0]));
 		}
 		else if(ce->funcName() == "redraw")
 		{

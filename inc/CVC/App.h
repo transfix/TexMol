@@ -36,8 +36,8 @@
 
 #include <boost/thread.hpp>
 #include <boost/signals2.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/any.hpp>
+#include <memory>
+#include <any>
 #include <boost/foreach.hpp>
 #include <boost/function.hpp>
 #include <boost/lexical_cast.hpp>
@@ -93,11 +93,11 @@ namespace CVC_NAMESPACE
   // 10/09/2011 -- Joe R. -- Added a new argument to startThread: 'wait'
   // 12/16/2011 -- Joe R. -- Added save/load property map functions.
   // 02/24/2012 -- Joe R. -- Moved wait_for_threads() to App.
-  // 03/31/3012 -- Joe R. -- Added boost::any dataTypeName().
+  // 03/31/3012 -- Joe R. -- Added std::any dataTypeName().
   class App
   {
   public:
-    typedef boost::shared_ptr<App> AppPtr;
+    typedef std::shared_ptr<App> AppPtr;
 
     //virtual ~App(); // arand: why virtual?
     ~App();
@@ -109,8 +109,8 @@ namespace CVC_NAMESPACE
 
     //Regular data access
     DataMap data();
-    boost::any data(const std::string& key);
-    void data(const std::string& key, const boost::any& value);
+    std::any data(const std::string& key);
+    void data(const std::string& key, const std::any& value);
     void data(const DataMap& map);
 
     //Returns a nice name for the type of data referenced by the key
@@ -129,8 +129,8 @@ namespace CVC_NAMESPACE
       else return rawname;
     }
 
-    //Returns a nice name for the type of boost::any data if it has been registered
-    std::string dataTypeName(const boost::any& d);
+    //Returns a nice name for the type of std::any data if it has been registered
+    std::string dataTypeName(const std::any& d);
 
     //Returns the enum of the type of data with key.  If not found or
     //type not registered with enum, it will return Undefined.
@@ -151,7 +151,7 @@ namespace CVC_NAMESPACE
     template<class T>
     T data(const std::string& key)
     {
-      return boost::any_cast<T>(data(key));
+      return std::any_cast<T>(data(key));
     }
 
     template<class T>

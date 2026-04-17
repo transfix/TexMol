@@ -420,7 +420,7 @@ bool DataManager::addData(VolumeData* volumeData, QString fileName)
 				}
 
 				// arand: this call was not working...
-				//CallEvent::call(w->parentWidget(), "deleteAndUpdateUI", std::vector<boost::any>(1,boost::any(i)));
+				//CallEvent::call(w->parentWidget(), "deleteAndUpdateUI", std::vector<std::any>(1,std::any(i)));
 				// this works...
 				((MainWindow *)w->parentWidget())->deleteAndUpdateUI(i);
 

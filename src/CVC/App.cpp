@@ -173,16 +173,16 @@ namespace CVC_NAMESPACE
     return _data; 
   }
 
-  boost::any App::data(const std::string& key)
+  std::any App::data(const std::string& key)
   {
     boost::this_thread::interruption_point();
     boost::mutex::scoped_lock lock(_dataMutex);
     if(_data.find(key)!=_data.end())
       return _data[key];
-    return boost::any();
+    return std::any();
   }
 
-  void App::data(const std::string& key, const boost::any& value)
+  void App::data(const std::string& key, const std::any& value)
   {
     log4cplus::Logger logger =
         log4cplus::Logger::getInstance(std::string("App.data.") + key);
@@ -191,7 +191,7 @@ namespace CVC_NAMESPACE
     boost::this_thread::interruption_point();
     {
       boost::mutex::scoped_lock lock(_dataMutex);
-      if(value.empty())
+      if(!value.has_value())
         _data.erase(key); //remove if empty
       else if(!key.empty()) //don't allow empty keys
         _data[key] = value;
@@ -208,7 +208,7 @@ namespace CVC_NAMESPACE
       //erase empty data
       std::list<std::string> emptyProps;
       BOOST_FOREACH(DataMap::value_type val, _data)
-        if(val.first.empty() || val.second.empty()) 
+        if(val.first.empty() || !val.second.has_value()) 
 	  emptyProps.push_back(val.first);
       BOOST_FOREACH(std::string key, emptyProps)
         _data.erase(key);
@@ -234,7 +234,7 @@ namespace CVC_NAMESPACE
     return retval;
   }
 
-  std::string App::dataTypeName(const boost::any& d)
+  std::string App::dataTypeName(const std::any& d)
   {
     boost::this_thread::interruption_point();
     boost::mutex::scoped_lock lock(_dataMutex);

@@ -31,7 +31,7 @@
 #include <QEvent>
 
 #include <string>
-#include <boost/any.hpp>
+#include <any>
 
 namespace CVC_NAMESPACE
 {
@@ -39,11 +39,11 @@ namespace CVC_NAMESPACE
   {
     public:
     CVCEvent(const std::string n = std::string(),
-             const boost::any d = boost::any())
+             const std::any d = std::any())
       : QEvent(QEvent::User), name(n), data(d) {}
   
     std::string name;
-    boost::any  data;
+    std::any  data;
   };
 }
 

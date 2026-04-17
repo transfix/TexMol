@@ -25,7 +25,7 @@
 #include <ColorTable2/XoomedOut.h>
 #include <cstdlib>
 #include <boost/utility.hpp>
-#include <boost/any.hpp>
+#include <any>
 
 #if QT_VERSION < 0x040000
 #include <qpixmap.h>
@@ -165,7 +165,7 @@ namespace CVCColorTable
 
   void XoomedOut::drawColorMapVertical( QPainter* painter, QRect rect )
   {
-    using boost::any_cast;
+    using std::any_cast;
 
     int miny = rect.y();
     int maxy = rect.y() + rect.height() - 1;
@@ -247,7 +247,7 @@ namespace CVCColorTable
 
   void XoomedOut::drawColorMapHorizontal( QPainter* painter, QRect rect )
   {
-    using boost::any_cast;
+    using std::any_cast;
 
     int miny = rect.y();
     int maxy = rect.y() + rect.height() - 1;

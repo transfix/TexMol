@@ -252,7 +252,7 @@ namespace
           BOOST_FOREACH(NotifyXmlRpcThread thread, threads)
             {
               cvcapp.startThread(thread.threadName(),thread,false);
-              cvcapp.data(thread.threadName(),boost::any()); //erase from the datamap
+              cvcapp.data(thread.threadName(),std::any()); //erase from the datamap
             }
         }
     }
@@ -738,7 +738,7 @@ namespace CVC_NAMESPACE
       boost::mutex::scoped_lock lock(_mutex);
       _value = std::string();
       _valueTypeName = std::string();
-      _data = boost::any();
+      _data = std::any();
       _comment = std::string();
       _hidden = false;
       _initialized = false;
@@ -860,7 +860,7 @@ namespace CVC_NAMESPACE
   //   Returns the data of this object.
   // ---- Change History ----
   // 02/18/2012 -- Joe R. -- Initial implementation.  
-  boost::any State::data()
+  std::any State::data()
   {
     boost::this_thread::interruption_point();
     boost::mutex::scoped_lock lock(_mutex);
@@ -876,7 +876,7 @@ namespace CVC_NAMESPACE
   // 02/18/2012 -- Joe R. -- Initial implementation.
   // 03/15/2012 -- Joe R. -- Added initialized flag.
   // 04/20/2012 -- Joe R. -- Returning reference to this.
-  State& State::data(const boost::any& d)
+  State& State::data(const std::any& d)
   {
     boost::this_thread::interruption_point();
     {

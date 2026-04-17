@@ -33,11 +33,11 @@
 
 #include <vector>
 #include <map>
-#include <boost/scoped_ptr.hpp>
-#include <boost/any.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/array.hpp>
 #include <boost/tuple/tuple.hpp>
+#include <any>
+#include <memory>
 #include <cstdint>
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
@@ -160,12 +160,12 @@ namespace CVCColorTable
     double _min;
     double _max;
 
-    boost::scoped_ptr<qglviewer::WorldConstraint> _constraint;
+    std::unique_ptr<qglviewer::WorldConstraint> _constraint;
 
     int _selectedObj;
     QPoint _selectedPoint;
 
-    std::vector<boost::any> _nameMap;
+    std::vector<std::any> _nameMap;
 
     bool _interactiveUpdates; //if this is false, we only emit on 'mouse up'
 

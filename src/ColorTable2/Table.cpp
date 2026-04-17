@@ -987,7 +987,7 @@ namespace CVCColorTable
 
   void Table::mouseMoveEvent(QMouseEvent *e)
   {
-    using boost::any_cast;
+    using std::any_cast;
 
     if(_selectedObj != -1)
       {
@@ -1108,7 +1108,7 @@ namespace CVCColorTable
 
   void Table::contextMenuEvent(QContextMenuEvent *e)
   {
-    using boost::any_cast;
+    using std::any_cast;
 
     std::cout << BOOST_CURRENT_FUNCTION << ": called!" << std::endl;
 

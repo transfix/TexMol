@@ -35,25 +35,25 @@
 
 #include <string>
 #include <vector>
-#include <boost/any.hpp>
+#include <any>
 
 class CallEvent : public QEvent
 {
 	public:
 		static const int TypeId = QEvent::User+256;
-		CallEvent(const std::string& funcName, const std::vector<boost::any>& args)
+		CallEvent(const std::string& funcName, const std::vector<std::any>& args)
 			: QEvent(static_cast<QEvent::Type>(TypeId)), _funcName(funcName), _args(args) {}
 		const std::string& funcName() const
 		{
 			return _funcName;
 		}
-		const std::vector<boost::any>& args() const
+		const std::vector<std::any>& args() const
 		{
 			return _args;
 		}
 		static void call(const std::string& widgetName,
 						 const std::string& funcName,
-						 const std::vector<boost::any>& args = std::vector<boost::any>())
+						 const std::vector<std::any>& args = std::vector<std::any>())
 		{
 		/*Q3Err:I
 			QWidgetList*  list = QApplication::allWidgets();
@@ -86,14 +86,14 @@ class CallEvent : public QEvent
 
 		static void call(QObject* o,
 						 const std::string& funcName,
-						 const std::vector<boost::any>& args = std::vector<boost::any>())
+						 const std::vector<std::any>& args = std::vector<std::any>())
 		{
 			QApplication::postEvent(o,new CallEvent(funcName,args));
 		}
 
 	private:
 		std::string _funcName;
-		std::vector<boost::any> _args;
+		std::vector<std::any> _args;
 };
 
 #endif

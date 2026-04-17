@@ -30,11 +30,11 @@
 #include <boost/cstdint.hpp>
 #include <boost/signals2.hpp>
 #include <boost/function.hpp>
-#include <boost/any.hpp>
 #include <boost/tuple/tuple.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
 
+#include <any>
+#include <memory>
 #include <map>
 #include <string>
 #include <vector>
@@ -118,18 +118,18 @@ namespace CVC_NAMESPACE
 
   typedef boost::signals2::signal<void ()>                   Signal;
   typedef boost::signals2::signal<void (const std::string&)> MapChangeSignal;
-  typedef std::map<std::string, boost::any>                  DataMap;
+  typedef std::map<std::string, std::any>                  DataMap;
   typedef std::map<std::string, std::string>                 DataTypeNameMap;
   typedef std::map<std::string, DataType>                    DataTypeEnumMap;
   typedef std::map<std::string, std::string>                 PropertyMap;
-  typedef boost::shared_ptr<boost::thread>                   ThreadPtr;
+  typedef std::shared_ptr<boost::thread>                   ThreadPtr;
   typedef std::map<std::string, ThreadPtr>                   ThreadMap;
   typedef std::map<boost::thread::id, double>                ThreadProgressMap;
   typedef std::map<boost::thread::id, std::string>           ThreadKeyMap;
   typedef std::map<boost::thread::id, std::string>           ThreadInfoMap;
   typedef boost::function<bool (const std::string&)>         DataReader;
   typedef std::vector<DataReader>                            DataReaderCollection;
-  typedef boost::shared_ptr<boost::mutex>                    MutexPtr;
+  typedef std::shared_ptr<boost::mutex>                    MutexPtr;
   typedef boost::tuple<MutexPtr,std::string>                 MutexMapElement;
   typedef std::map<std::string, MutexMapElement>             MutexMap;
 }

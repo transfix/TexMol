@@ -57,7 +57,7 @@ namespace CVC_NAMESPACE
   class State
   {
   public:  
-    typedef boost::shared_ptr<State> StatePtr;
+    typedef std::shared_ptr<State> StatePtr;
     typedef std::map<std::string,StatePtr> ChildMap;
     typedef boost::function<void (std::string)> TraversalUnaryFunc;
 
@@ -108,13 +108,13 @@ namespace CVC_NAMESPACE
     }
     Signal valueChanged;
 
-    boost::any data();
-    State& data(const boost::any&);
+    std::any data();
+    State& data(const std::any&);
 
     template<class T>
     T data()
     {
-      return boost::any_cast<T>(data());
+      return std::any_cast<T>(data());
     }
 
     template<class T>
@@ -203,7 +203,7 @@ namespace CVC_NAMESPACE
 
     std::string                      _value;
     std::string                      _valueTypeName;
-    boost::any                       _data;
+    std::any                       _data;
     std::string                      _comment;
     bool                             _hidden;
     ChildMap                         _children;
