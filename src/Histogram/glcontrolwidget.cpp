@@ -144,8 +144,8 @@ void GLControlWidget::mouseReleaseEvent(QMouseEvent* e)
 void GLControlWidget::mouseMoveEvent(QMouseEvent* e)
 {
 	e->accept();
-	double dx = e->x() - oldPos.x();
-	double dy = e->y() - oldPos.y();
+	double dx = e->position().x() - oldPos.x();
+	double dy = e->position().y() - oldPos.y();
 	oldPos = e->pos();
 	double rx = dx / width();
 	double ry = dy / height();

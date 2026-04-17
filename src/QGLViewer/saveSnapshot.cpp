@@ -184,7 +184,7 @@ static bool checkFileName(QString &fileName, QWidget *widget,
         widget, "Wrong extension",
         info.fileName() + " has a wrong extension.\nSave as " +
             modifInfo.fileName() + " instead ?",
-        QMessageBox::Yes, QMessageBox::No, QMessageBox::Cancel));
+        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel));
     if (i == QMessageBox::Cancel)
       return false;
 

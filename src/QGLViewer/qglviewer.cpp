@@ -521,11 +521,11 @@ void QGLViewer::setDefaultShortcuts() {
   setShortcut(DRAW_AXIS, Qt::Key_A);
   setShortcut(DRAW_GRID, Qt::Key_G);
   setShortcut(DISPLAY_FPS, Qt::Key_F);
-  setShortcut(ENABLE_TEXT, Qt::SHIFT | Qt::Key_Question);
+  setShortcut(ENABLE_TEXT, (Qt::SHIFT | Qt::Key_Question).toCombined());
   setShortcut(EXIT_VIEWER, Qt::Key_Escape);
-  setShortcut(SAVE_SCREENSHOT, Qt::CTRL | Qt::Key_S);
+  setShortcut(SAVE_SCREENSHOT, (Qt::CTRL | Qt::Key_S).toCombined());
   setShortcut(CAMERA_MODE, Qt::Key_Space);
-  setShortcut(FULL_SCREEN, Qt::ALT | Qt::Key_Return);
+  setShortcut(FULL_SCREEN, (Qt::ALT | Qt::Key_Return).toCombined());
   setShortcut(STEREO, Qt::Key_S);
   setShortcut(ANIMATION, Qt::Key_Return);
   setShortcut(HELP, Qt::Key_H);
@@ -536,7 +536,7 @@ void QGLViewer::setDefaultShortcuts() {
   setShortcut(MOVE_CAMERA_DOWN, Qt::Key_Down);
   setShortcut(INCREASE_FLYSPEED, Qt::Key_Plus);
   setShortcut(DECREASE_FLYSPEED, Qt::Key_Minus);
-  setShortcut(SNAPSHOT_TO_CLIPBOARD, Qt::CTRL | Qt::Key_C);
+  setShortcut(SNAPSHOT_TO_CLIPBOARD, (Qt::CTRL | Qt::Key_C).toCombined());
 
   keyboardActionDescription_[DISPLAY_FPS] =
       tr("Toggles the display of the FPS", "DISPLAY_FPS action description");
@@ -1428,7 +1428,7 @@ else
 \endcode */
 void QGLViewer::mouseMoveEvent(QMouseEvent *e) {
   if (mouseGrabber()) {
-    mouseGrabber()->checkIfGrabsMouse(e->x(), e->y(), camera());
+    mouseGrabber()->checkIfGrabsMouse(static_cast<int>(e->position().x()), static_cast<int>(e->position().y()), camera());
     if (mouseGrabber()->grabsMouse())
       if (mouseGrabberIsAManipulatedCameraFrame_)
         (dynamic_cast<ManipulatedFrame *>(mouseGrabber()))
@@ -1456,7 +1456,7 @@ void QGLViewer::mouseMoveEvent(QMouseEvent *e) {
         manipulatedFrame()->mouseMoveEvent(e, camera());
     else if (hasMouseTracking()) {
       for (auto* mg : MouseGrabber::MouseGrabberPool()) {
-        mg->checkIfGrabsMouse(e->x(), e->y(), camera());
+        mg->checkIfGrabsMouse(static_cast<int>(e->position().x()), static_cast<int>(e->position().y()), camera());
         if (mg->grabsMouse()) {
           setMouseGrabber(mg);
           // Check that MouseGrabber is not disabled
@@ -1484,7 +1484,7 @@ void QGLViewer::mouseReleaseEvent(QMouseEvent *e) {
           ->ManipulatedFrame::mouseReleaseEvent(e, camera());
     else
       mouseGrabber()->mouseReleaseEvent(e, camera());
-    mouseGrabber()->checkIfGrabsMouse(e->x(), e->y(), camera());
+    mouseGrabber()->checkIfGrabsMouse(static_cast<int>(e->position().x()), static_cast<int>(e->position().y()), camera());
     if (!(mouseGrabber()->grabsMouse()))
       setMouseGrabber(nullptr);
     // update();
@@ -1725,7 +1725,7 @@ static QString keyString(unsigned int key) {
 
 QString QGLViewer::formatClickActionPrivate(ClickBindingPrivate cbp) {
   bool buttonsBefore = cbp.buttonsBefore != Qt::NoButton;
-  QString keyModifierString = keyString(cbp.modifiers | cbp.key);
+  QString keyModifierString = keyString((cbp.modifiers | cbp.key).toCombined());
   if (!keyModifierString.isEmpty()) {
 #ifdef Q_OS_MAC
     // modifiers never has a '+' sign. Add one space to clearly separate
@@ -2280,7 +2280,7 @@ void QGLViewer::keyPressEvent(QKeyEvent *e) {
 
   QMap<KeyboardAction, unsigned int>::ConstIterator it = keyboardBinding_.begin(),
                                                    end = keyboardBinding_.end();
-  const unsigned int target = key | modifiers;
+  const unsigned int target = QKeyCombination(modifiers, key).toCombined();
   while ((it != end) && (it.value() != target))
     ++it;
 
@@ -3234,7 +3234,7 @@ unsigned int QGLViewer::wheelButtonState(MouseHandler handler,
        it != end; ++it)
     if ((it.value().handler == handler) && (it.value().action == action) &&
         (it.value().withConstraint == withConstraint))
-      return it.key().key + it.key().modifiers;
+      return QKeyCombination(it.key().modifiers, it.key().key).toCombined();
 
   return -1;
 }

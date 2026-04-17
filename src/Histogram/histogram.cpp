@@ -163,7 +163,7 @@ void Histogram::mousePressEvent(QMouseEvent* e)
 	e->accept();
 	// start drag gesture
 	_dragging = true;
-	float width = _data.binToWidth(e->x());
+	float width = _data.binToWidth(e->position().x());
 	_startWidth = _endWidth = width;
 }
 
@@ -174,7 +174,7 @@ void Histogram::mouseReleaseEvent(QMouseEvent* e)
 	if (_dragging)
 	{
 		_dragging = false;
-		float width = _data.binToWidth(e->x());
+		float width = _data.binToWidth(e->position().x());
 		_endWidth = width;
 	}
 	emit valueChanged(getMinWidth(),getMaxWidth());
@@ -183,7 +183,7 @@ void Histogram::mouseReleaseEvent(QMouseEvent* e)
 void Histogram::mouseMoveEvent(QMouseEvent* e)
 {
 	e->accept();
-	_cursorWidth = _data.binToWidth(e->x());
+	_cursorWidth = _data.binToWidth(e->position().x());
 	if (_dragging)
 	{
 		_endWidth = _cursorWidth;
