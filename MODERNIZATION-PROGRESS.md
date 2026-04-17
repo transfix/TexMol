@@ -294,6 +294,56 @@ Created `src/TexMol/Dialogs/dialog_stubs.cpp` — provides link-time symbols for
 
 ---
 
-## Phases 8–9: Pending
+## Phase 8: Replace Old CVC Compat Layer with libcvc Shims ✅
+
+**Commit:** `7819f193` — Phase 8: Replace old CVC compat layer with libcvc shims
+
+### Motivation
+The old CVC compat module (App.cpp, State.cpp, HDF5_Utilities.cpp + 14 headers) duplicated
+functionality already provided by libcvc. Phase 7's partial Boost→std migration was wasted effort
+since libcvc provides the canonical implementations. Replacing the old code with thin shim headers
+that forward to libcvc eliminates ~3,200 lines and ensures TexMol uses the maintained library.
+
+### Approach: Thin Compatibility Shims
+All old CVC headers were replaced with shim headers that `#include` the corresponding libcvc
+header and add `namespace CVC { ... }` aliases mapping PascalCase names to libcvc's snake_case:
+
+| Old CVC Header | libcvc Header | Key Aliases |
+|---|---|---|
+| `Namespace.h` | `<cvc/namespace.h>` | (CVC_NAMESPACE=cvc) |
+| `Types.h` | `<cvc/types.h>` | `DataType=data_type`, `DataMap`, `PropertyMap`, `ThreadPtr`, enum values via `using namespace cvc` |
+| `App.h` | `<cvc/app.h>` | `App=app`, `ThreadInfo=thread_info`, `ThreadFeedback=thread_feedback`, `ScopedLock=scoped_lock` |
+| `State.h` | `<cvc/state.h>` | `State=state` |
+| `BoundingBox.h` | `<cvc/bounding_box.h>` | `GenericBoundingBox<T>=generic_bounding_box<T>`, `BoundingBox`, `IndexBoundingBox` |
+| `Dimension.h` | `<cvc/dimension.h>` | `Dimension=dimension` |
+| `StateObject.h` | `<cvc/state_object.h>` | template alias |
+| `HDF5_Utilities.h` | `<cvc/hdf5_utils.h>` | conditional redirect |
+| `config.h` | `<cvc/config.h>` | redirect |
+
+### Key Design Decisions
+1. **Include guard collisions**: All old CVC headers shared guards with libcvc counterparts
+   (e.g., `__CVC_APP_H__`). Shims use unique guards: `__TEXMOL_CVC_COMPAT_*_H__`.
+2. **Exception hierarchy preserved standalone**: `CVC::Exception` inherits `std::exception`
+   (not aliased to libcvc's `cvc::exception` which inherits `boost::exception`). This preserves
+   VolMagick's `catch(std::exception&)` semantics. Uses `CVC_COMPAT_DEF_EXCEPTION` macro to
+   avoid collision with libcvc's `CVC_DEF_EXCEPTION`.
+3. **Enum value forwarding**: `using namespace cvc;` inside `namespace CVC {}` makes unscoped
+   enum values (`UChar`, `UShort`, `Float`, etc.) resolvable as `CVC::UChar`.
+4. **CVC library → INTERFACE**: `src/CVC/CMakeLists.txt` changed from STATIC library (compiling
+   App.cpp/State.cpp/HDF5_Utilities.cpp) to INTERFACE library linking `cvc` + `log4cplus`.
+
+### Unchanged Headers
+- `CVCEvent.h` — Qt-specific, not used anywhere
+- `upToPowerOfTwo.h` — utility, resolves through `using namespace cvc;`
+- `vec.h` — standalone utility
+
+### Build Status
+- **Errors:** 0
+- **Binary size:** 16MB (down from 19.6MB)
+- **Net change:** 12 files, +145 −3,368 lines
+
+---
+
+## Phase 9+: Pending
 
 See [CVC-modernization-plan.md](CVC-modernization-plan.md) for details.
