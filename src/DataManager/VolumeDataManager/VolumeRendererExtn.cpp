@@ -359,4 +359,5 @@ float VolumeRendererExtn::getExtents(double& minX, double& minY, double& minZ, d
 	maxX = m_MaxX;
 	maxY = m_MaxY;
 	maxZ = m_MaxZ;
+	return 0.0f;
 }

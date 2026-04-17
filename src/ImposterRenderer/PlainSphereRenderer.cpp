@@ -124,6 +124,7 @@ bool PlainSphereRenderer::bindProgramAndParamsGLSL()
 	glUniform3f(m_BBoxMinParam, AOvolMin[0], AOvolMin[1], AOvolMin[2]);
 	glUniform3f(m_AOResolParam, 1.f/(float)AOvolResol[0], 1.f/(float)AOvolResol[1], 1.f/(float)AOvolResol[2]);
 	#endif
+	return true;
 }
 
 bool PlainSphereRenderer::bindProgramAndParams()
@@ -134,6 +135,7 @@ bool PlainSphereRenderer::bindProgramAndParams()
 	#ifdef GLSL
 	bindProgramAndParamsGLSL();
 	#endif
+	return true;
 }
 
 void PlainSphereRenderer::bindMatrices()
@@ -180,6 +182,7 @@ bool PlainSphereRenderer::unbindProgramAndParams()
 	#ifdef GLSL
 	unbindProgramAndParamsGLSL();
 	#endif
+	return true;
 }
 
 bool PlainSphereRenderer::initCG()

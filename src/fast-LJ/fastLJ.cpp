@@ -1239,6 +1239,7 @@ bool fastLJ::buildOctrees( void )
    minRadiusUsed = minRadius;
    maxLeafSizeUsed = maxLeafSize;
    minInterAtomDistUsed = minInterAtomDist; 
+   return true;
 }
 
 

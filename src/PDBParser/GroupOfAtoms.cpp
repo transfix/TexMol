@@ -1740,6 +1740,5 @@ int GroupOfAtoms::getMassCenter(double* x, double* y, double* z)
 		count = m_Atoms.size();
 		return count;
 	}
-	
+	return 0;
 }
-

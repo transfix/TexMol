@@ -168,7 +168,7 @@ double GridPoint::getFunctionValue(int mode)
 			return functionValue;
 		}
 	}
-
+	return 0.0;
 }
 
 
@@ -703,7 +703,7 @@ bool GridPoint::getSDFForTripleIntersect(DPG::Ball* a1, DPG::Ball* a2, DPG::Ball
 	float point1[3] = {pointOnPlane[0] + t1*cross[0], pointOnPlane[1] + t1*cross[1], pointOnPlane[2] + t1*cross[2] };
 	float point2[3] = {pointOnPlane[0] + t2*cross[0], pointOnPlane[1] + t2*cross[1], pointOnPlane[2] + t2*cross[2] };
 
-	float givenPoint[3] = {x,y,z};
+	float givenPoint[3] = {static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)};
 	float dist1 = 10.0;
 	float dist2 = 10.0;
 	bool sdfcomputed = false;

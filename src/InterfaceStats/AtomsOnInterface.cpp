@@ -355,6 +355,7 @@ bool AtomsOnInterface::buildOctrees( void )
 	if ( ( minRadius != minRadiusUsed ) || ( maxLeafSize != maxLeafSizeUsed ) || ( !movingAtomsOctreeBuilt ) ) 				buildMovingAtomsOctree( );
 	minRadiusUsed = minRadius;
 	maxLeafSizeUsed = maxLeafSize;
+	return true;
 }
 
 

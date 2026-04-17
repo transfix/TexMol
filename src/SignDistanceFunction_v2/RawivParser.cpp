@@ -135,7 +135,5 @@ bool RawivParser::write(const Reg3Data<float>& data, const char* fname)
 	sData->setMaxExtent(maxext);
 
 	VolumeLoader().saveFile(fname, sData);
-
-
-
+	return true;
 }

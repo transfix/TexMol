@@ -366,16 +366,19 @@ bool HLevelSet::fixOrientation(Geometry* geo)
 		geo->m_TriVertNormals[i*3+1] = -1.0*geo->m_TriVertNormals[i*3+1];
 		geo->m_TriVertNormals[i*3+2] = -1.0*geo->m_TriVertNormals[i*3+2];
 	}
+	return true;
 }
 
 bool HLevelSet::computeGeometryNormal(Geometry* geo, unsigned int* dim)
 {
 	computeGeometryDerivative(geo, coeff, dim);
+	return true;
 }
 
 bool HLevelSet::computeGeometryError(Geometry* geo, unsigned int* dim)
 {
 	computeGeometryDerivative(geo, coeff,dim);
+	return true;
 }
 
 void HLevelSet::computeGeometryDerivative(Geometry* geo, float* coeff, unsigned int* dim)

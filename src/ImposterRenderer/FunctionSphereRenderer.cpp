@@ -294,6 +294,7 @@ bool FunctionSphereRenderer::loadProgramGLSL()
 		return false;
 	}
 	#endif
+	return true;
 }
 
 bool FunctionSphereRenderer::loadProgram()

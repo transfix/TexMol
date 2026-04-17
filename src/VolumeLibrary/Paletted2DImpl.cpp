@@ -331,7 +331,7 @@ void Paletted2DImpl::renderPolygons()
 {
 	GLuint* textureNamesArray[] = {m_DataTextureNameX, m_DataTextureNameY, m_DataTextureNameZ};
 	GLuint* textureNames = textureNamesArray[m_RenderDirection];
-	unsigned int numTexturesArray[] = {m_Width, m_Height, m_Depth};
+	unsigned int numTexturesArray[] = {static_cast<unsigned int>(m_Width), static_cast<unsigned int>(m_Height), static_cast<unsigned int>(m_Depth)};
 	unsigned int numTextures = numTexturesArray[m_RenderDirection];
 	unsigned int coordSwitchArray[3][3] = { {1, 2}, {2, 0}, {0, 1} };
 	unsigned int* coordSwitch = coordSwitchArray[m_RenderDirection];

@@ -293,6 +293,7 @@ bool DynamicAdaptiveGrids::updateContour()
 	toBeDeleted.clear();
 	toBeUpdated.clear();
 	toBeCreated.clear();
+	return true;
 }
 
 
@@ -343,6 +344,7 @@ bool DynamicAdaptiveGrids::updateCell(GridCell *gc)
 
 	gc->setGridPoints(gps);
 	gc->classifyCell();
+	return true;
 }
 
 
@@ -401,6 +403,7 @@ bool DynamicAdaptiveGrids::updateCells()
 //	cout<<"Cells to be created: "<< toBeCreated.size()<<endl;
 
 	newlyUpdated.clear();
+	return true;
 }
 
 
@@ -449,6 +452,7 @@ bool DynamicAdaptiveGrids::markNeighborCells(GridPoint *gp)
 			}
 		}
 	}
+	return true;
 }
 
 			
@@ -583,6 +587,7 @@ bool DynamicAdaptiveGrids::addAtom(PDBParser::Atom* a)
 //	cout<<"numExposedCells "<< numExposedCells<<endl;
 //	cout<<"numExposedAtoms "<< numExposedAtoms<<endl;
 
+	return true;
 }
 
 bool DynamicAdaptiveGrids::removeAtom(PDBParser::Atom* a)
@@ -669,12 +674,14 @@ bool DynamicAdaptiveGrids::removeAtom(PDBParser::Atom* a)
 //	cout<<"numExposedCells "<< numExposedCells<<endl;
 //	cout<<"numExposedAtoms "<< numExposedAtoms<<endl;
 
+	return true;
 }
 
 bool DynamicAdaptiveGrids::moveAtom(PDBParser::Atom* from, PDBParser::Atom* to)
 {
 	removeAtom(from);
 	addAtom(to);
+	return true;
 }
 
 
@@ -687,6 +694,7 @@ bool DynamicAdaptiveGrids::addAtoms(vector<PDBParser::Atom*> &atms)
 //	cout<<"added atoms and updated cell values"<<endl;
 	updateCells();
 	updateContour();
+	return true;
 }
 
 bool DynamicAdaptiveGrids::removeAtoms(vector<PDBParser::Atom*> &atms)
@@ -699,6 +707,7 @@ bool DynamicAdaptiveGrids::removeAtoms(vector<PDBParser::Atom*> &atms)
 //	cout<<"removed atoms and updated cell values"<<endl;
 	updateCells();
 	updateContour();
+	return true;
 }
 
 
@@ -854,5 +863,5 @@ bool DynamicAdaptiveGrids::printSurface(string surfaceFileName)
 	sasPointFile.close();
 	outPointFile.close();
 
-	
+	return true;
 }

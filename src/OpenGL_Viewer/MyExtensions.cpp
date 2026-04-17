@@ -89,6 +89,7 @@ bool MyExtensions::extensionExists(const char *extension)
         else
             ++iter;
     }
+    return (iter != endIter);
 }
 
 bool MyExtensions::extensionExists(const char* extension, const char* allExtensions)

@@ -573,7 +573,7 @@ bool convertToRawnUsingHLS(int argc, char* argv[])
 	
 	PDBParser::GroupOfAtoms* molecule = loadGOA(input);
 
-	unsigned int dim[3] = {size, size, size};
+	unsigned int dim[3] = {static_cast<unsigned int>(size), static_cast<unsigned int>(size), static_cast<unsigned int>(size)};
 	SimpleVolumeData* sData = HLevelSet().getHigherOrderLevelSetSurface(molecule, dim, nIterations, weight);
 	Geometry* geometry = GeometryLoader().loadFile(output1.c_str());
 	saveAndDeleteGeometry(output2, geometry);
@@ -697,9 +697,8 @@ bool normals(int argc, char* argv[])
 	}
 	fclose(output);
   }
+  return true;
 }
-
-// Reorientate the surface
 void usageReorientate()
 {
 	cout	<< endl << "Usage: MolSurf -reoriente <input geom file> <output geom file>"
@@ -767,6 +766,7 @@ bool pocketTunnel(int argc, char* argv[])
 
 bool pocketTunnel(int argc, char* argv[]) {
   cout << "PocketTunnel disable to remove CGAL dependence." << endl;
+  return false;
 }
 
 
@@ -1369,7 +1369,7 @@ Geometry* surfaceUsingAdaptiveGrid(PDBParser::GroupOfAtoms* molecule, int size, 
 
 Geometry* surfaceUsingHLS(PDBParser::GroupOfAtoms* molecule, int size, int iterations, double weight)
 {
-	unsigned int dim[3] = {size, size, size};
+	unsigned int dim[3] = {static_cast<unsigned int>(size), static_cast<unsigned int>(size), static_cast<unsigned int>(size)};
 	HLevelSet hls = HLevelSet();
 	SimpleVolumeData* sData = hls.getHigherOrderLevelSetSurface(molecule, dim, iterations, weight);
 	Geometry* geometry = 0;
@@ -1548,7 +1548,7 @@ bool volumeUsingHLS(int argc, char* argv[])
 		weight	= atof(argv[6]);
 	}
 	PDBParser::GroupOfAtoms* molecule = GOALoader().loadFile(input.c_str());
-	unsigned int dim[3] = {size, size, size};
+	unsigned int dim[3] = {static_cast<unsigned int>(size), static_cast<unsigned int>(size), static_cast<unsigned int>(size)};
 	SimpleVolumeData* sData = HLevelSet().getHigherOrderLevelSetSurface(molecule, dim, nIterations, weight);
 	VolumeLoader().saveFile(output.c_str(), sData);
 	return true;

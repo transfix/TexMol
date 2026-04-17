@@ -70,6 +70,7 @@ bool DetailResults::init()
 
 	conf = -1;
 	rmsd = 0.0;;
+	return true;
 }	
 
 

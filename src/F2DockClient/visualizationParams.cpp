@@ -43,6 +43,7 @@ bool VisualizationParams::init(void)
 
 	highlightInterface = false;
 	multipleLigand = false;
+	return true;
 }
 
 

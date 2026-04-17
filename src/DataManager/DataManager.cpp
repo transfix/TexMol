@@ -129,6 +129,7 @@ bool DataManager::checkVolumeRendererAllocation()
 		m_SplattingRendererExtn->initRenderer();
 	}
 #endif
+	return true;
 }
 
 bool DataManager::addNewDataSet(QStringList fileNames, bool instantVisibility)

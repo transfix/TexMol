@@ -348,7 +348,7 @@ MyMatrix MyMatrix::alignZAndXWithAndMove(MyVector& PC1, MyVector& PC2, MyVector&
 
 MyMatrix alignZAndXWithAndMoveAfterInitialRotateAroundZ(MyVector& vec1, MyVector& vec2, MyVector& pos, double angle)
 {
-
+	return MyMatrix();
 }
 
 

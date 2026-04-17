@@ -170,11 +170,11 @@ bool SkinGenerator::populate(string xyzFileName)
 
 bool SkinGenerator::populate(string xyzFileName, string xyzrFileName)
 {
-	populate(xyzFileName);
+	return populate(xyzFileName);
 }
 
 
 bool SkinGenerator::populate(string xyzFileName, string xyzrFileName, string f2dFileName)
 {
-	populate(xyzFileName);
+	return populate(xyzFileName);
 }

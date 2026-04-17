@@ -80,8 +80,8 @@ bool SummaryResults::init()
 	numStats = 0;
 
 //	cout<<"init done"<<endl;
+	return true;
 }
-
 
 bool SummaryResults::readOutputFromFile()
 {
@@ -902,7 +902,7 @@ bool SummaryResults::mineOutputs()
 			scoreMinRMSD[0] = detres[indexMinRMSD[0]]->getScore();	
 		}
 	}
-
+	return true;
 }
 
 

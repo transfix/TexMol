@@ -286,6 +286,7 @@ cout << "11 - bound_sign[0]: " << geoframe.bound_sign[0] << endl; // can't deref
 int LBIE_Mesher::saveMesh(const char* output)
 {
 	geoframe.write_raw(output,meshtype);
+	return 0;
 }
 
 MESHTYPE LBIE_Mesher::loadMesh(const char* input)

@@ -129,7 +129,7 @@ bool StickRenderer::bindProgramAndParamsCg()
 	cgGLSetParameter4f(m_MainColorParam, 0.7f, 0.7f, 0.7f, 1.0f); // gray
 	cgGLSetParameter1f(m_SpecularWeightParam, 0.487f);
 	#endif
-
+	return true;
 }
 
 bool StickRenderer::bindProgramAndParamsGLSL()
@@ -150,7 +150,7 @@ bool StickRenderer::bindProgramAndParamsGLSL()
 	glUniform4f(m_MainColorParam, 0.7, 0.7, 0.7, 1.0); // gray
 	glUniform1f(m_SpecularWeightParam, 0.487f);
 	#endif
-
+	return true;
 }
 
 bool StickRenderer::bindProgramAndParams()
@@ -171,6 +171,7 @@ bool StickRenderer::unbindProgramAndParamsCg()
 	cgGLDisableProfile(m_VertexProfile);
 	cgGLDisableProfile(m_FragmentProfile);
 	#endif
+	return true;
 }
 
 bool StickRenderer::unbindProgramAndParamsGLSL()

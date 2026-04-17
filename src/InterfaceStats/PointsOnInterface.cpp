@@ -406,6 +406,7 @@ bool PointsOnInterface::buildOctrees( void )
 	if ( ( minRadius != minRadiusUsed ) || ( maxLeafSize != maxLeafSizeUsed ) || ( !movingOctreeBuilt ) ) 				buildMovingOctree( );
 	minRadiusUsed = minRadius;
 	maxLeafSizeUsed = maxLeafSize;
+	return true;
 }
 
 

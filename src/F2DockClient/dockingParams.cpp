@@ -117,6 +117,7 @@ bool DockingParams::init()
 	complexType = UNKNOWN;
 
 	setDefaults();
+	return true;
 }
 
 

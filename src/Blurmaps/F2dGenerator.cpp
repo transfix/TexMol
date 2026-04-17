@@ -298,6 +298,7 @@ bool F2DGenerator::generate()
 		fclose(f2dFile);
 		fclose(newpqrFile);
 	}
+	return true;
 }
 
 

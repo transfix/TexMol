@@ -43,6 +43,7 @@ bool JobParams::init()
 	f2dPar = new F2dGenParams();
 	connPar = new ConnectionParams();
 	visPar = new VisualizationParams();
+	return true;
 }
 
 

@@ -725,9 +725,9 @@ namespace CVCColorTable
   {
      if( !_dirtyContourTree ) return;
   
-     int dim[3] = { _contourVolume.XDim(),
-                    _contourVolume.YDim(),
-                    _contourVolume.ZDim() };
+     int dim[3] = { static_cast<int>(_contourVolume.XDim()),
+                    static_cast<int>(_contourVolume.YDim()),
+                    static_cast<int>(_contourVolume.ZDim()) };
 
      _contourTreeVertices.clear();
      _contourTreeEdges.clear();
@@ -794,9 +794,9 @@ namespace CVCColorTable
      Signature	*sig;
      int dim[3] = 
      {
-        _contourVolume.XDim(),
-        _contourVolume.YDim(),
-        _contourVolume.ZDim()
+        static_cast<int>(_contourVolume.XDim()),
+        static_cast<int>(_contourVolume.YDim()),
+        static_cast<int>(_contourVolume.ZDim())
      };
 
      orig[0] = _contourVolume.XMin();
