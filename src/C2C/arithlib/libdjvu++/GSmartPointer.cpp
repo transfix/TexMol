@@ -47,7 +47,7 @@ GPEnabled::~GPEnabled()
 {
 	if(count)
 	{
-		THROW("Suspicious destruction of referenced GPEnabled object");
+		fprintf(stderr, "GPEnabled::~GPEnabled: Suspicious destruction of referenced object (count=%d)\n", count);
 	}
 }
 

@@ -974,7 +974,7 @@ void parserPDBtoGOA::parseHBOND(GroupOfAtoms* molecule, const char *fname)
 
 		_hbond->push_back(hb);
 	}
-	fprintf( stderr, "%d hbond have been parsed\n", _hbond->size() );
+	fprintf( stderr, "%zu hbond have been parsed\n", _hbond->size() );
 	delete[] atomlist;
 }
 

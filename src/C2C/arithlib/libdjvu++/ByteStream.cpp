@@ -327,7 +327,7 @@ StdioByteStream::~StdioByteStream()
 	if(must_close)
 		if(fclose(fp) < 0)
 		{
-			THROW(strerror(errno));
+			fprintf(stderr, "StdioByteStream::~StdioByteStream: fclose failed: %s\n", strerror(errno));
 		}
 }
 
