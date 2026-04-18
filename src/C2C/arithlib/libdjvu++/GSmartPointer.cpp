@@ -30,6 +30,7 @@
 #endif
 */
 
+#include <cstdio>
 #include <C2C/arithlib/libdjvu++/GThreads.h>
 #include <C2C/arithlib/libdjvu++/GSmartPointer.h>
 #include <C2C/arithlib/libdjvu++/GException.h>
