@@ -454,8 +454,104 @@ header and add `namespace CVC { ... }` aliases mapping PascalCase names to libcv
 
 ### Build Status
 - **Errors:** 0
-- **Actionable warnings:** 19 (all in legacy C code or 3rd party QGLViewer)
+- **Actionable warnings:** 19 → 0 after Phase 13
 - **Binary size:** 16MB (unchanged)
+
+---
+
+## Phase 13: Fix Remaining Compiler Warnings ✅
+
+**Commit:** `5f2b8f76`
+
+### Warning Reduction: ~19 → 1
+
+| Category | Before | After | Fixed |
+|----------|--------|-------|-------|
+| VRender `-Wnon-template-friend` | 6 | 0 | 6 |
+| Decimation `-Wimplicit-function-declaration` | 11 | 0 | 11 |
+| Decimation `-Wimplicit-int` | 2 | 0 | 2 |
+| LBIE `-Wswitch-unreachable` | 3 | 0 | 3 |
+| GOAFileTypes `-Wformat-truncation` | 1 | 0 | 1 |
+| MolecularCharacteristics `-Wformat-truncation` | 2 | 0 | 2 |
+
+### Key Fixes
+- **VRender:** Added namespace-scope declarations for friend operators (NVector3, Primitive, Vector2, Vector3)
+- **Decimation:** Added forward declarations for implicit C functions, fixed K&R-style return types
+- **LBIE Geoframe:** Removed redundant switch wrappers around readVertex
+- **GOAFileTypes/PQRFile:** Fixed snprintf truncation warning
+- **MolecularCharacteristics:** Increased snprintf buffer sizes
+
+### Build Status
+- **Errors:** 0
+- **Actionable warnings:** 0
+- **Remaining:** 1 intentional `#warning TODO` in Table.cpp + 4 unfixable Qt/GLEW system-header warnings
+- **13 files modified**
+
+---
+
+## Test Infrastructure ✅
+
+**Commit:** `47bfa0b5`
+
+### Setup
+- CMake options: `TEXMOL_BUILD_TESTS`, `TEXMOL_ENABLE_COVERAGE`
+- Google Test v1.15.2 via FetchContent (SHA-pinned)
+- lcov/genhtml coverage target
+- Build: `cmake -B build-test -DTEXMOL_BUILD_TESTS=ON -DTEXMOL_ENABLE_COVERAGE=ON ...`
+
+### 42 Unit Tests (4 suites)
+| Suite | Tests | Key Findings |
+|-------|-------|-------------|
+| Vector | 13 | Default constructor initializes all components to 0 (not w=1); negation preserves w; `norm()` uses xyz only |
+| Quaternion | 11 | q[0]=w layout; `norm()` returns **squared magnitude** (bug in `normalize()`); default is identity (1,0,0,0) |
+| Matrix | 13 | Column-major (OpenGL convention); `rotationZ` uses clockwise convention |
+| Geometry (Queue) | 6 | FIFO queue operations |
+
+### All 42 tests pass
+
+---
+
+## Phase 7b: Replace Boost Utilities with C++17 std ✅
+
+**Commit:** `d722a7a8` — 18 files, +128 −222 lines
+
+### Replacements (VolMagick + ColorTable2)
+| Boost | Replacement | Files |
+|-------|------------|-------|
+| `boost::shared_array<T>` | `std::shared_ptr<T[]>` | ColorTable.h/.cpp, Voxels.h/.cpp, HDF5_IO.cpp |
+| `boost::regex` / `boost::smatch` | `std::regex` / `std::smatch` | VolumeFile_IO.h/.cpp, VolumeFileInfo.cpp, INR_IO.cpp, VolumeCache.cpp |
+| `boost::format` | `std::string` concatenation, `snprintf` | 10 files across ColorTable2, VolMagick, CVC/Exception.h |
+| `boost::lexical_cast` | `std::stod()`, `std::stoul()` | ColorTable.cpp (11 casts) |
+
+### Scope Note
+VolMagick and LBIE are legacy duplicates of libcvc modules. These changes were made because they are compiled as part of TexMol's build. Future work will replace VolMagick entirely with libcvc's `cvc::volume_file_io`.
+
+### Deferred
+- VolumeCache.cpp — deeply coupled with `boost::filesystem` via `using namespace boost;`
+
+---
+
+## Phase 7c: Replace Boost in TexMol-Owned Code ✅
+
+**Commit:** `f424125b` — 10 files, +45 −59 lines
+
+### Replacements (TexMol-owned code only)
+| Boost | Replacement | Files |
+|-------|------------|-------|
+| `boost::tuple/tie/make_tuple/get` | `std::tuple` equivalents | Table.h, ColorTable.h, HLevelSet.h |
+| `boost::uint64_t` | `uint64_t` | Table.h, Table.cpp |
+| `boost::array<T,N>` | `std::array<T,N>` | Table.h |
+| `boost::lambda::_1` | C++ lambdas | ColorTable.cpp |
+| `boost::algorithm::split` | `std::istringstream` | ColorTable.cpp |
+| `boost::minmax_element` | `std::minmax_element` | Table.cpp |
+| `BOOST_FOREACH` | range-based for | Table.cpp |
+| `BOOST_CURRENT_FUNCTION` | `__PRETTY_FUNCTION__` | Table.cpp |
+| `boost::shared_ptr.hpp` | `<memory>` (include-only) | SecondaryStructureData.h, MainWindow.cpp |
+| `boost/utility.hpp` | `<iterator>` | XoomedOut.cpp |
+
+### Result
+- **Zero Boost references in TexMol-owned code** (only boundary conversion for VolMagick's `boost::tuple` histogram return)
+- Removed `boost/lambda`, `boost/utility`, `boost/algorithm/string` dependencies from ColorTable2
 
 ---
 
