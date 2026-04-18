@@ -163,8 +163,9 @@ PDBParser::GroupOfAtoms* PQRFile::loadFile(const string& fileName, bool deleteWa
 			int len = strlen(atomName);
 			if(len < 4)
 			{
-				char dup[256];
-				strcpy(dup, atomName);
+				char dup[5];
+				strncpy(dup, atomName, sizeof(dup) - 1);
+				dup[sizeof(dup) - 1] = '\0';
 				snprintf(atomName, sizeof(atomName), " %s", dup);   // add leading space
 			}
 			len = strlen(atomName);

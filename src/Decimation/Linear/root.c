@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <Decimation/Linear/sturm.h>
 
 /*---------------------------------------------------------------------------
 FindRoots1 -- compute degree 1 polynomial roots

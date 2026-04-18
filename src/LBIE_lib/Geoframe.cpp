@@ -498,10 +498,7 @@ void Geoframe::LoadFile(const char* rawivFileName) {
 			for(int i=0; i < numVerts; i++)
 			{
 				bound_sign[i] = 1;
-				switch(fileType)
-				{
-					readVertex(i, false, file);
-				}
+				readVertex(i, false, file);
 			}
 			for(int i = 0; i < numQuads; i++)
 			{
@@ -518,10 +515,7 @@ void Geoframe::LoadFile(const char* rawivFileName) {
 			bound_sign =	(uint(*))reallocSafely(bound_sign, sizeof(uint) * numVerts);
 			for(int i=0; i<numVerts; i++)
 			{
-				switch(fileType)
-				{
-					readVertex(i, true, file);
-				}
+				readVertex(i, true, file);
 				if(bound_sign[i] > 1)
 				{
 					r = 1;
@@ -709,10 +703,7 @@ void Geoframe::LoadFile(const char* rawivFileName) {
 			patch =		(int (*))reallocSafely(patch, sizeof(int)*npatch);
 			for(int i=0; i<numVerts; i++)
 			{
-				switch(fileType)
-				{
-					readVertex(i, true, file);
-				}
+				readVertex(i, true, file);
 			}
 			for(int i=0; i<npatch; i++)
 			{

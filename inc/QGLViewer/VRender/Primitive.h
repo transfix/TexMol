@@ -216,6 +216,8 @@ namespace vrender
 		double _c ;
 		NVector3 _normal ;
 	} ;
+
+	std::ostream& operator<<(std::ostream&, const Feedback3DColor&);
 }
 #endif
 

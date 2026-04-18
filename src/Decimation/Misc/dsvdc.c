@@ -40,7 +40,7 @@ integer *job, *info;
     static integer kase;
     extern doublereal ddot_(integer*, doublereal*, integer*, doublereal*, integer*);
     static integer jobu, iter;
-    extern drot_(integer*,doublereal*,integer*,doublereal*,integer*,doublereal*,doublereal*);
+    extern int drot_(integer*,doublereal*,integer*,doublereal*,integer*,doublereal*,doublereal*);
     static doublereal test;
     extern doublereal dnrm2_(integer*, doublereal*, integer*);
     static integer nctp1;

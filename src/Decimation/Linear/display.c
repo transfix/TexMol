@@ -9,6 +9,11 @@
 #include <string.h>
 #include <Decimation/Linear/display.h>
 
+extern double BernsteinBaseValue();
+extern double BernsteinValue();
+extern double BernsteinValue2D();
+extern void print_vector();
+
 static int  face[12][6] = {
    {1, 2, 3, 9, 4, 8},
    {2, 3, 0, 9, 5, 11},

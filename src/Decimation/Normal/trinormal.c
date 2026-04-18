@@ -11,6 +11,10 @@
 
 #include <Decimation/Normal/normal.h>
 
+extern int QRdecomposition();
+extern int Normalized_GaussInverse();
+extern void ProduceNormalS();
+
 static void RemoveOneVertexWork();
 static void ReviseAllLists();
 static void Face_Gradient(); 

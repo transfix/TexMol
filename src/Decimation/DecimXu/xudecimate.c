@@ -11,6 +11,11 @@
 #include <Decimation/Misc/misc.h>
 #include <Decimation/geometry.h>
 
+extern void ProduceNormalS();
+extern void Valence_Neighbor();
+extern void AdjacentTriangles();
+static int GlobalToLocal();
+
 extern VertixNormal   *pointnormals;         /* original points and normal */
 extern Face           *facetetras;           /* original triangulation     */
 extern int            *facevalence,          *edgevalence,

@@ -310,7 +310,7 @@ bool MolecularCharacteristics::getAreaVolume(double* area, double* volume, doubl
 		int i;
 		for(i=m_NumberOfSpheres-1; i>=0; i--)
 		{
-			char shellDensFileName[1024];
+			char shellDensFileName[1048];
 			snprintf(shellDensFileName, sizeof(shellDensFileName), "%s_%d.rawiv", m_GOAFileName, i);
 			zeroOutVolumeShell(sData, m_ActiveSite, m_Radii[i], shellDensFileName) ;
 			double t;
@@ -375,7 +375,7 @@ bool MolecularCharacteristics::getElectrostaticCharacteristics(double* ratio, do
 		int i;
 		for(i=m_NumberOfSpheres-1; i>=0; i--)
 		{
-			char shellElecFileName[1024];
+			char shellElecFileName[1048];
 			snprintf(shellElecFileName, sizeof(shellElecFileName), "%s_%d.rawiv", m_ElecFileName, i);
 			zeroOutVolumeShell(m_Electrostatics, m_ActiveSite, m_Radii[i], shellElecFileName) ;
 			getElecRatio((float*)(m_Electrostatics->getData(0)), dim, &(sphereRatios[i]));

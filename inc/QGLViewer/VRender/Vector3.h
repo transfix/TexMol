@@ -48,6 +48,7 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #define _VRENDER_VECTOR3_H
 
 #include <stdexcept>
+#include <iosfwd>
 
 #ifndef FLT_MAX
 # define FLT_MAX 9.99E20f
@@ -193,5 +194,8 @@ namespace vrender
 			double _xyz[3];  //!< The 3 vector components
 
 	}; // interface of Vector3
+
+	Vector3 operator*(double, const Vector3&);
+	std::ostream& operator<<(std::ostream&, const Vector3&);
 }
 #endif // _VECTOR3_H

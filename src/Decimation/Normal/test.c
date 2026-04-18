@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-main()
+int main()
 {
 int i; 
 
