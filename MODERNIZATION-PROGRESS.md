@@ -428,14 +428,57 @@ header and add `namespace CVC { ... }` aliases mapping PascalCase names to libcv
 
 ---
 
-## Phase 11+: Pending
+## Phase 11: Compat Module Replacement + Final Warning Cleanup ✅
 
-Remaining compat modules to replace with libcvc (in priority order):
-1. ByteOrder, ComputeNormals — quick wins, 1–2 consumers each
-2. GeometryFileTypes → `cvc::geometry_file_io`
-3. VolumeFileTypes → `cvc::volume_file_io`
-4. SignDistanceFunction_v2 → `cvc::sdf()` (18–27× faster)
-5. LBIE_lib → `cvc::iso(LBIE)`
-6. SimpleVolumeData → `cvc::voxels` + `cvc::volume`
-7. VolMagick → `cvc::volume_file_io` + `cvc::volume`
-8. Geometry → `cvc::geometry`
+**Commits:**
+- `d9b1b7db` — Phase 11a: Replace ByteOrder with cvc/endians.h (header-only, remove static lib)
+- `b433a404` — Phase 11b: Fix -Wterminate, format warning, suppress Boost bind deprecation
+
+### Phase 11a: ByteOrder → cvc/endians.h
+- Rewrote `ByteSwapping.h` to delegate to `cvc/endians.h` for endianness detection
+- Removed `Utility/utility.h` dependency from ByteOrder header
+- Removed ByteOrder static library (now header-only)
+- Removed ByteOrder from TexMol link dependencies
+
+### Phase 11b: Final Warning Cleanup
+- Fixed 2 `-Wterminate` warnings: removed `throw` from destructors (`~StdioByteStream`, `~GPEnabled`)
+- Fixed 1 `-Wformat=` warning: `%d` → `%zu` for `size_t` in parserPDBtoGOA.cpp
+- Suppressed Boost bind global placeholders deprecation via `BOOST_BIND_GLOBAL_PLACEHOLDERS` define
+
+### Warning Count: 43 → ~19 actionable
+- 0 `-Wterminate` (was 2)
+- 0 `-Wformat` (was 1)
+- 0 Boost pragma messages (was variable)
+- Remaining: 11 `-Wimplicit-function-declaration` + 2 `-Wimplicit-int` (legacy C Decimation) + 6 VRender namespace (3rd party QGLViewer)
+- System headers: `-Wcpp` (GLEW/Qt6 incompatibility, unfixable)
+
+### Build Status
+- **Errors:** 0
+- **Actionable warnings:** 19 (all in legacy C code or 3rd party QGLViewer)
+- **Binary size:** 16MB (unchanged)
+
+---
+
+## Phase 12+: Pending — Compat Module Replacements
+
+### Analysis Summary
+Compat modules fall into 3 tiers:
+
+**Tier 1 — Completed:**
+- ✅ ByteOrder → `cvc/endians.h` (Phase 11a)
+
+**Tier 2 — Major refactors (deferred):**
+These require replacing both the I/O module AND the data model (SimpleVolumeData → cvc::volume, Geometry → cvc::geometry), since the return types are deeply embedded in TexMol's rendering pipeline (VBOs, texture coords, raw float* arrays).
+
+- GeometryFileTypes (23 consumers) + Geometry (deeply coupled to OpenGL rendering)
+- VolumeFileTypes (14 consumers) + SimpleVolumeData (26 consumers)
+- SignDistanceFunction_v2 → `cvc::sdf()`
+- LBIE_lib → `cvc::iso(LBIE)`
+- VolMagick → `cvc::volume_file_io` + `cvc::volume`
+
+**Tier 3 — Keep as-is (no libcvc equivalent):**
+- VolumeLibrary (GPU rendering — 17 files, properly isolated)
+- libCG (ARM, coarse-graining, optimization — 16 files, specialized domain code)
+- ComputeNormals (2 files, 1 consumer — specialized geometry parsing + normal computation)
+- Utility (48+ consumers — god header, used by everything)
+- XmlRPC (deprecated, kept for Server.cpp)
