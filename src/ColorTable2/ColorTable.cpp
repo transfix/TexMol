@@ -5,9 +5,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <functional> //compose2, etc
-#include <boost/lambda/lambda.hpp>
-#include <boost/utility.hpp> //for std::prev()
-#include <boost/algorithm/string.hpp>
+#include <sstream>
 #include <charconv>
 #include <memory>
 #include <ColorTable2/ColorTable.h>
@@ -454,8 +452,6 @@ namespace CVCColorTable
   ColorTable::color_table_info& ColorTable::color_table_info::normalize()
   {
     using namespace std;
-    //using namespace boost::lambda;
-    //using boost::lambda::_1;
 
     {
       color_nodes::iterator bound;
@@ -488,17 +484,13 @@ namespace CVCColorTable
     }
 
 
-    // arand, 2/20 added boost::lambda namespace below to fix a compile issue
-    //               maybe a boost version changed to cause the
-    //               using boost::lambda above to break?
-
     //Now that we're sure we have a range of nodes within [MIN_RANGE,MAX_RANGE],
     //lets clear out everything not in that range.
     {
       color_nodes pruned;
       remove_copy_if(colorNodes().begin(),colorNodes().end(),
 		     insert_iterator<color_nodes>(pruned,pruned.begin()),
-		     (boost::lambda::_1 < color_node(MIN_RANGE)) || (color_node(MAX_RANGE) < boost::lambda::_1));
+		     [](const color_node& n) { return n < color_node(MIN_RANGE) || color_node(MAX_RANGE) < n; });
       colorNodes() = pruned;
     }
     
@@ -506,7 +498,7 @@ namespace CVCColorTable
       opacity_nodes pruned;
       remove_copy_if(opacityNodes().begin(),opacityNodes().end(),
 		     insert_iterator<opacity_nodes>(pruned,pruned.begin()),
-		     (boost::lambda::_1 < opacity_node(MIN_RANGE)) || (opacity_node(MAX_RANGE) < boost::lambda::_1));
+		     [](const opacity_node& n) { return n < opacity_node(MIN_RANGE) || opacity_node(MAX_RANGE) < n; });
       opacityNodes() = pruned;
     }
 
@@ -643,7 +635,7 @@ namespace CVCColorTable
 		getline(inf, line); line_num++;
 		if(!inf)
 		  throw runtime_error(file_error());
-		boost::algorithm::split(split_line,line,boost::algorithm::is_any_of(" "));
+		{ split_line.clear(); std::istringstream iss(line); std::string tok; while(iss >> tok) split_line.push_back(tok); }
 		if(split_line.size() != 2)
 		  throw runtime_error(file_error("Invalid position and opacity"));
 		cti.opacityNodes().insert(ColorTable::opacity_node(std::stod(split_line[0]),
@@ -666,7 +658,7 @@ namespace CVCColorTable
 		getline(inf, line); line_num++;
 		if(!inf)
 		  throw runtime_error(file_error());
-		boost::algorithm::split(split_line,line,boost::algorithm::is_any_of(" "));
+		{ split_line.clear(); std::istringstream iss(line); std::string tok; while(iss >> tok) split_line.push_back(tok); }
 		if(split_line.size() != 4)
 		  throw runtime_error(file_error("Invalid position and RGB values"));
 		cti.colorNodes().insert(ColorTable::color_node(std::stod(split_line[0]),

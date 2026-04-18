@@ -33,12 +33,11 @@
 
 #include <vector>
 #include <map>
-#include <boost/cstdint.hpp>
-#include <boost/array.hpp>
-#include <boost/tuple/tuple.hpp>
+#include <cstdint>
+#include <array>
+#include <tuple>
 #include <any>
 #include <memory>
-#include <cstdint>
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
 #include <VolMagick/VolMagick.h>
@@ -58,7 +57,7 @@ namespace CVCColorTable
 #endif
               );
 
-    Table( boost::uint64_t components,
+    Table( uint64_t components,
               ColorTable::color_table_info& cti, QWidget *parent, 
 #if QT_VERSION < 0x040000 || defined QT3_SUPPORT
               const char *name=0
@@ -83,17 +82,17 @@ namespace CVCColorTable
     bool interactiveUpdates() const { return _interactiveUpdates; }
 
     //The different components of the table
-    static const boost::uint64_t BACKGROUND       = 1 << 0;
-    static const boost::uint64_t COLOR_BARS       = 1 << 1;
-    static const boost::uint64_t ISOCONTOUR_BARS  = 1 << 2;
-    static const boost::uint64_t OPACITY_NODES    = 1 << 3;
-    static const boost::uint64_t RANGE_BARS       = 1 << 4;
-    static const boost::uint64_t CONTOUR_TREE     = 1 << 5;
-    static const boost::uint64_t CONTOUR_SPECTRUM = 1 << 6;
-    static const boost::uint64_t HISTOGRAM        = 1 << 7;
+    static const uint64_t BACKGROUND       = 1 << 0;
+    static const uint64_t COLOR_BARS       = 1 << 1;
+    static const uint64_t ISOCONTOUR_BARS  = 1 << 2;
+    static const uint64_t OPACITY_NODES    = 1 << 3;
+    static const uint64_t RANGE_BARS       = 1 << 4;
+    static const uint64_t CONTOUR_TREE     = 1 << 5;
+    static const uint64_t CONTOUR_SPECTRUM = 1 << 6;
+    static const uint64_t HISTOGRAM        = 1 << 7;
     
-    boost::uint64_t visibleComponents() const { return _visibleComponents; }
-    void visibleComponents(boost::uint64_t components);
+    uint64_t visibleComponents() const { return _visibleComponents; }
+    void visibleComponents(uint64_t components);
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
     void setContourVolume(const VolMagick::Volume& vol);
@@ -170,7 +169,7 @@ namespace CVCColorTable
     bool _interactiveUpdates; //if this is false, we only emit on 'mouse up'
 
     //bitfield for enabling/disabling the rendered components of the table
-    boost::uint64_t _visibleComponents;
+    uint64_t _visibleComponents;
 
     //Range bars min/max.  Used for setting the min/max of an accompanying
     //table.
@@ -191,7 +190,7 @@ namespace CVCColorTable
     bool _dirtyContourTree;
 
     //Contour spectrum functions
-    typedef boost::array<double,3> color_t;
+    typedef std::array<double,3> color_t;
     typedef std::vector<float> function_t;
     typedef std::map<std::string, std::pair<color_t,function_t> > function_map;
     function_map _contourSpectrum;
@@ -199,9 +198,9 @@ namespace CVCColorTable
 
     //Histogram stuff
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-    boost::tuple<const VolMagick::uint64 *,VolMagick::uint64> _histogram;
+    std::tuple<const VolMagick::uint64 *,VolMagick::uint64> _histogram;
 #else
-    boost::tuple<const uint64_t *, uint64_t> _histogram;
+    std::tuple<const uint64_t *, uint64_t> _histogram;
 #endif
     bool _dirtyHistogram;
 

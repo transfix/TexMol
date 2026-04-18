@@ -22,7 +22,7 @@
 #ifndef _HLEVELSET_H_
 #define _HLEVELSET_H_
 
-#include <boost/tuple/tuple.hpp>
+#include <tuple>
 #include <Geometry/Geometry.h>
 #include <vector>
 

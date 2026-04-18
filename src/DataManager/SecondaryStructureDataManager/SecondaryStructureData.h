@@ -9,7 +9,7 @@
 #include "../AbstractData.h"
 #include "Ray.h"
 #include "Plane.h"
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 using std::vector;
 

@@ -30,7 +30,7 @@
 #include <DataManager/AbstractData.h>
 #include <UsefulMath/Ray.h>
 #include <OpenGL_Viewer/Plane.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 using std::vector;
 

@@ -49,8 +49,7 @@
 
 
 #include <Blurmaps/MolecularSurface.h>
-#include <boost/shared_ptr.hpp>
-#include <boost/bind.hpp>
+#include <memory>
 
 #include <DataManager/DataManager.h>
 

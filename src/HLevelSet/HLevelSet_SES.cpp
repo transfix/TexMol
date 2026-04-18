@@ -26,7 +26,7 @@
 #include <PDBParser/FlattenGOA.h>
 //#include <Blurmaps/BlurMapsDataManager.h>
 #include <LBIE_lib/normalspline.h>
-#include <boost/tuple/tuple.hpp>
+#include <tuple>
 
 void ConvertToInterpolationCoefficients_Qu(float*, int, float*, int ,float);
 void ConvertToInterpolationCoefficients_1D(float*, int, float);

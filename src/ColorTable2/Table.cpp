@@ -2,10 +2,7 @@
 #include <map>
 #include <algorithm>
 #include <utility>
-#include <boost/utility.hpp>
-#include <boost/current_function.hpp>
-#include <boost/algorithm/minmax_element.hpp>
-#include <boost/foreach.hpp>
+#include <iterator>
 #include <cmath>
 #include <cstdlib>
 #include <ColorTable2/Table.h>
@@ -79,7 +76,7 @@ namespace CVCColorTable
       allocateInformDialg();
   }
 
-  Table::Table( boost::uint64_t components,
+  Table::Table( uint64_t components,
                       ColorTable::color_table_info& cti, QWidget *parent, 
 #if QT_VERSION < 0x040000 || defined QT3_SUPPORT
                       const char *name
@@ -125,7 +122,7 @@ namespace CVCColorTable
     _interactiveUpdates = b; 
   }
 
-  void Table::visibleComponents(boost::uint64_t components)
+  void Table::visibleComponents(uint64_t components)
   {
     _visibleComponents = components;
     update();
@@ -238,7 +235,7 @@ namespace CVCColorTable
   {
     //begin selection already set up the screen coord matrix
     drawTable(true);
-    //qDebug("%s: glGetError: %d",BOOST_CURRENT_FUNCTION,glGetError());
+    //qDebug("%s: glGetError: %d",__PRETTY_FUNCTION__,glGetError());
   }
 
   void Table::drawTable(bool withNames)
@@ -510,7 +507,7 @@ namespace CVCColorTable
             p2x = _contourTreeVertices[v2 * 2 + 0]; //func_val
             p2y = _contourTreeVertices[v2 * 2 + 1]; //norm_x;
 
-            //qDebug("%s :: p1x = %f, p1y = %f, p2x = %f, p2y = %f", BOOST_CURRENT_FUNCTION, p1x, p1y, p2x, p2y);            
+            //qDebug("%s :: p1x = %f, p1y = %f, p2x = %f, p2y = %f", __PRETTY_FUNCTION__, p1x, p1y, p2x, p2y);            
 
             // don't add edges that are outside of the zoomed in region
             if (p1x < _min && p2x < _min) continue;
@@ -558,7 +555,7 @@ namespace CVCColorTable
               }
             }
 
-            //qDebug("%s :: x0 = %f, y0 = %f, x1 = %f, y1 = %f", BOOST_CURRENT_FUNCTION, 
+            //qDebug("%s :: x0 = %f, y0 = %f, x1 = %f, y1 = %f", __PRETTY_FUNCTION__, 
             //       clampedP1x, clampedP1y, clampedP2x, clampedP2y);
 
             double x0 = ((clampedP1x - _min)/(_max - _min))*(width()-1);
@@ -585,8 +582,9 @@ namespace CVCColorTable
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
       if (_dirtyHistogram) {
-	// grab the histogram
-	_histogram = _contourVolume.histogram();
+	// grab the histogram (convert from boost::tuple returned by VolMagick)
+	auto h = _contourVolume.histogram();
+	_histogram = std::make_tuple(boost::get<0>(h), boost::get<1>(h));
 	_dirtyHistogram = false;
       }
 #endif
@@ -594,8 +592,8 @@ namespace CVCColorTable
      
       // loop over datapoints...
 
-      const boost::uint64_t* hist = boost::get<0>(_histogram);
-      uint64_t len = boost::get<1>(_histogram);
+      const uint64_t* hist = std::get<0>(_histogram);
+      uint64_t len = std::get<1>(_histogram);
       
       long histmax = 0;
       long histmin = 100000000;
@@ -857,13 +855,13 @@ namespace CVCColorTable
         if(func.empty()) continue;
         typedef function_t::iterator iterator;
         std::pair<iterator,iterator> result =
-        boost::minmax_element(func.begin(),
+        std::minmax_element(func.begin(),
                                 func.end());
 
 	float mymin = *(result.first);
 	float mymax = *(result.second);
 
-        BOOST_FOREACH(float &val, func) {
+        for(float &val : func) {
           val = (val-mymin)/(mymax-mymin);
         }
      }
@@ -1095,7 +1093,7 @@ namespace CVCColorTable
 
   void Table::mouseReleaseEvent(QMouseEvent *e)
   {
-    std::cout << BOOST_CURRENT_FUNCTION << ": called!" << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << ": called!" << std::endl;
 
     if(_selectedObj != -1)
       {
@@ -1110,7 +1108,7 @@ namespace CVCColorTable
   {
     using std::any_cast;
 
-    std::cout << BOOST_CURRENT_FUNCTION << ": called!" << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << ": called!" << std::endl;
 
     bool modified = false;
     POPUPSELECTION selection = showPopup(e->globalPos());

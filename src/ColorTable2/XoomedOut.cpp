@@ -24,7 +24,7 @@
 
 #include <ColorTable2/XoomedOut.h>
 #include <cstdlib>
-#include <boost/utility.hpp>
+#include <iterator>
 #include <any>
 
 #if QT_VERSION < 0x040000

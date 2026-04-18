@@ -6,9 +6,7 @@
 #include <string>
 #include <QFrame>
 
-#include <boost/tuple/tuple.hpp>
-#include <boost/tuple/tuple_comparison.hpp>
-#include <boost/tuple/tuple_io.hpp>
+#include <tuple>
 #include <memory>
 
 #ifndef COLORTABLE2_DISABLE_CONTOUR_TREE
