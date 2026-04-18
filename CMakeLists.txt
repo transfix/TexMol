@@ -26,6 +26,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_compile_definitions(BOOST_BIND_GLOBAL_PLACEHOLDERS)
 
 # ---------------------------------------------------------------------------
+# Testing and coverage options
+# ---------------------------------------------------------------------------
+option(TEXMOL_BUILD_TESTS "Build unit tests" OFF)
+option(TEXMOL_ENABLE_COVERAGE "Enable code coverage instrumentation (GCC/Clang)" OFF)
+
+# ---------------------------------------------------------------------------
 # Output directories
 # ---------------------------------------------------------------------------
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
@@ -243,6 +249,63 @@ if(APPLE)
     MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
     MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
   )
+endif()
+
+# ---------------------------------------------------------------------------
+# Code coverage (must be before targets that use it)
+# ---------------------------------------------------------------------------
+if(TEXMOL_ENABLE_COVERAGE)
+  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    message(STATUS "Code coverage enabled")
+    set(COVERAGE_COMPILE_FLAGS "--coverage -fprofile-arcs -ftest-coverage")
+    set(COVERAGE_LINK_FLAGS "--coverage")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COVERAGE_COMPILE_FLAGS}")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COVERAGE_COMPILE_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${COVERAGE_LINK_FLAGS}")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${COVERAGE_LINK_FLAGS}")
+
+    find_program(LCOV_PATH lcov)
+    find_program(GENHTML_PATH genhtml)
+
+    if(LCOV_PATH AND GENHTML_PATH)
+      add_custom_target(coverage
+        COMMAND ${LCOV_PATH} --directory . --zerocounters
+        COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+        COMMAND ${LCOV_PATH} --directory . --capture --output-file coverage.info --ignore-errors mismatch
+        COMMAND ${LCOV_PATH} --remove coverage.info
+          '/usr/*' '*/test/*' '*/tests/*' '*/_deps/*' '*/googletest/*'
+          --output-file coverage_filtered.info
+        COMMAND ${GENHTML_PATH} coverage_filtered.info
+          --output-directory coverage_html
+          --title "TexMol Code Coverage"
+          --legend --demangle-cpp --ignore-errors source
+        COMMAND ${CMAKE_COMMAND} -E echo "Coverage report: ${CMAKE_BINARY_DIR}/coverage_html/index.html"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMENT "Generating code coverage report"
+      )
+    else()
+      message(WARNING "lcov/genhtml not found — coverage target unavailable (apt install lcov)")
+    endif()
+  else()
+    message(WARNING "Code coverage only supported with GCC or Clang")
+  endif()
+endif()
+
+# ---------------------------------------------------------------------------
+# Testing (Google Test)
+# ---------------------------------------------------------------------------
+if(TEXMOL_BUILD_TESTS)
+  enable_testing()
+  include(FetchContent)
+  FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.15.2
+  )
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  FetchContent_MakeAvailable(googletest)
+  message(STATUS "Google Test enabled — tests will be built")
+  add_subdirectory(tests)
 endif()
 
 # ---------------------------------------------------------------------------
