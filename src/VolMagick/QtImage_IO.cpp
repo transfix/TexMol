@@ -21,7 +21,7 @@
 */
 
 #include <boost/current_function.hpp>
-#include <boost/format.hpp>
+#include <string>
 
 #include <qimage.h>
 
@@ -87,9 +87,7 @@ namespace VolMagick
     QImage img(filename.c_str());
     if(img.isNull())
       throw ReadError(
-	 boost::str(
-	    boost::format("QImage could not read %1%") % filename
-	 )
+	 "QImage could not read " + filename
       );
 
     data._filename = filename;
@@ -134,9 +132,7 @@ namespace VolMagick
     CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
 
     throw ReadError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 
@@ -157,9 +153,7 @@ namespace VolMagick
     CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
 
     throw WriteError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 
@@ -178,9 +172,7 @@ namespace VolMagick
     CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
 
     throw WriteError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 }

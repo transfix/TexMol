@@ -38,14 +38,14 @@
 // #endif
 
 #include <boost/current_function.hpp>
-#include <boost/format.hpp>
+#include <string>
 #include <boost/scoped_ptr.hpp>
 #include <boost/scoped_array.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/lexical_cast.hpp>
+#include <memory>
 #include <boost/array.hpp>
 
 #include <iostream>
@@ -438,12 +438,7 @@ namespace VolMagick
             for(unsigned int j = 0; j < data._numTimesteps; j++)
               {
                 std::string volume_name =
-                  boost::str(
-                             boost::format("%1%/%2%:%3%:%4%") %
-                             objectName %
-                             DEFAULT_VOLUME_NAME %
-                             i % j
-                             );
+                  objectName + "/" + DEFAULT_VOLUME_NAME + ":" + std::to_string(i) + ":" + std::to_string(j);
 
                 data._min[i][j] = getDataSetMinimum(actualFileName,volume_name);
                 data._minIsSet[i][j]=true;
@@ -535,12 +530,7 @@ namespace VolMagick
         //instances of the same dataset at various resolutions.  This function assumes
         //you want the highest resolution dataset, which uses the following naming convention.
         volume_name =
-          boost::str(
-            boost::format("%1%/%2%:%3%:%4%") %
-            objectName %
-            DEFAULT_VOLUME_NAME %
-            var % time
-          );
+          objectName + "/" + DEFAULT_VOLUME_NAME + ":" + std::to_string(var) + ":" + std::to_string(time);
       }
     else //Ungrouped dataset
       {
@@ -743,7 +733,7 @@ namespace VolMagick
         vol.max(getDataSetMaximum(actualFileName,volume_name));
       }
 
-    boost::shared_array<unsigned char> data;
+    std::shared_ptr<unsigned char[]> data;
     Dimension dim;
     
     boost::tie(data,dim) = 
@@ -815,12 +805,7 @@ namespace VolMagick
           //for the highest resolution dataset.  writeVolumeFile should trigger updates to the
           //hierarchy via a seperate thread for use by the BoundingBox based readVolumeFile above.
           std::string volume_name =
-            boost::str(
-                boost::format("%1%/%2%:%3%:%4%") %
-                objectName %
-                DEFAULT_VOLUME_NAME %
-                var % time
-              );
+            objectName + "/" + DEFAULT_VOLUME_NAME + ":" + std::to_string(var) + ":" + std::to_string(time);
 
           if(voxelTypes.size() <= var)
             throw InvalidHDF5File("VoxelTypes array not large enough!");

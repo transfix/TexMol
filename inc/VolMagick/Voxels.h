@@ -29,11 +29,11 @@
 #include <VolMagick/Dimension.h>
 #include <VolMagick/Exceptions.h>
 
-#include <boost/shared_array.hpp>
 #include <boost/tuple/tuple.hpp>
 
 #include <algorithm>
 #include <cstring>
+#include <memory>
 
 namespace VolMagick
 {
@@ -54,7 +54,7 @@ namespace VolMagick
     Dimension& dimension() { return _dimension; }
     const Dimension& dimension() const { return _dimension; }
     virtual void dimension(const Dimension& d, 
-                           boost::shared_array<unsigned char> voxels = boost::shared_array<unsigned char>());
+                           std::shared_ptr<unsigned char[]> voxels = std::shared_ptr<unsigned char[]>());
     uint64 XDim() const { return dimension().xdim; }
     uint64 YDim() const { return dimension().ydim; }
     uint64 ZDim() const { return dimension().zdim; }
@@ -215,11 +215,11 @@ namespace VolMagick
     {
       _histogramDirty = true; //invalidate the histogram
 
-      if(_voxels.unique()) return; //nothing to copy if our voxels are already unique
+      if(_voxels.use_count() == 1) return; //nothing to copy if our voxels are already unique
 
       try
 	{
-	  boost::shared_array<unsigned char> tmp(_voxels);
+	  std::shared_ptr<unsigned char[]> tmp(_voxels);
 	  _voxels.reset(new unsigned char[XDim()*YDim()*ZDim()*voxelSize()]);
 	  memcpy(_voxels.get(),tmp.get(),XDim()*YDim()*ZDim()*voxelSize());
 	}
@@ -231,7 +231,7 @@ namespace VolMagick
     void calcHistogram(uint64 size) const;
 
     //unsigned char *_voxels;
-    boost::shared_array<unsigned char> _voxels;
+    std::shared_ptr<unsigned char[]> _voxels;
 
     Dimension _dimension;
 
@@ -245,7 +245,7 @@ namespace VolMagick
     const VoxelOperationStatusMessenger* _vosm;
 
     //computed on demand even for const reference so declare as mutable
-    mutable boost::shared_array<uint64> _histogram;
+    mutable std::shared_ptr<uint64[]> _histogram;
     mutable uint64 _histogramSize;
     mutable bool _histogramDirty;
   };

@@ -29,7 +29,7 @@
 
 #include <CVC/App.h>
 
-#include <boost/regex.hpp>
+#include <regex>
 
 namespace VolMagick
 {
@@ -49,8 +49,8 @@ namespace VolMagick
   void VolumeFileInfo::read(const std::string& filename)
   {
     std::string errors;
-    boost::regex file_extension("^(.*)(\\.\\S*)$");
-    boost::smatch what;
+    std::regex file_extension("^(.*)(\\.\\S*)$");
+    std::smatch what;
 
     std::string actualFileName;
     std::string objectName;
@@ -58,7 +58,7 @@ namespace VolMagick
     boost::tie(actualFileName, objectName) =
       VolumeFile_IO::splitRawFilename(filename);
 
-    if(boost::regex_match(actualFileName, what, file_extension))
+    if(std::regex_match(actualFileName, what, file_extension))
       {
 	if(VolumeFile_IO::handlerMap()[what[2]].empty())
 	  throw UnsupportedVolumeFileType(std::string(BOOST_CURRENT_FUNCTION) + 
@@ -82,12 +82,7 @@ namespace VolMagick
 	    }
       }
     throw UnsupportedVolumeFileType(
-      boost::str(
-	boost::format("%1% : Cannot read '%2%'%3%") % 
-	BOOST_CURRENT_FUNCTION %
-	filename %
-	errors
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " : Cannot read '" + filename + "'" + errors
     );
   }
 

@@ -27,7 +27,6 @@
 
 #include <CVC/Exception.h>
 
-#include <boost/format.hpp>
 #include <exception>
 #include <string>
 
@@ -41,7 +40,7 @@ namespace VolMagick
   public: \
     name () : _msg("VolMagick::"#name) {} \
     name (const std::string& msg) : \
-      _msg(boost::str(boost::format("VolMagick::" #name " exception: %1%") % msg)) {} \
+      _msg(std::string("VolMagick::" #name " exception: ") + msg) {} \
     virtual ~name() throw() {} \
     virtual const std::string& what_str() const throw() { return _msg; } \
   private: \

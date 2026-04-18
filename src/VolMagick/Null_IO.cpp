@@ -21,7 +21,7 @@
 */
 
 #include <boost/current_function.hpp>
-#include <boost/format.hpp>
+#include <string>
 
 #include <VolMagick/Null_IO.h>
 
@@ -76,9 +76,7 @@ namespace VolMagick
 				  const std::string& /*filename*/) const
   {
     throw ReadError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 
@@ -96,9 +94,7 @@ namespace VolMagick
 			       const Dimension& /*subvoldim*/, const CVC::Dimension& maxdim) const
   {
     throw ReadError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 
@@ -117,9 +113,7 @@ namespace VolMagick
 				 double /*min_time*/, double /*max_time*/) const
   {
     throw WriteError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 
@@ -136,9 +130,7 @@ namespace VolMagick
 				uint64 /*off_x*/, uint64 /*off_y*/, uint64 /*off_z*/) const
   {
     throw WriteError(
-      boost::str(
-	boost::format("%1% unimplemented") % BOOST_CURRENT_FUNCTION
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " unimplemented"
     );
   }
 }

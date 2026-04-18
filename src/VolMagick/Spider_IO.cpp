@@ -30,7 +30,7 @@
 #include <CVC/App.h>
 
 #include <boost/scoped_array.hpp>
-#include <boost/format.hpp>
+#include <string>
 
 #include <stdio.h>
 #include <stdlib.h>

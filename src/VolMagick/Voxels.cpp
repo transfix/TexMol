@@ -86,7 +86,7 @@ namespace VolMagick
   // ---- Change History ----
   // ??/??/2007 -- Joe R. -- Initial implementation.
   // 08/26/2011 -- Joe R. -- Added voxels argument
-  void Voxels::dimension(const Dimension& d, boost::shared_array<unsigned char> voxels)
+  void Voxels::dimension(const Dimension& d, std::shared_ptr<unsigned char[]> voxels)
   {
     CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
 
@@ -109,7 +109,7 @@ namespace VolMagick
         try
           {
             //in case this throws...
-            boost::shared_array<unsigned char> tmp(new unsigned char[d.xdim*d.ydim*d.zdim*voxelSize()]);
+            std::shared_ptr<unsigned char[]> tmp(new unsigned char[d.xdim*d.ydim*d.zdim*voxelSize()]);
             _voxels = tmp;
           }
         catch(std::bad_alloc& e)
@@ -140,7 +140,7 @@ namespace VolMagick
     try
       {
 	//in case this throws...
-	boost::shared_array<unsigned char> tmp(new unsigned char[XDim()*YDim()*ZDim()*VoxelTypeSizes[vt]]);
+	std::shared_ptr<unsigned char[]> tmp(new unsigned char[XDim()*YDim()*ZDim()*VoxelTypeSizes[vt]]);
 	_voxels = tmp;
       }
     catch(std::bad_alloc& e)

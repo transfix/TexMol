@@ -36,9 +36,9 @@
 #include <vector>
 #include <map>
 #include <boost/filesystem.hpp>
-#include <boost/format.hpp>
+#include <string>
 #include <boost/algorithm/string.hpp>
-#include <boost/regex.hpp>
+#include <regex>
 #include <boost/lexical_cast.hpp>
 #include <boost/array.hpp>
 

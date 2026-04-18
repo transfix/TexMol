@@ -28,7 +28,7 @@
 
 #include <CVC/App.h>
 
-#include <boost/format.hpp>
+#include <string>
 
 namespace VolMagick
 {

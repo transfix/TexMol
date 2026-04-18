@@ -9,7 +9,7 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/tuple/tuple_comparison.hpp>
 #include <boost/tuple/tuple_io.hpp>
-#include <boost/shared_array.hpp>
+#include <memory>
 
 #ifndef COLORTABLE2_DISABLE_CONTOUR_TREE
 namespace VolMagick
@@ -43,10 +43,10 @@ namespace CVCColorTable
     virtual QSize sizeHint() const;
     virtual QSize minimumSizeHint() const;
 
-    boost::shared_array<unsigned char> getTable(unsigned int size = 256) const;
+    std::shared_ptr<unsigned char[]> getTable(unsigned int size = 256) const;
     unsigned char* getCharTable(unsigned int size = 256) const;
 
-    boost::shared_array<float> getFloatTable(unsigned int size = 256) const;
+    std::shared_ptr<float[]> getFloatTable(unsigned int size = 256) const;
 
     bool interactiveUpdates() const;
     bool opacityCubed() const;

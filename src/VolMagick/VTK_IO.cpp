@@ -36,7 +36,7 @@
 #include <cmath>
 #include <errno.h>
 
-#include <boost/format.hpp>
+#include <string>
 
 #include <VolMagick/VolMagick.h>
 #include <VolMagick/VTK_IO.h>

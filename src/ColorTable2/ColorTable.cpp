@@ -7,9 +7,9 @@
 #include <functional> //compose2, etc
 #include <boost/lambda/lambda.hpp>
 #include <boost/utility.hpp> //for std::prev()
-#include <boost/format.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include <charconv>
+#include <memory>
 #include <ColorTable2/ColorTable.h>
 #include <ColorTable2/Table.h>
 #include <qlayout.h>
@@ -114,10 +114,10 @@ namespace CVCColorTable
     return QSize(150, 150);
   }
 
-  boost::shared_array<unsigned char> ColorTable::getTable(unsigned int size) const
+  std::shared_ptr<unsigned char[]> ColorTable::getTable(unsigned int size) const
   {
-    if(size==0) return boost::shared_array<unsigned char>();
-    boost::shared_array<unsigned char> table(new unsigned char[size*4]);
+    if(size==0) return std::shared_ptr<unsigned char[]>();
+    std::shared_ptr<unsigned char[]> table(new unsigned char[size*4]);
 
     //if for some reason we don't have enough nodes, return a simple grayscale ramp
     if(info().colorNodes().size() < 2 || info().opacityNodes().size() < 2)
@@ -317,10 +317,10 @@ namespace CVCColorTable
   }
 
   // arand, 10-7-2011, new Float table for eventually better Volume Rendering
-  boost::shared_array<float> ColorTable::getFloatTable(unsigned int size) const
+  std::shared_ptr<float[]> ColorTable::getFloatTable(unsigned int size) const
   {
-    if(size==0) return boost::shared_array<float>();
-    boost::shared_array<float> table(new float[size*4]);
+    if(size==0) return std::shared_ptr<float[]>();
+    std::shared_ptr<float[]> table(new float[size*4]);
 
     //if for some reason we don't have enough nodes, return a simple grayscale ramp
     if(info().colorNodes().size() < 2 || info().opacityNodes().size() < 2)
@@ -602,33 +602,22 @@ namespace CVCColorTable
     string line;
     vector<string> split_line;
 
+    // Helper for error messages
+    auto file_error = [&](const string& detail = "") {
+      return "Error reading file " + filename + ", line " + std::to_string(line_num)
+             + (detail.empty() ? "" : ": " + detail);
+    };
+
 #define CHECK_LINE(check_str)						\
     {									\
       getline(inf, line); line_num++;					\
       if(!inf)								\
-	std::cout << boost::str(boost::format("Error reading file %1%, line %2%")	\
-				% filename				\
-		    % line_num) << std::endl;				\
+	std::cout << file_error() << std::endl;				\
       if(line != check_str)						\
-	std::cout << boost::str(boost::format("Error reading file %1%, line %2%: "	\
-				       "string '%3%' not found")	\
-				% filename				\
-				% line_num				\
-			 % string(check_str)) << endl;			\
+	std::cout << file_error(					\
+		  "string '" + string(check_str) + "' not found")	\
+		  << endl;						\
     }
-
-    /* // arand: old version crashed when a bad vinay is loaded
-      if(!inf)								\
-	throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%") \
-				% filename				\
-				% line_num));				\
-      if(line != check_str)						\
-	throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%: " \
-				       "string '%3%' not found")	\
-				% filename				\
-				% line_num				\
-				% string(check_str)));			\
-    */
 
     CHECK_LINE("Anthony and Vinay are Great.");
 
@@ -636,9 +625,7 @@ namespace CVCColorTable
       {
 	line_num++;
 	if(!inf)
-	  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-				  % filename
-				  % line_num));
+	  throw runtime_error(file_error());
 	
 	if(line == "Alphamap") //process alphamap
 	  {
@@ -646,10 +633,8 @@ namespace CVCColorTable
 	    
 	    getline(inf, line); line_num++;
 	    if(!inf)
-	      throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-				      % filename
-				      % line_num));
-	    unsigned int num_nodes = boost::lexical_cast<unsigned int>(line);
+	      throw runtime_error(file_error());
+	    unsigned int num_nodes = std::stoul(line);
 	    
 	    CHECK_LINE("Position and opacity");
 
@@ -657,17 +642,12 @@ namespace CVCColorTable
 	      {
 		getline(inf, line); line_num++;
 		if(!inf)
-		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-					  % filename
-					  % line_num));
+		  throw runtime_error(file_error());
 		boost::algorithm::split(split_line,line,boost::algorithm::is_any_of(" "));
 		if(split_line.size() != 2)
-		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%: "
-						 "Invalid position and opacity")
-					  % filename
-					  % line_num));
-		cti.opacityNodes().insert(ColorTable::opacity_node(boost::lexical_cast<double>(split_line[0]),
-								   boost::lexical_cast<double>(split_line[1])));
+		  throw runtime_error(file_error("Invalid position and opacity"));
+		cti.opacityNodes().insert(ColorTable::opacity_node(std::stod(split_line[0]),
+								   std::stod(split_line[1])));
 	      }
 	  }
 	else if(line == "ColorMap")
@@ -676,10 +656,8 @@ namespace CVCColorTable
 	    
 	    getline(inf, line); line_num++;
 	    if(!inf)
-	      throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-				      % filename
-				      % line_num));
-	    unsigned int num_nodes = boost::lexical_cast<unsigned int>(line);
+	      throw runtime_error(file_error());
+	    unsigned int num_nodes = std::stoul(line);
 	    
 	    CHECK_LINE("Position and RGB");
 	    
@@ -687,19 +665,14 @@ namespace CVCColorTable
 	      {
 		getline(inf, line); line_num++;
 		if(!inf)
-		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-					  % filename
-					  % line_num));
+		  throw runtime_error(file_error());
 		boost::algorithm::split(split_line,line,boost::algorithm::is_any_of(" "));
 		if(split_line.size() != 4)
-		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%: "
-						 "Invalid position and RGB values")
-					  % filename
-					  % line_num));
-		cti.colorNodes().insert(ColorTable::color_node(boost::lexical_cast<double>(split_line[0]),
-							       boost::lexical_cast<double>(split_line[1]),
-							       boost::lexical_cast<double>(split_line[2]),
-							       boost::lexical_cast<double>(split_line[3])));
+		  throw runtime_error(file_error("Invalid position and RGB values"));
+		cti.colorNodes().insert(ColorTable::color_node(std::stod(split_line[0]),
+							       std::stod(split_line[1]),
+							       std::stod(split_line[2]),
+							       std::stod(split_line[3])));
 	      }
 	  }
 	else if(line == "IsocontourMap")
@@ -708,10 +681,8 @@ namespace CVCColorTable
 	    
 	    getline(inf, line); line_num++;
 	    if(!inf)
-	      throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-				      % filename
-				      % line_num));
-	    unsigned int num_nodes = boost::lexical_cast<unsigned int>(line);
+	      throw runtime_error(file_error());
+	    unsigned int num_nodes = std::stoul(line);
 	    
 	    CHECK_LINE("Position");
 	    
@@ -719,10 +690,8 @@ namespace CVCColorTable
 	      {
 		getline(inf, line); line_num++;
 		if(!inf)
-		  throw runtime_error(boost::str(boost::format("Error reading file %1%, line %2%")
-					  % filename
-					  % line_num));
-		cti.isocontourNodes().insert(ColorTable::isocontour_node(boost::lexical_cast<double>(line)));
+		  throw runtime_error(file_error());
+		cti.isocontourNodes().insert(ColorTable::isocontour_node(std::stod(line)));
 	      }
 	  }
       }

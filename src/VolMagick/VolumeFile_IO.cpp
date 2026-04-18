@@ -339,7 +339,7 @@ namespace VolMagick
     vol.unsetMinMax();
 
     std::string errors;
-    boost::smatch what;
+    std::smatch what;
 
     std::string actualFileName;
     std::string objectName;
@@ -347,8 +347,8 @@ namespace VolMagick
     boost::tie(actualFileName, objectName) =
       VolumeFile_IO::splitRawFilename(filename);
 
-    const boost::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
-    if(boost::regex_match(actualFileName, what, file_extension))
+    const std::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
+    if(std::regex_match(actualFileName, what, file_extension))
       {
 	if(VolumeFile_IO::handlerMap()[what[2]].empty())
 	  throw UnsupportedVolumeFileType(std::string(BOOST_CURRENT_FUNCTION) + 
@@ -373,12 +373,7 @@ namespace VolMagick
 	    }
       }
     throw UnsupportedVolumeFileType(
-      boost::str(
-	boost::format("%1% : Cannot read '%2%'%3%") % 
-	BOOST_CURRENT_FUNCTION %
-	filename %
-	errors
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " : Cannot read '" + filename + "'" + errors
     );
   }
 
@@ -402,7 +397,7 @@ namespace VolMagick
     vol.unsetMinMax();
 
     std::string errors;
-    boost::smatch what;
+    std::smatch what;
 
     std::string actualFileName;
     std::string objectName;
@@ -410,8 +405,8 @@ namespace VolMagick
     boost::tie(actualFileName, objectName) =
       VolumeFile_IO::splitRawFilename(filename);
 
-    const boost::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
-    if(boost::regex_match(actualFileName, what, file_extension))
+    const std::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
+    if(std::regex_match(actualFileName, what, file_extension))
       {
 	if(VolumeFile_IO::handlerMap()[what[2]].empty())
 	  throw UnsupportedVolumeFileType(std::string(BOOST_CURRENT_FUNCTION) + 
@@ -436,12 +431,7 @@ namespace VolMagick
 	    }
       }
     throw UnsupportedVolumeFileType(
-      boost::str(
-	boost::format("%1% : Cannot read '%2%'%3%") % 
-	BOOST_CURRENT_FUNCTION %
-	filename %
-	errors
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " : Cannot read '" + filename + "'" + errors
     );
   }
 
@@ -477,7 +467,7 @@ namespace VolMagick
 		       uint64 off_x, uint64 off_y, uint64 off_z)
   {
     std::string errors;
-    boost::smatch what;
+    std::smatch what;
 
     std::string actualFileName;
     std::string objectName;
@@ -485,8 +475,8 @@ namespace VolMagick
     boost::tie(actualFileName, objectName) =
       VolumeFile_IO::splitRawFilename(filename);
 
-    const boost::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
-    if(boost::regex_match(actualFileName, what, file_extension))
+    const std::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
+    if(std::regex_match(actualFileName, what, file_extension))
       {
 	if(VolumeFile_IO::handlerMap()[what[2]].empty())
 	  throw UnsupportedVolumeFileType(std::string(BOOST_CURRENT_FUNCTION) + 
@@ -510,12 +500,7 @@ namespace VolMagick
 	    }
       }
     throw UnsupportedVolumeFileType(
-      boost::str(
-	boost::format("%1% : Cannot read '%2%'%3%") % 
-	BOOST_CURRENT_FUNCTION %
-	filename %
-	errors
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " : Cannot read '" + filename + "'" + errors
     );
   }
 
@@ -631,7 +616,7 @@ namespace VolMagick
 			double min_time, double max_time)
   {
     std::string errors;
-    boost::smatch what;
+    std::smatch what;
 
     std::string actualFileName;
     std::string objectName;
@@ -639,8 +624,8 @@ namespace VolMagick
     boost::tie(actualFileName, objectName) =
       VolumeFile_IO::splitRawFilename(filename);
 
-    const boost::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
-    if(boost::regex_match(actualFileName, what, file_extension))
+    const std::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
+    if(std::regex_match(actualFileName, what, file_extension))
       {
 	if(VolumeFile_IO::handlerMap()[what[2]].empty())
 	  throw UnsupportedVolumeFileType(std::string(BOOST_CURRENT_FUNCTION) + 
@@ -666,12 +651,7 @@ namespace VolMagick
 	    }
       }
     throw UnsupportedVolumeFileType(
-      boost::str(
-	boost::format("%1% : Cannot read '%2%'%3%") % 
-	BOOST_CURRENT_FUNCTION %
-	filename %
-	errors
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " : Cannot read '" + filename + "'" + errors
     );
   }
 
@@ -698,7 +678,7 @@ namespace VolMagick
                         
   {
     std::string errors;
-    boost::smatch what;
+    std::smatch what;
 
     std::string actualFileName;
     std::string objectName;
@@ -706,8 +686,8 @@ namespace VolMagick
     boost::tie(actualFileName, objectName) =
       VolumeFile_IO::splitRawFilename(filename);
 
-    const boost::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
-    if(boost::regex_match(actualFileName, what, file_extension))
+    const std::regex file_extension(VolumeFile_IO::FILE_EXTENSION_EXPR);
+    if(std::regex_match(actualFileName, what, file_extension))
       {
 	if(VolumeFile_IO::handlerMap()[what[2]].empty())
 	  throw UnsupportedVolumeFileType(std::string(BOOST_CURRENT_FUNCTION) + 
@@ -731,12 +711,7 @@ namespace VolMagick
 	    }
       }
     throw UnsupportedVolumeFileType(
-      boost::str(
-	boost::format("%1% : Cannot write '%2%'%3%") % 
-	BOOST_CURRENT_FUNCTION %
-	filename %
-	errors
-      )
+      std::string(BOOST_CURRENT_FUNCTION) + " : Cannot write '" + filename + "'" + errors
     );
   }
 

@@ -30,8 +30,8 @@
 #define PHOENIX_LIMIT 10
 #define BOOST_SPIRIT_SELECT_LIMIT 10
 
-#include <boost/format.hpp>
-#include <boost/regex.hpp>
+#include <string>
+#include <regex>
 #include <boost/spirit.hpp>
 #include <boost/spirit/dynamic/select.hpp>
 #include <boost/current_function.hpp>
@@ -78,11 +78,11 @@ Inrimage format
 This is the format of the FOVEA 3D images that was developed at INRIA. It is composed of a 256 characters header followed by the image raw data.
 
 The header contains the following information:
-¥ the image dimensions
-¥ number of values per pixel (or voxel)
-¥ the type of coding (integer, float)
-¥ the size of the coding in bits
-¥ the type of machine that coded the information: Sun, Dec, Intel.
+ï¿½ the image dimensions
+ï¿½ number of values per pixel (or voxel)
+ï¿½ the type of coding (integer, float)
+ï¿½ the size of the coding in bits
+ï¿½ the type of machine that coded the information: Sun, Dec, Intel.
 
 An example of an image file:
 
@@ -608,28 +608,28 @@ namespace VolMagick
       case UInt64: datatype = "unsigned fixed"; pixsize = "64 bits"; break;
       }
 
-    strncpy(header,boost::str(boost::format("#INRIMAGE-4#{\n"
-					    "XDIM=%1%\n"
-					    "YDIM=%2%\n"
-					    "ZDIM=%3%\n"
-					    "VDIM=%4%\n"
-					    "VX=%5%\n"
-					    "VY=%6%\n"
-					    "VZ=%7%\n"
-					    "TYPE=%8%\n"
-					    "PIXSIZE=%9%\n"
-					    "CPU=%10%\n")
-			      % dimension[0]
-			      % dimension[1]
-			      % dimension[2]
-			      % numVariables
-			      % ((boundingBox.maxx - boundingBox.minx)/(dimension[0]-1))
-			      % ((boundingBox.maxy - boundingBox.miny)/(dimension[1]-1))
-			      % ((boundingBox.maxz - boundingBox.minz)/(dimension[2]-1))
-			      % datatype
-			      % pixsize
-			      % (big_endian()?"sun":"pc")).c_str(),
-	    256);
+    snprintf(header, 256,
+             "#INRIMAGE-4#{\n"
+             "XDIM=%llu\n"
+             "YDIM=%llu\n"
+             "ZDIM=%llu\n"
+             "VDIM=%u\n"
+             "VX=%f\n"
+             "VY=%f\n"
+             "VZ=%f\n"
+             "TYPE=%s\n"
+             "PIXSIZE=%s\n"
+             "CPU=%s\n",
+             (unsigned long long)dimension[0],
+             (unsigned long long)dimension[1],
+             (unsigned long long)dimension[2],
+             numVariables,
+             ((boundingBox.maxx - boundingBox.minx)/(dimension[0]-1)),
+             ((boundingBox.maxy - boundingBox.miny)/(dimension[1]-1)),
+             ((boundingBox.maxz - boundingBox.minz)/(dimension[2]-1)),
+             datatype,
+             pixsize,
+             (big_endian()?"sun":"pc"));
     memcpy(header+256-4,"##}\n",4);
     
     if((output = fopen(filename.c_str(),"wb")) == NULL)

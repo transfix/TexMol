@@ -4,7 +4,6 @@
 #ifndef __TEXMOL_CVC_COMPAT_EXCEPTIONS_H__
 #define __TEXMOL_CVC_COMPAT_EXCEPTIONS_H__
 
-#include <boost/format.hpp>
 #include <exception>
 #include <string>
 
@@ -30,7 +29,7 @@ namespace CVC
   public: \
     name () : _msg("CVC::"#name) {} \
     name (const std::string& msg) : \
-      _msg(boost::str(boost::format("CVC::" #name " exception: %1%") % msg)) {} \
+      _msg(std::string("CVC::" #name " exception: ") + msg) {} \
     virtual ~name() noexcept {} \
     virtual const std::string& what_str() const noexcept { return _msg; } \
   private: \
