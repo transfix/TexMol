@@ -161,7 +161,6 @@ set(TEXMOL_LINK_LIBS
   GeometryFileTypes
   SimpleVolumeData
   Utility
-  ByteOrder
   ComputeNormals
   LBIE_lib
   SignDistanceFunction_v2

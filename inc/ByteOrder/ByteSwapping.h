@@ -22,38 +22,18 @@
 #ifndef CCV_BYTE_SWAPPING_H
 #define CCV_BYTE_SWAPPING_H
 
-#include <Utility/utility.h>
+// Phase 11: Replaced Utility/utility.h dependency with standard headers
+// and delegate endianness detection to libcvc's cvc/endians.h.
+#include <cassert>
+#include <cstdint>
+#include <cvc/endians.h>
 
-#ifndef WIN32
+#ifndef Q_ULLONG
 typedef unsigned long long Q_ULLONG;
-#else
-typedef unsigned __int64 Q_ULLONG;
 #endif
 
-static inline bool isBigEndian();
-static inline bool isLittleEndian();
-
-static inline bool isBigEndian()
-{
-	assert(sizeof(unsigned int)==4);
-	unsigned int intVersion= 0x89ABCDEF;
-	unsigned char* charVersion = (unsigned char*)&intVersion;
-	return charVersion[0]==0x89 &&
-		   charVersion[1]==0xAB &&
-		   charVersion[2]==0xCD &&
-		   charVersion[3]==0xEF;
-}
-
-static inline bool isLittleEndian()
-{
-	assert(sizeof(unsigned int)==4);
-	unsigned int intVersion= 0x89ABCDEF;
-	unsigned char* charVersion = (unsigned char*)&intVersion;
-	return charVersion[3]==0x89 &&
-		   charVersion[2]==0xAB &&
-		   charVersion[1]==0xCD &&
-		   charVersion[0]==0xEF;
-}
+static inline bool isBigEndian()  { return cvc::big_endian(); }
+static inline bool isLittleEndian() { return !cvc::big_endian(); }
 
 template<class T>
 static inline void swapByteOrder(T& input);

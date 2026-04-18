@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 # These modules are kept as internal code until consumers are adapted
 # to use libcvc APIs directly.  Will be removed in future phases.
 # ===========================================================================
-ADD_SUBDIRECTORY(ByteOrder)
+# ByteOrder: now header-only, delegates to cvc/endians.h (Phase 11)
 ADD_SUBDIRECTORY(Utility)
 ADD_SUBDIRECTORY(SimpleVolumeData)
 ADD_SUBDIRECTORY(Geometry)
