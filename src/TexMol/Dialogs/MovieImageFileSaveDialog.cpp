@@ -25,7 +25,7 @@
 #include <qpushbutton.h>
 #include <qcombobox.h>
 //Added by qt3to4:
-#include <Q3StrList>
+
 #include <QImageWriter>
 #include <QFileDialog>
 
@@ -45,7 +45,7 @@ MovieImageFileSaveDialog::MovieImageFileSaveDialog(QWidget* parent, const char* 
 			imgListQS.push_back(QString(imgList.back()));
 			imgList.pop_back();
 		}
-		m_ImageFileFormatsComboBox->insertStringList(imgListQS, -1);
+		m_ImageFileFormatsComboBox->addItems(imgListQS);
 	}
 }
 
@@ -63,7 +63,8 @@ void MovieImageFileSaveDialog::getSelectedFileNames(QString* animationFileName, 
 void MovieImageFileSaveDialog::baseImageFileSlot()
 {
   //QString baseImageFileName = Q3FileDialog::getSaveFileName("","(*.*)",this,"save file dialog","Save as",0);
-  QString baseImageFileName = QFileDialog::getSaveFileName("","(*.*)",this,"save file dialog","Save as",0);
+  QString baseImageFileName = QFileDialog::getSaveFileName(this, "Save as", "", "(*.*)");
+
   m_BaseImageFileNameLineEdit->setText(baseImageFileName);
 }
 
@@ -71,6 +72,7 @@ void MovieImageFileSaveDialog::animationFileSlot()
 {
   //QString animationFileName = Q3FileDialog::getSaveFileName("","(*.*)",this,"save file dialog","Save as",0);
   //QString animationFileName = QFileDialog::getSaveFileName("","(*.*)",this,"save file dialog","Save as",0);
-  QString animationFileName = QFileDialog::getOpenFileName("","(*.*)",this,"open file dialog","Open",0);
+  QString animationFileName = QFileDialog::getOpenFileName(this, "Open", "", "(*.*)");
+
   m_AnimationFileNameLineEdit1->setText(animationFileName);
 }

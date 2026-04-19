@@ -21,9 +21,7 @@
 #ifndef SCRIPTS_DIALOG_H
 #define SCRIPTS_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog ScriptsDialogBase;
+#include <TexMol/Dialogs/ScriptsDialogBase.h>
 
 class ArgumentList;
 class Server;

@@ -44,7 +44,7 @@ ConstructDepthColoredVolumesDialog::~ConstructDepthColoredVolumesDialog()
 void ConstructDepthColoredVolumesDialog::outputRawVFileNameSlot()
 {
   //m_OutputRawVFileName = Q3FileDialog::getOpenFileName("", "Volume RAWV file (*.rawv);;All files (*.*)");
-  m_OutputRawVFileName = QFileDialog::getOpenFileName("", "Volume RAWV file (*.rawv);;All files (*.*)");
+  m_OutputRawVFileName = QFileDialog::getOpenFileName(this, "Open Volume file", "", "Volume RAWV file (*.rawv);;All files (*.*)");
 /*Q3Err:C
 	if(m_OutputRawVFileName != 0)
 */

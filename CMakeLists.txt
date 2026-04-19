@@ -105,7 +105,7 @@ endif()
 # System dependencies
 # ---------------------------------------------------------------------------
 # Qt6
-find_package(Qt6 COMPONENTS Core Gui Widgets Xml OpenGL OpenGLWidgets QUIET)
+find_package(Qt6 COMPONENTS Core Gui Widgets Xml Network OpenGL OpenGLWidgets QUIET)
 if(NOT Qt6_FOUND)
   message(FATAL_ERROR "Qt6 not found. Install: sudo apt-get install qt6-base-dev libqt6opengl6-dev libqt6openglwidgets6")
 endif()

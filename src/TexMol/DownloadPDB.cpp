@@ -18,34 +18,37 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
-#include <qfile.h>
+#include <QFile>
 #include <QNetworkAccessManager>
-#include <q3network.h>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QEventLoop>
+#include <QUrl>
 #include <TexMol/DownloadPDB.h>
 
 DownloadPDB::DownloadPDB()
 {
+	m_manager = new QNetworkAccessManager(this);
 }
 
 DownloadPDB::~DownloadPDB()
 {
-	delete http;
-	http = 0;
 	delete http_file;
-	http_file = 0;
+	http_file = nullptr;
+	// m_manager is parented to this, auto-deleted
 }
 
 void DownloadPDB::finishedop(bool error)
 {
 	if (error)
 	{
-	  printf("Download errer %s\n", http->errorString().ascii()); // arand, no warning
+		fprintf(stderr, "Download error\n");
 		delete http_file;
-		http_file = 0;
+		http_file = nullptr;
 		return;
 	}
 	delete http_file;
-	http_file = 0;
+	http_file = nullptr;
 }
 
 bool DownloadPDB::blockedDownload(const char* pdbID, const char* filename)
@@ -54,28 +57,42 @@ bool DownloadPDB::blockedDownload(const char* pdbID, const char* filename)
 	{
 		return false;
 	}
-	http = new Q3Http();
-	http_file = 0;
-	connect(http, SIGNAL(done(bool)), this, SLOT(finishedop(bool)));
+
 	QString qpdbIDtemp = QString(pdbID);
-	QString qpdbIDtemp2 = qpdbIDtemp.upper();
-	QString qpdbID = qpdbIDtemp2;
-	if (qpdbIDtemp2.length() > 4 && qpdbIDtemp2.endsWith(".PDB"))
+	QString qpdbID = qpdbIDtemp.toUpper();
+	if (qpdbID.length() > 4 && qpdbID.endsWith(".PDB"))
 	{
-		qpdbID = qpdbIDtemp2.remove(qpdbIDtemp2.length() - 4, 4);
+		qpdbID = qpdbID.left(qpdbID.length() - 4);
 	}
-	q3InitNetworkProtocols();
-	//http://www.rcsb.org/pdb/cgi/export.cgi/101M.pdb?format=PDB&pdbId=101M&compression=None
-	QString pdbURL = "/pdb/cgi/export.cgi/" + QString(pdbID) + ".pdb?format=PDB&pdbId=" + QString(pdbID) + "&compression=None";
-	http_file = new QFile(filename);
-	if (!http_file->open(QIODevice::WriteOnly))
+
+	// RCSB PDB REST API
+	QUrl url("https://files.rcsb.org/download/" + qpdbID + ".pdb");
+	QNetworkRequest request(url);
+
+	QNetworkReply* reply = m_manager->get(request);
+
+	// Block until download completes
+	QEventLoop loop;
+	connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+	loop.exec();
+
+	if (reply->error() != QNetworkReply::NoError)
 	{
-		printf("Could not open file %s for writing\n", filename);
-		delete http_file;
-		http_file =0;
+		fprintf(stderr, "Download error: %s\n", reply->errorString().toLatin1().constData());
+		reply->deleteLater();
 		return false;
 	}
-	http->setHost("www.rcsb.org");
-	http->get(pdbURL, http_file);
+
+	QFile file(filename);
+	if (!file.open(QIODevice::WriteOnly))
+	{
+		fprintf(stderr, "Could not open file %s for writing\n", filename);
+		reply->deleteLater();
+		return false;
+	}
+
+	file.write(reply->readAll());
+	file.close();
+	reply->deleteLater();
 	return true;
 }

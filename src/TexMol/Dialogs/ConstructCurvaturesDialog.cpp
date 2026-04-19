@@ -205,7 +205,7 @@ bool ConstructCurvaturesDialog::constructCurvature()
 void ConstructCurvaturesDialog::inputPDBFileSlot()
 {
   //QString inputPDBFileName = Q3FileDialog::getOpenFileName("", "Molecular Structure (*.pdb *.pqr);;PQR (*.pqr);;PDB (*.pdb);;All files (*.*)");
-  QString inputPDBFileName = QFileDialog::getOpenFileName("", "Molecular Structure (*.pdb *.pqr);;PQR (*.pqr);;PDB (*.pdb);;All files (*.*)");
+  QString inputPDBFileName = QFileDialog::getOpenFileName(this, "Open PDB/PQR file", "", "Molecular Structure (*.pdb *.pqr);;PQR (*.pqr);;PDB (*.pdb);;All files (*.*)");
 /*Q3Err:C
 	if(inputPDBFileName != 0)
 */
@@ -218,7 +218,7 @@ void ConstructCurvaturesDialog::inputPDBFileSlot()
 void ConstructCurvaturesDialog::inputIsocontourFileSlot()
 {
   //QString inputIsocontourFileName = Q3FileDialog::getOpenFileName("", "Surface file (*.raw);;All files (*.*)");
-  QString inputIsocontourFileName = QFileDialog::getOpenFileName("", "Surface file (*.raw);;All files (*.*)");
+  QString inputIsocontourFileName = QFileDialog::getOpenFileName(this, "Open Isocontour file", "", "Surface file (*.raw);;All files (*.*)");
 
 /*Q3Err:C
 	if(inputIsocontourFileName != 0)
@@ -232,7 +232,7 @@ void ConstructCurvaturesDialog::inputIsocontourFileSlot()
 void ConstructCurvaturesDialog::outputMeanCurvatureFileSlot()
 {
   //QString outputMeanCurvatureFileName = Q3FileDialog::getSaveFileName("", "Surface file (*.raw);;All files (*.*)");
-  QString outputMeanCurvatureFileName = QFileDialog::getSaveFileName("", "Surface file (*.raw);;All files (*.*)");
+  QString outputMeanCurvatureFileName = QFileDialog::getSaveFileName(this, "Save Mean Curvature file", "", "Surface file (*.raw);;All files (*.*)");
 
 /*Q3Err:C
 	if(outputMeanCurvatureFileName != 0)
@@ -246,7 +246,7 @@ void ConstructCurvaturesDialog::outputMeanCurvatureFileSlot()
 void ConstructCurvaturesDialog::outputGaussianCurvatureFileSlot()
 {
   //QString outputGaussianCurvatureFileName = Q3FileDialog::getSaveFileName("", "Surface file (*.raw);;All files (*.*)");
-  QString outputGaussianCurvatureFileName = QFileDialog::getSaveFileName("", "Surface file (*.raw);;All files (*.*)");
+  QString outputGaussianCurvatureFileName = QFileDialog::getSaveFileName(this, "Save Gaussian Curvature file", "", "Surface file (*.raw);;All files (*.*)");
 
 /*Q3Err:C
 	if(outputGaussianCurvatureFileName != 0)

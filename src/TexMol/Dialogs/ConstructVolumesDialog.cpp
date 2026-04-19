@@ -25,7 +25,7 @@
 #include <qradiobutton.h>
 #include <qspinbox.h>
 #include <qcheckbox.h>
-#include <q3buttongroup.h>
+#include <QGroupBox>
 #include <qpushbutton.h>
 #include <SimpleVolumeData/SimpleVolumeData.h>
 #include <DataManager/VolumeDataManager/VolumeData.h>
@@ -172,8 +172,7 @@ bool ConstructVolumes::constructVolume(DataManager* dataManager, PDBParser::Grou
 void ConstructVolumes::colorMapFileSlot()
 {
   //QString cMapFile = Q3FileDialog::getOpenFileName("", "Color Map (*.cmap);;All files (*.*)");
-	QString cMapFile = QFileDialog::getOpenFileName("", "Color Map (*.cmap);;All files (*.*)");
-/*Q3Err:C
+	QString cMapFile = QFileDialog::getOpenFileName(this, "Open Color Map", "", "Color Map (*.cmap);;All files (*.*)");/*Q3Err:C
 	if(cMapFile != 0)
 */
 	if(!cMapFile.isNull())

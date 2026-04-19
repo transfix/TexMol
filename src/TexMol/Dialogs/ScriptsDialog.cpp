@@ -20,7 +20,7 @@
 */
 // Qt3Support removed
 
-#include <q3textedit.h>
+#include <QTextEdit>
 //#include <q3filedialog.h>
 #include <QFileDialog>
 #include <TexMol/Dialogs/MainWindow.h>
@@ -55,10 +55,10 @@ void ScriptsDialog::executeCommandsSequentially(ArgumentList* argumentList)
 void ScriptsDialog::executeSlot()
 {
 	ArgumentList* argumentList = 0;
-	QString commandList = m_CommandsTextEdit->selectedText();
+	QString commandList = m_CommandsTextEdit->textCursor().selectedText();
 	int cListLen =commandList.length();
 	int first = 0;
-	int second = commandList.find('\n');
+	int second = commandList.indexOf('\n');
 
 	if(second == -1)
 	{
@@ -78,7 +78,7 @@ void ScriptsDialog::executeSlot()
 				argumentList = new ArgumentList();
 			}
 
-			argumentList->addNewCommand((command.simplifyWhiteSpace()));
+			argumentList->addNewCommand((command.simplified()));
 		}
 
 		if(second >= cListLen-1)
@@ -87,7 +87,7 @@ void ScriptsDialog::executeSlot()
 		}
 
 		first = second+1;
-		second = commandList.find('\n', second+1);
+		second = commandList.indexOf('\n', second+1);
 
 		if(second == -1)
 		{
@@ -102,7 +102,7 @@ void ScriptsDialog::executeSlot()
 void ScriptsDialog::loadSlot()
 {
   //QString fileName = Q3FileDialog::getOpenFileName("", "(*.*)", this, "open file dialog", "Load file", 0);
-	QString fileName = QFileDialog::getOpenFileName("", "(*.*)", this, "open file dialog", "Load file", 0);
+	QString fileName = QFileDialog::getOpenFileName(this, "Load file", "", "(*.*)");
 	FILE* fp = fopen(fileName.toLatin1().constData(), "r");
 
 	if(fp == 0)
@@ -140,12 +140,10 @@ void ScriptsDialog::saveSlot()
   //					   0
   //				   );
   QString fileName = QFileDialog::getSaveFileName(
-						   "",
-						   "(*.*)",
 						   this,
-						   "save file dialog",
 						   "Save as",
-						   0
+						   "",
+						   "(*.*)"
 						   );
 
 	FILE* fp = fopen(fileName.toLatin1().constData(), "w");
@@ -155,10 +153,10 @@ void ScriptsDialog::saveSlot()
 		return;
 	}
 
-	QString commandList = m_CommandsTextEdit->selectedText();
+	QString commandList = m_CommandsTextEdit->textCursor().selectedText();
 	int cListLen =commandList.length();
 	int first = 0;
-	int second = commandList.find('\n');
+	int second = commandList.indexOf('\n');
 
 	if(second == -1)
 	{
@@ -184,7 +182,7 @@ void ScriptsDialog::saveSlot()
 		}
 
 		first = second+1;
-		second = commandList.find('\n', second+1);
+		second = commandList.indexOf('\n', second+1);
 
 		if(second == -1)
 		{

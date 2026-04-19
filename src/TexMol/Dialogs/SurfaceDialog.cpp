@@ -54,12 +54,12 @@ Geometry* SurfaceDialog::getSurface(PDBParser::GroupOfAtoms* molecule)
 	QString algorithm	= inputAlgorithm->currentText();
 	int size 		= inputSize->value();
 	int isovalue		= inputIsovalue->value();
-	double blobbiness	= atof(inputBlobbiness->text());
-	bool radiusType		= (bool)inputRadiusType->currentItem();
+	double blobbiness	= inputBlobbiness->text().toDouble();
+	bool radiusType		= (bool)inputRadiusType->currentIndex();
 	int level		= inputLevel->value();
 	int iterations		= inputIterations->value();
-	double weight		= atof(inputWeight->text());
-	bool optimizeRadii	= inputOptimizeRadii->isOn();
+	double weight		= inputWeight->text().toDouble();
+	bool optimizeRadii	= inputOptimizeRadii->isChecked();
 
 
 	cout << "Get Surface Member Function No Longer In Use/Supported." << endl;

@@ -27,7 +27,7 @@
 #include <qpushbutton.h>
 #include <qcombobox.h>
 //Added by qt3to4:
-#include <Q3StrList>
+
 #include <QImageWriter>
 
 FileSaveDialog::FileSaveDialog(QWidget* parent, const char* name, bool modal, Qt::WindowFlags fl)
@@ -46,7 +46,7 @@ FileSaveDialog::FileSaveDialog(QWidget* parent, const char* name, bool modal, Qt
 			imgList2.push_back(QString(imgList.back()));
 			imgList.pop_back();
 		}
-		m_FileFormatComboBox->insertStringList(imgList2, -1);
+		m_FileFormatComboBox->addItems(imgList2);
 	}
 }
 
@@ -68,6 +68,6 @@ void FileSaveDialog::getSelectedFileName(QString* imageFileName, QString* format
 void FileSaveDialog::fileNameSlot()
 {
   //QString imageFileName = Q3FileDialog::getSaveFileName("", "(*.*)", this, "save file dialog", "Save as", 0);
-	QString imageFileName = QFileDialog::getSaveFileName("", "(*.*)", this, "save file dialog", "Save as", 0);
+	QString imageFileName = QFileDialog::getSaveFileName(this, "Save as", "", "(*.*)");
 	m_FileNameLineEdit->setText(imageFileName);
 }

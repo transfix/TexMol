@@ -21,9 +21,7 @@
 #ifndef SET_VIEWING_PARAMETERS_DIALOG_H
 #define SET_VIEWING_PARAMETERS_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog SetViewingParametersDialogBase;
+#include <TexMol/Dialogs/SetViewingParametersDialogBase.h>
 #include <UsefulMath/Quaternion.h>
 
 class SetViewingParametersDialog : public SetViewingParametersDialogBase

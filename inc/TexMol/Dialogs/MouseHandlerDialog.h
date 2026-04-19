@@ -21,9 +21,7 @@
 #ifndef MOUSE_HANDLER_DIALOG_H
 #define MOUSE_HANDLER_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog MouseHandlerDialogBase;
+#include <TexMol/Dialogs/MouseHandlerDialogBase.h>
 
 class MouseHandlerDialog : public MouseHandlerDialogBase
 {

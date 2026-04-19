@@ -49,33 +49,8 @@ if(QT3_HEADERS)
   set_source_files_properties(${QT3_HEADERS} PROPERTIES SKIP_AUTOMOC ON SKIP_AUTOUIC ON HEADER_FILE_ONLY ON)
 endif()
 
-# Exclude dialogs with unported Qt3 base classes (Phase 6 TODO)
-set(QT3_DIALOG_BASENAMES
-  AboutDialog
-  ConstructCurvaturesDialog
-  ConstructDepthColoredVolumesDialog
-  ConstructVolumesDialog
-  FileSaveDialog
-  LightsDialog
-  MouseHandlerDialog
-  MovieImageFileSaveDialog
-  ScriptsDialog
-  SetViewingParametersDialog
-  SliceDialog
-  SurfaceAreaAndVolumeDialog
-  SurfaceDialog
-  TransformationsDialog
-)
-foreach(_dlg ${QT3_DIALOG_BASENAMES})
-  list(FILTER SOURCE_FILES EXCLUDE REGEX "/${_dlg}\\.cpp$")
-  list(FILTER INCLUDE_FILES EXCLUDE REGEX "/${_dlg}\\.h$")
-endforeach()
-
-# Exclude files with deep Qt3 dependencies (Phase 6 TODO)
-list(FILTER SOURCE_FILES EXCLUDE REGEX "/DownloadPDB\\.cpp$")
-list(FILTER SOURCE_FILES EXCLUDE REGEX "/MouseHandlerHelper\\.cpp$")
-list(FILTER INCLUDE_FILES EXCLUDE REGEX "/DownloadPDB\\.h$")
-list(FILTER INCLUDE_FILES EXCLUDE REGEX "/MouseHandlerHelper\\.h$")
+# Exclude dialog_stubs.cpp (no longer needed — real dialogs are ported)
+list(FILTER SOURCE_FILES EXCLUDE REGEX "/dialog_stubs\\.cpp$")
 
 # .ui files (renamed from .Qt4.ui in Phase 3)
 file(GLOB UI_FORMS ./Dialogs/*.ui)
@@ -182,6 +157,7 @@ set(TEXMOL_LINK_LIBS
   Qt6::Gui
   Qt6::Core
   Qt6::Xml
+  Qt6::Network
   Qt6::OpenGL
   Qt6::OpenGLWidgets
   OpenGL::GL

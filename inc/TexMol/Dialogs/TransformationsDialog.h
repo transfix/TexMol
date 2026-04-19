@@ -23,9 +23,7 @@
 
 #include <qstringlist.h>
 #include <UsefulMath/Matrix.h>
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog TransformationsDialogBase;
+#include <TexMol/Dialogs/TransformationsDialogBase.h>
 
 class TransformationsDialog : public TransformationsDialogBase
 {

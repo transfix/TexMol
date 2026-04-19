@@ -21,9 +21,7 @@
 #ifndef LIGHTS_DIALOG_H
 #define LIGHTS_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog LightsDialogBase;
+#include <TexMol/Dialogs/LightsDialogBase.h>
 
 class LightSet;
 

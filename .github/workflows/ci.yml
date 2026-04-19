@@ -1,0 +1,185 @@
+name: CI/CD
+
+on:
+  pull_request:
+    branches: [ main, master, develop, modernization ]
+  push:
+    branches: [ main, master, modernization ]
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux
+          - os: ubuntu-latest
+            build_type: Debug
+            package_generator: DEB
+          - os: ubuntu-latest
+            build_type: Release
+            package_generator: DEB
+          # macOS
+          - os: macos-latest
+            build_type: Debug
+            package_generator: DragNDrop
+          - os: macos-latest
+            build_type: Release
+            package_generator: DragNDrop
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} / ${{ matrix.build_type }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ── Linux dependencies ──
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            cmake \
+            ninja-build \
+            qt6-base-dev \
+            libqt6opengl6-dev \
+            qt6-base-private-dev \
+            libgl1-mesa-dev \
+            libglu1-mesa-dev \
+            libglew-dev \
+            libboost-all-dev \
+            libfftw3-dev \
+            libgsl-dev \
+            liblog4cplus-dev \
+            libnsl-dev \
+            libhdf5-dev
+
+      # ── macOS dependencies ──
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install \
+            cmake \
+            ninja \
+            qt@6 \
+            glew \
+            boost \
+            fftw \
+            gsl \
+            log4cplus \
+            hdf5
+          echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@6);$(brew --prefix boost);$(brew --prefix log4cplus)" >> $GITHUB_ENV
+
+      # ── Configure ──
+      - name: Configure (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          cmake -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DHAVE_PETSC=OFF \
+            -DHAVE_NFFT=OFF \
+            -DCVC_ENABLE_CUDA=OFF \
+            -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
+
+      - name: Configure (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          cmake -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DHAVE_PETSC=OFF \
+            -DHAVE_NFFT=OFF \
+            -DCVC_ENABLE_CUDA=OFF \
+            -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" \
+            -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
+
+      # ── Build ──
+      - name: Build
+        run: cmake --build build --config ${{ matrix.build_type }} --parallel
+
+      # ── Test ──
+      - name: Configure tests
+        if: matrix.build_type == 'Debug'
+        run: |
+          cmake -B build-test \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DTEXMOL_BUILD_TESTS=ON \
+            -DHAVE_PETSC=OFF \
+            -DHAVE_NFFT=OFF \
+            -DCVC_ENABLE_CUDA=OFF
+
+      - name: Build tests
+        if: matrix.build_type == 'Debug'
+        run: cmake --build build-test --parallel
+
+      - name: Run tests
+        if: matrix.build_type == 'Debug'
+        run: ctest --test-dir build-test --output-on-failure --parallel
+
+      # ── Install ──
+      - name: Install
+        run: cmake --install build --config ${{ matrix.build_type }}
+
+      # ── Package ──
+      - name: Package
+        working-directory: build
+        run: cpack -G ${{ matrix.package_generator }} -C ${{ matrix.build_type }}
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.os }}-${{ matrix.build_type }}
+          path: |
+            build/*.deb
+            build/*.dmg
+            build/*.tar.gz
+          retention-days: 30
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}-${{ matrix.build_type }}
+          path: ${{ github.workspace }}/_install/
+          retention-days: 14
+
+  # ── Release ──
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: package-*
+
+      - name: Collect release assets
+        run: |
+          mkdir release-assets
+          find artifacts -type f \( -name '*.deb' -o -name '*.dmg' -o -name '*.tar.gz' \) \
+            -exec cp {} release-assets/ \;
+          ls -la release-assets/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-assets/*
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref, '-') }}

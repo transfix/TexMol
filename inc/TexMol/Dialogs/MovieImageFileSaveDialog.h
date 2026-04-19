@@ -21,9 +21,7 @@
 #ifndef MOVIE_IMAGE_FILE_SAVE_DIALOG_H
 #define MOVIE_IMAGE_FILE_SAVE_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog MovieImageFileSaveDialogBase;
+#include <TexMol/Dialogs/MovieImageFileSaveDialogBase.h>
 
 class MovieImageFileSaveDialog : public MovieImageFileSaveDialogBase
 {
