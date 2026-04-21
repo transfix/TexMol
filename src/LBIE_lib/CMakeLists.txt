@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 #arand - qt dependence removed...
 #find_package(Qt3 REQUIRED)

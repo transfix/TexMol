@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 if(CMAKE_HOST_UNIX)
   # kind of a hack... using CPP flags (i.e. include directories)

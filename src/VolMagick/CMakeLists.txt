@@ -1,5 +1,5 @@
 # joe - 07/23/2011 - adding cvc
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 if(WIN32)
   add_definitions(-D__WINDOWS__)
