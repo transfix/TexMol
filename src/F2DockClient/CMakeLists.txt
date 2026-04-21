@@ -42,6 +42,7 @@ add_library(F2DockClient STATIC
 target_link_libraries(F2DockClient
   Qt6::Widgets
   Qt6::Xml
+  cvc::xmlrpc
 )
 
 # NOTE: SubmitDockingJob, CheckStatus, and GetResults executables removed —

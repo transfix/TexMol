@@ -77,14 +77,15 @@ else()
   include(FetchContent)
   FetchContent_Declare(libcvc
     GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        4544105e04eb53dfb215e809fdbb9c5dd8e45608
+    GIT_TAG        29c703c1e21268f3cedc56ae186163600162a089 # add-github-ci-cd
   )
   # Configure libcvc build options
   set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
   set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
   set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
   set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
-  set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
+  # XmlRPC is provided by libcvc as cvc::xmlrpc (consumed by F2DockClient)
+  set(CVC_USING_XMLRPC ON CACHE BOOL "Build libcvc's vendored xmlrpc library" FORCE)
   FetchContent_MakeAvailable(libcvc)
 endif()
 
