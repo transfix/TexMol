@@ -77,7 +77,7 @@ else()
   include(FetchContent)
   FetchContent_Declare(libcvc
     GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        29c703c1e21268f3cedc56ae186163600162a089 # add-github-ci-cd
+    GIT_TAG        39919bc523b613d5ed1838f2e63345a328cb29d2 # add-github-ci-cd
   )
   # Configure libcvc build options
   set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
@@ -96,10 +96,15 @@ include(LegacyCompat)
 
 # ---------------------------------------------------------------------------
 # Make libcvc headers available globally (for compatibility shims in inc/)
+# Use BEFORE so that <cvc/foo.h> always resolves to libcvc's copy, not to
+# TexMol's legacy case-insensitive <CVC/Foo.h> compat headers.
 # ---------------------------------------------------------------------------
 if(LIBCVC_SOURCE_DIR)
-  include_directories("${LIBCVC_SOURCE_DIR}/inc")
-  include_directories("${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
+  include_directories(BEFORE "${LIBCVC_SOURCE_DIR}/inc")
+  include_directories(BEFORE "${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
+else()
+  include_directories(BEFORE "${libcvc_SOURCE_DIR}/inc")
+  include_directories(BEFORE "${libcvc_BINARY_DIR}/inc")
 endif()
 
 # ---------------------------------------------------------------------------
