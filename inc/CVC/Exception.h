@@ -7,6 +7,8 @@
 #include <exception>
 #include <string>
 
+#ifndef CVC_COMPAT_EXCEPTION_DEFINED
+#define CVC_COMPAT_EXCEPTION_DEFINED
 namespace CVC
 {
   class Exception : public std::exception
@@ -51,6 +53,7 @@ namespace CVC
   CVC_COMPAT_DEF_EXCEPTION(NetworkError);
   CVC_COMPAT_DEF_EXCEPTION(XmlRpcServerTerminate);
 }
+#endif // CVC_COMPAT_EXCEPTION_DEFINED
 
 #endif
 
