@@ -77,7 +77,7 @@ else()
   include(FetchContent)
   FetchContent_Declare(libcvc
     GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        39919bc523b613d5ed1838f2e63345a328cb29d2 # add-github-ci-cd
+    GIT_TAG        98a19c000704dbaee2573f7ed0de38cb2035b503 # add-github-ci-cd
   )
   # Configure libcvc build options
   set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
@@ -101,7 +101,7 @@ include(LegacyCompat)
 # ---------------------------------------------------------------------------
 if(LIBCVC_SOURCE_DIR)
   include_directories(BEFORE "${LIBCVC_SOURCE_DIR}/inc")
-  include_directories(BEFORE "${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
+  include_directories(BEFORE "${CMAKE_BINARY_DIR}/libcvc/inc")  # generated cvc/config.h
 else()
   include_directories(BEFORE "${libcvc_SOURCE_DIR}/inc")
   include_directories(BEFORE "${libcvc_BINARY_DIR}/inc")
