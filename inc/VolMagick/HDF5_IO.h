@@ -29,12 +29,7 @@
 #include <VolMagick/Dimension.h>
 
 #include <CVC/HDF5_Utilities.h>
-#include <cpp/H5Cpp.h>
-// #if defined (WIN32)
-// #include <cpp/H5Cpp.h>
-// #else 
-// #include <H5Cpp.h>
-// #endif
+#include <H5Cpp.h>
 
 namespace VolMagick
 {

@@ -32,6 +32,13 @@ jobs:
           - os: macos-latest
             build_type: Release
             package_generator: DragNDrop
+          # Windows
+          - os: windows-latest
+            build_type: Debug
+            package_generator: NSIS
+          - os: windows-latest
+            build_type: Release
+            package_generator: NSIS
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} / ${{ matrix.build_type }}
@@ -80,6 +87,22 @@ jobs:
             hdf5
           echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@6);$(brew --prefix boost);$(brew --prefix log4cplus)" >> $GITHUB_ENV
 
+      # ── Windows dependencies ──
+      - name: Install Qt (Windows)
+        if: runner.os == 'Windows'
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.*'
+          arch: win64_msvc2022_64
+          cache: true
+
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          vcpkg install glew fftw3 gsl hdf5 log4cplus pthreads boost-thread boost-date-time boost-regex boost-filesystem boost-system boost-program-options boost-signals2 boost-any boost-tuple boost-format boost-multi-array boost-foreach boost-property-tree boost-algorithm boost-asio boost-bind boost-graph boost-lambda boost-lexical-cast boost-spirit boost-tokenizer boost-dynamic-bitset boost-numeric-conversion boost-range boost-smart-ptr boost-functional --triplet x64-windows
+        env:
+          VCPKG_MAX_CONCURRENCY: 4
+
       # ── Configure ──
       - name: Configure (Linux)
         if: runner.os == 'Linux'
@@ -106,13 +129,26 @@ jobs:
             -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" \
             -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
 
+      - name: Configure (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          cmake -B build `
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
+            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" `
+            -DCMAKE_PREFIX_PATH="$env:Qt6_DIR" `
+            -DHAVE_PETSC=OFF `
+            -DHAVE_NFFT=OFF `
+            -DCVC_ENABLE_CUDA=OFF `
+            -DDISABLE_CGAL=ON `
+            -DCMAKE_INSTALL_PREFIX="${{ github.workspace }}/_install"
+
       # ── Build ──
       - name: Build
         run: cmake --build build --config ${{ matrix.build_type }} --parallel
 
       # ── Test ──
       - name: Configure tests
-        if: matrix.build_type == 'Debug'
+        if: matrix.build_type == 'Debug' && runner.os != 'Windows'
         run: |
           cmake -B build-test \
             -G Ninja \
@@ -124,11 +160,11 @@ jobs:
             -DDISABLE_CGAL=ON
 
       - name: Build tests
-        if: matrix.build_type == 'Debug'
+        if: matrix.build_type == 'Debug' && runner.os != 'Windows'
         run: cmake --build build-test --parallel
 
       - name: Run tests
-        if: matrix.build_type == 'Debug'
+        if: matrix.build_type == 'Debug' && runner.os != 'Windows'
         run: ctest --test-dir build-test --output-on-failure --parallel
 
       # ── Install ──
@@ -136,7 +172,28 @@ jobs:
         run: cmake --install build --config ${{ matrix.build_type }}
 
       # ── Package ──
-      - name: Package
+      - name: Install NSIS (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: choco install nsis -y
+
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        working-directory: build
+        shell: pwsh
+        run: |
+          $nsisPath = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\NSIS' -ErrorAction SilentlyContinue).'(default)'
+          if (-not $nsisPath) {
+            $nsisPath = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\NSIS' -ErrorAction SilentlyContinue).'(default)'
+          }
+          if ($nsisPath) {
+            $env:PATH = "$nsisPath;$env:PATH"
+          }
+          cpack -G NSIS -C ${{ matrix.build_type }}
+          cpack -G ZIP -C ${{ matrix.build_type }}
+
+      - name: Package (Unix)
+        if: runner.os != 'Windows'
         working-directory: build
         run: cpack -G ${{ matrix.package_generator }} -C ${{ matrix.build_type }}
 
@@ -148,6 +205,8 @@ jobs:
             build/*.deb
             build/*.dmg
             build/*.tar.gz
+            build/*.exe
+            build/*.zip
           retention-days: 30
 
       - name: Upload build artifact
@@ -175,7 +234,7 @@ jobs:
       - name: Collect release assets
         run: |
           mkdir release-assets
-          find artifacts -type f \( -name '*.deb' -o -name '*.dmg' -o -name '*.tar.gz' \) \
+          find artifacts -type f \( -name '*.deb' -o -name '*.dmg' -o -name '*.tar.gz' -o -name '*.exe' -o -name '*.zip' \) \
             -exec cp {} release-assets/ \;
           ls -la release-assets/
 

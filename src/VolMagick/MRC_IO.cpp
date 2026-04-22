@@ -391,7 +391,7 @@ namespace VolMagick
 		// we need to double check the meaning of xlength
 		// (plus some extra paranoia)
 		if (header.xlength<=0.0 || header.ylength<=0.0 || header.zlength<=0.0
-	    	|| !finite(header.xlength) || !finite(header.ylength) || !finite(header.zlength))
+	    	|| !std::isfinite(header.xlength) || !std::isfinite(header.ylength) || !std::isfinite(header.zlength))
 		  data._boundingBox = BoundingBox(0.0,0.0,0.0,
 					     header.nx,header.ny,header.nz);
 		else
@@ -412,7 +412,7 @@ namespace VolMagick
 		data._voxelTypes.push_back(mrcTypes[header.mode]);
 
 		// make sure we aren't using garbage values
-		if (!finite(header.xorigin) || !finite(header.yorigin) || !finite(header.zorigin))
+		if (!std::isfinite(header.xorigin) || !std::isfinite(header.yorigin) || !std::isfinite(header.zorigin))
 		  {
 	    	tmpmin[0] = 0.0;
 		    tmpmin[1] = 0.0;
@@ -430,7 +430,7 @@ namespace VolMagick
 		// xlength, ylength, zlength means the size of the volume, that means xlength=boundingbox.xmax()-boundingbox.xmin()
 		// similar to ylenght and zlength. So xlength, ylength, zlength are positive.
 		if (header.xlength<=0.0 || header.ylength<=0.0 || header.zlength<=0.0
-		    || !finite(header.xlength) || !finite(header.ylength) || !finite(header.zlength))
+		    || !std::isfinite(header.xlength) || !std::isfinite(header.ylength) || !std::isfinite(header.zlength))
 	  	{
 	    // hmm, this is wierd //not necessary.
 		    tmpmax[0] = tmpmin[0] + header.nx;
