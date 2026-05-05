@@ -143,11 +143,10 @@ set(TEXMOL_LINK_LIBS
   VolumeLibrary
   Contouring
   Contour
-  XmlRPC
+  cvc::xmlrpc
   ARM
   OptimizerLib
   CoarseGrain
-  VolMagick
   CVC
   contourtree
   levmar

@@ -10,9 +10,9 @@
 #include <memory>
 
 #ifndef COLORTABLE2_DISABLE_CONTOUR_TREE
-namespace VolMagick
+namespace cvc
 {
-  class Volume;
+  class volume;
 }
 #endif
 
@@ -244,7 +244,7 @@ namespace CVCColorTable
     void write(const std::string& filename);
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-    void setContourVolume(const VolMagick::Volume& vol);
+    void setContourVolume(const cvc::volume& vol);
 #endif
 
     static color_table_info default_transfer_function();

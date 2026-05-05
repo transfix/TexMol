@@ -40,7 +40,8 @@
 #include <memory>
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
-#include <VolMagick/VolMagick.h>
+#include <cvc/app.h>
+#include <cvc/volmagick.h>
 #endif
 
 namespace CVCColorTable
@@ -95,7 +96,7 @@ namespace CVCColorTable
     void visibleComponents(uint64_t components);
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)    
-    void setContourVolume(const VolMagick::Volume& vol);
+    void setContourVolume(const cvc::volume& vol);
 #endif
 
   public slots:
@@ -177,7 +178,10 @@ namespace CVCColorTable
     double _rangeMax;
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-    VolMagick::Volume  _contourVolume;
+    // App context owning the cvc::volume below. Must be declared before
+    // _contourVolume so it is constructed first and outlives the volume.
+    cvc::app     _ctApp;
+    cvc::volume  _contourVolume;
 #endif
 
     // TODO: remove the need for ColorTable2 needing to know about contour trees and spectrums.
@@ -198,7 +202,7 @@ namespace CVCColorTable
 
     //Histogram stuff
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-    std::tuple<const VolMagick::uint64 *,VolMagick::uint64> _histogram;
+    std::tuple<const cvc::uint64 *, cvc::uint64> _histogram;
 #else
     std::tuple<const uint64_t *, uint64_t> _histogram;
 #endif

@@ -18,7 +18,7 @@ project(TexMol
 # ---------------------------------------------------------------------------
 # C++ Standard
 # ---------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -77,7 +77,7 @@ else()
   include(FetchContent)
   FetchContent_Declare(libcvc
     GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        699fcd4c7567d58b0cda724a4c9147d7237fc8ab # add-github-ci-cd
+    GIT_TAG        95ff1bb8c0053179aa6c8b66ac793be5a6fafb5f # v3.1.0
   )
   # Configure libcvc build options
   set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")

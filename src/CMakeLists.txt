@@ -20,7 +20,6 @@ ADD_SUBDIRECTORY(Contour)
 # XmlRPC is now provided by libcvc as cvc::xmlrpc (see top-level CMakeLists.txt)
 ADD_SUBDIRECTORY(libCG)
 ADD_SUBDIRECTORY(CVC)
-ADD_SUBDIRECTORY(VolMagick)
 
 # ===========================================================================
 # Phase 1: Modules FULLY REMOVED — replaced by libcvc
