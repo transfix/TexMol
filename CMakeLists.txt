@@ -126,6 +126,11 @@ find_package(Threads REQUIRED)
 # GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
 find_package(GLEW REQUIRED)
 
+# Boost — used directly by several legacy modules (ColorTable2, etc.) via
+# SetupBoost(target). libcvc consumes Boost privately, so we need our own
+# top-level find_package to expose Boost::boost as an imported target.
+find_package(Boost REQUIRED)
+
 # GSL (for molecular analysis modules)
 find_package(GSL QUIET)
 
