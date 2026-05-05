@@ -86,7 +86,7 @@ jobs:
             gsl \
             log4cplus \
             hdf5
-          echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@6);$(brew --prefix boost);$(brew --prefix log4cplus)" >> $GITHUB_ENV
+          echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@6);$(brew --prefix boost);$(brew --prefix log4cplus);$(brew --prefix glew);$(brew --prefix fftw);$(brew --prefix gsl);$(brew --prefix hdf5)" >> $GITHUB_ENV
 
       # ── Windows dependencies ──
       - name: Install Qt (Windows)

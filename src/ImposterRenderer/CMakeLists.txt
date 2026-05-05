@@ -25,4 +25,4 @@ if(CG_FOUND)
 endif(CG_FOUND)
 
 add_library(ImposterRenderer STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
-target_link_libraries(ImposterRenderer ${LIBS})
+target_link_libraries(ImposterRenderer ${LIBS} GLEW::GLEW)
