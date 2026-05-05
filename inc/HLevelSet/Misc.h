@@ -27,7 +27,7 @@
 #include <iomanip>
 
 #if ! defined(__APPLE__)
-#include <malloc.h>
+#include <stdlib.h>
 #endif
 
 template <typename T> T Distance_Two_points3D(T* P1, T* P2)

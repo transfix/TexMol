@@ -3,7 +3,7 @@
 
 #include <Utility/utility.h>
 #include <pthread.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdarg.h>
 
 #ifdef _WIN32

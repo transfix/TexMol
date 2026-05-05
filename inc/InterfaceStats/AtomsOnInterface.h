@@ -50,7 +50,7 @@ number of polar and non-polar residues, the local and global density indexes etc
 #include <map>
 
 #if ! defined(__APPLE__)
-#include <malloc.h>
+#include <stdlib.h>
 #endif
 
 #ifdef _WIN32

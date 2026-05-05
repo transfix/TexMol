@@ -32,7 +32,7 @@
 #include <pthread.h>
 
 #if ! defined(__APPLE__)
-#include <malloc.h>
+#include <stdlib.h>
 #endif
 
 #include <time.h>

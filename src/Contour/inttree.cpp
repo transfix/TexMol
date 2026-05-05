@@ -29,7 +29,7 @@
 #include <Contour/inttree.h>
 
 #if ! defined (__APPLE__)
-#include <malloc.h>
+#include <stdlib.h>
 #else
 #include <stdlib.h>
 #endif

@@ -23,7 +23,7 @@
 // Copyright (c) 1997 Dan Schikore - updated by Emilio Camahort, 1999
 
 #if ! defined (__APPLE__)
-#include <malloc.h>
+#include <stdlib.h>
 #else
 #include <stdlib.h>
 #endif

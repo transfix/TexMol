@@ -22,7 +22,7 @@
 // seedCells.C - maintain the list of seed cells
 
 #if ! defined (__APPLE__)
-#include <malloc.h>
+#include <stdlib.h>
 #else
 #include <stdlib.h>
 #endif

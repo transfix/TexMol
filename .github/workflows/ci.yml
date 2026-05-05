@@ -67,6 +67,7 @@ jobs:
             libboost-all-dev \
             libfftw3-dev \
             libgsl-dev \
+            liblapack-dev \
             liblog4cplus-dev \
             libnsl-dev \
             libhdf5-dev

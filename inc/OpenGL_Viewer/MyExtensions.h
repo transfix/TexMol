@@ -7,7 +7,7 @@
 #endif
 
 #if ! defined (__APPLE__)
-#include <malloc.h> // for ptrdiff_t
+#include <stdlib.h> // for ptrdiff_t
 #else
 #include <stdlib.h>
 #endif
