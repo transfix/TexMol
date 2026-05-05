@@ -13,7 +13,7 @@ INCLUDE_DIRECTORIES(
 
 ADD_LIBRARY (VirusAssembly STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
-SET(VA_LINK_LIBS VirusAssembly AssemblyUtils pthread fast-clash GOAFileTypes PDBParser DPG UsefulMath Utility)
+SET(VA_LINK_LIBS VirusAssembly AssemblyUtils Threads::Threads fast-clash GOAFileTypes PDBParser DPG UsefulMath Utility)
 
 ADD_EXECUTABLE (testAssembleVirus testAssembleVirus.cpp)
 TARGET_LINK_LIBRARIES(testAssembleVirus ${VA_LINK_LIBS})

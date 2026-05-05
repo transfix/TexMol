@@ -119,6 +119,10 @@ endif()
 # OpenGL
 find_package(OpenGL REQUIRED)
 
+# Threads (POSIX pthreads on Linux/macOS, vcpkg PThreads4W on Windows)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 # GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
 find_package(GLEW REQUIRED)
 

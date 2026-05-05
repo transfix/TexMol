@@ -12,3 +12,4 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (fast-resCont STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+target_link_libraries(fast-resCont PUBLIC Threads::Threads)

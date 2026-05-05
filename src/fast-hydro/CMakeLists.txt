@@ -12,3 +12,4 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (fast-hydro STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+target_link_libraries(fast-hydro PUBLIC Threads::Threads)

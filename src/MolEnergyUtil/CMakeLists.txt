@@ -11,3 +11,4 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (MolEnergyUtil STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+target_link_libraries(MolEnergyUtil PUBLIC Threads::Threads)

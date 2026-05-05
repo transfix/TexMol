@@ -12,3 +12,4 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (fast-clash STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+target_link_libraries(fast-clash PUBLIC Threads::Threads)

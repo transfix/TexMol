@@ -11,3 +11,4 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (Utility STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+target_link_libraries(Utility PUBLIC Threads::Threads)
