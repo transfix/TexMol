@@ -22,6 +22,9 @@
 #include <math.h>
 #include <OpenGL_Viewer/View.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #if defined(__APPLE__)
 #include <OpenGL/gl.h>
 #else

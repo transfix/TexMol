@@ -32,6 +32,9 @@
 
 #ifdef _MSC_VER
 #define LM_FINITE _finite // MSVC
+#elif defined(__APPLE__)
+/* macOS / clang: BSD `finite()` was removed; use C99 `isfinite()` (in <math.h>). */
+#define LM_FINITE isfinite
 #elif defined(__ICC) || defined(__INTEL_COMPILER) || defined(__GNUC__)
 #define LM_FINITE finite // ICC, GCC
 #else
