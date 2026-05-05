@@ -22,11 +22,7 @@
 // volume.C - class for a regular volume of scalar data
 // Copyright (c) 1997 Dan Schikore - updated by Emilio Camahort, 1999
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 
 #include <stdio.h>
 #include <string.h>

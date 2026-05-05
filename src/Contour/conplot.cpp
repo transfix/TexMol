@@ -22,11 +22,7 @@
 // conplot.C - preprocess and extract contours from 3d scalar data
 // Copyright (c) 1997 Dan Schikore
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 #include <memory.h>
 #include <string.h>
 #ifndef WIN32

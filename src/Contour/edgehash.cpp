@@ -29,11 +29,7 @@
 #include <memory.h>
 #include <Contour/edgehash.h>
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 
 // use a small prime # of buckets
 #define NBUCKETS 3001

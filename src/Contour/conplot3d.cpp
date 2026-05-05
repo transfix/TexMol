@@ -23,11 +23,7 @@
 // Copyright (c) 1997 Dan Schikore - modified by Emilio Camahort, 1999
 
 #include <stdlib.h>
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 #include <memory.h>
 #include <string.h>
 #ifndef WIN32

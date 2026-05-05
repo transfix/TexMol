@@ -3,9 +3,7 @@
 #include <unistd.h>
 #include <math.h>
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 
 #include <memory.h>
 #include <string.h>

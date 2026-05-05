@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 #include <stdlib.h>
 #include <Decimation/Misc/misc.h>
 #include <Decimation/Bezier/BezierMath.h>

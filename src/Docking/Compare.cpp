@@ -1,8 +1,6 @@
 #include "fftw3.h"
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 
 #include <math.h>
 #include <stdio.h>

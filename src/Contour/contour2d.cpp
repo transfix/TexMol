@@ -25,11 +25,7 @@
 #include <stdio.h>
 #include <Contour/contour2d.h>
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 
 
 // Contour2d() - basic constructor

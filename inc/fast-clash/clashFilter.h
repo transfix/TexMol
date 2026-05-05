@@ -31,9 +31,7 @@
 #include <cstring>
 #include <pthread.h>
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 
 #include <time.h>
 #include <stdarg.h>

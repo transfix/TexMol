@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 
 #include <stdlib.h>
 #include <string.h>

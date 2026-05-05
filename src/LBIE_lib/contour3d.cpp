@@ -21,11 +21,7 @@
 */
 #include <LBIE_lib/contour3d.h>
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 
 #include <stdio.h>
 

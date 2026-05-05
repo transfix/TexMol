@@ -13,9 +13,7 @@
 #include <Geometry/Geometry.h>
 #include <GOAFileTypes/GOALoader.h>
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 
 #include <math.h>
 #include <pthread.h>

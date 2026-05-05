@@ -26,11 +26,7 @@
 #include <Contour/datareg3.h>
 #include <memory.h>
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 #ifndef WIN32
 #include <unistd.h>
 #endif

@@ -49,9 +49,7 @@ number of polar and non-polar residues, the local and global density indexes etc
 #include <stdarg.h>
 #include <map>
 
-#if ! defined(__APPLE__)
 #include <stdlib.h>
-#endif
 
 #ifdef _WIN32
    #include <sys/types.h>

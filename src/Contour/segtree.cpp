@@ -27,11 +27,7 @@
 #include <memory.h>
 #include <Contour/segtree.h>
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#else
-#include <stdlib.h>
-#endif
 
 // SegTree() - construct a segment tree for the given range of values
 SegTree::SegTree(u_int n, float* val)

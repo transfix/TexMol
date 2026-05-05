@@ -3,9 +3,7 @@
 #include <memory.h>
 #include <string.h>
 
-#if ! defined (__APPLE__)
 #include <stdlib.h>
-#endif
 
 #include <Decimation/Decim/mesh.h>
 #include <Decimation/Decim/sdecimPriv.h>
