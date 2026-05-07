@@ -60,6 +60,7 @@ jobs:
             ninja-build \
             qt6-base-dev \
             libqt6opengl6-dev \
+            libqt6openglwidgets6 \
             qt6-base-private-dev \
             libgl1-mesa-dev \
             libglu1-mesa-dev \
