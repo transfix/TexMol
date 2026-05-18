@@ -32,13 +32,18 @@ jobs:
           - os: macos-latest
             build_type: Release
             package_generator: DragNDrop
-          # Windows
-          - os: windows-latest
-            build_type: Debug
-            package_generator: NSIS
-          - os: windows-latest
-            build_type: Release
-            package_generator: NSIS
+          # Windows: temporarily disabled — multiple TexMol modules
+          # (src/libCG/CoarseGrain/, src/DPG/, src/Decimation/, fast-clash,
+          # fast-resCont) rely on POSIX-only headers (pthread.h, sys/time.h,
+          # strcasecmp) and GCC VLA / array-assignment extensions that MSVC
+          # does not accept. Re-enable once those modules are ported or
+          # gated off on Windows.
+          # - os: windows-latest
+          #   build_type: Debug
+          #   package_generator: NSIS
+          # - os: windows-latest
+          #   build_type: Release
+          #   package_generator: NSIS
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} / ${{ matrix.build_type }}
