@@ -77,7 +77,7 @@ else()
   include(FetchContent)
   FetchContent_Declare(libcvc
     GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        63a7306785359818459ce19eb1343c16a8298e49 # v3.2.1
+    GIT_TAG        ab00f545bc74afbd6572c7d0ad8567e858f5a7f4 # v3.2.1 (retagged)
   )
   # Configure libcvc build options
   set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
