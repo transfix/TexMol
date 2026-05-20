@@ -75,6 +75,7 @@ add_library(DataManager STATIC
 target_link_libraries(DataManager
   Qt6::Widgets
   Qt6::OpenGLWidgets
+  GLEW::GLEW
 )
 
 SetupBoost(DataManager)
