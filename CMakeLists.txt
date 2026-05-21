@@ -87,6 +87,8 @@ else()
   set(CVC_USING_IMOD_MRC OFF CACHE BOOL "Disable IMOD MRC support (requires libiimod)")
   # XmlRPC is provided by libcvc as cvc::xmlrpc (consumed by F2DockClient)
   set(CVC_USING_XMLRPC ON CACHE BOOL "Build libcvc's vendored xmlrpc library" FORCE)
+  # Skip libcvc's tests — their hdf5-config transitive deps (libaec) aren't in libcvc-deps.
+  set(CVC_BUILD_TESTS OFF CACHE BOOL "Don't build libcvc's tests in TexMol" FORCE)
   FetchContent_MakeAvailable(libcvc)
 endif()
 
