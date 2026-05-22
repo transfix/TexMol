@@ -49,17 +49,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ── libcvc-deps prebuilt bundle ──
-      # Pulls a self-contained CMake prefix (Boost, HDF5, FFTW, GSL,
-      # log4cplus, Qt 6) matching the runner OS, arch, and build_type.
-      # Massive speedup on Windows where vcpkg otherwise compiles Boost
-      # from source. On miss the action emits an empty `path` output
-      # and we fall back to the platform package manager path.
+      # ── libcvc-deps prebuilt bundles via cvcpkg ──
+      # Downloads only the components listed in cvc-requirements.yaml
+      # via cvcpkg, rather than a monolithic ~2 GB archive.
+      # On miss the action emits an empty `path` output and we fall
+      # back to the platform package manager path.
       - name: Fetch libcvc-deps
         id: libcvc-deps
-        uses: transfix/libcvc/.github/actions/fetch-libcvc-deps@v3.2.3
+        uses: transfix/libcvc-deps/.github/actions/cvcpkg-install@v1.2.0
         with:
-          version: '1.1.0'
+          requirements: cvc-requirements.yaml
           build_type: ${{ matrix.build_type }}
           link: shared
 
