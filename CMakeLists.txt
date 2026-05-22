@@ -126,6 +126,39 @@ find_package(OpenGL REQUIRED)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+# ---------------------------------------------------------------------------
+# Windows / MSVC portability
+# ---------------------------------------------------------------------------
+if(MSVC)
+  # Avoid C++17 std::byte vs Windows SDK byte ambiguity
+  add_compile_definitions(_HAS_STD_BYTE=0)
+  # Suppress CRT deprecation warnings for POSIX names
+  add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+  # Map POSIX string functions to MSVC equivalents
+  add_compile_definitions(strcasecmp=_stricmp strncasecmp=_strnicmp)
+  # M_PI and friends are not defined by default on MSVC
+  add_compile_definitions(_USE_MATH_DEFINES)
+  # Map POSIX random functions to CRT equivalents
+  add_compile_definitions(srand48\(x\)=srand\(\(unsigned\)\(x\)\))
+  add_compile_definitions(drand48\(\)=\(rand\(\)/\(double\)RAND_MAX\))
+
+  # PThreads4W — provides <pthread.h> on Windows (vcpkg)
+  find_package(PThreads4W QUIET)
+  if(PThreads4W_FOUND)
+    # Expose pthread.h include path globally so legacy #include <pthread.h> works
+    get_target_property(_ptw4_inc PThreads4W::PThreads4W INTERFACE_INCLUDE_DIRECTORIES)
+    if(_ptw4_inc)
+      include_directories(${_ptw4_inc})
+    endif()
+  endif()
+
+  # Compat stubs for POSIX headers (unistd.h, sys/time.h)
+  include_directories("${CMAKE_SOURCE_DIR}/inc/compat")
+
+  # Map POSIX sleep(sec) to Windows Sleep(ms)
+  add_compile_definitions(sleep\(x\)=Sleep\(1000*\(x\)\))
+endif()
+
 # GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
 find_package(GLEW REQUIRED)
 

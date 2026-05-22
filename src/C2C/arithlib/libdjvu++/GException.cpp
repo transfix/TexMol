@@ -156,12 +156,11 @@ GExceptionHandler::emthrow(const GException& gex)
 // memory exceptions by themselves.
 #if defined(_MSC_VER)
 // Microsoft is different!
-static int throw_memory_error(size_t)
+static void throw_memory_error()
 {
 	THROW(GException::outofmemory);
-	return 0;
 }
-static int (*old_handler)(size_t) = _set_new_handler(throw_memory_error);
+static auto old_handler = std::set_new_handler(throw_memory_error);
 #else // !_MSC_VER
 // Standard C++
 static void throw_memory_error()

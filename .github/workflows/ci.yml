@@ -119,13 +119,13 @@ jobs:
       - name: Install dependencies (macOS, system)
         if: runner.os == 'macOS'
         run: |
-          brew install cmake ninja glew
+          brew install cmake ninja glew qt@6
+          echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@6)${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}" >> $GITHUB_ENV
 
       - name: Install dependencies (macOS, fallback)
         if: runner.os == 'macOS' && steps.libcvc-deps.outputs.path == ''
         run: |
           brew install \
-            qt@6 \
             boost \
             fftw \
             gsl \
@@ -159,6 +159,19 @@ jobs:
           vcpkg install glew pthreads --triplet x64-windows
         env:
           VCPKG_MAX_CONCURRENCY: 4
+
+      # The libcvc-deps bundle may ship GL/ headers (via VTK) that
+      # conflict with the Windows SDK / vcpkg GLEW on MSVC.  Remove
+      # them so the proper platform headers are used instead.
+      - name: Remove conflicting GL headers from libcvc-deps (Windows)
+        if: runner.os == 'Windows' && steps.libcvc-deps.outputs.path != ''
+        shell: pwsh
+        run: |
+          $glDir = "${{ steps.libcvc-deps.outputs.path }}/include/GL"
+          if (Test-Path $glDir) {
+            Write-Host "Removing conflicting GL headers: $glDir"
+            Remove-Item -Recurse -Force $glDir
+          }
 
       # ── Configure ──
       # Prepend the libcvc-deps prefix to CMAKE_PREFIX_PATH when the
@@ -216,6 +229,8 @@ jobs:
       - name: Configure tests
         if: matrix.build_type == 'Debug' && runner.os != 'Windows'
         run: |
+          extra_prefix="${{ steps.libcvc-deps.outputs.path }}"
+          combined_prefix="$extra_prefix${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
           cmake -B build-test \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
@@ -223,7 +238,8 @@ jobs:
             -DHAVE_PETSC=OFF \
             -DHAVE_NFFT=OFF \
             -DCVC_ENABLE_CUDA=OFF \
-            -DDISABLE_CGAL=ON
+            -DDISABLE_CGAL=ON \
+            -DCMAKE_PREFIX_PATH="$combined_prefix"
 
       - name: Build tests
         if: matrix.build_type == 'Debug' && runner.os != 'Windows'
