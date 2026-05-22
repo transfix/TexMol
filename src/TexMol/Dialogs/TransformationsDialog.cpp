@@ -24,7 +24,7 @@
 #include <qlineedit.h>
 #include <qcombobox.h>
 #include <qmessagebox.h>
-#include <q3listbox.h>
+#include <QListWidget>
 #include <qpushbutton.h>
 
 TransformationsDialog::TransformationsDialog(QWidget* parent,  const char* name, bool modal, Qt::WindowFlags fl)
@@ -36,9 +36,9 @@ TransformationsDialog::TransformationsDialog(QWidget* parent,  const char* name,
 	m_YTranslationLineEdit->setValidator(new QDoubleValidator(this));
 	m_ZTranslationLineEdit->setValidator(new QDoubleValidator(this));
 	m_ScaleLineEdit->setValidator(new QDoubleValidator(this));
-	m_RotationAxisComboBox->insertItem("x");
-	m_RotationAxisComboBox->insertItem("y");
-	m_RotationAxisComboBox->insertItem("z");
+	m_RotationAxisComboBox->addItem("x");
+	m_RotationAxisComboBox->addItem("y");
+	m_RotationAxisComboBox->addItem("z");
 	m_R00LineEdit->setValidator(new QDoubleValidator(this));
 	m_R01LineEdit->setValidator(new QDoubleValidator(this));
 	m_R02LineEdit->setValidator(new QDoubleValidator(this));
@@ -83,7 +83,7 @@ void TransformationsDialog::addRotationSlot()
 
 	// here we assume that there is a number in the line edit since we used validators.
 	// seems overkill to recheck.
-	m_CurrentTransformationsListBox->insertItem("R " +
+	m_CurrentTransformationsListBox->addItem("R " +
 			m_RotationAxisComboBox->currentText() +
 			" " +
 			m_AngleLineEdit->text());
@@ -119,7 +119,7 @@ void TransformationsDialog::addTranslationSlot()
 
 	// here we assume that there is a number in the line edit since we used validators.
 	// seems overkill to recheck.
-	m_CurrentTransformationsListBox->insertItem("T " +
+	m_CurrentTransformationsListBox->addItem("T " +
 			m_XTranslationLineEdit->text() +
 			" " +
 			m_YTranslationLineEdit->text() +
@@ -142,7 +142,7 @@ void TransformationsDialog::addScaleSlot()
 
 	// here we assume that there is a number in the line edit since we used validators.
 	// seems overkill to recheck.
-	m_CurrentTransformationsListBox->insertItem("S " +
+	m_CurrentTransformationsListBox->addItem("S " +
 			m_ScaleLineEdit->text());
 	float scale = m_ScaleLineEdit->text().toFloat();
 	m_Transformation.postMultiplication(CCVOpenGLMath::Matrix::scale(scale, scale, scale));
@@ -165,7 +165,7 @@ void TransformationsDialog::addGeneralRotationSlot()
 		return;
 	}
 
-	m_CurrentTransformationsListBox->insertItem("G " +
+	m_CurrentTransformationsListBox->addItem("G " +
 			m_R00LineEdit->text() + " " +
 			m_R01LineEdit->text() + " " +
 			m_R02LineEdit->text() + " " +
@@ -220,7 +220,7 @@ void TransformationsDialog::addGeneralXFormSlot()
 		return;
 	}
 
-	m_CurrentTransformationsListBox->insertItem("X " +
+	m_CurrentTransformationsListBox->addItem("X " +
 			m_X00LineEdit->text() + " " +
 			m_X01LineEdit->text() + " " +
 			m_X02LineEdit->text() + " " +

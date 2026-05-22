@@ -21,7 +21,7 @@
 #ifndef F2DOCKCLIENT
 #define F2DOCKCLIENT
 
-#include <XmlRPC/XmlRpc.h>
+#include <xmlrpc/XmlRpc.h>
 #include <F2DockClient/jobParams.h>
 #include <iostream>
 #include <fstream>

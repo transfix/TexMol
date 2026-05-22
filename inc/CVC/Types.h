@@ -12,8 +12,11 @@ namespace CVC
 
   // PascalCase aliases for snake_case types
   typedef cvc::data_type                  DataType;
+#ifndef CVC_COMPAT_TYPES_STATICS_DEFINED
+#define CVC_COMPAT_TYPES_STATICS_DEFINED
   static const unsigned int*              DataTypeSizes = cvc::data_type_sizes;
   static const char**                     DataTypeStrings = cvc::data_type_strings;
+#endif
 
   typedef cvc::locale_bool                LocaleBool;
   typedef cvc::signal                     Signal;

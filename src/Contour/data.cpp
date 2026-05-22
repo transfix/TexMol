@@ -23,11 +23,7 @@
 // Copyright (c) 1997 Dan Schikore
 
 #include <stdio.h>
-#if ! defined (__APPLE__)
-#include <malloc.h>
-#else
 #include <stdlib.h>
-#endif
 
 #include <string.h>
 #include <Contour/data.h>

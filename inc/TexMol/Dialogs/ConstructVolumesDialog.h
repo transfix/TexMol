@@ -20,9 +20,7 @@
 */
 #ifndef ConstructVOLUMES_H
 #define ConstructVOLUMES_H
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog ConstructVolumesDialogBase;
+#include <TexMol/Dialogs/ConstructVolumesDialogBase.h>
 
 class VolumeData;
 class DataManager;

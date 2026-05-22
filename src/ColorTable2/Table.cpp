@@ -69,6 +69,9 @@ namespace CVCColorTable
                          OPACITY_NODES),
       _rangeMin(MIN_RANGE),
       _rangeMax(MAX_RANGE),
+#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
+      _contourVolume(_ctApp),
+#endif
       _dirtyContourTree(true),
       _dirtyContourSpectrum(true),
       _dirtyHistogram(true)
@@ -91,6 +94,9 @@ namespace CVCColorTable
       _visibleComponents(components),
       _rangeMin(MIN_RANGE),
       _rangeMax(MAX_RANGE),
+#if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
+      _contourVolume(_ctApp),
+#endif
       _dirtyContourTree(true),
       _dirtyContourSpectrum(true),
       _dirtyHistogram(true)
@@ -129,7 +135,7 @@ namespace CVCColorTable
   }
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-  void Table::setContourVolume(const VolMagick::Volume& vol)
+  void Table::setContourVolume(const cvc::volume& vol)
   {
     _contourVolume = vol;
     _dirtyContourTree = true;

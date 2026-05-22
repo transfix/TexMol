@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifndef MACOS_X
-#include <malloc.h>
+#include <stdlib.h>
 #endif
 
 #include <Contour/contour3d.h>

@@ -21,9 +21,7 @@
 #ifndef CONSTRUCT_CURVATURES_DIALOG_H
 #define CONSTRUCT_CURVATURES_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog ConstructCurvaturesDialogBase;
+#include <TexMol/Dialogs/ConstructCurvaturesDialogBase.h>
 
 class ConstructCurvaturesDialog : public ConstructCurvaturesDialogBase
 {

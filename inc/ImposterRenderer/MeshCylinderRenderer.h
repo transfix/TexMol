@@ -28,6 +28,7 @@
 #define __MESHCYLINDERRENDERER_H__
 
 #include <GL/glew.h>
+#include <GL/glu.h>
 
 #include <stdio.h>
 #include <ImposterRenderer/ExpandableBuffer.h>

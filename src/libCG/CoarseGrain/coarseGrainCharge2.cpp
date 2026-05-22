@@ -3,6 +3,8 @@
 #include <libCG/CoarseGrain/atom2.h>
 #include <libCG/CoarseGrain/groupOfAtoms.h>
 #include <libCG/CoarseGrain/optimizer.h>
+#include <vector>
+#include <cmath>
 
 using namespace MOLECULE;
 using namespace CGOptim;
@@ -14,7 +16,7 @@ void CoarseGrain::CoarseGrainChargeGB(GroupOfAtoms* groupOfBeads)
 	int atomIndex;
 	int i, j;
 	double Q_total = 0.0;
-	double E[N], R[N], Q[N];
+	std::vector<double> E(N), R(N), Q(N);
 	for(i = 0; i < N; i++)
 	{
 		Q[i] = 0.0;
@@ -27,7 +29,7 @@ void CoarseGrain::CoarseGrainChargeGB(GroupOfAtoms* groupOfBeads)
 		R[i] = groupOfBeads->m_Atoms[i]->Born_radius;
 		E[i] = getBeadSelfEnergy(groupOfBeads, i);
 	}
-	Optimizer* opt = new Optimizer(E, R, Q, N, Q_total);
+	Optimizer* opt = new Optimizer(E.data(), R.data(), Q.data(), N, Q_total);
 	opt->optimizeCharge();
 	// assign charges
 	for(i = 0; i < N; i++)
@@ -40,7 +42,7 @@ void CoarseGrain::CoarseGrainChargeGB(GroupOfAtoms* groupOfBeads)
 	{
 		error += (E[i]-Q[i]*Q[i]/R[i])*(E[i]-Q[i]*Q[i]/R[i]);
 	}
-	printf("%f \n", sqrt(error)); //E[i], Q[i]*Q[i]/R[i]);
+	printf("%f \n", std::sqrt(error)); //E[i], Q[i]*Q[i]/R[i]);
 }
 
 void CoarseGrain::CoarseGrainChargeGB2(GroupOfAtoms* groupOfBeads)
@@ -50,7 +52,8 @@ void CoarseGrain::CoarseGrainChargeGB2(GroupOfAtoms* groupOfBeads)
 	int atomIndex;
 	int i, j;
 	double Q_total = 0.0;
-	double AE, R[N], Q[N], X[N], Y[N], Z[N];
+	double AE;
+	std::vector<double> R(N), Q(N), X(N), Y(N), Z(N);
 	for(i = 0; i < N; i++)
 	{
 		Q[i] = 0.0;
@@ -66,7 +69,7 @@ void CoarseGrain::CoarseGrainChargeGB2(GroupOfAtoms* groupOfBeads)
 		R[i] = groupOfBeads->m_Atoms[i]->Born_radius;
 	}
 	AE = getAtomicGBEnergy();
-	Optimizer* opt = new Optimizer(AE, R, Q, X, Y, Z, N, Q_total);
+	Optimizer* opt = new Optimizer(AE, R.data(), Q.data(), X.data(), Y.data(), Z.data(), N, Q_total);
 	opt->optimizeCharge();
 	// assign charges
 	for(i = 0; i < N; i++)
@@ -81,14 +84,14 @@ void CoarseGrain::CoarseGrainChargeGB2(GroupOfAtoms* groupOfBeads)
 		for(j = 0; j < N; j++)
 		{
 			double rij2 = (X[i]-X[j])*(X[i]-X[j]) + (Y[i]-Y[j])*(Y[i]-Y[j]) + (Z[i]-Z[j])*(Z[i]-Z[j]);
-			err1 += groupOfBeads->m_Atoms[i]->charge*groupOfBeads->m_Atoms[j]->charge / sqrt(rij2 + R[i]*R[j]*exp(-1.0*rij2/(4.0*R[i]*R[j])));
+			err1 += groupOfBeads->m_Atoms[i]->charge*groupOfBeads->m_Atoms[j]->charge / std::sqrt(rij2 + R[i]*R[j]*std::exp(-1.0*rij2/(4.0*R[i]*R[j])));
 		}
 	printf("AE GB = %f CE GB = %f\n", AE, err1); //E[i], Q[i]*Q[i]/R[i]);
 	for(i = 0; i < N; i++)
 		for(j = i+1; j < N; j++)
 		{
 			double rij2 = (X[i]-X[j])*(X[i]-X[j]) + (Y[i]-Y[j])*(Y[i]-Y[j]) + (Z[i]-Z[j])*(Z[i]-Z[j]);
-			err2 += groupOfBeads->m_Atoms[i]->charge*groupOfBeads->m_Atoms[j]->charge / sqrt(rij2);
+			err2 += groupOfBeads->m_Atoms[i]->charge*groupOfBeads->m_Atoms[j]->charge / std::sqrt(rij2);
 		}
 	printf("AE Col = %f CE Col = %f\n", ecol, err2);
 }

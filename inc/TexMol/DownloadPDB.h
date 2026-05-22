@@ -21,9 +21,9 @@
 #ifndef CCV_DOWNLOAD_PDB_H
 #define CCV_DOWNLOAD_PDB_H
 
-#include <qobject.h>
+#include <QObject>
 
-class Q3Http;
+class QNetworkAccessManager;
 class QFile;
 
 class DownloadPDB : public QObject
@@ -38,8 +38,8 @@ class DownloadPDB : public QObject
 		virtual void finishedop(bool error);
 
 	protected:
-		Q3Http* http;
-		QFile* http_file;
+		QNetworkAccessManager* m_manager = nullptr;
+		QFile* http_file = nullptr;
 };
 
 #endif

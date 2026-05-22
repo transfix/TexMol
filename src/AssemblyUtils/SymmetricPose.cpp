@@ -2,7 +2,7 @@
 #include <AssemblyUtils/SymmetricPose.h>
 #include <PDBParser/FlattenGOA.h>
 #include <UsefulMath/Matrix.h>
-#include <malloc.h>
+#include <cstdlib>
 
 /**
 Using LAPACK for least squares solving

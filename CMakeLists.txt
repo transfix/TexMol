@@ -18,7 +18,7 @@ project(TexMol
 # ---------------------------------------------------------------------------
 # C++ Standard
 # ---------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -59,53 +59,83 @@ add_compile_definitions(GLSL)
 # ---------------------------------------------------------------------------
 # libcvc — Core dependency
 # ---------------------------------------------------------------------------
-# Option A (default): FetchContent from GitHub
-# Option B: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
-#   cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
+# Default: use prebuilt libcvc binary from CMAKE_PREFIX_PATH
+#   (binary release from https://github.com/transfix/libcvc/releases)
+# Co-dev: cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
 # ---------------------------------------------------------------------------
-option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use FetchContent)" "")
+option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use prebuilt binary)" "")
 
 if(LIBCVC_SOURCE_DIR)
   message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
-  # Prepend libcvc's CMake module path so its Setup*.cmake modules are found
-  # (libcvc uses CMAKE_SOURCE_DIR which points to TexMol when used as subdirectory)
   list(PREPEND CMAKE_MODULE_PATH "${LIBCVC_SOURCE_DIR}/CMake")
-  # Disable volrover3 — it uses CMAKE_SOURCE_DIR for source paths
   set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
-  include(FetchContent)
-  FetchContent_Declare(libcvc
-    GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        573a89bfcadc70ef052e111dee569634063625f3
+  # ── Prebuilt libcvc binary ──
+  # The official cvcConfig.cmake export encodes build-time deps
+  # (CUDA, IMOD MRC, hardcoded system paths) that a consumer may
+  # not have.  Create thin imported targets directly instead.
+  find_path(LIBCVC_INCLUDE_DIR cvc/app.h PATH_SUFFIXES include)
+  find_library(LIBCVC_LIBRARY NAMES cvc)
+  find_library(LIBCVC_XMLRPC_LIBRARY NAMES xmlrpc)
+
+  if(NOT LIBCVC_INCLUDE_DIR OR NOT LIBCVC_LIBRARY)
+    message(FATAL_ERROR
+      "Prebuilt libcvc not found.\n"
+      "Set CMAKE_PREFIX_PATH to the libcvc install prefix,\n"
+      "or set LIBCVC_SOURCE_DIR for co-development builds.")
+  endif()
+
+  add_library(cvc::cvc SHARED IMPORTED GLOBAL)
+  set_target_properties(cvc::cvc PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${LIBCVC_INCLUDE_DIR}"
   )
-  # Configure libcvc build options
-  set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
-  set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
-  set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
-  set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
-  set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
-  FetchContent_MakeAvailable(libcvc)
+  if(WIN32)
+    find_file(LIBCVC_DLL NAMES cvc.dll PATH_SUFFIXES bin)
+    set_target_properties(cvc::cvc PROPERTIES
+      IMPORTED_IMPLIB "${LIBCVC_LIBRARY}"
+      IMPORTED_LOCATION "${LIBCVC_DLL}"
+    )
+  else()
+    set_target_properties(cvc::cvc PROPERTIES
+      IMPORTED_LOCATION "${LIBCVC_LIBRARY}"
+    )
+  endif()
+
+  if(LIBCVC_XMLRPC_LIBRARY)
+    add_library(cvc::xmlrpc STATIC IMPORTED GLOBAL)
+    set_target_properties(cvc::xmlrpc PROPERTIES
+      IMPORTED_LOCATION "${LIBCVC_XMLRPC_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES "${LIBCVC_INCLUDE_DIR}"
+    )
+    if(WIN32)
+      target_link_libraries(cvc::xmlrpc INTERFACE wsock32 ws2_32)
+    endif()
+  endif()
+
+  message(STATUS "Using prebuilt libcvc: ${LIBCVC_LIBRARY}")
 endif()
 
 # Legacy compatibility macros for per-module CMakeLists.txt files
-# MUST be included AFTER libcvc so our plain-signature wrappers override
-# libcvc's keyword-signature SetupBoost/SetupCGAL functions.
 include(LegacyCompat)
 
 # ---------------------------------------------------------------------------
 # Make libcvc headers available globally (for compatibility shims in inc/)
+# Use BEFORE so that <cvc/foo.h> always resolves to libcvc's copy, not to
+# TexMol's legacy case-insensitive <CVC/Foo.h> compat headers.
 # ---------------------------------------------------------------------------
 if(LIBCVC_SOURCE_DIR)
-  include_directories("${LIBCVC_SOURCE_DIR}/inc")
-  include_directories("${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
+  include_directories(BEFORE "${LIBCVC_SOURCE_DIR}/inc")
+  include_directories(BEFORE "${CMAKE_BINARY_DIR}/libcvc/inc")  # generated cvc/config.h
+else()
+  include_directories(BEFORE "${LIBCVC_INCLUDE_DIR}")
 endif()
 
 # ---------------------------------------------------------------------------
 # System dependencies
 # ---------------------------------------------------------------------------
 # Qt6
-find_package(Qt6 COMPONENTS Core Gui Widgets Xml OpenGL OpenGLWidgets QUIET)
+find_package(Qt6 COMPONENTS Core Gui Widgets Xml Network OpenGL OpenGLWidgets QUIET)
 if(NOT Qt6_FOUND)
   message(FATAL_ERROR "Qt6 not found. Install: sudo apt-get install qt6-base-dev libqt6opengl6-dev libqt6openglwidgets6")
 endif()
@@ -113,8 +143,50 @@ endif()
 # OpenGL
 find_package(OpenGL REQUIRED)
 
+# Threads (POSIX pthreads on Linux/macOS, vcpkg PThreads4W on Windows)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+# ---------------------------------------------------------------------------
+# Windows / MSVC portability
+# ---------------------------------------------------------------------------
+if(MSVC)
+  # Avoid C++17 std::byte vs Windows SDK byte ambiguity
+  add_compile_definitions(_HAS_STD_BYTE=0)
+  # Suppress CRT deprecation warnings for POSIX names
+  add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+  # Map POSIX string functions to MSVC equivalents
+  add_compile_definitions(strcasecmp=_stricmp strncasecmp=_strnicmp)
+  # M_PI and friends are not defined by default on MSVC
+  add_compile_definitions(_USE_MATH_DEFINES)
+  # Map POSIX random functions to CRT equivalents
+  add_compile_definitions(srand48\(x\)=srand\(\(unsigned\)\(x\)\))
+  add_compile_definitions(drand48\(\)=\(rand\(\)/\(double\)RAND_MAX\))
+
+  # PThreads4W — provides <pthread.h> on Windows (vcpkg)
+  find_package(PThreads4W QUIET)
+  if(PThreads4W_FOUND)
+    # Expose pthread.h include path globally so legacy #include <pthread.h> works
+    get_target_property(_ptw4_inc PThreads4W::PThreads4W INTERFACE_INCLUDE_DIRECTORIES)
+    if(_ptw4_inc)
+      include_directories(${_ptw4_inc})
+    endif()
+  endif()
+
+  # Compat stubs for POSIX headers (unistd.h, sys/time.h)
+  include_directories("${CMAKE_SOURCE_DIR}/inc/compat")
+
+  # Map POSIX sleep(sec) to Windows Sleep(ms)
+  add_compile_definitions(sleep\(x\)=Sleep\(1000*\(x\)\))
+endif()
+
 # GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
 find_package(GLEW REQUIRED)
+
+# Boost — used directly by several legacy modules (ColorTable2, etc.) via
+# SetupBoost(target). libcvc consumes Boost privately, so we need our own
+# top-level find_package to expose Boost::boost as an imported target.
+find_package(Boost REQUIRED)
 
 # GSL (for molecular analysis modules)
 find_package(GSL QUIET)

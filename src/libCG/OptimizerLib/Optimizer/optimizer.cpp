@@ -3,6 +3,7 @@
 #include <math.h>
 #include <float.h>
 #include <iostream>
+#include <vector>
 #include <libCG/OptimizerLib/Optimizer/optimizer.h>
 #include <libCG/OptimizerLib/Optimizer/optimizationFunction.h>
 #include <PDBParser/GroupOfAtoms.h>
@@ -325,21 +326,13 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 		// optimize radius first since the initial centers are close to the optimal centers
 		m = 1;
 		n = m;
-		double x1[n]; // chi function
-		for(i = 0; i < n; i++)
-		{
-			x1[i] = 0.0;
-		}
-		ret=dlevmar_dif(radiusOptimizeFunction, p, x1, m, n, 1000, opts, info, NULL, NULL, (void*)fdata);
+		std::vector<double> x1(n, 0.0); // chi function
+		ret=dlevmar_dif(radiusOptimizeFunction, p, x1.data(), m, n, 1000, opts, info, NULL, NULL, (void*)fdata);
 		updateFunctionData(fdata, c, p[0]);
 		int mm = 3*m;
 		n = mm;
-		double x2[n]; // chi function
-		for(i = 0; i < n; i++)
-		{
-			x2[i] = 0.0;
-		}
-		ret = dlevmar_dif(centerOptimizeFunction, c, x2, mm, n, 1000, opts, info, NULL, NULL, (void*)fdata);
+		std::vector<double> x2(n, 0.0); // chi function
+		ret = dlevmar_dif(centerOptimizeFunction, c, x2.data(), mm, n, 1000, opts, info, NULL, NULL, (void*)fdata);
 		updateFunctionData(fdata, c, p[0]);
 	}
 	end = getMyTime();
@@ -463,7 +456,9 @@ void Optimizer::updateFunctionDataN(FunctionData* fdata, double* p)
 void Optimizer::optimizeCenterAndRadiusN(int iteration)
 {
 	int n=numOfSamples, m=4;
-	double p[m], x[n], opts[LM_OPTS_SZ], info[LM_INFO_SZ];
+	std::vector<double> p(m);
+	std::vector<double> x(n, 0.0);
+	double opts[LM_OPTS_SZ], info[LM_INFO_SZ];
 	int i;
 	int ret;
 	p[0] = adata[0].center[0];
@@ -472,10 +467,6 @@ void Optimizer::optimizeCenterAndRadiusN(int iteration)
 	p[3] = adata[0].radius;
 	FunctionData* fdata = new FunctionData;
 	initializeFunctionData(fdata);
-	for(i=0; i<n; i++)
-	{
-		x[i] = 0;
-	}
 	/* optimization control parameters; passing to levmar NULL instead of opts reverts to defaults */
 	opts[0]=LM_INIT_MU;
 	opts[1]=1E-15;
@@ -484,11 +475,11 @@ void Optimizer::optimizeCenterAndRadiusN(int iteration)
 	opts[4]=LM_DIFF_DELTA; // relevant only if the finite difference Jacobian version is used
 	//	for(int it =0; it<iteration; it++){
 	/* invoke the optimization function */
-	ret=dlevmar_der(expfuncN, jacexpfuncN, p, x, m, n, 1000, opts, info, NULL, NULL, (void*)fdata); // with analytic Jacobian
+	ret=dlevmar_der(expfuncN, jacexpfuncN, p.data(), x.data(), m, n, 1000, opts, info, NULL, NULL, (void*)fdata); // with analytic Jacobian
 	//  ret=dlevmar_dif(expfuncN, p, x, m, n, 1000, opts, info, NULL, NULL, (void*)fdata); // without analytic Jacobian
 	//seems no difference for with or without analytic Jacobian.
 	cout <<"Iteration: "<<ret <<endl;
-	updateFunctionDataN(fdata, p);
+	updateFunctionDataN(fdata, p.data());
 	// }
 	adata[0].center[0] = fdata->adata[0].center[0];
 	adata[0].center[1] = fdata->adata[0].center[1];

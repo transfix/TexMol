@@ -13,4 +13,4 @@ target_include_directories(CVC INTERFACE
 )
 
 # Link libcvc — provides cvc::app, cvc::state, etc.
-target_link_libraries(CVC INTERFACE cvc)
+target_link_libraries(CVC INTERFACE cvc::cvc)

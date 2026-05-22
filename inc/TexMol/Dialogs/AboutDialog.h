@@ -21,9 +21,7 @@
 #ifndef ABOUT_DIALOG_H
 #define ABOUT_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog AboutDialogBase;
+#include <TexMol/Dialogs/AboutDialogBase.h>
 
 class AboutDialog : public AboutDialogBase
 {

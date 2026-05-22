@@ -22,11 +22,7 @@
 // conplotreg2.C - preprocess and extract contours from 2d scalar data
 // Copyright (c) 1997 Dan Schikore
 
-#if ! defined (__APPLE__)
-#include <malloc.h>
-#else
 #include <stdlib.h>
-#endif
 #include <memory.h>
 #include <string.h>
 #ifndef WIN32

@@ -26,11 +26,7 @@
 #include <Contour/seedall.h>
 #include <Contour/datareg2.h>
 
-#if ! defined (__APPLE__)
-#include <malloc.h>
-#else
 #include <stdlib.h>
-#endif
 #ifndef WIN32
 #include <unistd.h>
 #endif

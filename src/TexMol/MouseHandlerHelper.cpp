@@ -66,15 +66,15 @@ void MouseHandler::setDefaults()
 MouseHandler::USER_SELECTED_TRANSFORMATION MouseHandler::getUserSelectedTransformation(QMouseEvent* qMouseEvent, bool controlPressed, bool shiftPressed, bool controlAndShiftPressed)
 {
 	MOUSE_BUTTONS mButton = NO_BUTTON;
-	if (qMouseEvent->state() & Qt::LeftButton)
+	if (qMouseEvent->buttons() & Qt::LeftButton)
 	{
 		mButton = LEFT_BUTTON;
 	}
-	if (qMouseEvent->state() & Qt::MiddleButton)
+	if (qMouseEvent->buttons() & Qt::MiddleButton)
 	{
 		mButton = MIDDLE_BUTTON;
 	}
-	if (qMouseEvent->state() & Qt::RightButton)
+	if (qMouseEvent->buttons() & Qt::RightButton)
 	{
 		mButton = RIGHT_BUTTON;
 	}
@@ -129,36 +129,36 @@ MouseHandler::USER_SELECTED_TRANSFORMATION MouseHandler::getUserSelectedTransfor
 
 void MouseHandler::addMouseComboBoxItems(QComboBox* qcombobox)
 {
-	qcombobox->insertItem("  --  ", 0);
-	qcombobox->insertItem("Left", 1);
-	qcombobox->insertItem("Middle", 2);
-	qcombobox->insertItem("Right", 3);
+	qcombobox->insertItem(0, "  --  ");
+	qcombobox->insertItem(1, "Left");
+	qcombobox->insertItem(2, "Middle");
+	qcombobox->insertItem(3, "Right");
 }
 
 void MouseHandler::addKeyComboBoxItems(QComboBox* qcombobox)
 {
-	qcombobox->insertItem("  --  ", 0);
-	qcombobox->insertItem("Shift", 1);
-	qcombobox->insertItem("Control", 2);
-	qcombobox->insertItem("Shift+Control", 3);
+	qcombobox->insertItem(0, "  --  ");
+	qcombobox->insertItem(1, "Shift");
+	qcombobox->insertItem(2, "Control");
+	qcombobox->insertItem(3, "Shift+Control");
 }
 
 void MouseHandler::setCurrentPreferenecs(MouseHandlerDialog* mouseHandlerDialog)
 {
-	mouseHandlerDialog->m_Button_View_Translate_ComboBox->setCurrentItem(m_ViewTranslateMouseButton);
-	mouseHandlerDialog->m_Button_View_Zoom_ComboBox->setCurrentItem(m_ViewZoomMouseButton);
-	mouseHandlerDialog->m_Button_View_Rotate_ComboBox->setCurrentItem(m_ViewRotateMouseButton);
-	mouseHandlerDialog->m_Key_View_Translate_ComboBox->setCurrentItem(m_ViewTranslateKey);
-	mouseHandlerDialog->m_Key_View_Zoom_ComboBox->setCurrentItem(m_ViewZoomKey);
-	mouseHandlerDialog->m_Key_View_Rotate_ComboBox->setCurrentItem(m_ViewRotateKey);
-	mouseHandlerDialog->m_Button_Object_Translate_ComboBox->setCurrentItem(m_ObjectTranslateMouseButton);
-	mouseHandlerDialog->m_Button_Object_Zoom_ComboBox->setCurrentItem(m_ObjectZoomMouseButton);
-	mouseHandlerDialog->m_Button_Object_Rotate_ComboBox->setCurrentItem(m_ObjectRotateMouseButton);
-	mouseHandlerDialog->m_Key_Object_Translate_ComboBox->setCurrentItem(m_ObjectTranslateKey);
-	mouseHandlerDialog->m_Key_Object_Zoom_ComboBox->setCurrentItem(m_ObjectZoomKey);
-	mouseHandlerDialog->m_Key_Object_Rotate_ComboBox->setCurrentItem(m_ObjectRotateKey);
-	mouseHandlerDialog->m_Button_Object_Select_ComboBox->setCurrentItem(m_ObjectSelectMouseButton);
-	mouseHandlerDialog->m_Key_Object_Select_ComboBox->setCurrentItem(m_ObjectSelectKey);
+	mouseHandlerDialog->m_Button_View_Translate_ComboBox->setCurrentIndex(m_ViewTranslateMouseButton);
+	mouseHandlerDialog->m_Button_View_Zoom_ComboBox->setCurrentIndex(m_ViewZoomMouseButton);
+	mouseHandlerDialog->m_Button_View_Rotate_ComboBox->setCurrentIndex(m_ViewRotateMouseButton);
+	mouseHandlerDialog->m_Key_View_Translate_ComboBox->setCurrentIndex(m_ViewTranslateKey);
+	mouseHandlerDialog->m_Key_View_Zoom_ComboBox->setCurrentIndex(m_ViewZoomKey);
+	mouseHandlerDialog->m_Key_View_Rotate_ComboBox->setCurrentIndex(m_ViewRotateKey);
+	mouseHandlerDialog->m_Button_Object_Translate_ComboBox->setCurrentIndex(m_ObjectTranslateMouseButton);
+	mouseHandlerDialog->m_Button_Object_Zoom_ComboBox->setCurrentIndex(m_ObjectZoomMouseButton);
+	mouseHandlerDialog->m_Button_Object_Rotate_ComboBox->setCurrentIndex(m_ObjectRotateMouseButton);
+	mouseHandlerDialog->m_Key_Object_Translate_ComboBox->setCurrentIndex(m_ObjectTranslateKey);
+	mouseHandlerDialog->m_Key_Object_Zoom_ComboBox->setCurrentIndex(m_ObjectZoomKey);
+	mouseHandlerDialog->m_Key_Object_Rotate_ComboBox->setCurrentIndex(m_ObjectRotateKey);
+	mouseHandlerDialog->m_Button_Object_Select_ComboBox->setCurrentIndex(m_ObjectSelectMouseButton);
+	mouseHandlerDialog->m_Key_Object_Select_ComboBox->setCurrentIndex(m_ObjectSelectKey);
 }
 
 void MouseHandler::initDialog(MouseHandlerDialog* mouseHandlerDialog)
@@ -187,38 +187,38 @@ bool MouseHandler::repeatingCombination(MouseHandlerDialog* mouseHandlerDialog)
 
 bool MouseHandler::onlyKeySelected(MouseHandlerDialog* mouseHandlerDialog)
 {
-	if (mouseHandlerDialog->m_Button_View_Translate_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_View_Translate_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_View_Translate_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_View_Translate_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
-	if (mouseHandlerDialog->m_Button_View_Zoom_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_View_Zoom_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_View_Zoom_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_View_Zoom_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
-	if (mouseHandlerDialog->m_Button_View_Rotate_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_View_Rotate_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_View_Rotate_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_View_Rotate_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
-	if (mouseHandlerDialog->m_Button_Object_Translate_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_Object_Translate_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_Object_Translate_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_Object_Translate_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
-	if (mouseHandlerDialog->m_Button_Object_Zoom_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_Object_Zoom_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_Object_Zoom_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_Object_Zoom_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
-	if (mouseHandlerDialog->m_Button_Object_Rotate_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_Object_Rotate_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_Object_Rotate_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_Object_Rotate_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
-	if (mouseHandlerDialog->m_Button_Object_Select_ComboBox->currentItem() == NO_BUTTON &&
-			mouseHandlerDialog->m_Key_Object_Select_ComboBox->currentItem() != NO_KEY)
+	if (mouseHandlerDialog->m_Button_Object_Select_ComboBox->currentIndex() == NO_BUTTON &&
+			mouseHandlerDialog->m_Key_Object_Select_ComboBox->currentIndex() != NO_KEY)
 	{
 		return true;
 	}
@@ -227,20 +227,20 @@ bool MouseHandler::onlyKeySelected(MouseHandlerDialog* mouseHandlerDialog)
 
 void MouseHandler::updateUserPreferences(MouseHandlerDialog* mouseHandlerDialog)
 {
-	m_ViewTranslateMouseButton = mouseHandlerDialog->m_Button_View_Translate_ComboBox->currentItem();
-	m_ViewZoomMouseButton = mouseHandlerDialog->m_Button_View_Zoom_ComboBox->currentItem();
-	m_ViewRotateMouseButton = mouseHandlerDialog->m_Button_View_Rotate_ComboBox->currentItem();
-	m_ViewTranslateKey = mouseHandlerDialog->m_Key_View_Translate_ComboBox->currentItem();
-	m_ViewZoomKey = mouseHandlerDialog->m_Key_View_Zoom_ComboBox->currentItem();
-	m_ViewRotateKey = mouseHandlerDialog->m_Key_View_Rotate_ComboBox->currentItem();
-	m_ObjectTranslateMouseButton = mouseHandlerDialog->m_Button_Object_Translate_ComboBox->currentItem();
-	m_ObjectZoomMouseButton = mouseHandlerDialog->m_Button_Object_Zoom_ComboBox->currentItem();
-	m_ObjectRotateMouseButton = mouseHandlerDialog->m_Button_Object_Rotate_ComboBox->currentItem();
-	m_ObjectTranslateKey = mouseHandlerDialog->m_Key_Object_Translate_ComboBox->currentItem();
-	m_ObjectZoomKey = mouseHandlerDialog->m_Key_Object_Zoom_ComboBox->currentItem();
-	m_ObjectRotateKey = mouseHandlerDialog->m_Key_Object_Rotate_ComboBox->currentItem();
-	m_ObjectSelectMouseButton = mouseHandlerDialog->m_Button_Object_Select_ComboBox->currentItem();
-	m_ObjectSelectKey = mouseHandlerDialog->m_Key_Object_Select_ComboBox->currentItem();
+	m_ViewTranslateMouseButton = mouseHandlerDialog->m_Button_View_Translate_ComboBox->currentIndex();
+	m_ViewZoomMouseButton = mouseHandlerDialog->m_Button_View_Zoom_ComboBox->currentIndex();
+	m_ViewRotateMouseButton = mouseHandlerDialog->m_Button_View_Rotate_ComboBox->currentIndex();
+	m_ViewTranslateKey = mouseHandlerDialog->m_Key_View_Translate_ComboBox->currentIndex();
+	m_ViewZoomKey = mouseHandlerDialog->m_Key_View_Zoom_ComboBox->currentIndex();
+	m_ViewRotateKey = mouseHandlerDialog->m_Key_View_Rotate_ComboBox->currentIndex();
+	m_ObjectTranslateMouseButton = mouseHandlerDialog->m_Button_Object_Translate_ComboBox->currentIndex();
+	m_ObjectZoomMouseButton = mouseHandlerDialog->m_Button_Object_Zoom_ComboBox->currentIndex();
+	m_ObjectRotateMouseButton = mouseHandlerDialog->m_Button_Object_Rotate_ComboBox->currentIndex();
+	m_ObjectTranslateKey = mouseHandlerDialog->m_Key_Object_Translate_ComboBox->currentIndex();
+	m_ObjectZoomKey = mouseHandlerDialog->m_Key_Object_Zoom_ComboBox->currentIndex();
+	m_ObjectRotateKey = mouseHandlerDialog->m_Key_Object_Rotate_ComboBox->currentIndex();
+	m_ObjectSelectMouseButton = mouseHandlerDialog->m_Button_Object_Select_ComboBox->currentIndex();
+	m_ObjectSelectKey = mouseHandlerDialog->m_Key_Object_Select_ComboBox->currentIndex();
 }
 
 void MouseHandler::updateUserPreferences()

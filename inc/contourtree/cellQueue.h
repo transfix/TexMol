@@ -17,7 +17,7 @@
 #if 0
 #include <memory.h>
 #ifndef MACOS_X
-#include <malloc.h>
+#include <stdlib.h>
 #endif
 #endif
 #include <string.h>

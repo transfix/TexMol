@@ -21,9 +21,7 @@
 #ifndef SURFACE_AREA_AND_VOLUME_DIALOG_H
 #define SURFACE_AREA_AND_VOLUME_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog SurfaceAreaAndVolumeDialogBase;
+#include <TexMol/Dialogs/SurfaceAreaAndVolumeDialogBase.h>
 
 class SurfaceAreaAndVolumeDialog : public SurfaceAreaAndVolumeDialogBase
 {

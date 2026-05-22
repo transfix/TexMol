@@ -21,9 +21,7 @@
 #ifndef CCV_TEXMOL_SLICE_DIALOG_H
 #define CCV_TEXMOL_SLICE_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog SliceDialogBase;
+#include <TexMol/Dialogs/SliceDialogBase.h>
 
 namespace PDBParser
 {

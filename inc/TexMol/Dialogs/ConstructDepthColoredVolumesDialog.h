@@ -21,9 +21,7 @@
 #ifndef CONSTRUCT_DEPTH_COLORED_VOLUMES_DIALOG_H
 #define CONSTRUCT_DEPTH_COLORED_VOLUMES_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog ConstructDepthColoredVolumesDialogBase;
+#include <TexMol/Dialogs/ConstructDepthColoredVolumesDialogBase.h>
 
 class VolumeData;
 class DataManager;

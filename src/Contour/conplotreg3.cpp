@@ -21,11 +21,7 @@
 */
 // conPlotReg3.C - preprocess and extract contours from 3d scalar data
 
-#if ! defined (__APPLE__)
-#include <malloc.h>
-#else
 #include <stdlib.h>
-#endif
 #include <memory.h>
 #include <string.h>
 #ifndef WIN32

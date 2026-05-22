@@ -21,9 +21,7 @@
 #ifndef FILE_SAVE_DIALOG_H
 #define FILE_SAVE_DIALOG_H
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog FileSaveDialogBase;
+#include <TexMol/Dialogs/FileSaveDialogBase.h>
 
 class FileSaveDialog : public FileSaveDialogBase
 {

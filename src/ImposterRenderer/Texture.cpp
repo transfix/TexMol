@@ -21,6 +21,7 @@
 // Texture.cpp: implementation of the Texture class.
 
 #include <GL/glew.h>
+#include <GL/glu.h>
 
 #include <ImposterRenderer/Texture.h>
 #include <math.h>

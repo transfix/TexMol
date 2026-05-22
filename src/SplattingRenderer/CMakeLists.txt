@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 FILE(GLOB SOURCE_FILES *.cpp)
 FILE(GLOB INCLUDE_FILES ../../inc/SplattingRenderer/*.[Hh])
@@ -10,13 +10,13 @@ INCLUDE_DIRECTORIES(
   ../../inc
 )
 
-set(LIBS "")
+set(LIBS GLEW::GLEW)
 
 if(CG_FOUND)
   include_directories(
     ${CG_INCLUDE_PATH}
   )
-  set(LIBS ${CG_LIBRARY} ${CG_GL_LIBRARY})
+  set(LIBS ${LIBS} ${CG_LIBRARY} ${CG_GL_LIBRARY})
 endif(CG_FOUND)
 
 add_library(SplattingRenderer STATIC ${SOURCE_FILES} ${INCLUDE_FILES})

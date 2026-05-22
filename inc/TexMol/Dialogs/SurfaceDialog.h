@@ -23,13 +23,9 @@
 
 #include <QFutureWatcher>
 
-#include <QDialog>
-// Qt3 base removed — stub
-typedef QDialog SurfaceDialogBase;
+#include <TexMol/Dialogs/SurfaceDialogBase.h>
 #include <Geometry/Geometry.h>
 #include <PDBParser/GroupOfAtoms.h>
-
-
 
 struct SurfaceBackgroundJob {
   QFuture<Geometry *> * future;
@@ -54,8 +50,6 @@ Geometry* getSurfaceExtern(GetSurfaceData d);
 			   //QString algorithm, int size, int isovalue,double blobbiness,
 			   //bool radiusType, int level, int iterations, double weight, 
 			   //bool optimizeRadii, PDBParser::GroupOfAtoms* molecule);
-
-
 class SurfaceDialog : public SurfaceDialogBase
 {
 	public:

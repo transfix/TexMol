@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 FILE(GLOB SOURCE_FILES *.cpp)
 FILE(GLOB INCLUDE_FILES ../../inc/AssemblyUtils/*.[Hh])
@@ -14,7 +14,7 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY (AssemblyUtils STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 SetupLapack(AssemblyUtils)
 
-SET(AU_LINK_LIBS AssemblyUtils pthread fast-clash GOAFileTypes PDBParser DPG UsefulMath Utility)
+SET(AU_LINK_LIBS AssemblyUtils Threads::Threads fast-clash GOAFileTypes PDBParser DPG UsefulMath Utility)
 
 ADD_EXECUTABLE (testAlignedOligomerFormation testAlignedOligomerFormation.cpp)
 TARGET_LINK_LIBRARIES(testAlignedOligomerFormation ${AU_LINK_LIBS})

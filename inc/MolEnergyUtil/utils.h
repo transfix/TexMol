@@ -9,9 +9,7 @@
 #include <cstring>
 #include <pthread.h>
 
-#if ! defined(__APPLE__)
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 
 #include <stdarg.h>
 #include <time.h>

@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
 FILE(GLOB SOURCE_FILES *.cpp)
 FILE(GLOB INCLUDE_FILES ../../inc/fast-hydro/*.[Hh])
@@ -12,3 +12,4 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (fast-hydro STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+target_link_libraries(fast-hydro PUBLIC Threads::Threads)

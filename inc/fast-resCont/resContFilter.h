@@ -10,9 +10,7 @@
 #include <pthread.h>
 #include <DPG/PG.h>
 
-#if ! defined(__APPLE__)
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 
 #include <time.h>
 #include <stdarg.h>

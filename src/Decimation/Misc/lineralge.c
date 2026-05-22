@@ -11,9 +11,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#if ! defined (__APPLE__)
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 
 #include <assert.h>
 #include <Decimation/Misc/misc.h>
