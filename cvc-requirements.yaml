@@ -1,0 +1,26 @@
+# cvc-requirements.yaml — component set for TexMol.
+#
+# Usage (local):
+#   cvcpkg install --from cvc-requirements.yaml --prefix ./deps
+#
+# TexMol needs a focused subset of libcvc-deps: Boost, CGAL,
+# FFTW3, GSL, HDF5, Qt6/VTK for the GUI, plus zlib and log4cplus.
+#
+# See https://github.com/transfix/libcvc-deps/blob/master/docs/roadmap/split-distribution.md
+
+platform: auto
+arch: auto
+config: release
+link: shared
+
+components:
+  - zlib
+  - boost
+  - cgal
+  - fftw3
+  - gsl
+  - hdf5
+  - log4cplus
+  - qt6
+  - vtk
+  - pthreads4w
