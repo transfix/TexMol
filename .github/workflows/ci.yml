@@ -57,7 +57,7 @@ jobs:
       # and we fall back to the platform package manager path.
       - name: Fetch libcvc-deps
         id: libcvc-deps
-        uses: transfix/libcvc/.github/actions/fetch-libcvc-deps@v3.2.2
+        uses: transfix/libcvc/.github/actions/fetch-libcvc-deps@v3.2.3
         with:
           version: '1.1.0'
           build_type: ${{ matrix.build_type }}
@@ -82,6 +82,65 @@ jobs:
         run: |
           $deps = '${{ steps.libcvc-deps.outputs.path }}'
           "$deps\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+
+      # ── Prebuilt libcvc binary ──
+      # Download the libcvc developer SDK matching the current
+      # platform/config from the GitHub release. This is a
+      # self-contained archive with libcvc.so/.dll, headers, and all
+      # third-party dep libraries bundled alongside.
+      - name: Fetch prebuilt libcvc
+        id: libcvc
+        shell: bash
+        run: |
+          set -euo pipefail
+          LIBCVC_TAG="v3.2.3"
+          LIBCVC_PKG_VERSION="3.2.1"   # CPack project(VERSION) in the release
+
+          case "$RUNNER_OS" in
+            Linux)   os=linux;   ext=tar.gz ;;
+            macOS)   os=macos;   ext=zip ;;
+            Windows) os=windows; ext=zip ;;
+            *)       os=$(echo "$RUNNER_OS" | tr '[:upper:]' '[:lower:]'); ext=tar.gz ;;
+          esac
+
+          if [ "$os" = "windows" ]; then
+            arch="x86_64"
+          else
+            arch=$(uname -m)
+          fi
+
+          btlc=$(echo "${{ matrix.build_type }}" | tr '[:upper:]' '[:lower:]')
+          stem="libcvc-${LIBCVC_PKG_VERSION}-${os}-${arch}-${btlc}"
+          url="https://github.com/transfix/libcvc/releases/download/${LIBCVC_TAG}/${stem}.${ext}"
+
+          prefix="$HOME/libcvc"
+          [ "$os" = "windows" ] && prefix="D:/libcvc"
+          mkdir -p "$prefix"
+
+          tmp="$(mktemp -d)"
+          echo "libcvc: downloading $url"
+          if ! curl -fL -o "$tmp/${stem}.${ext}" "$url"; then
+            echo "libcvc: download failed; will error at cmake configure."
+            echo "path=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          case "$ext" in
+            tar.gz) tar -xzf "$tmp/${stem}.${ext}" -C "$prefix" ;;
+            zip)    unzip -q "$tmp/${stem}.${ext}" -d "$prefix" ;;
+          esac
+
+          if [ -d "$prefix/$stem" ]; then
+            root="$prefix/$stem"
+          elif [ -d "$prefix/lib" ] || [ -d "$prefix/include" ]; then
+            root="$prefix"
+          else
+            root="$(find "$prefix" -mindepth 1 -maxdepth 1 -type d | head -n1)"
+          fi
+
+          echo "libcvc: ready at $root"
+          ls "$root" | head -10 || true
+          echo "path=$root" >> "$GITHUB_OUTPUT"
 
       # ── Linux dependencies ──
       # System-only essentials always installed; bundled libs (Boost,
@@ -174,34 +233,34 @@ jobs:
           }
 
       # ── Configure ──
-      # Prepend the libcvc-deps prefix to CMAKE_PREFIX_PATH when the
-      # bundle was fetched, so find_package picks up bundled Boost/Qt6/
-      # FFTW/etc. ahead of any system installs.
+      # Both the libcvc binary prefix and the libcvc-deps prefix go
+      # into CMAKE_PREFIX_PATH so find_package / find_library finds
+      # libcvc itself as well as Boost/Qt6/FFTW/etc.
       - name: Configure (Linux)
         if: runner.os == 'Linux'
         run: |
-          extra_prefix="${{ steps.libcvc-deps.outputs.path }}"
+          libcvc_prefix="${{ steps.libcvc.outputs.path }}"
+          deps_prefix="${{ steps.libcvc-deps.outputs.path }}"
           cmake -B build \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DHAVE_PETSC=OFF \
             -DHAVE_NFFT=OFF \
-            -DCVC_ENABLE_CUDA=OFF \
             -DDISABLE_CGAL=ON \
-            -DCMAKE_PREFIX_PATH="$extra_prefix" \
+            -DCMAKE_PREFIX_PATH="${libcvc_prefix};${deps_prefix}" \
             -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
 
       - name: Configure (macOS)
         if: runner.os == 'macOS'
         run: |
-          extra_prefix="${{ steps.libcvc-deps.outputs.path }}"
-          combined_prefix="$extra_prefix${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
+          libcvc_prefix="${{ steps.libcvc.outputs.path }}"
+          deps_prefix="${{ steps.libcvc-deps.outputs.path }}"
+          combined_prefix="${libcvc_prefix};${deps_prefix}${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
           cmake -B build \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DHAVE_PETSC=OFF \
             -DHAVE_NFFT=OFF \
-            -DCVC_ENABLE_CUDA=OFF \
             -DDISABLE_CGAL=ON \
             -DCMAKE_PREFIX_PATH="$combined_prefix" \
             -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
@@ -209,15 +268,16 @@ jobs:
       - name: Configure (Windows)
         if: runner.os == 'Windows'
         run: |
+          $libcvcPath = '${{ steps.libcvc.outputs.path }}'
           $depsPath = '${{ steps.libcvc-deps.outputs.path }}'
-          $prefix = if ($depsPath) { "$depsPath;$env:Qt6_DIR" } else { "$env:Qt6_DIR" }
+          $parts = @($libcvcPath, $depsPath, $env:Qt6_DIR) | Where-Object { $_ }
+          $prefix = $parts -join ';'
           cmake -B build `
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
             -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" `
             -DCMAKE_PREFIX_PATH="$prefix" `
             -DHAVE_PETSC=OFF `
             -DHAVE_NFFT=OFF `
-            -DCVC_ENABLE_CUDA=OFF `
             -DDISABLE_CGAL=ON `
             -DCMAKE_INSTALL_PREFIX="${{ github.workspace }}/_install"
 
@@ -229,15 +289,15 @@ jobs:
       - name: Configure tests
         if: matrix.build_type == 'Debug' && runner.os != 'Windows'
         run: |
-          extra_prefix="${{ steps.libcvc-deps.outputs.path }}"
-          combined_prefix="$extra_prefix${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
+          libcvc_prefix="${{ steps.libcvc.outputs.path }}"
+          deps_prefix="${{ steps.libcvc-deps.outputs.path }}"
+          combined_prefix="${libcvc_prefix};${deps_prefix}${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
           cmake -B build-test \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
             -DTEXMOL_BUILD_TESTS=ON \
             -DHAVE_PETSC=OFF \
             -DHAVE_NFFT=OFF \
-            -DCVC_ENABLE_CUDA=OFF \
             -DDISABLE_CGAL=ON \
             -DCMAKE_PREFIX_PATH="$combined_prefix"
 

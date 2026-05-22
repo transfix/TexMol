@@ -59,42 +59,64 @@ add_compile_definitions(GLSL)
 # ---------------------------------------------------------------------------
 # libcvc — Core dependency
 # ---------------------------------------------------------------------------
-# Option A (default): FetchContent from GitHub
-# Option B: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
-#   cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
+# Default: use prebuilt libcvc binary from CMAKE_PREFIX_PATH
+#   (binary release from https://github.com/transfix/libcvc/releases)
+# Co-dev: cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
 # ---------------------------------------------------------------------------
-option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use FetchContent)" "")
+option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use prebuilt binary)" "")
 
 if(LIBCVC_SOURCE_DIR)
   message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
-  # Prepend libcvc's CMake module path so its Setup*.cmake modules are found
-  # (libcvc uses CMAKE_SOURCE_DIR which points to TexMol when used as subdirectory)
   list(PREPEND CMAKE_MODULE_PATH "${LIBCVC_SOURCE_DIR}/CMake")
-  # Disable volrover3 — it uses CMAKE_SOURCE_DIR for source paths
   set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
-  include(FetchContent)
-  FetchContent_Declare(libcvc
-    GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        ab00f545bc74afbd6572c7d0ad8567e858f5a7f4 # v3.2.1 (retagged)
+  # ── Prebuilt libcvc binary ──
+  # The official cvcConfig.cmake export encodes build-time deps
+  # (CUDA, IMOD MRC, hardcoded system paths) that a consumer may
+  # not have.  Create thin imported targets directly instead.
+  find_path(LIBCVC_INCLUDE_DIR cvc/app.h PATH_SUFFIXES include)
+  find_library(LIBCVC_LIBRARY NAMES cvc)
+  find_library(LIBCVC_XMLRPC_LIBRARY NAMES xmlrpc)
+
+  if(NOT LIBCVC_INCLUDE_DIR OR NOT LIBCVC_LIBRARY)
+    message(FATAL_ERROR
+      "Prebuilt libcvc not found.\n"
+      "Set CMAKE_PREFIX_PATH to the libcvc install prefix,\n"
+      "or set LIBCVC_SOURCE_DIR for co-development builds.")
+  endif()
+
+  add_library(cvc::cvc SHARED IMPORTED GLOBAL)
+  set_target_properties(cvc::cvc PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${LIBCVC_INCLUDE_DIR}"
   )
-  # Configure libcvc build options
-  set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
-  set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
-  set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
-  set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
-  set(CVC_USING_IMOD_MRC OFF CACHE BOOL "Disable IMOD MRC support (requires libiimod)")
-  # XmlRPC is provided by libcvc as cvc::xmlrpc (consumed by F2DockClient)
-  set(CVC_USING_XMLRPC ON CACHE BOOL "Build libcvc's vendored xmlrpc library" FORCE)
-  # Skip libcvc's tests — their hdf5-config transitive deps (libaec) aren't in libcvc-deps.
-  set(CVC_BUILD_TESTS OFF CACHE BOOL "Don't build libcvc's tests in TexMol" FORCE)
-  FetchContent_MakeAvailable(libcvc)
+  if(WIN32)
+    find_file(LIBCVC_DLL NAMES cvc.dll PATH_SUFFIXES bin)
+    set_target_properties(cvc::cvc PROPERTIES
+      IMPORTED_IMPLIB "${LIBCVC_LIBRARY}"
+      IMPORTED_LOCATION "${LIBCVC_DLL}"
+    )
+  else()
+    set_target_properties(cvc::cvc PROPERTIES
+      IMPORTED_LOCATION "${LIBCVC_LIBRARY}"
+    )
+  endif()
+
+  if(LIBCVC_XMLRPC_LIBRARY)
+    add_library(cvc::xmlrpc STATIC IMPORTED GLOBAL)
+    set_target_properties(cvc::xmlrpc PROPERTIES
+      IMPORTED_LOCATION "${LIBCVC_XMLRPC_LIBRARY}"
+      INTERFACE_INCLUDE_DIRECTORIES "${LIBCVC_INCLUDE_DIR}"
+    )
+    if(WIN32)
+      target_link_libraries(cvc::xmlrpc INTERFACE wsock32 ws2_32)
+    endif()
+  endif()
+
+  message(STATUS "Using prebuilt libcvc: ${LIBCVC_LIBRARY}")
 endif()
 
 # Legacy compatibility macros for per-module CMakeLists.txt files
-# MUST be included AFTER libcvc so our plain-signature wrappers override
-# libcvc's keyword-signature SetupBoost/SetupCGAL functions.
 include(LegacyCompat)
 
 # ---------------------------------------------------------------------------
@@ -106,8 +128,7 @@ if(LIBCVC_SOURCE_DIR)
   include_directories(BEFORE "${LIBCVC_SOURCE_DIR}/inc")
   include_directories(BEFORE "${CMAKE_BINARY_DIR}/libcvc/inc")  # generated cvc/config.h
 else()
-  include_directories(BEFORE "${libcvc_SOURCE_DIR}/inc")
-  include_directories(BEFORE "${libcvc_BINARY_DIR}/inc")
+  include_directories(BEFORE "${LIBCVC_INCLUDE_DIR}")
 endif()
 
 # ---------------------------------------------------------------------------

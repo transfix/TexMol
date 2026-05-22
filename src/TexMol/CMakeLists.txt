@@ -89,7 +89,7 @@ set_target_properties(TexMol PROPERTIES
 #   Utility, XmlRPC, GeometryFileTypes, GraphicsPrimitives
 set(TEXMOL_LINK_LIBS
   # libcvc — replaces all Phase 1 deleted modules
-  cvc
+  cvc::cvc
 
   # Remaining TexMol modules
   Decimation

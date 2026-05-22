@@ -10,26 +10,26 @@
 #ifdef _WIN32
 
 #include <time.h>
+#include <windows.h>
 
-/* struct timeval is defined in <winsock2.h>, but pulling in the
- * full Winsock stack can cause redefinition warnings.  Define a
- * minimal version if it hasn't been included yet.                */
+/* struct timeval is provided by <winsock2.h>. If Winsock hasn't
+ * been included, define it ourselves.                            */
+#ifndef _WINSOCKAPI_
 #ifndef _WINSOCK2API_
-#ifndef _TIMEVAL_DEFINED
-#define _TIMEVAL_DEFINED
 struct timeval {
     long tv_sec;
     long tv_usec;
 };
-#endif /* _TIMEVAL_DEFINED */
-#endif /* _WINSOCK2API_ */
+#endif
+#endif
 
+#ifndef _TIMEZONE_DEFINED
+#define _TIMEZONE_DEFINED
 struct timezone {
     int tz_minuteswest;
     int tz_dsttime;
 };
-
-#include <windows.h>
+#endif
 
 static inline int gettimeofday(struct timeval *tp, struct timezone *tzp)
 {
