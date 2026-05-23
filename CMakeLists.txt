@@ -3,7 +3,7 @@
 # ===========================================================================
 # Modernized CMake build (Phase 2+3 of CVC Modernization Plan)
 # - CMake 3.16+ with target-based patterns
-# - libcvc as core dependency (FetchContent or local)
+# - libcvc as core dependency (prebuilt SDK, FetchContent, or local)
 # - No third-party/ ExternalProject chain
 # - GLSL only (Cg removed)
 # ===========================================================================
@@ -59,11 +59,12 @@ add_compile_definitions(GLSL)
 # ---------------------------------------------------------------------------
 # libcvc — Core dependency
 # ---------------------------------------------------------------------------
-# Option A (default): FetchContent from GitHub
-# Option B: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
+# Option A: Prebuilt SDK via find_package (CMAKE_PREFIX_PATH)
+# Option B: FetchContent from GitHub (fallback when no SDK found)
+# Option C: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
 #   cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
 # ---------------------------------------------------------------------------
-option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use FetchContent)" "")
+option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use find_package/FetchContent)" "")
 
 if(LIBCVC_SOURCE_DIR)
   message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
@@ -74,18 +75,29 @@ if(LIBCVC_SOURCE_DIR)
   set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
-  include(FetchContent)
-  FetchContent_Declare(libcvc
-    GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        573a89bfcadc70ef052e111dee569634063625f3
-  )
-  # Configure libcvc build options
-  set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
-  set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
-  set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
-  set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
-  set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
-  FetchContent_MakeAvailable(libcvc)
+  # Try prebuilt SDK first (installed via release archive)
+  find_package(cvc QUIET)
+  if(cvc_FOUND)
+    message(STATUS "Using prebuilt libcvc SDK (version ${cvc_VERSION})")
+    # Create unnamespaced alias so existing target_link_libraries(... cvc) works
+    if(NOT TARGET cvc)
+      add_library(cvc ALIAS cvc::cvc)
+    endif()
+  else()
+    message(STATUS "Prebuilt libcvc not found; building from source via FetchContent")
+    include(FetchContent)
+    FetchContent_Declare(libcvc
+      GIT_REPOSITORY https://github.com/transfix/libcvc.git
+      GIT_TAG        v3.2.4
+    )
+    # Configure libcvc build options
+    set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
+    set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
+    set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
+    set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
+    set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
+    FetchContent_MakeAvailable(libcvc)
+  endif()
 endif()
 
 # Legacy compatibility macros for per-module CMakeLists.txt files
@@ -221,7 +233,13 @@ endif()
 message(STATUS "=== TexMol ${PROJECT_VERSION} Build Configuration ===")
 message(STATUS "  C++ Standard:           ${CMAKE_CXX_STANDARD}")
 message(STATUS "  Qt6:                    ${Qt6_VERSION}")
-message(STATUS "  libcvc:                 ${LIBCVC_SOURCE_DIR}")
+if(LIBCVC_SOURCE_DIR)
+  message(STATUS "  libcvc:                 local (${LIBCVC_SOURCE_DIR})")
+elseif(cvc_FOUND)
+  message(STATUS "  libcvc:                 prebuilt SDK (${cvc_VERSION})")
+else()
+  message(STATUS "  libcvc:                 FetchContent (v3.2.4)")
+endif()
 message(STATUS "  CGAL:                   ${HAVE_CGAL}")
 message(STATUS "  LAPACK:                 ${HAVE_LAPACK}")
 message(STATUS "  FFTW:                   ${HAVE_FFTW}")
