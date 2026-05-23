@@ -56,7 +56,7 @@ jobs:
       # back to the platform package manager path.
       - name: Fetch libcvc-deps
         id: libcvc-deps
-        uses: transfix/libcvc-deps/.github/actions/cvcpkg-install@v1.2.0
+        uses: transfix/libcvc-deps/.github/actions/cvcpkg-install@v1.2.1
         with:
           requirements: cvc-requirements.yaml
           build_type: ${{ matrix.build_type }}
