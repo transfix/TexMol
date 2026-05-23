@@ -75,7 +75,9 @@ if(LIBCVC_SOURCE_DIR)
   set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
-  # Try prebuilt SDK first (installed via release archive)
+  # Try prebuilt SDK first (installed via release archive).
+  # Boost, FFTW, HDF5, etc. come from the libcvc-deps bundle whose
+  # config-mode cmake files are found via CMAKE_PREFIX_PATH.
   find_package(cvc QUIET)
   if(cvc_FOUND)
     message(STATUS "Using prebuilt libcvc SDK (version ${cvc_VERSION})")
