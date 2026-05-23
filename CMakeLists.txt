@@ -16,9 +16,9 @@ project(TexMol
 )
 
 # ---------------------------------------------------------------------------
-# C++ Standard
+# C++ Standard  (C++20 required by libcvc ≥ 3.x for std::format etc.)
 # ---------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
