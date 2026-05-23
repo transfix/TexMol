@@ -77,7 +77,13 @@ if(LIBCVC_SOURCE_DIR)
 else()
   # Try prebuilt SDK first (installed via release archive).
   # Boost, FFTW, HDF5, etc. come from the libcvc-deps bundle whose
-  # config-mode cmake files are found via CMAKE_PREFIX_PATH.
+  # config-mode cmake files are found via CMAKE_PREFIX_PATH.  When the
+  # bundle isn't available and Boost comes from the system (e.g.
+  # Ubuntu's libboost-*-dev), CMake 3.31+'s CMP0167 removal of the
+  # FindBoost module must be reverted so find_dependency(Boost) works.
+  if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 OLD)
+  endif()
   find_package(cvc QUIET)
   if(cvc_FOUND)
     message(STATUS "Using prebuilt libcvc SDK (version ${cvc_VERSION})")
