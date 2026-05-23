@@ -100,6 +100,8 @@ else()
     )
     # Configure libcvc build options
     set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
+    set(CVC_USING_IMOD_MRC OFF CACHE BOOL "libiimod not available outside deps bundle")
+    set(CVC_ENABLE_IMAGEMAGICK OFF CACHE BOOL "TexMol does not need ImageMagick I/O")
     set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
     set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
     set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
