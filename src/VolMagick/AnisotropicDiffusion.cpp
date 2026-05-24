@@ -25,13 +25,13 @@
 #include <math.h>
 #include <VolMagick/VolMagick.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 namespace VolMagick
 {
   Voxels& Voxels::anisotropicDiffusion(unsigned int iterations)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     double cn, cs, ce, cw, cu, cd;
     double delta_n, delta_s, delta_e, delta_w, delta_u, delta_d;

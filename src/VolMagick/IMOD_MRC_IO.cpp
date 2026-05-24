@@ -34,7 +34,7 @@
 #include <boost/scoped_array.hpp>
 #include <boost/current_function.hpp>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 namespace VolMagick
 {
@@ -62,7 +62,7 @@ namespace VolMagick
 				      const std::string& filename) const
   {
     using namespace std;
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     VoxelType mrcTypes[] = { UChar, UShort, Float };
     MrcHeader header;
@@ -138,7 +138,7 @@ namespace VolMagick
                                    const CVC::Dimension& maxdim) const
   {
     using namespace std;
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(var > 0)
       throw IndexOutOfBounds("Variable index out of bounds.");

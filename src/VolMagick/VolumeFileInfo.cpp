@@ -27,7 +27,7 @@
 #include <VolMagick/VolumeFile_IO.h>
 #include <VolMagick/Utility.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #include <regex>
 
@@ -88,7 +88,7 @@ namespace VolMagick
 
   void VolumeFileInfo::calcMinMax(unsigned int var, unsigned int time) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     Volume vol;
     const uint64 maxdim = 128; //read in 128^3 chunks

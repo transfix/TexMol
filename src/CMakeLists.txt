@@ -19,7 +19,6 @@ ADD_SUBDIRECTORY(Contouring)
 ADD_SUBDIRECTORY(Contour)
 ADD_SUBDIRECTORY(XmlRPC)
 ADD_SUBDIRECTORY(libCG)
-ADD_SUBDIRECTORY(CVC)
 ADD_SUBDIRECTORY(VolMagick)
 
 # ===========================================================================

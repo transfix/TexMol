@@ -25,7 +25,7 @@
 #ifndef __VOLMAGICK_EXCEPTIONS_H__
 #define __VOLMAGICK_EXCEPTIONS_H__
 
-#include <CVC/Exception.h>
+#include <cvc/exception.h>
 
 #include <exception>
 #include <string>

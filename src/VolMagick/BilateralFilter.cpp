@@ -25,13 +25,13 @@
 #include <math.h>
 #include <VolMagick/VolMagick.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 namespace VolMagick
 {
   Voxels& Voxels::bilateralFilter(double radiometricSigma, double spatialSigma, unsigned int filterRadius)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     int i,j,k,x,y,z,c,index;
     int filterDiameter = filterRadius*2+1;

@@ -40,7 +40,7 @@
 #include <VolMagick/endians.h>
 #include <VolMagick/RawIV_IO.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #ifdef __WINDOWS__ 
 #define SNPRINTF _snprintf
@@ -127,7 +127,7 @@ namespace VolMagick
   void RawIV_IO::getVolumeFileInfo(VolumeFileInfo::Data& data,
 				   const std::string& filename) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     RawIVHeader rawivHeader;
@@ -281,7 +281,7 @@ namespace VolMagick
                                 const CVC::Dimension& maxdim) const
 
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     RawIVHeader rawivHeader;
@@ -487,7 +487,7 @@ namespace VolMagick
 				  unsigned int numVariables, unsigned int numTimesteps,
 				  double min_time, double max_time) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     RawIVHeader rawivHeader;
@@ -611,7 +611,7 @@ namespace VolMagick
 				 unsigned int var, unsigned int time,
 				 uint64 off_x, uint64 off_y, uint64 off_z) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     VolumeFileInfo volinfo;
     char buf[256];

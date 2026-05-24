@@ -48,7 +48,7 @@
 
 #include <VolMagick/Utility.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #include <boost/foreach.hpp>
 
@@ -521,7 +521,7 @@ namespace VolMagick
 		       unsigned int var, unsigned int time,
 		       const BoundingBox& subvolbox)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     Volume localvol(vol);
     VolumeFileInfo volinfo(filename);

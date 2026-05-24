@@ -26,7 +26,7 @@
 #include <VolMagick/MRC_IO.h>
 #include <VolMagick/endians.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #include <string>
 #include <boost/scoped_array.hpp>
@@ -320,7 +320,7 @@ namespace VolMagick
   void MRC_IO::getVolumeFileInfo(VolumeFileInfo::Data& data,
 				 const std::string& filename) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     FILE *input;
@@ -486,7 +486,7 @@ namespace VolMagick
 			      const Dimension& subvoldim,
                               const CVC::Dimension& maxdim) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
 
@@ -693,7 +693,7 @@ namespace VolMagick
 				double min_time, double max_time) const
   {
     using namespace boost;
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     MrcHeader mrcHeader;
      
@@ -810,7 +810,7 @@ namespace VolMagick
 			       uint64 off_x, uint64 off_y, uint64 off_z) const
   {
     using namespace boost;
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     VolumeFileInfo volinfo;
     char buf[256];

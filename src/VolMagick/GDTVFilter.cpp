@@ -25,7 +25,7 @@
 #include <cmath>
 #include <VolMagick/VolMagick.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 using namespace std;
 
@@ -39,7 +39,7 @@ namespace VolMagick
   /*--------------------------------------------------------------------*/
   void Gradient(const Voxels& input, Voxels& grad)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     float val[6];
 
@@ -80,7 +80,7 @@ namespace VolMagick
   /*--------------------------------------------------------------------*/
   void Gradient2(const Voxels& input, Voxels& grad)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     float val[26];
 
@@ -173,7 +173,7 @@ namespace VolMagick
   /*------------------------------------------------------------------------*/
   void filtGDTV(const Voxels& input, const Voxels& grad, Voxels&  funcval, float q, float lbda)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     Voxels funcvalue(grad);
     
@@ -268,7 +268,7 @@ namespace VolMagick
 
   void filtGDTV2(const Voxels& input, const Voxels& grad, Voxels&  funcval, float q, float lbda)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     Voxels funcvalue(grad);
 
@@ -506,7 +506,7 @@ namespace VolMagick
 
   Voxels& Voxels::gdtvFilter(double parameterq, double lambda, unsigned int iteration, unsigned int neigbour)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     Voxels filter(*this);
     Voxels gradient(*this);

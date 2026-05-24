@@ -27,7 +27,7 @@
 #include <VolMagick/CompositeFunction.h>
 #include <VolMagick/Utility.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #include <boost/current_function.hpp>
 
@@ -88,7 +88,7 @@ namespace VolMagick
   // 08/26/2011 -- Joe R. -- Added voxels argument
   void Voxels::dimension(const Dimension& d, std::shared_ptr<unsigned char[]> voxels)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(d.isNull()) throw NullDimension("Null volume dimension.");
 
@@ -130,7 +130,7 @@ namespace VolMagick
   
   void Voxels::voxelType(VoxelType vt)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(voxelType() == vt) return;
 
@@ -159,7 +159,7 @@ namespace VolMagick
 
   void Voxels::calcMinMax() const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(_vosm) _vosm->start(this, VoxelOperationStatusMessenger::CalculatingMinMax, ZDim());
     double val;
@@ -318,7 +318,7 @@ namespace VolMagick
 
   void Voxels::calcHistogram(uint64 size) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(!_histogramDirty && _histogramSize == size) return;
 
@@ -350,7 +350,7 @@ namespace VolMagick
   double Voxels::min(uint64 off_x, uint64 off_y, uint64 off_z,
 		     const Dimension& dim) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(_vosm) _vosm->start(this, VoxelOperationStatusMessenger::CalculatingMin, dim[2]);
 
@@ -375,7 +375,7 @@ namespace VolMagick
   double Voxels::max(uint64 off_x, uint64 off_y, uint64 off_z,
 		     const Dimension& dim) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(_vosm) _vosm->start(this, VoxelOperationStatusMessenger::CalculatingMax, dim[2]);
 
@@ -426,7 +426,7 @@ namespace VolMagick
   Voxels& Voxels::sub(uint64 off_x, uint64 off_y, uint64 off_z,
 		      const Dimension& subvoldim)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(off_x+subvoldim[0]-1 >= dimension()[0] || 
        off_y+subvoldim[1]-1 >= dimension()[1] || 
@@ -462,7 +462,7 @@ namespace VolMagick
   Voxels& Voxels::fillsub(uint64 off_x, uint64 off_y, uint64 off_z,
 			  const Dimension& subvoldim, double val)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(off_x+subvoldim[0]-1 >= dimension()[0] || 
        off_y+subvoldim[1]-1 >= dimension()[1] || 
@@ -487,7 +487,7 @@ namespace VolMagick
 
   Voxels& Voxels::map(double min_, double max_)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(_vosm) _vosm->start(this, VoxelOperationStatusMessenger::Map, ZDim());
     uint64 len = XDim()*YDim()*ZDim(), count=0;
@@ -508,7 +508,7 @@ namespace VolMagick
 
   Voxels& Voxels::resize(const Dimension& newdim)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     double inSpaceX, inSpaceY, inSpaceZ;
     double val[8];
@@ -627,7 +627,7 @@ namespace VolMagick
 
   Voxels& Voxels::composite(const Voxels& compVox, int64 off_x, int64 off_y, int64 off_z, const CompositeFunction& func)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     uint64 i,j,k;
 

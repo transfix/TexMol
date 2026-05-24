@@ -27,7 +27,7 @@
 #include <VolMagick/Spider_IO.h>
 #include <VolMagick/endians.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #include <boost/scoped_array.hpp>
 #include <string>
@@ -593,7 +593,7 @@ namespace VolMagick
   void Spider_IO::getVolumeFileInfo(VolumeFileInfo::Data& data,
 				    const std::string& filename) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     int dim[3];
     float *buf=NULL;
@@ -659,7 +659,7 @@ namespace VolMagick
 				 const Dimension& subvoldim,
                                  const CVC::Dimension& maxdim) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     int dim[3];
     float *data=NULL;
@@ -726,7 +726,7 @@ namespace VolMagick
 				   double min_time, double max_time) const
   {
     using namespace boost;
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     int dim[3] = { static_cast<int>(dimension[0]), static_cast<int>(dimension[1]), static_cast<int>(dimension[2]) };
     boost::scoped_array<float> data(new float[dimension.size()]);
@@ -769,7 +769,7 @@ namespace VolMagick
 				  unsigned int var, unsigned int time,
 				  uint64 off_x, uint64 off_y, uint64 off_z) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     Volume vol;
 

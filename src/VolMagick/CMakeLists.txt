@@ -48,8 +48,8 @@ SET(SOURCE_FILES
   StdErrOpStatus.cpp
 )
 
-# the core CVC lib that contains CVC::App
-SET(VOLMAGICK_LINK_LIBS CVC)
+# Link against libcvc directly (CVC compat shim removed)
+SET(VOLMAGICK_LINK_LIBS cvc)
 
 # The VolMagick version number.
 SET(VOLMAGICK_VERSION_MAJOR 1)

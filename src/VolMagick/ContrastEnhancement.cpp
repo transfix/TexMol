@@ -25,7 +25,7 @@
 #include <math.h>
 #include <VolMagick/VolMagick.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 namespace VolMagick
 {
@@ -161,7 +161,7 @@ namespace VolMagick
 
   Voxels& Voxels::contrastEnhancement(double resistor)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     int i,j,k, curstep=0;
     double origmin, origmax, lmin, lmax, img, avg;

@@ -25,7 +25,7 @@
 #ifndef __VOLMAGICK_TYPES_H__
 #define __VOLMAGICK_TYPES_H__
 
-#include <CVC/Types.h>
+#include <cvc/types.h>
 
 #ifndef VOLMAGICK_VERSION_STRING
 #define VOLMAGICK_VERSION_STRING "1.0.0"

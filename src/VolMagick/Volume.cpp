@@ -26,7 +26,7 @@
 #include <VolMagick/VoxelOperationStatusMessenger.h>
 #include <VolMagick/Utility.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #include <string>
 
@@ -93,7 +93,7 @@ namespace VolMagick
 
   Volume& Volume::sub(const BoundingBox& subvolbox, const Dimension& subvoldim)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(!subvolbox.isWithin(boundingBox()))
       throw SubVolumeOutOfBounds("Subvolume bounding box must be within the bounding box of the original volume.");
@@ -214,7 +214,7 @@ namespace VolMagick
 
   Volume& Volume::combineWith(const Volume& vol, const Dimension& dim)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     BoundingBox combbox = boundingBox() + vol.boundingBox();
     Volume combvol(dim,voxelType(),combbox);

@@ -59,46 +59,76 @@ add_compile_definitions(GLSL)
 # ---------------------------------------------------------------------------
 # libcvc — Core dependency
 # ---------------------------------------------------------------------------
-# Option A: Prebuilt SDK via find_package (CMAKE_PREFIX_PATH)
-# Option B: FetchContent from GitHub (fallback when no SDK found)
+# Option A: Prebuilt binary via find_library (CMAKE_PREFIX_PATH)
+# Option B: FetchContent from GitHub (fallback when no binary found)
 # Option C: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
 #   cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
 # ---------------------------------------------------------------------------
-option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use find_package/FetchContent)" "")
+option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use prebuilt/FetchContent)" "")
 
 if(LIBCVC_SOURCE_DIR)
   message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
-  # Prepend libcvc's CMake module path so its Setup*.cmake modules are found
-  # (libcvc uses CMAKE_SOURCE_DIR which points to TexMol when used as subdirectory)
   list(PREPEND CMAKE_MODULE_PATH "${LIBCVC_SOURCE_DIR}/CMake")
-  # Disable volrover3 — it uses CMAKE_SOURCE_DIR for source paths
   set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
-  # Try prebuilt SDK first (installed via release archive).
-  # Boost, FFTW, HDF5, etc. come from the libcvc-deps bundle whose
-  # config-mode cmake files are found via CMAKE_PREFIX_PATH.  When the
-  # bundle isn't available and Boost comes from the system (e.g.
-  # Ubuntu's libboost-*-dev), CMake 3.31+'s CMP0167 removal of the
-  # FindBoost module must be reverted so find_dependency(Boost) works.
-  if(POLICY CMP0167)
-    cmake_policy(SET CMP0167 OLD)
-  endif()
-  find_package(cvc QUIET)
-  if(cvc_FOUND)
-    message(STATUS "Using prebuilt libcvc SDK (version ${cvc_VERSION})")
-    # Create unnamespaced alias so existing target_link_libraries(... cvc) works
+  # Try to find a prebuilt libcvc binary on CMAKE_PREFIX_PATH.
+  # We bypass find_package(cvc) because the upstream cvcConfig.cmake
+  # encodes build-time deps (CUDA, libiimod, hardcoded system paths)
+  # that consumers typically don't have.  Instead create thin imported
+  # targets directly from the library and header paths.
+  find_path(_CVC_INC cvc/app.h PATH_SUFFIXES include)
+  find_library(_CVC_LIB NAMES cvc)
+  find_library(_CVC_XMLRPC_LIB NAMES xmlrpc)
+
+  if(_CVC_INC AND _CVC_LIB)
+    message(STATUS "Using prebuilt libcvc: ${_CVC_LIB}")
+
+    add_library(cvc::cvc SHARED IMPORTED GLOBAL)
+    set_target_properties(cvc::cvc PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${_CVC_INC}"
+    )
+    if(WIN32)
+      find_file(_CVC_DLL NAMES cvc.dll PATH_SUFFIXES bin)
+      set_target_properties(cvc::cvc PROPERTIES
+        IMPORTED_IMPLIB "${_CVC_LIB}"
+        IMPORTED_LOCATION "${_CVC_DLL}"
+      )
+    else()
+      set_target_properties(cvc::cvc PROPERTIES
+        IMPORTED_LOCATION "${_CVC_LIB}"
+      )
+    endif()
+
+    # Unnamespaced alias for legacy references
     if(NOT TARGET cvc)
       add_library(cvc ALIAS cvc::cvc)
     endif()
+
+    if(_CVC_XMLRPC_LIB)
+      add_library(cvc::xmlrpc STATIC IMPORTED GLOBAL)
+      set_target_properties(cvc::xmlrpc PROPERTIES
+        IMPORTED_LOCATION "${_CVC_XMLRPC_LIB}"
+        INTERFACE_INCLUDE_DIRECTORIES "${_CVC_INC}"
+      )
+      if(WIN32)
+        set_target_properties(cvc::xmlrpc PROPERTIES
+          INTERFACE_LINK_LIBRARIES "wsock32;ws2_32"
+        )
+      endif()
+    endif()
+
+    set(_CVC_PREBUILT TRUE)
   else()
     message(STATUS "Prebuilt libcvc not found; building from source via FetchContent")
+    if(POLICY CMP0167)
+      cmake_policy(SET CMP0167 OLD)
+    endif()
     include(FetchContent)
     FetchContent_Declare(libcvc
       GIT_REPOSITORY https://github.com/transfix/libcvc.git
       GIT_TAG        v3.2.4
     )
-    # Configure libcvc build options
     set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
     set(CVC_USING_IMOD_MRC OFF CACHE BOOL "libiimod not available outside deps bundle")
     set(CVC_ENABLE_IMAGEMAGICK OFF CACHE BOOL "TexMol does not need ImageMagick I/O")
@@ -107,6 +137,7 @@ else()
     set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
     set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
     FetchContent_MakeAvailable(libcvc)
+    set(_CVC_PREBUILT FALSE)
   endif()
 endif()
 
@@ -117,10 +148,19 @@ include(LegacyCompat)
 
 # ---------------------------------------------------------------------------
 # Make libcvc headers available globally (for compatibility shims in inc/)
+# Many legacy TexMol modules #include <cvc/endians.h> etc. via headers in
+# inc/ without linking cvc::cvc directly, so the include path must be
+# available project-wide.
 # ---------------------------------------------------------------------------
 if(LIBCVC_SOURCE_DIR)
   include_directories("${LIBCVC_SOURCE_DIR}/inc")
   include_directories("${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
+elseif(_CVC_PREBUILT)
+  include_directories("${_CVC_INC}")
+else()
+  # FetchContent — headers are in the fetched source tree
+  include_directories("${libcvc_SOURCE_DIR}/inc")
+  include_directories("${libcvc_BINARY_DIR}/inc")
 endif()
 
 # ---------------------------------------------------------------------------

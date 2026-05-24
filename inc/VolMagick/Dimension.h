@@ -25,7 +25,7 @@
 #ifndef __VOLMAGICK_DIMENSION_H__
 #define __VOLMAGICK_DIMENSION_H__
 
-#include <CVC/Dimension.h>
+#include <cvc/dimension.h>
 
 namespace VolMagick
 {

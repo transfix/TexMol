@@ -39,7 +39,7 @@
 #include <VolMagick/endians.h>
 #include <VolMagick/RawV_IO.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 #ifdef __WINDOWS__ 
 #define SNPRINTF _snprintf
@@ -127,7 +127,7 @@ namespace VolMagick
   void RawV_IO::getVolumeFileInfo(VolumeFileInfo::Data& data,
 				  const std::string& filename) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     VoxelType rawv_type_conv[] = { CVC::UChar, CVC::UChar, CVC::UShort, 
@@ -311,7 +311,7 @@ namespace VolMagick
 			       const Dimension& subvoldim,
                                const CVC::Dimension& maxdim) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     VoxelType rawv_type_conv[] = { CVC::UChar, CVC::UChar, CVC::UShort, 
@@ -573,7 +573,7 @@ namespace VolMagick
 				 unsigned int numVariables, unsigned int numTimesteps,
 				 double min_time, double max_time) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     unsigned char rawv_inv_type_conv[] = { 1, 2, 3, 4, 5 };
@@ -697,7 +697,7 @@ namespace VolMagick
 				unsigned int var, unsigned int time,
 				uint64 off_x, uint64 off_y, uint64 off_z) const
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     char buf[256];
     unsigned char rawv_inv_type_conv[] = { 1, 2, 3, 4, 5 };

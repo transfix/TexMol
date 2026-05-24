@@ -33,7 +33,7 @@
 #include <VolMagick/Exceptions.h>
 #include <VolMagick/Dimension.h>
 
-#include <CVC/BoundingBox.h>
+#include <cvc/bounding_box.h>
 
 namespace VolMagick
 {

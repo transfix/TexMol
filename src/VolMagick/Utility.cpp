@@ -24,13 +24,13 @@
 
 #include <VolMagick/Utility.h>
 
-#include <CVC/App.h>
+#include <TexMol/cvcapp.h>
 
 namespace VolMagick
 {
   void calcGradient(std::vector<Volume>& grad, const Volume& vol, VoxelType vt)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     double dx,dy,dz,length;
     int i, j, k;
@@ -98,7 +98,7 @@ namespace VolMagick
 	   uint64 off_x, uint64 off_y, uint64 off_z,
 	   const Dimension& subvoldim)
   {
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     if(!(Dimension(off_x+subvoldim[0],off_y+subvoldim[1],off_z+subvoldim[2]) <= vol.dimension()))
       throw IndexOutOfBounds("Subvolume offset and dimension exceeds the boundary of input volume.");
@@ -124,7 +124,7 @@ namespace VolMagick
   {
     using namespace boost;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     cvcapp.log(2,str(format("%s :: out-of-core convert\n")
                      % BOOST_CURRENT_FUNCTION));

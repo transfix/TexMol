@@ -28,7 +28,7 @@
 #include <VolMagick/VolMagick.h>
 #include <VolMagick/endians.h>
 
-#include <CVC/upToPowerOfTwo.h>
+#include <cvc/utility.h>
 
 #include <cpp/H5PredType.h>
 // #if defined(WIN32)
@@ -106,7 +106,7 @@ namespace
       while(1)
         {
           VolMagick::uint64 maxdim = std::max(prevDim.xdim,std::max(prevDim.ydim,prevDim.zdim));
-          maxdim = CVC::upToPowerOfTwo(maxdim) >> 1; //power of 2 less than maxdim
+          maxdim = cvc::upToPowerOfTwo(maxdim) >> 1; //power of 2 less than maxdim
           Dimension curDim(maxdim,maxdim,maxdim);
           for(int i = 0; i < 3; i++)
             curDim[i] = std::min(curDim[i],prevDim[i]);
@@ -177,7 +177,7 @@ namespace
           while(1)
             {
               uint64 maxdim = std::max(prevDim.xdim,std::max(prevDim.ydim,prevDim.zdim));
-              maxdim = CVC::upToPowerOfTwo(maxdim) >> 1; //power of 2 less than maxdim
+              maxdim = cvc::upToPowerOfTwo(maxdim) >> 1; //power of 2 less than maxdim
               Dimension curDim(maxdim,maxdim,maxdim);
               for(int i = 0; i < 3; i++)
                 curDim[i] = std::min(curDim[i],prevDim[i]);
@@ -349,7 +349,7 @@ namespace VolMagick
     using namespace CVC::HDF5_Utilities;
     using namespace boost;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     std::string actualFileName;
     std::string objectName;
@@ -511,7 +511,7 @@ namespace VolMagick
     using namespace CVC::HDF5_Utilities;
     using namespace boost;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     std::string actualFileName;
     std::string objectName;
@@ -621,7 +621,7 @@ namespace VolMagick
     using namespace CVC::HDF5_Utilities;
     using namespace boost;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     std::string actualFileName;
     std::string objectName;
@@ -766,7 +766,7 @@ namespace VolMagick
     namespace fs = boost::filesystem;
     using boost::filesystem::path;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     std::string actualFileName;
     std::string objectName;
@@ -842,7 +842,7 @@ namespace VolMagick
     using namespace CVC::HDF5_Utilities;
     using namespace boost;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     std::string actualFileName;
     std::string objectName;
@@ -882,7 +882,7 @@ namespace VolMagick
         while(1)
           {
             uint64 maxdim = std::max(prevDim.xdim,std::max(prevDim.ydim,prevDim.zdim));
-            maxdim = CVC::upToPowerOfTwo(maxdim) >> 1; //power of 2 less than maxdim
+            maxdim = cvc::upToPowerOfTwo(maxdim) >> 1; //power of 2 less than maxdim
             Dimension curDim(maxdim,maxdim,maxdim);
             for(int i = 0; i < 3; i++)
               curDim[i] = std::min(curDim[i],prevDim[i]);
@@ -945,7 +945,7 @@ namespace VolMagick
     using namespace CVC::HDF5_Utilities;
     using namespace boost;
 
-    CVC::ThreadInfo ti(BOOST_CURRENT_FUNCTION);
+    CVC::ThreadInfo ti(cvcapp, BOOST_CURRENT_FUNCTION);
 
     std::string actualFileName;
     std::string objectName;
