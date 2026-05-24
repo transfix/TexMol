@@ -172,7 +172,6 @@ set(TEXMOL_LINK_LIBS
   ARM
   OptimizerLib
   CoarseGrain
-  VolMagick
   contourtree
   levmar
 

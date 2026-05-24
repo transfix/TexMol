@@ -19,12 +19,11 @@ ADD_SUBDIRECTORY(Contouring)
 ADD_SUBDIRECTORY(Contour)
 ADD_SUBDIRECTORY(XmlRPC)
 ADD_SUBDIRECTORY(libCG)
-ADD_SUBDIRECTORY(VolMagick)
 
 # ===========================================================================
 # Phase 1: Modules FULLY REMOVED — replaced by libcvc
 # ===========================================================================
-# VolMagick           → cvc::volume_file_io (shim header in inc/)
+# VolMagick           → cvc::volume_file_io + cvc::volume
 # VolumeFileTypes     → cvc::volume_file_io
 # VolumeLibrary       → cvc::algorithm + cvc::voxels filters
 # SignDistanceFunction (v1) → cvc::sdf(SDF_V1)
