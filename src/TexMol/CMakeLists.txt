@@ -233,9 +233,6 @@ endif()
 # GLEW — system (required)
 list(APPEND TEXMOL_LINK_LIBS GLEW::GLEW)
 
-# Legacy GL for extension function pointers (glBindFramebufferEXT etc.)
-list(APPEND TEXMOL_LINK_LIBS GL)
-
 target_link_libraries(TexMol ${TEXMOL_LINK_LIBS})
 
 SetupBoost(TexMol)
