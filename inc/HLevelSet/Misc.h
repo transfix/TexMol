@@ -26,6 +26,7 @@
 #include <cstdio>
 #include <iomanip>
 
+#include <stdlib.h>
 #if ! defined(__APPLE__)
 #include <malloc.h>
 #endif

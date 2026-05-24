@@ -3,6 +3,7 @@
 #include <memory.h>
 #include <string.h>
 
+#include <stdlib.h>
 #if ! defined (__APPLE__)
 #include <malloc.h>
 #endif

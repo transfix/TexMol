@@ -31,6 +31,7 @@
 #include <cstring>
 #include <pthread.h>
 
+#include <stdlib.h>
 #if ! defined(__APPLE__)
 #include <malloc.h>
 #endif

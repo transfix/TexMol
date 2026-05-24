@@ -2,6 +2,7 @@
 #include <AssemblyUtils/SymmetricPose.h>
 #include <PDBParser/FlattenGOA.h>
 #include <UsefulMath/Matrix.h>
+#include <stdlib.h>
 #if !defined(__APPLE__)
 #include <malloc.h>
 #endif

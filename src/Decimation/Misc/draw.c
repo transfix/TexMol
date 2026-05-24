@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 #if !defined(__APPLE__)
 #include <malloc.h>
 #endif
