@@ -26,4 +26,4 @@ if(CG_FOUND)
 endif(CG_FOUND)
 
 add_library(ObjectRenderer STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
-target_link_libraries(ObjectRenderer ${LIBS})
+target_link_libraries(ObjectRenderer ${LIBS} GLEW::GLEW)
