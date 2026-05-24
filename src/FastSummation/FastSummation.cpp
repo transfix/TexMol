@@ -30,7 +30,7 @@
 #include "FastSummation/FastSummation.h"
 
 extern "C" {
-#include "/usr/include/complex.h"
+#include <complex.h>
 
   //#include <complex.h>
 #include <FastSummation/kernels.h>

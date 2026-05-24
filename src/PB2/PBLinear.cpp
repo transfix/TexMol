@@ -19,6 +19,7 @@
 #include <PB2/endians.h>
 
 #include <MolEnergyUtil/utils.h>
+#include <TexMol/compat.h>
 
 
 // e_c*e_c*n_a*10^10/epsilon_0
@@ -113,7 +114,7 @@ extern double getTime();
 PBconstant* PBSolver::setEnv(PBOptions* options) {
 
   PrintHeading("setEnv()");
-  int numIon = 2;
+  const int numIon = 2;
 
   double ionQ[numIon];
   double ionConc[numIon];

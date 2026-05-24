@@ -77,6 +77,7 @@
 // #include <MolSurfAPI/pqr.h>
 
 #include <F2DockClient/commandLineControl.h>
+#include <TexMol/compat.h>
 
 
 

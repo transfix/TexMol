@@ -11,7 +11,12 @@
 #  define ftime _ftime
 # endif
 #else
+#ifndef _WIN32
 # include <sys/time.h>
+#else
+#include <sys/timeb.h>
+#include <TexMol/compat.h>
+#endif
 #endif  // _WINDOWS
 
 using namespace XmlRpc;

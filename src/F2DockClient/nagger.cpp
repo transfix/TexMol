@@ -20,6 +20,7 @@
 */
 
 #include <F2DockClient/nagger.h>
+#include <TexMol/compat.h>
 
 NaggerThread::NaggerThread(QObject* par)  : QThread(par)
 {

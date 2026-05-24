@@ -39,6 +39,7 @@
 // Include ordering error if these goes above
 #include <Docking/fastfft.h>
 #include <Docking/Inverse.h>
+#include <vector>
 
 using namespace my_erfs;
 using CCVOpenGLMath::Matrix;
@@ -1029,8 +1030,8 @@ void printIntermediateStats(FILE* fp, TopValues* curTopValues, float* rotations,
 	int r, f, c;
 	double mv, mx, my, mz, mrmsd = 100000000;
 	int mr, mf, mc, rank;
-	int counter[ rmsdToReport ]; // keep until 20A
-	int highestPos[ rmsdToReport ];
+	std::vector<int> counter(rmsdToReport); // keep until 20A
+	std::vector<int> highestPos(rmsdToReport);
 	int maxRank = n + 1;
 	for (int i = 0; i < rmsdToReport; i++)
 	{

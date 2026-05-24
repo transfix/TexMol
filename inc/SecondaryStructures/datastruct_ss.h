@@ -209,7 +209,7 @@ class VC_vertex : public Vb
 			v_isolated = true;
 			v_on_smooth_surface = false;
 			nnd_vector.clear();
-			nnd_vector.resize(3, HUGE);
+			nnd_vector.resize(3, HUGE_COST);
 			v_pl = false;
 			v_cyl = false;
 			// init of general purpose fields.

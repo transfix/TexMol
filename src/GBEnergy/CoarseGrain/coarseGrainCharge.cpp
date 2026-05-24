@@ -65,13 +65,13 @@ void CoarseGrain::CoarseGrainCharge(GroupOfGBAtoms *groupOfBeads)
         getBeadRange(min, max, cutoff, groupOfBeads, beadRange);
         getBeadRange(min, max, cutoff, molecule, atomRange);
 
-	int residueEnd[Nr];
-	getResidueEnd(groupOfBeads, residueEnd);
+	std::vector<int> residueEnd(Nr);
+	getResidueEnd(groupOfBeads, residueEnd.data());
 	totalChargeContained(groupOfBeads, Q, Nr);
 
 //        setupLinearSystem2bead(A, b, groupOfBeads, beadRange, atomRange, Q); // set up linear system for 2-bead model
 //	setupLinearSystemAnybead2(A, b, groupOfBeads, beadRange, atomRange, Q, residueEnd, min, max); // set up linear system for any-bead model small pqr
-	setupLinearSystemAnybead1(A, b, groupOfBeads, beadRange, atomRange, Q, residueEnd); // set up linear system for any-bead model large pqr
+	setupLinearSystemAnybead1(A, b, groupOfBeads, beadRange, atomRange, Q, residueEnd.data()); // set up linear system for any-bead model large pqr
 /*
 	for (i = 0; i < Mb; i++)
 	{
@@ -82,7 +82,7 @@ void CoarseGrain::CoarseGrainCharge(GroupOfGBAtoms *groupOfBeads)
 */
         LinearSystemSolver(A, b, Mb);
 
-	assignCharge(groupOfBeads, b, Q, residueEnd);
+	assignCharge(groupOfBeads, b, Q, residueEnd.data());
 	check(groupOfBeads, min, max, beadRange, atomRange);
 /*
 //	double chi = 0.0;

@@ -20,6 +20,7 @@
 */
 #include <F2DockClient/rerankControl.h>
 #include <string.h>
+#include <TexMol/compat.h>
 
 RerankControl::RerankControl()
 {

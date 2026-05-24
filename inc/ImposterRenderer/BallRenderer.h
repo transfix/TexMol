@@ -21,6 +21,9 @@
 #if !defined(AFX_BALLRENDERER_H__18AC0DE6_49B9_4036_9221_63B5DF373C4B__INCLUDED_)
 #define AFX_BALLRENDERER_H__18AC0DE6_49B9_4036_9221_63B5DF373C4B__INCLUDED_
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
 
 #ifdef CG

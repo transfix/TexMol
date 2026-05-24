@@ -28,6 +28,7 @@
 #include "fastLJ.h"
 
 #include <iostream>
+#include <TexMol/compat.h>
 
 using namespace std;
 

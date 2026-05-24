@@ -21,6 +21,9 @@
 #if !defined(AFX_STICKRENDERER_H__55F98E43_5A95_4CB7_9F7D_B6ADBD4D0FA9__INCLUDED_)
 #define AFX_STICKRENDERER_H__55F98E43_5A95_4CB7_9F7D_B6ADBD4D0FA9__INCLUDED_
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
 
 #ifdef CG

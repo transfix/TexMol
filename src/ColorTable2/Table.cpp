@@ -1093,7 +1093,7 @@ namespace CVCColorTable
 
   void Table::mouseReleaseEvent(QMouseEvent *e)
   {
-    std::cout << __PRETTY_FUNCTION__ << ": called!" << std::endl;
+    std::cout << __FUNCTION__ << ": called!" << std::endl;
 
     if(_selectedObj != -1)
       {
@@ -1108,7 +1108,7 @@ namespace CVCColorTable
   {
     using std::any_cast;
 
-    std::cout << __PRETTY_FUNCTION__ << ": called!" << std::endl;
+    std::cout << __FUNCTION__ << ": called!" << std::endl;
 
     bool modified = false;
     POPUPSELECTION selection = showPopup(e->globalPos());

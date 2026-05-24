@@ -24,6 +24,7 @@
 #include <PDBParser/Atom.h>
 #include <time.h>
 #include <iostream>
+#include <TexMol/compat.h>
 using namespace std;
 
 

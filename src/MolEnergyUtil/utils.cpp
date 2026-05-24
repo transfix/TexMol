@@ -4,6 +4,7 @@
 
 #include "MolEnergyUtil/utils.h"
 #include <stdio.h>
+#include <TexMol/compat.h>
 
 void printError( const char *format, ... )
 {

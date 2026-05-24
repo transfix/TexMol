@@ -26,6 +26,7 @@
 
 #ifndef WIN32
 #include <unistd.h>
+#include <TexMol/compat.h>
 #endif
 
 #define MIN2(x,y) ((x)<(y)?(x):(y))

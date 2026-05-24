@@ -21,6 +21,7 @@
 */
 #include <MolSurfAPI/molsurf.h>
 #include <PDBParser/FlattenGOA.h>
+#include <TexMol/compat.h>
 
 using namespace CVCUtility;
 using namespace ASPLINE;

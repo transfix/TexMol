@@ -16,14 +16,42 @@ project(TexMol
 )
 
 # ---------------------------------------------------------------------------
-# C++ Standard  (C++20 required by libcvc ≥ 3.x for std::format etc.)
+# C++ Standard
+# libcvc 3.x is built with C++20, but as a prebuilt library it only requires
+# a C++17 consumer.  MSVC + Qt 6.7 has QByteArrayView aggregate-init bugs
+# under C++20, so we use C++17 there.
 # ---------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 20)
+if(MSVC)
+  set(CMAKE_CXX_STANDARD 17)
+else()
+  set(CMAKE_CXX_STANDARD 20)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# ---------------------------------------------------------------------------
+# C Standard  (C17 for MSVC _Complex support in FastSummation etc.)
+# ---------------------------------------------------------------------------
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
 # Suppress Boost bind global placeholders deprecation warning
 add_compile_definitions(BOOST_BIND_GLOBAL_PLACEHOLDERS)
+
+# ---------------------------------------------------------------------------
+# MSVC-specific definitions
+# ---------------------------------------------------------------------------
+if(MSVC)
+  add_compile_definitions(
+    _USE_MATH_DEFINES
+    _CRT_SECURE_NO_WARNINGS
+    _CRT_NONSTDC_NO_WARNINGS
+    _CRT_NONSTDC_NO_DEPRECATE
+    WIN32_LEAN_AND_MEAN      # Prevent <windows.h> from pulling in <winsock.h>
+    NOMINMAX
+    _WIN32_WINNT=0x0601
+  )
+endif()
 
 # ---------------------------------------------------------------------------
 # Testing and coverage options
@@ -171,6 +199,9 @@ find_package(Qt6 COMPONENTS Core Gui Widgets Xml OpenGL OpenGLWidgets QUIET)
 if(NOT Qt6_FOUND)
   message(FATAL_ERROR "Qt6 not found. Install: sudo apt-get install qt6-base-dev libqt6opengl6-dev libqt6openglwidgets6")
 endif()
+
+# Threads (portable replacement for -lpthread)
+find_package(Threads REQUIRED)
 
 # OpenGL
 find_package(OpenGL REQUIRED)

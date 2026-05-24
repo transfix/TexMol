@@ -20,6 +20,9 @@
 */
 #include <cmath>
 
+#ifdef _WIN32
+#include <TexMol/compat.h>
+#endif
 #if defined(__APPLE__)
 #include <OpenGL/glu.h>
 #else

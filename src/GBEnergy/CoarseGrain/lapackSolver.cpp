@@ -1,10 +1,15 @@
 #include <stddef.h>
+#ifndef _WIN32
 #include <sys/time.h>
+#else
+#include <sys/timeb.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "GBEnergy/CoarseGrain/coarseGrain.h"
+#include <vector>
 
 //extern "C" double dnrm2_(int *n,double *x, int* incx);
 extern "C" void   dgesv_(int *n, int *nrhs, double *a, int *lda, int *ipiv, 
@@ -20,8 +25,8 @@ void CoarseGrain::LinearSystemSolver(double *AA, double *bb, int N)
 {
 	int n = N;
 	int k = 1;
-	double A[n*n], b[n];
-	int ipiv[n], info;
+	std::vector<double> A(n*n), b(n);
+	std::vector<int> ipiv(n); int info;
 	int i, j;
 	for (i = 0; i < n; i++)
 	{
@@ -41,7 +46,7 @@ void CoarseGrain::LinearSystemSolver(double *AA, double *bb, int N)
 		printf(" %f\n", b[i]);
 	}
 */
-	dgesv_(&n, &k, A, &n, ipiv, b, &n, &info);
+	dgesv_(&n, &k, A.data(), &n, ipiv.data(), b.data(), &n, &info);
 	for (i = 0; i < n; i++)
 		bb[i] = b[i];
 }

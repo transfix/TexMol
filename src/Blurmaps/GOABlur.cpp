@@ -61,6 +61,7 @@ void printAtomColors(vector<PDBParser::Atom*> atomList)
 }
 
 #include <iostream>
+#include <TexMol/compat.h>
 using namespace std;
 
 bool GOABlur::generateBlurmap(PDBParser::GroupOfAtoms* molecule,	SimpleVolumeData* vol,

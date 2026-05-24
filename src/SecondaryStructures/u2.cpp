@@ -232,7 +232,7 @@ void sort_i2set_by_circumradius(const vector<Facet>& i2set, vector<Facet>& sorte
 			cerr << " ";
 		}
 		int ind = -1;
-		double min = HUGE;
+		double min = HUGE_COST;
 		for (int j = 0; j < (int)i2set.size(); j ++)
 		{
 			if (b[j])
@@ -246,7 +246,7 @@ void sort_i2set_by_circumradius(const vector<Facet>& i2set, vector<Facet>& sorte
 			}
 		}
 		CGAL_assertion(ind != -1);
-		CGAL_assertion(min != HUGE);
+		CGAL_assertion(min != HUGE_COST);
 		b[ind] = true;
 		sorted_i2set.push_back(Facet(i2set[ind].first, i2set[ind].second));
 	}

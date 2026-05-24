@@ -33,9 +33,7 @@
 #include <vector>
 #include <DataManager/BoundingBox.h>
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
+#include <TexMol/compat.h>
 #if defined(__APPLE__)
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>

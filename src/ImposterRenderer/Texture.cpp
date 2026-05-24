@@ -20,17 +20,21 @@
 */
 // Texture.cpp: implementation of the Texture class.
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
+#if defined(__APPLE__)
+# include <OpenGL/glu.h>
+#else
+# include <GL/glu.h>
+#endif
 
 #include <ImposterRenderer/Texture.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
 using CCVImposterRenderer::Texture;
 

@@ -1320,7 +1320,7 @@ void mark_in_out(Triangulation& triang)
 		}
 		// calculate the facet with least circumradius and mark that facet only
 		// as opaque facet.
-		double min_r = HUGE;
+		double min_r = HUGE_COST;
 		int min = -1;
 		for (int i = 0; i < 4; i ++)
 		{
@@ -1613,7 +1613,7 @@ void create_surface(Triangulation& triang, bool postponne_walk_to_do_io_marking,
 		// if the cell is marked transparent choose the opaque facet.
 		// calculate the facet with least circumradius and mark that facet only
 		// as opaque facet.
-		double min_r = HUGE;
+		double min_r = HUGE_COST;
 		int min = -1;
 		for (int i = 0; i < 4; i ++)
 		{

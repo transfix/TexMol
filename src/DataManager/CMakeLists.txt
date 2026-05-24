@@ -11,8 +11,8 @@ if(ENABLE_SECONDARY_STRUCTURE)
   add_definitions(-DWITH_SECSTRUCT)
 endif()
 
-# for secondary structure includes
-add_definitions(-DHUGE=1000000)
+# for secondary structure includes (must not collide with POSIX/UCRT HUGE macro)
+add_definitions(-DHUGE_COST=1000000)
 
 file(GLOB SOURCE_FILES
   ./*.cpp

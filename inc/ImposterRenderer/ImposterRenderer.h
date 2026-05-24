@@ -23,6 +23,9 @@
 
 class VolumeData;
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
 
 #include <ImposterRenderer/Texture.h>

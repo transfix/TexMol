@@ -3,6 +3,7 @@
 #include <memory.h>
 #include <stdlib.h>
 #include <Decimation/Decim/sdecimPriv.h>
+#include <TexMol/compat.h>
 
 #define MAX2(x,y)  ((x)>(y)?(x):(y))
 #define SQR(x) ((x)*(x))

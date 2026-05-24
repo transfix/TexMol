@@ -18,6 +18,7 @@
 
 #ifndef COLORTABLE2_DISABLE_CONTOUR_TREE
 #include <cvc/volume.h>
+#include <TexMol/compat.h>
 #endif
 
 namespace CVCColorTable

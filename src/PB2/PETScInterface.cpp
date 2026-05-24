@@ -1,4 +1,5 @@
 #include "PB2/PETScInterface.h"
+#include <vector>
 //#include "Precondition.h"
 
 extern MultPB* mult_fmm2;
@@ -243,11 +244,11 @@ int KSPSolverPB::PBPC(int m, int n, Mat& P) {
   //MatCreateMPIBDiag(comm,PETSC_DECIDE,m,n,m,1, diag, diagv, &P);
   MatCreateSeqBDiag(comm,m,n,m,bs, diag, diagv, &P);*/
 
-  PetscInt nnz[m];
+  std::vector<PetscInt> nnz(m);
   for(int i=0; i<m; i++)
     nnz[i] = 1;
 
-  MatCreateSeqAIJ(comm,m,n,1,nnz,&P);
+  MatCreateSeqAIJ(comm,m,n,1,nnz.data(),&P);
   MatSetFromOptions(P);
   //MatCreateMPIAIJ(comm,PETSC_DECIDE,PETSC_DECIDE, m, n, 1, nnz, 0, PETSC_NULL, &P);
   PetscScalar v = 1.0;

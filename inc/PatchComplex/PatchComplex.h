@@ -23,8 +23,6 @@
 
 #include <vector>
 
-using namespace std;
-
 namespace PDBParser
 {
 	class GroupOfAtoms;

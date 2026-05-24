@@ -27,6 +27,7 @@
 #include <Utility/utility.h>
 #include <Contour/data.h>
 #include <Contour/endian_io.h>
+#include <TexMol/compat.h>
 
 extern int verbose;
 

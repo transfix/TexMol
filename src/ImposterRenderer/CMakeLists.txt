@@ -11,6 +11,11 @@ INCLUDE_DIRECTORIES(
 )
 
 set(LIBS GLEW::GLEW)
+if(TARGET OpenGL::GLU)
+  list(APPEND LIBS OpenGL::GLU)
+elseif(OPENGL_glu_LIBRARY)
+  list(APPEND LIBS ${OPENGL_glu_LIBRARY})
+endif()
 
 option(USING_AO "option for using ambient occusion for ball rendering" ON)
 if(USING_AO)

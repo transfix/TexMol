@@ -21,9 +21,7 @@
 #if !defined(AFX_DATAMANAGER_H__D330C23B_B629_4F2A_B174_FB33A71BB443__INCLUDED_)
 #define AFX_DATAMANAGER_H__D330C23B_B629_4F2A_B174_FB33A71BB443__INCLUDED_
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
+#include <TexMol/compat.h>
 
 #include <DataManager/DataSetMap.h>
 #include <UsefulMath/Ray.h>

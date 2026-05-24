@@ -3,6 +3,7 @@
 #endif
 
 #include <fast-hydro/pseudoGsol.h>
+#include <TexMol/compat.h>
 
 void pseudoGsol::freeMemory( void )
 {

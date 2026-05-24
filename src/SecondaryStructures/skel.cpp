@@ -391,7 +391,7 @@ void Skel::do_star()
 		A.push_back(comp_area);
 		comp_center = (1./comp_area)*comp_center;
 		// project the center to the nearest face of the component.
-		double min_d = HUGE;
+		double min_d = HUGE_COST;
 		Vector p_cc = comp_center;
 		for (int j = 0; j < (int)comps[i].size(); j ++)
 		{
@@ -465,7 +465,7 @@ void Skel::filter(const int& pc)
 	int max_sheets = 0;
 	for (int i = 0; i < comp_cnt; i ++)
 	{
-		double max_a = -HUGE;
+		double max_a = -HUGE_COST;
 		int max_id = -1;
 		for (int j = 0; j < comp_cnt; j ++)
 		{
@@ -572,7 +572,7 @@ void Skel::refine_skel(const double& eps)
 				Vector pi = (double)(REFINE_FACTOR - k)/REFINE_FACTOR*c +
 							(double)(k)/REFINE_FACTOR*p;
 				// if pi is further than epsilon away from the component, add it.
-				double min_d = HUGE;
+				double min_d = HUGE_COST;
 				Vector _pi = pi;
 				for (int f = 0; f < (int)comps[i].size(); f ++)
 				{
@@ -938,9 +938,9 @@ int Skel::compute_secondary_structures(Geometry* inputGeom)
 	}
 	cerr << "DT 2 ";
 	// Maintain the min-max span of the pointset in 3 directions.
-	double x_min = HUGE, x_max = -HUGE,
-		   y_min = HUGE, y_max = -HUGE,
-		   z_min = HUGE, z_max = -HUGE;
+	double x_min = HUGE_COST, x_max = -HUGE_COST,
+		   y_min = HUGE_COST, y_max = -HUGE_COST,
+		   z_min = HUGE_COST, z_max = -HUGE_COST;
 	int total_pt_cnt = 0;
 
 

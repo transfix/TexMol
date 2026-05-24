@@ -140,8 +140,14 @@
 
 #if THREADMODEL==POSIXTHREADS
 #include <sys/types.h>
+#ifndef _WIN32
 #include <sys/time.h>
+#else
+#include <sys/timeb.h>
+#endif
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #undef TRY
 #undef CATCH
 #define _CMA_NOWRAPPERS_
@@ -160,8 +166,14 @@
 
 #if THREADMODEL==COTHREADS
 #include <sys/types.h>
+#ifndef _WIN32
 #include <sys/time.h>
+#else
+#include <sys/timeb.h>
+#endif
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #endif
 
 

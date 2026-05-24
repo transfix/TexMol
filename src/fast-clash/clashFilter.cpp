@@ -25,6 +25,8 @@
 #endif
 
 #include "clashFilter.h"
+#include <vector>
+#include <TexMol/compat.h>
 
 
 void clashFilter::printError( const char *format, ... )
@@ -844,8 +846,8 @@ bool clashFilter::computeInteractions( Matrix transMat, int *nClashes, int *nSev
        initSubtreeRootServer( );
        initFreeNodeServer( numThreads );      
              
-       pthread_t p[ numThreads ];         
-       THREAD_RESULT threadResults[ numThreads ]; 
+       std::vector<pthread_t> p( numThreads );         
+       std::vector<THREAD_RESULT> threadResults( numThreads ); 
        
        for ( int i = 0; i < numThreads; i++ )
          {

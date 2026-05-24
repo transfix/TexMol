@@ -32,14 +32,13 @@ jobs:
           - os: macos-latest
             build_type: Release
             package_generator: DragNDrop
-          # Windows — disabled: codebase uses POSIX-only APIs (pthread,
-          # unistd, sys/time, VLAs) that require substantial porting work.
-          # - os: windows-latest
-          #   build_type: Debug
-          #   package_generator: NSIS
-          # - os: windows-latest
-          #   build_type: Release
-          #   package_generator: NSIS
+          # Windows
+          - os: windows-latest
+            build_type: Debug
+            package_generator: NSIS
+          - os: windows-latest
+            build_type: Release
+            package_generator: NSIS
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} / ${{ matrix.build_type }}
@@ -50,51 +49,45 @@ jobs:
         with:
           fetch-depth: 0
 
-      # ── libcvc-deps prebuilt bundles via cvcpkg ──
-      # Downloads only the components listed in cvc-requirements.yaml
-      # via cvcpkg, rather than a monolithic ~2 GB archive.
-      # On miss the action emits an empty `path` output and we fall
-      # back to the platform package manager path.
-      - name: Fetch libcvc-deps
+      # ── Third-party dependencies via cvcpkg ──
+      # cvcpkg resolves and installs prebuilt component bundles from
+      # libcvc-deps.  When the catalog is available, this provides
+      # Boost, Qt6, FFTW, GSL, HDF5, etc. in a single step.
+      # On miss the action outputs path="" and we fall back to
+      # system package managers below.
+      - name: Install dependencies (cvcpkg)
         id: libcvc-deps
-        uses: transfix/libcvc-deps/.github/actions/cvcpkg-install@v1.2.1
+        uses: transfix/libcvc-deps/.github/actions/cvcpkg-install@v1.4.0
         with:
           requirements: cvc-requirements.yaml
           build_type: ${{ matrix.build_type }}
           link: shared
 
-      # Make bundled Qt 6 host tools (uic, moc, rcc) able to load
-      # their shared libraries at build time. The bundle's
-      # libexec/uic links against libQt6Core.so/.dylib in the bundle's
-      # lib/, which isn't on the runner's default loader path.
-      - name: Export Qt runtime lib path (Linux/macOS)
-        if: runner.os != 'Windows' && steps.libcvc-deps.outputs.path != ''
+      # Export library paths so Qt host tools (uic, moc, rcc) can
+      # find their shared libraries at build time.
+      - name: Export runtime lib paths
+        if: steps.libcvc-deps.outputs.path != ''
         shell: bash
         run: |
           deps='${{ steps.libcvc-deps.outputs.path }}'
-          echo "LD_LIBRARY_PATH=$deps/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
-          echo "DYLD_LIBRARY_PATH=$deps/lib${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}" >> "$GITHUB_ENV"
-          echo "DYLD_FALLBACK_LIBRARY_PATH=$deps/lib${DYLD_FALLBACK_LIBRARY_PATH:+:$DYLD_FALLBACK_LIBRARY_PATH}" >> "$GITHUB_ENV"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            echo "$deps/bin" >> "$GITHUB_PATH"
+          else
+            echo "LD_LIBRARY_PATH=$deps/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+            echo "DYLD_LIBRARY_PATH=$deps/lib${DYLD_LIBRARY_PATH:+:$DYLD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+            echo "DYLD_FALLBACK_LIBRARY_PATH=$deps/lib${DYLD_FALLBACK_LIBRARY_PATH:+:$DYLD_FALLBACK_LIBRARY_PATH}" >> "$GITHUB_ENV"
+          fi
 
-      - name: Export Qt runtime DLL path (Windows)
-        if: runner.os == 'Windows' && steps.libcvc-deps.outputs.path != ''
-        shell: pwsh
-        run: |
-          $deps = '${{ steps.libcvc-deps.outputs.path }}'
-          "$deps\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-
-      # ── Prebuilt libcvc binary ──
-      # Download the libcvc developer SDK matching the current
-      # platform/config from the GitHub release. This is a
-      # self-contained archive with libcvc.so/.dll, headers, and all
-      # third-party dep libraries bundled alongside.
+      # ── Prebuilt libcvc SDK ──
+      # Downloaded from the libcvc GitHub release (no cvcpkg recipe
+      # for libcvc itself yet).
       - name: Fetch prebuilt libcvc
         id: libcvc
         shell: bash
         run: |
           set -euo pipefail
           LIBCVC_TAG="v3.2.4"
-          LIBCVC_PKG_VERSION="3.2.4"   # CPack project(VERSION) in the release
+          LIBCVC_PKG_VERSION="3.2.4"
 
           case "$RUNNER_OS" in
             Linux)   os=linux;   ext=tar.gz ;;
@@ -103,24 +96,19 @@ jobs:
             *)       os=$(echo "$RUNNER_OS" | tr '[:upper:]' '[:lower:]'); ext=tar.gz ;;
           esac
 
-          if [ "$os" = "windows" ]; then
-            arch="x86_64"
-          else
-            arch=$(uname -m)
-          fi
-
+          arch=$([[ "$os" == "windows" ]] && echo x86_64 || uname -m)
           btlc=$(echo "${{ matrix.build_type }}" | tr '[:upper:]' '[:lower:]')
           stem="libcvc-${LIBCVC_PKG_VERSION}-${os}-${arch}-${btlc}"
           url="https://github.com/transfix/libcvc/releases/download/${LIBCVC_TAG}/${stem}.${ext}"
 
           prefix="$HOME/libcvc"
-          [ "$os" = "windows" ] && prefix="D:/libcvc"
+          [[ "$os" == "windows" ]] && prefix="D:/libcvc"
           mkdir -p "$prefix"
 
           tmp="$(mktemp -d)"
           echo "libcvc: downloading $url"
           if ! curl -fL -o "$tmp/${stem}.${ext}" "$url"; then
-            echo "libcvc: download failed; will error at cmake configure."
+            echo "::warning::libcvc download failed — cmake configure will error"
             echo "path=" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -130,53 +118,35 @@ jobs:
             zip)    unzip -q "$tmp/${stem}.${ext}" -d "$prefix" ;;
           esac
 
-          if [ -d "$prefix/$stem" ]; then
-            root="$prefix/$stem"
-          elif [ -d "$prefix/lib" ] || [ -d "$prefix/include" ]; then
-            root="$prefix"
-          else
+          root="$prefix"
+          [[ -d "$prefix/$stem" ]] && root="$prefix/$stem"
+          [[ ! -d "$root/lib" && ! -d "$root/include" ]] && \
             root="$(find "$prefix" -mindepth 1 -maxdepth 1 -type d | head -n1)"
-          fi
 
           echo "libcvc: ready at $root"
-          ls "$root" | head -10 || true
           echo "path=$root" >> "$GITHUB_OUTPUT"
 
-      # ── Linux dependencies ──
-      # System-only essentials always installed; bundled libs (Boost,
-      # HDF5, FFTW, GSL, log4cplus, Qt 6) skipped when libcvc-deps is
-      # available.
+      # ── System fallback dependencies ──
+      # Only installed when cvcpkg didn't provide the deps.
+
       - name: Install dependencies (Linux, system)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            build-essential \
-            cmake \
-            ninja-build \
-            libgl1-mesa-dev \
-            libglu1-mesa-dev \
-            libglew-dev \
-            liblapack-dev \
-            libnsl-dev
+            build-essential cmake ninja-build \
+            libgl1-mesa-dev libglu1-mesa-dev libglew-dev \
+            liblapack-dev libnsl-dev
 
       - name: Install dependencies (Linux, fallback)
         if: runner.os == 'Linux' && steps.libcvc-deps.outputs.path == ''
         run: |
           sudo apt-get install -y --no-install-recommends \
-            qt6-base-dev \
-            libqt6opengl6-dev \
-            libqt6openglwidgets6 \
+            qt6-base-dev libqt6opengl6-dev libqt6openglwidgets6 \
             qt6-base-private-dev \
-            libboost-all-dev \
-            libcgal-dev \
-            libfftw3-dev \
-            libgsl-dev \
-            liblog4cplus-dev \
-            libhdf5-dev \
-            libmagick++-dev
+            libboost-all-dev libcgal-dev libfftw3-dev libgsl-dev \
+            liblog4cplus-dev libhdf5-dev libmagick++-dev
 
-      # ── macOS dependencies ──
       - name: Install dependencies (macOS, system)
         if: runner.os == 'macOS'
         run: |
@@ -186,45 +156,34 @@ jobs:
       - name: Install dependencies (macOS, fallback)
         if: runner.os == 'macOS' && steps.libcvc-deps.outputs.path == ''
         run: |
-          brew install \
-            boost \
-            fftw \
-            gsl \
-            log4cplus \
-            hdf5
+          brew install boost fftw gsl log4cplus hdf5
           echo "CMAKE_PREFIX_PATH=$(brew --prefix qt@6);$(brew --prefix boost);$(brew --prefix log4cplus);$(brew --prefix fftw);$(brew --prefix gsl);$(brew --prefix hdf5)" >> $GITHUB_ENV
 
-      # ── Windows dependencies ──
-      # On libcvc-deps hit: skip both install-qt-action and the heavy
-      # vcpkg install (Boost from source ~20 min). On miss: full path.
-      - name: Install Qt (Windows)
+      - name: Install Qt (Windows, fallback)
         if: runner.os == 'Windows' && steps.libcvc-deps.outputs.path == ''
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.8.*'
-          arch: win64_msvc2022_64
+          version: '6.7.3'
+          arch: win64_msvc2019_64
           cache: true
 
       - name: Install dependencies (Windows, fallback)
         if: runner.os == 'Windows' && steps.libcvc-deps.outputs.path == ''
         run: |
-          vcpkg install glew fftw3 gsl hdf5 log4cplus pthreads boost-thread boost-date-time boost-regex boost-filesystem boost-system boost-program-options boost-signals2 boost-any boost-tuple boost-format boost-multi-array boost-foreach boost-property-tree boost-algorithm boost-asio boost-bind boost-graph boost-lambda boost-lexical-cast boost-spirit boost-tokenizer boost-dynamic-bitset boost-numeric-conversion boost-range boost-smart-ptr boost-functional --triplet x64-windows
+          vcpkg install glew pthreads gsl --triplet x64-windows
         env:
           VCPKG_MAX_CONCURRENCY: 4
 
-      # GLEW + pthreads aren't in the libcvc-deps bundle, so install
-      # them via vcpkg unconditionally on Windows.
-      - name: Install GLEW + pthreads (Windows, libcvc-deps hit)
+      # GLEW + pthreads always needed via vcpkg on Windows (not in
+      # the libcvc-deps bundle).
+      - name: Install GLEW + pthreads (Windows, cvcpkg hit)
         if: runner.os == 'Windows' && steps.libcvc-deps.outputs.path != ''
-        run: |
-          vcpkg install glew pthreads --triplet x64-windows
+        run: vcpkg install glew pthreads --triplet x64-windows
         env:
           VCPKG_MAX_CONCURRENCY: 4
 
-      # The libcvc-deps bundle may ship GL/ headers (via VTK) that
-      # conflict with the Windows SDK / vcpkg GLEW on MSVC.  Remove
-      # them so the proper platform headers are used instead.
-      - name: Remove conflicting GL headers from libcvc-deps (Windows)
+      # VTK may ship GL/ headers that conflict with the Windows SDK.
+      - name: Remove conflicting GL headers (Windows)
         if: runner.os == 'Windows' && steps.libcvc-deps.outputs.path != ''
         shell: pwsh
         run: |
@@ -234,54 +193,74 @@ jobs:
             Remove-Item -Recurse -Force $glDir
           }
 
+      # libcvc prebuilt bundles the Qt headers/cmake-configs it was built with
+      # (6.8.x).  These conflict with the Qt 6.7 we install via aqtinstall, so
+      # strip them from the prebuilt prefix — TexMol only needs cvc/*.h from it.
+      - name: Remove bundled Qt from libcvc (Windows)
+        if: runner.os == 'Windows' && steps.libcvc.outputs.path != ''
+        shell: pwsh
+        run: |
+          $root = "${{ steps.libcvc.outputs.path }}"
+          # Remove Qt headers
+          Get-ChildItem -Path "$root/include" -Directory -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -like 'Qt*' } |
+            ForEach-Object {
+              Write-Host "Removing $($_.FullName)"
+              Remove-Item -Recurse -Force $_.FullName
+            }
+          # Remove Qt cmake configs so find_package(Qt6) finds aqtinstall's Qt
+          foreach ($d in @("$root/lib/cmake", "$root/cmake")) {
+            if (Test-Path $d) {
+              Get-ChildItem -Path $d -Directory -ErrorAction SilentlyContinue |
+                Where-Object { $_.Name -like 'Qt*' } |
+                ForEach-Object {
+                  Write-Host "Removing $($_.FullName)"
+                  Remove-Item -Recurse -Force $_.FullName
+                }
+            }
+          }
+          # Remove Qt DLLs/libs to avoid runtime conflicts
+          foreach ($ext in @("Qt6*.dll", "Qt6*.lib")) {
+            Get-ChildItem -Path "$root/lib" -Filter $ext -ErrorAction SilentlyContinue |
+              ForEach-Object {
+                Write-Host "Removing $($_.FullName)"
+                Remove-Item -Force $_.FullName
+              }
+            Get-ChildItem -Path "$root/bin" -Filter $ext -ErrorAction SilentlyContinue |
+              ForEach-Object {
+                Write-Host "Removing $($_.FullName)"
+                Remove-Item -Force $_.FullName
+              }
+          }
+
       # ── Configure ──
-      # Both the libcvc binary prefix and the libcvc-deps prefix go
-      # into CMAKE_PREFIX_PATH so find_package / find_library finds
-      # libcvc itself as well as Boost/Qt6/FFTW/etc.
-      - name: Configure (Linux)
-        if: runner.os == 'Linux'
+      # Assemble CMAKE_PREFIX_PATH from all available prefixes.
+      - name: Configure
+        shell: bash
         run: |
-          libcvc_prefix="${{ steps.libcvc.outputs.path }}"
-          deps_prefix="${{ steps.libcvc-deps.outputs.path }}"
+          prefixes=()
+          [[ -n "${{ steps.libcvc.outputs.path }}" ]] && prefixes+=("${{ steps.libcvc.outputs.path }}")
+          [[ -n "${{ steps.libcvc-deps.outputs.path }}" ]] && prefixes+=("${{ steps.libcvc-deps.outputs.path }}")
+          [[ -n "${CMAKE_PREFIX_PATH:-}" ]] && prefixes+=("$CMAKE_PREFIX_PATH")
+          # On Windows fallback, install-qt-action sets Qt6_DIR
+          [[ -n "${Qt6_DIR:-}" ]] && prefixes+=("$Qt6_DIR")
+          cmake_prefix=$(IFS=';'; echo "${prefixes[*]}")
+
+          extra_args=()
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            extra_args+=("-DCMAKE_TOOLCHAIN_FILE=$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake")
+          else
+            extra_args+=("-G" "Ninja")
+          fi
+
           cmake -B build \
-            -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DHAVE_PETSC=OFF \
             -DHAVE_NFFT=OFF \
             -DDISABLE_CGAL=ON \
-            -DCMAKE_PREFIX_PATH="${libcvc_prefix};${deps_prefix}" \
-            -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
-
-      - name: Configure (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          libcvc_prefix="${{ steps.libcvc.outputs.path }}"
-          deps_prefix="${{ steps.libcvc-deps.outputs.path }}"
-          combined_prefix="${libcvc_prefix};${deps_prefix}${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
-          cmake -B build \
-            -G Ninja \
-            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-            -DHAVE_PETSC=OFF \
-            -DHAVE_NFFT=OFF \
-            -DDISABLE_CGAL=ON \
-            -DCMAKE_PREFIX_PATH="$combined_prefix" \
-            -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install
-
-      - name: Configure (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          $libcvcPath = '${{ steps.libcvc.outputs.path }}'
-          $depsPath = '${{ steps.libcvc-deps.outputs.path }}'
-          $parts = @($libcvcPath, $depsPath, $env:Qt6_DIR) | Where-Object { $_ }
-          $prefix = $parts -join ';'
-          cmake -B build `
-            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
-            -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" `
-            -DCMAKE_PREFIX_PATH="$prefix" `
-            -DHAVE_PETSC=OFF `
-            -DHAVE_NFFT=OFF `
-            -DDISABLE_CGAL=ON `
-            -DCMAKE_INSTALL_PREFIX="${{ github.workspace }}/_install"
+            -DCMAKE_PREFIX_PATH="$cmake_prefix" \
+            -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/_install \
+            "${extra_args[@]}"
 
       # ── Build ──
       - name: Build
@@ -290,10 +269,13 @@ jobs:
       # ── Test ──
       - name: Configure tests
         if: matrix.build_type == 'Debug' && runner.os != 'Windows'
+        shell: bash
         run: |
-          libcvc_prefix="${{ steps.libcvc.outputs.path }}"
-          deps_prefix="${{ steps.libcvc-deps.outputs.path }}"
-          combined_prefix="${libcvc_prefix};${deps_prefix}${CMAKE_PREFIX_PATH:+;$CMAKE_PREFIX_PATH}"
+          prefixes=()
+          [[ -n "${{ steps.libcvc.outputs.path }}" ]] && prefixes+=("${{ steps.libcvc.outputs.path }}")
+          [[ -n "${{ steps.libcvc-deps.outputs.path }}" ]] && prefixes+=("${{ steps.libcvc-deps.outputs.path }}")
+          [[ -n "${CMAKE_PREFIX_PATH:-}" ]] && prefixes+=("$CMAKE_PREFIX_PATH")
+          cmake_prefix=$(IFS=';'; echo "${prefixes[*]}")
           cmake -B build-test \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
@@ -301,7 +283,7 @@ jobs:
             -DHAVE_PETSC=OFF \
             -DHAVE_NFFT=OFF \
             -DDISABLE_CGAL=ON \
-            -DCMAKE_PREFIX_PATH="$combined_prefix"
+            -DCMAKE_PREFIX_PATH="$cmake_prefix"
 
       - name: Build tests
         if: matrix.build_type == 'Debug' && runner.os != 'Windows'

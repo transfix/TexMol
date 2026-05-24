@@ -10,6 +10,7 @@
 
 #include <Decimation/Decim/mesh.h>
 #include <Decimation/Decim/sdecimPriv.h>
+#include <TexMol/compat.h>
 
 #define PROP_ERR
 static int ncorner, nintedge, nboundary, nsimple, ncomplex;
