@@ -17,7 +17,9 @@
 #if 0
 #include <memory.h>
 #ifndef MACOS_X
+#if !defined(__APPLE__)
 #include <malloc.h>
+#endif
 #endif
 #endif
 #include <string.h>

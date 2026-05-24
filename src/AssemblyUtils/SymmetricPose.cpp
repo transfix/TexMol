@@ -2,7 +2,9 @@
 #include <AssemblyUtils/SymmetricPose.h>
 #include <PDBParser/FlattenGOA.h>
 #include <UsefulMath/Matrix.h>
+#if !defined(__APPLE__)
 #include <malloc.h>
+#endif
 
 /**
 Using LAPACK for least squares solving

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
+#if !defined(__APPLE__)
 #include <malloc.h>
+#endif
 #include <assert.h>
 #include <X11/StringDefs.h>
 #include <Decimation/Control/cmds.h>
