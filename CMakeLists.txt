@@ -177,6 +177,7 @@ find_package(OpenGL REQUIRED)
 
 # GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
 find_package(GLEW REQUIRED)
+include_directories(${GLEW_INCLUDE_DIRS})
 
 # GSL (for molecular analysis modules)
 find_package(GSL QUIET)
