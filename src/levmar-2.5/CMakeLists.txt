@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
 FILE(GLOB SOURCE_FILES Axb.c expfit.c lmdb.c lmblec.c lmbleic.c lm.c lmdemo.c lmlec.c misc.c)
 FILE(GLOB INCLUDE_FILES ../../inc/UsefulMath/*.[Hh])

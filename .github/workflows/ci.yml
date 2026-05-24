@@ -32,13 +32,14 @@ jobs:
           - os: macos-latest
             build_type: Release
             package_generator: DragNDrop
-          # Windows
-          - os: windows-latest
-            build_type: Debug
-            package_generator: NSIS
-          - os: windows-latest
-            build_type: Release
-            package_generator: NSIS
+          # Windows — disabled: codebase uses POSIX-only APIs (pthread,
+          # unistd, sys/time, VLAs) that require substantial porting work.
+          # - os: windows-latest
+          #   build_type: Debug
+          #   package_generator: NSIS
+          # - os: windows-latest
+          #   build_type: Release
+          #   package_generator: NSIS
 
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} / ${{ matrix.build_type }}

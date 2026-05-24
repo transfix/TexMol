@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
 # CHA: we should be able to find third-party from our own build
 #IF (HAVE_NFFT)
