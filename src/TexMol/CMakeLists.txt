@@ -255,3 +255,29 @@ if(UNIX AND NOT APPLE)
   install(PROGRAMS "${TexMol_SOURCE_DIR}/bin/runTexMol" DESTINATION bin OPTIONAL)
 endif()
 
+# On Windows, run windeployqt at install time to bundle Qt DLLs alongside TexMol.exe
+if(WIN32)
+  find_program(WINDEPLOYQT_EXECUTABLE NAMES windeployqt6 windeployqt HINTS "${Qt6_DIR}/../../../bin" "${Qt6Core_DIR}/../../../bin")
+  if(WINDEPLOYQT_EXECUTABLE)
+    install(CODE "
+      execute_process(
+        COMMAND \"${WINDEPLOYQT_EXECUTABLE}\"
+          --no-translations --no-system-d3d-compiler --no-opengl-sw
+          \"\${CMAKE_INSTALL_PREFIX}/bin/TexMol.exe\"
+      )
+    ")
+  endif()
+
+  # Bundle libcvc DLL if found
+  find_file(LIBCVC_DLL NAMES libcvc.dll cvc.dll HINTS "${CMAKE_PREFIX_PATH}" PATH_SUFFIXES bin lib)
+  if(LIBCVC_DLL)
+    install(FILES "${LIBCVC_DLL}" DESTINATION bin)
+  endif()
+
+  # Bundle GLEW DLL if found
+  find_file(GLEW_DLL NAMES glew32.dll GLEW.dll HINTS "${CMAKE_PREFIX_PATH}" "$ENV{VCPKG_INSTALLATION_ROOT}/installed/x64-windows/bin" PATH_SUFFIXES bin)
+  if(GLEW_DLL)
+    install(FILES "${GLEW_DLL}" DESTINATION bin)
+  endif()
+endif()
+

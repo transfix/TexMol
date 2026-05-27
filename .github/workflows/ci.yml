@@ -323,6 +323,44 @@ jobs:
         working-directory: build
         run: cpack -G ${{ matrix.package_generator }} -C ${{ matrix.build_type }}
 
+      # ── AppImage (Linux Release only) ──
+      - name: Build AppImage (Linux)
+        if: runner.os == 'Linux' && matrix.build_type == 'Release'
+        run: |
+          set -e
+
+          # Stage install tree into AppDir
+          DESTDIR="$PWD/AppDir" cmake --install build --prefix /usr
+
+          # Copy desktop/icon to AppDir root (required by linuxdeploy)
+          cp AppDir/usr/share/applications/texmol.desktop AppDir/
+          cp AppDir/usr/share/icons/hicolor/256x256/apps/texmol.png AppDir/
+
+          # Copy libcvc.so into AppDir for bundling
+          libcvc_path="${{ steps.libcvc.outputs.path }}"
+          if [ -n "$libcvc_path" ] && [ -d "$libcvc_path/lib" ]; then
+            cp -a "$libcvc_path"/lib/libcvc.so* AppDir/usr/lib/ 2>/dev/null || true
+          fi
+
+          # Download linuxdeploy
+          curl -L -o linuxdeploy \
+            https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          curl -L -o linuxdeploy-plugin-qt \
+            https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          chmod +x linuxdeploy linuxdeploy-plugin-qt
+
+          # Build AppImage
+          export LD_LIBRARY_PATH="$PWD/AppDir/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          ./linuxdeploy --appdir AppDir \
+            --plugin qt \
+            --output appimage \
+            --desktop-file AppDir/texmol.desktop \
+            --icon-file AppDir/texmol.png
+
+          # Rename to consistent scheme
+          mv TexMol-*.AppImage "TexMol-${GITHUB_REF_NAME#v}-x86_64.AppImage" 2>/dev/null || \
+            mv TexMol*.AppImage "TexMol-${{ matrix.build_type }}-x86_64.AppImage"
+
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
@@ -333,6 +371,7 @@ jobs:
             build/*.tar.gz
             build/*.exe
             build/*.zip
+            *.AppImage
           retention-days: 30
 
       - name: Upload build artifact
@@ -360,7 +399,7 @@ jobs:
       - name: Collect release assets
         run: |
           mkdir release-assets
-          find artifacts -type f \( -name '*.deb' -o -name '*.dmg' -o -name '*.tar.gz' -o -name '*.exe' -o -name '*.zip' \) \
+          find artifacts -type f \( -name '*.deb' -o -name '*.dmg' -o -name '*.tar.gz' -o -name '*.exe' -o -name '*.zip' -o -name '*.AppImage' \) \
             -exec cp {} release-assets/ \;
           ls -la release-assets/
 

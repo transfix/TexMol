@@ -409,21 +409,44 @@ if(TEXMOL_BUILD_TESTS)
 endif()
 
 # ---------------------------------------------------------------------------
+# Install desktop integration files (Linux AppImage / DEB)
+# ---------------------------------------------------------------------------
+if(UNIX AND NOT APPLE)
+  install(FILES "${CMAKE_SOURCE_DIR}/share/applications/texmol.desktop"
+    DESTINATION share/applications)
+  install(FILES "${CMAKE_SOURCE_DIR}/share/icons/hicolor/256x256/apps/texmol.png"
+    DESTINATION share/icons/hicolor/256x256/apps)
+endif()
+
+# ---------------------------------------------------------------------------
 # CPack packaging
 # ---------------------------------------------------------------------------
+include(InstallRequiredSystemLibraries)
+
+set(CPACK_PACKAGE_NAME "TexMol")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Molecular Processing and Visualization")
 set(CPACK_PACKAGE_VENDOR "Computational Visualization Center")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_CONTACT "arand@ices.utexas.edu")
 set(CPACK_STRIP_FILES ON)
 set(CPACK_PACKAGE_EXECUTABLES "TexMol" "TexMol")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "TexMol")
 
 if(WIN32)
-  set(CPACK_GENERATOR "NSIS")
+  set(CPACK_GENERATOR "NSIS;ZIP")
+  # NSIS configuration
+  set(CPACK_NSIS_DISPLAY_NAME "TexMol ${PROJECT_VERSION}")
+  set(CPACK_NSIS_PACKAGE_NAME "TexMol ${PROJECT_VERSION}")
+  set(CPACK_NSIS_MODIFY_PATH ON)
+  set(CPACK_CREATE_DESKTOP_LINKS TexMol)
+  set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 elseif(APPLE)
   set(CPACK_GENERATOR "DragNDrop")
 else()
   set(CPACK_GENERATOR "DEB;TGZ")
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER "CVC Lab")
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS
+    "libqt6widgets6, libqt6openglwidgets6, libqt6xml6, libglew2.2, libglu1-mesa, liblapack3")
 endif()
 include(CPack)

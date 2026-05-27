@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=TexMol
+Comment=Molecular Processing and Visualization
+Exec=TexMol
+Icon=texmol
+Terminal=false
+Type=Application
+Categories=Science;Education;
+MimeType=chemical/x-pdb;
