@@ -338,6 +338,7 @@ jobs:
 
           # Copy libcvc.so into AppDir for bundling
           libcvc_path="${{ steps.libcvc.outputs.path }}"
+          mkdir -p AppDir/usr/lib
           if [ -n "$libcvc_path" ] && [ -d "$libcvc_path/lib" ]; then
             echo "Copying libcvc from $libcvc_path/lib/"
             ls -la "$libcvc_path"/lib/libcvc* || true
