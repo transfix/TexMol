@@ -339,18 +339,27 @@ jobs:
           # Copy libcvc.so into AppDir for bundling
           libcvc_path="${{ steps.libcvc.outputs.path }}"
           if [ -n "$libcvc_path" ] && [ -d "$libcvc_path/lib" ]; then
-            cp -a "$libcvc_path"/lib/libcvc.so* AppDir/usr/lib/ 2>/dev/null || true
+            echo "Copying libcvc from $libcvc_path/lib/"
+            ls -la "$libcvc_path"/lib/libcvc* || true
+            cp -av "$libcvc_path"/lib/libcvc.so* AppDir/usr/lib/
+          else
+            echo "::warning::libcvc prebuilt not found — AppImage may be incomplete"
           fi
+          echo "=== AppDir/usr/lib contents ==="
+          ls -la AppDir/usr/lib/
 
           # Download linuxdeploy
-          curl -L -o linuxdeploy \
+          curl -fL -o linuxdeploy \
             https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-          curl -L -o linuxdeploy-plugin-qt \
+          curl -fL -o linuxdeploy-plugin-qt \
             https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
           chmod +x linuxdeploy linuxdeploy-plugin-qt
 
-          # Build AppImage
-          export LD_LIBRARY_PATH="$PWD/AppDir/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+          # Build AppImage — include libcvc prebuilt AND system lib paths
+          export LD_LIBRARY_PATH="$PWD/AppDir/usr/lib"
+          [ -n "$libcvc_path" ] && export LD_LIBRARY_PATH="$libcvc_path/lib:$LD_LIBRARY_PATH"
+          echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+
           ./linuxdeploy --appdir AppDir \
             --plugin qt \
             --output appimage \
