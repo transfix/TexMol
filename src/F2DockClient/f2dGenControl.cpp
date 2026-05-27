@@ -20,6 +20,7 @@
 */
 #include <F2DockClient/f2dGenControl.h>
 #include <string.h>
+#include <TexMol/compat.h>
 
 F2dGenControl::F2dGenControl()
 {

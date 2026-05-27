@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
 SetupQt()
 
@@ -22,7 +22,7 @@ if(CG_FOUND)
 endif(CG_FOUND)
 
 add_library(GeometryRenderer STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
-target_link_libraries(GeometryRenderer ${LIBS} Qt6::Widgets)
+target_link_libraries(GeometryRenderer ${LIBS} Qt6::Widgets GLEW::GLEW)
 
 #because we include ColorTable.h
 SetupBoost(GeometryRenderer)

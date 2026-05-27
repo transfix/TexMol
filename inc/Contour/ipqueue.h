@@ -26,6 +26,7 @@
 #include <Contour/basic.h>
 #include <Contour/Bin.h>
 #include <Contour/hash.h>
+#include <TexMol/compat.h>
 
 extern int verbose;
 

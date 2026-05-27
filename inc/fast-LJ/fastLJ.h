@@ -31,6 +31,7 @@
 #include <cstdlib>
 #include <cstring>
 
+#include <stdlib.h>
 #if ! defined(__APPLE__)
 #include <malloc.h>
 #endif

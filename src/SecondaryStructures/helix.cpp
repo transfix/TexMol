@@ -4,6 +4,7 @@
 #include <SecondaryStructures/op.h>
 
 #include <stdlib.h>
+#include <TexMol/compat.h>
 
 using namespace SecondaryStructures;
 
@@ -233,7 +234,7 @@ vector< vector<Point> > build_cylindrical_helices(const vector< vector<int> >& c
 	for (int i = 0; i < (int)curve_comps.size(); i ++)
 	{
 		int ep[2] = {-1,-1};
-		double max = -HUGE;
+		double max = -HUGE_COST;
 		if ((int)curve_comps[i].size() < 2)
 		{
 			continue;

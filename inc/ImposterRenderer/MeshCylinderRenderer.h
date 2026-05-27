@@ -27,7 +27,15 @@
 #ifndef __MESHCYLINDERRENDERER_H__
 #define __MESHCYLINDERRENDERER_H__
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
+#if defined(__APPLE__)
+# include <OpenGL/glu.h>
+#else
+# include <GL/glu.h>
+#endif
 
 #include <stdio.h>
 #include <ImposterRenderer/ExpandableBuffer.h>

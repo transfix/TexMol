@@ -1,6 +1,7 @@
 
-#include <VolMagick/VolMagick.h> // arand: the VolMagick header is picky...
-// if it is at the bottom of the list, the compiler complains
+#include <TexMol/cvcapp.h>
+#include <cvc/volume.h>
+#include <cvc/volume_file_io.h>
 
 #include "PB2/PBLinear.h"
 #include "PB2/PETScInterface.h"
@@ -18,6 +19,7 @@
 #include <PB2/endians.h>
 
 #include <MolEnergyUtil/utils.h>
+#include <TexMol/compat.h>
 
 
 // e_c*e_c*n_a*10^10/epsilon_0
@@ -112,7 +114,7 @@ extern double getTime();
 PBconstant* PBSolver::setEnv(PBOptions* options) {
 
   PrintHeading("setEnv()");
-  int numIon = 2;
+  const int numIon = 2;
 
   double ionQ[numIon];
   double ionConc[numIon];
@@ -1246,16 +1248,16 @@ PetscErrorCode PBSolver::computeVolumePotential(PBOptions* options) {
   loadPot(options);
   cout << "Potential Loaded" << endl;
 
-  VolMagick::Volume inputVol;
+  cvc::volume inputVol(cvcapp);
 
   if (options->haveSDF) {
 
     cout << "Loading Signed Distance Function from " << options->sdf_fname << endl;
     try {
 
-      VolMagick::readVolumeFile(inputVol,options->sdf_fname);
+      cvc::readVolumeFile(cvcapp, inputVol, options->sdf_fname);
 
-    } catch(VolMagick::Exception &e) {
+    } catch(cvc::exception &e) {
       std:: cerr << e.what() << std::endl;
     } catch(std::exception &e) {
       std::cerr << e.what() << std::endl;

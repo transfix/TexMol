@@ -3,6 +3,7 @@
 #endif
 
 #include "utils.h"
+#include <TexMol/compat.h>
 
 using namespace std;
 

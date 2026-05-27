@@ -31,6 +31,8 @@ using namespace GBGEOMETRY;
         #include <sys/timeb.h>
 #else
         #include <sys/time.h>
+#include <TexMol/compat.h>
+#include <vector>
 #endif
 
 // #define dim 12 //32 //64
@@ -409,7 +411,7 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	blurAtomList(atomList,blurValue);
 
 	n = numOfSamples;
-	double x[n]; // chi function
+	std::vector<double> x(n); // chi function
 
 	srand48( (long)time(NULL) );
 	p[0] = adata[0].radius;
@@ -430,11 +432,11 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	{
 		// optimize radius first since the initial centers are close to the optimal centers
 		m = 1;
-		ret=dlevmar_dif(radiuscenterOptimizeFunction, p, x, m, n, 1000, opts, info, NULL, NULL, (void*)fdata);
+		ret=dlevmar_dif(radiuscenterOptimizeFunction, p, x.data(), m, n, 1000, opts, info, NULL, NULL, (void*)fdata);
         	updateFunctionData(fdata, c, p[0]);
 		
     		int mm = 3*m;
-   		ret = dlevmar_dif(radiuscenterOptimizeFunction, c, x, mm, n, 1000, opts, info, NULL, NULL, (void*)fdata);
+   		ret = dlevmar_dif(radiuscenterOptimizeFunction, c, x.data(), mm, n, 1000, opts, info, NULL, NULL, (void*)fdata);
 		updateFunctionData(fdata, c, p[0]);
 /*
 		m = 1; 
@@ -449,7 +451,7 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	adata[0].center[2] = fdata->adata[0].center[2];
 	adata[0].radius = fdata->adata[0].radius;
 
-//  ret = dlevmar_dif(radiuscenterOptimizeFunction, c, x, m, n, 50, opts, info, NULL, NULL, (void*)adata);
+//  ret = dlevmar_dif(radiuscenterOptimizeFunction, c, x.data(), m, n, 50, opts, info, NULL, NULL, (void*)adata);
     // no jacobian
 /*
   printf("Levenberg-Marquardt returned %d in %g iter, takes %f seconds, reason %g\nSolution: \n", ret, info[5], end-start, info[6]);
@@ -500,7 +502,7 @@ void Optimizer::optimizeCharge()
 
 	m = numOfUnknown;
 	n = m;
-	double x[n]; // chi function
+	std::vector<double> x(n); // chi function
 
 	srand48( (long)time(NULL) );
 	for (i = 0; i < numOfUnknown; i++)
@@ -525,9 +527,9 @@ void Optimizer::optimizeCharge()
       double A[3*5]={1.0, 3.0, 0.0, 0.0, 0.0,  0.0, 0.0, 1.0, 1.0, -2.0,  0.0, 1.0, 0.0, 0.0, -1.0},
              b[3]={0.0, 0.0, 0.0};
 */
-//	ret = dlevmar_lec_dif(chargeOptimizeFunction, q, x, m, n, A, b, 1, 1000, opts, info, NULL, NULL, (void*)fdata); // optimize self energy only
-//	ret = dlevmar_lec_dif(chargeOptimizeFunction2, q, x, m, n, A, b, 1, 1000, opts, info, NULL, NULL, (void*)fdata); // optimize GB energy
-	ret = dlevmar_dif(chargeOptimizeFunction2, q, x, m, n, 6/*000*/, opts, info, NULL, NULL, (void*)fdata);
+//	ret = dlevmar_lec_dif(chargeOptimizeFunction, q, x.data(), m, n, A, b, 1, 1000, opts, info, NULL, NULL, (void*)fdata); // optimize self energy only
+//	ret = dlevmar_lec_dif(chargeOptimizeFunction2, q, x.data(), m, n, A, b, 1, 1000, opts, info, NULL, NULL, (void*)fdata); // optimize GB energy
+	ret = dlevmar_dif(chargeOptimizeFunction2, q, x.data(), m, n, 6/*000*/, opts, info, NULL, NULL, (void*)fdata);
 	updateChargeData(fdata, q);
 
 	end = getMyTime();

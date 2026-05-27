@@ -7,6 +7,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <TexMol/compat.h>
 
 using namespace std;
 

@@ -42,6 +42,7 @@
 #else
 # include <GL/gl.h>
 # include <GL/glu.h>
+#include <TexMol/compat.h>
 #endif
 
 using CCVTexMolGeometryRenderer::GeometryRenderer;

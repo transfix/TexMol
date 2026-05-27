@@ -20,6 +20,7 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include <MultiresolutionSurface/blurring.h>
+#include <TexMol/compat.h>
 
 extern bool getBlurMapWithSlowAlgo(fftw_complex* blurmap, fftw_complex* rbfCenterValues, double* rbfCenterPositions, fftw_complex* rbf1D, int numCenters, int numFreq, int gridSize, double alpha, int interpFuncExtent, int rbfWidth);
 

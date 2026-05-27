@@ -32,10 +32,8 @@
 
 #ifdef _MSC_VER
 #define LM_FINITE _finite // MSVC
-#elif defined(__ICC) || defined(__INTEL_COMPILER) || defined(__GNUC__)
-#define LM_FINITE finite // ICC, GCC
 #else
-#define LM_FINITE finite // other than MSVC, ICC, GCC, let's hope this will work
+#define LM_FINITE isfinite // C99 standard; works on GCC, Clang, ICC
 #endif
 
 #ifdef _MSC_VER // avoid deprecation warnings in VS2005

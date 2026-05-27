@@ -1,10 +1,13 @@
 #include <fast-hydro/pseudoGsol.h>
 #include <fast-resCont/resContFilter.h>
+#include <array>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <UsefulMath/Matrix.h>
 #include <fast-resCont/miscIdent.h>
 #include <vis-lib/getVis.h>
+#include <TexMol/compat.h>
 #define GRIDSIZE 8
 
 using CCVOpenGLMath::Matrix;
@@ -39,9 +42,9 @@ double computeArea(Point4D &a, Point4D &b, Point4D &c) {
 vector<string> split(string &s) {
     vector<string> results;
     char *p;
-    char buffer[s.size() + 1];
-    strcpy(buffer, s.c_str());
-    p = strtok(buffer, " ");
+    std::vector<char> buffer(s.size() + 1);
+    strcpy(buffer.data(), s.c_str());
+    p = strtok(buffer.data(), " ");
     results.push_back(string(p));
     p = strtok(NULL, " ");
     while (p != NULL) {
@@ -108,11 +111,11 @@ int quad2mesh(vector<double> &quadValues, vector<double> &quadWeights, int densi
         vector<string> title = split(s);
         numVertices = atoi(title[0].c_str());
         numFaces = atoi(title[1].c_str());
-        Point4D vertices[numVertices];
-        Point4D normal[numVertices];
+        std::vector<Point4D> vertices(numVertices);
+        std::vector<Point4D> normal(numVertices);
         
-        double weights[numVertices];
-        int index[numFaces][3];
+        std::vector<double> weights(numVertices);
+        std::vector<std::array<int,3>> index(numFaces);
         
         for (int i = 0; i < numVertices; i ++) {
             weights[i] = 0;
@@ -214,10 +217,10 @@ int atom2mesh(vector<Point> &atomPoints, vector<double> &atomValues, const char 
         vector<string> title = split(s);
         numVertices = atoi(title[0].c_str());
         numFaces = atoi(title[1].c_str());
-        Point4D vertices[numVertices];
-        Point4D normal[numVertices];
+        std::vector<Point4D> vertices(numVertices);
+        std::vector<Point4D> normal(numVertices);
         
-        int index[numFaces][3];
+        std::vector<std::array<int,3>> index(numFaces);
         
         for (int i = 0; i < numVertices; i ++) {
             getline(ifs, s);

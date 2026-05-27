@@ -19,17 +19,21 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
+#if defined(__APPLE__)
+# include <OpenGL/glu.h>
+#else
+# include <GL/glu.h>
+#endif
 
 #include <math.h>
 #include <ObjectRenderer/Texture.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
 using namespace ObjectRendererLibrary;
 

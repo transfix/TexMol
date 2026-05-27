@@ -39,7 +39,9 @@
 #define GETPID  _getpid
 #elif defined(__GNUC__) // GCC
 #include <sys/types.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #define GETPID  getpid
 #else
 #warning Do not know the name of the function returning the process id for your OS/compiler combination
@@ -92,8 +94,10 @@ register int i, j;
 
 int main()
 {
-const int n=40, m=3; // 40 measurements, 3 parameters
-double p[m], x[n], opts[LM_OPTS_SZ], info[LM_INFO_SZ];
+#define EXPFIT_N 40
+#define EXPFIT_M 3
+const int n=EXPFIT_N, m=EXPFIT_M; // 40 measurements, 3 parameters
+double p[EXPFIT_M], x[EXPFIT_N], opts[LM_OPTS_SZ], info[LM_INFO_SZ];
 register int i;
 int ret;
 

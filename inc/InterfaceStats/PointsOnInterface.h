@@ -47,6 +47,7 @@ of interface statistics.
 #include <stdarg.h>
 #include <map>
 
+#include <stdlib.h>
 #if ! defined(__APPLE__)
 #include <malloc.h>
 #endif

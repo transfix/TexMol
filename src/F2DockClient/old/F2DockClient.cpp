@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
+#include <TexMol/compat.h>
 
 using namespace XmlRpc;
 using namespace std;

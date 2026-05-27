@@ -4,6 +4,8 @@
 
 #include <fast-resCont/resContFilter.h>
 #include <stdlib.h>
+#include <vector>
+#include <TexMol/compat.h>
 
 void resContFilter::printError( const char *format, ... )
 {
@@ -851,8 +853,8 @@ bool resContFilter::computeInteractions( Matrix transMat, double *interactionVal
        initSubtreeRootServer( );
        initFreeNodeServer( numThreads );
 
-       pthread_t p[ numThreads ];
-       THREAD_RESULT threadResults[ numThreads ];
+       std::vector<pthread_t> p( numThreads );
+       std::vector<THREAD_RESULT> threadResults( numThreads );
 
        for ( int i = 0; i < numThreads; i++ )
          {

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #include <math.h>
 
 #if ! defined(__APPLE__)
@@ -9,7 +11,12 @@
 
 #include <memory.h>
 #include <string.h>
+#include <TexMol/compat.h>
+#ifndef _WIN32
 #include <sys/time.h>
+#else
+#include <sys/timeb.h>
+#endif
 #include <Decimation/Decim/sdecimPriv.h>
 
 #define SIMPLE  0
@@ -354,7 +361,6 @@ void SDecimMeshDecimate(SDecimMeshP dmp, float *err, int niter, float aspect,
    int *vindex;
    int *deleted, nd;
    struct timeval tp;
-   struct timezone tzp;
    float *curerr;
 
    vindex = (int *)malloc(sizeof(int)*dmp->tdata->nvert);
@@ -380,7 +386,7 @@ if (VTmeshNvars(dmp->mesh) == 1 && !strcmp(VTmeshVarName(dmp->mesh,0),"initerr")
 #endif
 
    /* compute a random perturbation of the current vertices */
-   gettimeofday(&tp, &tzp);
+   gettimeofday(&tp, NULL);
    srand48(tp.tv_usec);
    for (v=0; v<dmp->tdata->nvert; v++)
       vindex[v] = v;

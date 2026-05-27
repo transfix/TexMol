@@ -172,8 +172,6 @@ set(TEXMOL_LINK_LIBS
   ARM
   OptimizerLib
   CoarseGrain
-  VolMagick
-  CVC
   contourtree
   levmar
 
@@ -235,16 +233,13 @@ endif()
 # GLEW — system (required)
 list(APPEND TEXMOL_LINK_LIBS GLEW::GLEW)
 
-# Legacy GL for extension function pointers (glBindFramebufferEXT etc.)
-list(APPEND TEXMOL_LINK_LIBS GL)
-
 target_link_libraries(TexMol ${TEXMOL_LINK_LIBS})
 
 SetupBoost(TexMol)
 SetupCGAL(TexMol)
 
-# for secondary structure includes
-add_definitions(-DHUGE=1000000)
+# for secondary structure includes (must not collide with POSIX/UCRT HUGE macro)
+add_definitions(-DHUGE_COST=1000000)
 
 # ---------------------------------------------------------------------------
 # Install

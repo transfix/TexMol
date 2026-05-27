@@ -24,6 +24,7 @@
  */
 
 #include <cmath>
+#include <vector>
 #include <ImposterRenderer/MeshHelixRenderer.h>
 #include <UsefulMath/Matrix.h>
 #include <UsefulMath/Vector.h>
@@ -79,26 +80,26 @@ void MeshHelixRenderer::DrawHelixBuffer(const ExpandableBuffer<GLfloat>& positio
 		const GLfloat HEIGHT_TO_THETA = (1.0f / height) * 360.0f * HEIGHT_TO_COILS;
 		int nAngles = height / HEIGHT_STEP;
 		int nVertices = 2 * nAngles;
-		GLfloat vertices[nVertices][3];
-		GLfloat normals[nVertices][3];
+		std::vector<GLfloat> vertices(nVertices * 3);
+		std::vector<GLfloat> normals(nVertices * 3);
 		GLfloat heightIter = 0;
 		for (int i = 0; i < nVertices; i+=2)
 		{
 			GLfloat thetaIter = heightIter * HEIGHT_TO_THETA;
-			normals[i+1][0] = normals[i][0] = cos(thetaIter);
-			normals[i+1][1] = normals[i][1] = sin(thetaIter);
-			normals[i+1][2] = normals[i][2] = 0;
-			vertices[i][0] = radius * cos(thetaIter);
-			vertices[i][1] = radius * sin(thetaIter);
-			vertices[i][2] = heightIter + STRIP_HEIGHT;
-			vertices[i+1][0] = radius * cos(thetaIter);
-			vertices[i+1][1] = radius * sin(thetaIter);
-			vertices[i+1][2] = heightIter;
+			normals[(i+1)*3+0] = normals[i*3+0] = cos(thetaIter);
+			normals[(i+1)*3+1] = normals[i*3+1] = sin(thetaIter);
+			normals[(i+1)*3+2] = normals[i*3+2] = 0;
+			vertices[i*3+0] = radius * cos(thetaIter);
+			vertices[i*3+1] = radius * sin(thetaIter);
+			vertices[i*3+2] = heightIter + STRIP_HEIGHT;
+			vertices[(i+1)*3+0] = radius * cos(thetaIter);
+			vertices[(i+1)*3+1] = radius * sin(thetaIter);
+			vertices[(i+1)*3+2] = heightIter;
 			heightIter += HEIGHT_STEP;
 		}
 		// render
-		glVertexPointer(3, GL_FLOAT, 0, vertices);
-		glNormalPointer(GL_FLOAT, 0, normals);
+		glVertexPointer(3, GL_FLOAT, 0, vertices.data());
+		glNormalPointer(GL_FLOAT, 0, normals.data());
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_NORMAL_ARRAY);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, nVertices);

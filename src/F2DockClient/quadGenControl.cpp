@@ -20,6 +20,7 @@
 */
 #include <F2DockClient/quadGenControl.h>
 #include <string.h>
+#include <TexMol/compat.h>
 
 QuadGenControl::QuadGenControl()
 {

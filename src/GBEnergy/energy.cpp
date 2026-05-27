@@ -163,6 +163,7 @@ void savePQR(GroupOfGBAtoms *goa, FILE *fp)
         #include <sys/timeb.h>
 #else
         #include <sys/time.h>
+#include <TexMol/compat.h>
 #endif
 
 /*****************************************************************************************************************/

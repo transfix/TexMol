@@ -10,6 +10,9 @@
 //#include <OpenGL/glext.h>
 #else
 #include <stdlib.h>
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
 #include <GL/gl.h>
 //#include <GL/glut.h>

@@ -3,12 +3,14 @@
 #include <memory.h>
 #include <string.h>
 
+#include <stdlib.h>
 #if ! defined (__APPLE__)
 #include <malloc.h>
 #endif
 
 #include <Decimation/Decim/mesh.h>
 #include <Decimation/Decim/sdecimPriv.h>
+#include <TexMol/compat.h>
 
 #define PROP_ERR
 static int ncorner, nintedge, nboundary, nsimple, ncomplex;

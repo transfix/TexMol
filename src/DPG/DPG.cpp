@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <DPG/PG.h>
 #include <string.h>
+#include <TexMol/compat.h>
 
 using namespace DPG;
 

@@ -2,6 +2,7 @@
 #include <libCG/CoarseGrain/coarseGrain.h>
 #include <libCG/CoarseGrain/atom2.h>
 #include <libCG/CoarseGrain/groupOfAtoms.h>
+#include <vector>
 
 using namespace MOLECULE;
 
@@ -25,12 +26,12 @@ void CoarseGrain::CoarseGrainCharge(GroupOfAtoms* groupOfBeads)
 	IndexRange* atomRange = new IndexRange[molecule->numOfAtoms];
 	getBeadRange(min, max, cutoff, groupOfBeads, beadRange);
 	getBeadRange(min, max, cutoff, molecule, atomRange);
-	int residueEnd[Nr];
-	getResidueEnd(groupOfBeads, residueEnd);
+	std::vector<int> residueEnd(Nr);
+	getResidueEnd(groupOfBeads, residueEnd.data());
 	totalChargeContained(groupOfBeads, Q, Nr);
-	setupLinearSystemAnybead1(A, b, groupOfBeads, beadRange, atomRange, Q, residueEnd); // set up linear system for any-bead model large pqr
+	setupLinearSystemAnybead1(A, b, groupOfBeads, beadRange, atomRange, Q, residueEnd.data()); // set up linear system for any-bead model large pqr
 	LinearSystemSolver(A, b, Mb);
-	assignCharge(groupOfBeads, b, Q, residueEnd);
+	assignCharge(groupOfBeads, b, Q, residueEnd.data());
 	check(groupOfBeads, min, max, beadRange, atomRange);
 
 }
@@ -305,7 +306,7 @@ void CoarseGrain::setupLinearSystemAnybead1(double* A, double* b, GroupOfAtoms* 
 	int Nr = groupOfBeads->numOfRes;
 	int N = Nb-Nr;	// NxN is the size of matrix
 	//	compute the unknown list
-	int unknownIndex[N];
+	std::vector<int> unknownIndex(N);
 	j = 0;
 	k = 0;
 	for(i = 0; i < Nb; i++)
@@ -396,7 +397,7 @@ void CoarseGrain::setupLinearSystemAnybead2(double* AtA, double* Atb, GroupOfAto
 	dim[1] = max[1] - min[1];
 	dim[2] = max[2] - min[2];
 	//	compute the unknown list
-	int unknownIndex[N];
+	std::vector<int> unknownIndex(N);
 	j = 0;
 	k = 0;
 	for(i = 0; i < Nb; i++)
@@ -411,10 +412,11 @@ void CoarseGrain::setupLinearSystemAnybead2(double* AtA, double* Atb, GroupOfAto
 		}
 	}
 	// construct the matrix
-	printf("%d\n", dim[0]*dim[1]*dim[2]);
-	double A[N][dim[0]*dim[1]*dim[2]];
-	double b[dim[0]*dim[1]*dim[2]];
-	double temp[Nr];
+	int totalDim = dim[0]*dim[1]*dim[2];
+	printf("%d\n", totalDim);
+	std::vector<double> A(N * totalDim);
+	std::vector<double> b(totalDim);
+	std::vector<double> temp(Nr);
 	for(i = 0; i < N*N; i++)
 	{
 		AtA[i] = 0.0;
@@ -427,7 +429,7 @@ void CoarseGrain::setupLinearSystemAnybead2(double* AtA, double* Atb, GroupOfAto
 	{
 		for(j = 0; j < N; j++)
 		{
-			A[j][i] = 0.0;
+			A[j * totalDim + i] = 0.0;
 		}
 		b[i] = 0.0;
 	}
@@ -463,10 +465,10 @@ void CoarseGrain::setupLinearSystemAnybead2(double* AtA, double* Atb, GroupOfAto
 						double x = groupOfBeads->m_Atoms[beadIndex]->position[0];
 						double y = groupOfBeads->m_Atoms[beadIndex]->position[1];
 						double z = groupOfBeads->m_Atoms[beadIndex]->position[2];
-						A[t][i* dim[1]*dim[2]+j* dim[2]+k] = 1.0/sqrt((x-r[0])*(x-r[0])+(y-r[1])*(y-r[1])+(z-r[2])*(z-r[2]));
+						A[t * totalDim + i* dim[1]*dim[2]+j* dim[2]+k] = 1.0/sqrt((x-r[0])*(x-r[0])+(y-r[1])*(y-r[1])+(z-r[2])*(z-r[2]));
 					}
 					l = getResidueIndex(beadIndex, residueEnd, Nr);
-					A[t][i* dim[1]*dim[2]+j* dim[2]+k] -= temp[l];
+					A[t * totalDim + i* dim[1]*dim[2]+j* dim[2]+k] -= temp[l];
 				}
 				for(t = 0; t < molecule->numOfAtoms; t++)
 				{
@@ -491,12 +493,12 @@ void CoarseGrain::setupLinearSystemAnybead2(double* AtA, double* Atb, GroupOfAto
 		{
 			for(k = 0; k < dim[0]*dim[1]*dim[2]; k++)
 			{
-				AtA[i* N+j] += A[i][k]*A[j][k];
+				AtA[i* N+j] += A[i * totalDim + k]*A[j * totalDim + k];
 			}
 		}
 		for(k = 0; k < dim[0]*dim[1]*dim[2]; k++)
 		{
-			Atb[i] += A[i][k]*b[k];
+			Atb[i] += A[i * totalDim + k]*b[k];
 		}
 	}
 }

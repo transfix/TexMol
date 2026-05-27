@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
 FILE(GLOB SOURCE_FILES *.cpp)
 FILE(GLOB INCLUDE_FILES ../../inc/VirusAssembly/*.[Hh])
@@ -13,10 +13,13 @@ INCLUDE_DIRECTORIES(
 
 ADD_LIBRARY (VirusAssembly STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
-SET(VA_LINK_LIBS VirusAssembly AssemblyUtils pthread fast-clash GOAFileTypes PDBParser DPG UsefulMath Utility)
+# Test executables require pthreads (via fast-clash) and LAPACK — skip on Windows
+if(NOT WIN32)
+  SET(VA_LINK_LIBS VirusAssembly AssemblyUtils Threads::Threads fast-clash GOAFileTypes PDBParser DPG UsefulMath Utility)
 
-ADD_EXECUTABLE (testAssembleVirus testAssembleVirus.cpp)
-TARGET_LINK_LIBRARIES(testAssembleVirus ${VA_LINK_LIBS})
+  ADD_EXECUTABLE (testAssembleVirus testAssembleVirus.cpp)
+  TARGET_LINK_LIBRARIES(testAssembleVirus ${VA_LINK_LIBS})
 
-ADD_EXECUTABLE (testLayout testLayout.cpp)
-TARGET_LINK_LIBRARIES(testLayout ${VA_LINK_LIBS})
+  ADD_EXECUTABLE (testLayout testLayout.cpp)
+  TARGET_LINK_LIBRARIES(testLayout ${VA_LINK_LIBS})
+endif()

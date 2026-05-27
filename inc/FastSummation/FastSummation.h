@@ -25,8 +25,6 @@
 //#include <complex>
 
 extern "C" {
-  //#include <complex.h>
-  #include "/usr/include/complex.h"
 #include "nfft3util.h"
 #include "nfft3.h"
 #include <FastSummation/fastsum.h>

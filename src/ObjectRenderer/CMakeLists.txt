@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 
 FILE(GLOB SOURCE_FILES 
   ./*.cpp
@@ -26,4 +26,10 @@ if(CG_FOUND)
 endif(CG_FOUND)
 
 add_library(ObjectRenderer STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
-target_link_libraries(ObjectRenderer ${LIBS})
+set(_glu_lib "")
+if(TARGET OpenGL::GLU)
+  set(_glu_lib OpenGL::GLU)
+elseif(OPENGL_glu_LIBRARY)
+  set(_glu_lib ${OPENGL_glu_LIBRARY})
+endif()
+target_link_libraries(ObjectRenderer ${LIBS} GLEW::GLEW ${_glu_lib})

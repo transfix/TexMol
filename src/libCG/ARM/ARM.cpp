@@ -7,6 +7,7 @@
 #include <PDBParser/FlattenGOA.h>
 
 #include <fstream>
+#include <TexMol/compat.h>
 
 using namespace PDBParser;
 using namespace GEOMETRY;

@@ -3,6 +3,8 @@
 #endif
 
 #include "clashFilter.h"
+#include <vector>
+#include <TexMol/compat.h>
 
 using namespace std;
 
@@ -862,8 +864,8 @@ bool clashFilter::computeInteractions( double *trans, int *nClashes, int *nSever
        initSubtreeRootServer( );
        initFreeNodeServer( numThreads );      
              
-       pthread_t p[ numThreads ];         
-       THREAD_RESULT threadResults[ numThreads ]; 
+       std::vector<pthread_t> p( numThreads );         
+       std::vector<THREAD_RESULT> threadResults( numThreads ); 
        
        for ( int i = 0; i < numThreads; i++ )
          {

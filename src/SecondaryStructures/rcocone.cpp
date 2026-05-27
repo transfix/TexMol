@@ -13,7 +13,7 @@ void compute_cell_radius(Triangulation& triang)
 		if (isnan(r) || isinf(r))
 		{
 			cerr << "cell radius nan or inf " << endl;
-			cit->set_cell_radius(HUGE);
+			cit->set_cell_radius(HUGE_COST);
 		}
 		else if (r <= 0)
 		{

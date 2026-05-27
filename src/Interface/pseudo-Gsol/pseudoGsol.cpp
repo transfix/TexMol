@@ -3,6 +3,7 @@
 #endif
 
 #include "pseudoGsol.h"
+#include <TexMol/compat.h>
 
 using namespace std;
 using namespace DPG;

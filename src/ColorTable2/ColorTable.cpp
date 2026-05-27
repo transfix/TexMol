@@ -17,7 +17,8 @@
 #endif
 
 #ifndef COLORTABLE2_DISABLE_CONTOUR_TREE
-#include <VolMagick/VolMagick.h>
+#include <cvc/volume.h>
+#include <TexMol/compat.h>
 #endif
 
 namespace CVCColorTable
@@ -533,7 +534,7 @@ namespace CVCColorTable
   }
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-  void ColorTable::setContourVolume(const VolMagick::Volume& vol)
+  void ColorTable::setContourVolume(const cvc::volume& vol)
   {
     _xoomedIn->setContourVolume(vol);
   }

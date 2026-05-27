@@ -23,7 +23,12 @@
 #include <DPG/PG.h>
 #include <cmath>
 #include <time.h>
+#ifndef _WIN32
 #include <sys/time.h>
+#else
+#include <sys/timeb.h>
+#include <TexMol/compat.h>
+#endif
 
 using namespace std;
 using namespace DPG;
@@ -35,10 +40,9 @@ double gtod_sec = 0.0E0;
 double gtod_timer()
 {
    struct timeval tv;
-   struct timezone Tzp;
    double sec;
 
-   gettimeofday(&tv, &Tzp);
+   gettimeofday(&tv, nullptr);
 
    if(gtod_sec == 0.0E0) 
       gtod_sec = (double)tv.tv_sec;

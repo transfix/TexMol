@@ -20,6 +20,7 @@
 */
 #include <F2DockClient/dockControl.h>
 #include <string.h>
+#include <TexMol/compat.h>
 
 DockControl::DockControl()
 {

@@ -25,6 +25,7 @@
 #include <Utility/utility.h>
 #include <Contour/queue.h>
 #include <Contour/utilities.h>
+#include <TexMol/compat.h>
 
 #define frac(x) ((x) - floor(x))
 

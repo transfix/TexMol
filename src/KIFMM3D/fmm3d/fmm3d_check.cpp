@@ -17,6 +17,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 02111-1307, USA.  */
 #include "fmm3d.hpp"
 #include "common/vecmatop.hpp"
+#include <TexMol/compat.h>
 
 using namespace std;
 using std::cerr;

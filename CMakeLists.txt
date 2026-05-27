@@ -3,7 +3,7 @@
 # ===========================================================================
 # Modernized CMake build (Phase 2+3 of CVC Modernization Plan)
 # - CMake 3.16+ with target-based patterns
-# - libcvc as core dependency (FetchContent or local)
+# - libcvc as core dependency (prebuilt SDK, FetchContent, or local)
 # - No third-party/ ExternalProject chain
 # - GLSL only (Cg removed)
 # ===========================================================================
@@ -17,13 +17,41 @@ project(TexMol
 
 # ---------------------------------------------------------------------------
 # C++ Standard
+# libcvc 3.x is built with C++20, but as a prebuilt library it only requires
+# a C++17 consumer.  MSVC + Qt 6.7 has QByteArrayView aggregate-init bugs
+# under C++20, so we use C++17 there.
 # ---------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 17)
+if(MSVC)
+  set(CMAKE_CXX_STANDARD 17)
+else()
+  set(CMAKE_CXX_STANDARD 20)
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# ---------------------------------------------------------------------------
+# C Standard  (C17 for MSVC _Complex support in FastSummation etc.)
+# ---------------------------------------------------------------------------
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
 # Suppress Boost bind global placeholders deprecation warning
 add_compile_definitions(BOOST_BIND_GLOBAL_PLACEHOLDERS)
+
+# ---------------------------------------------------------------------------
+# MSVC-specific definitions
+# ---------------------------------------------------------------------------
+if(MSVC)
+  add_compile_definitions(
+    _USE_MATH_DEFINES
+    _CRT_SECURE_NO_WARNINGS
+    _CRT_NONSTDC_NO_WARNINGS
+    _CRT_NONSTDC_NO_DEPRECATE
+    WIN32_LEAN_AND_MEAN      # Prevent <windows.h> from pulling in <winsock.h>
+    NOMINMAX
+    _WIN32_WINNT=0x0601
+  )
+endif()
 
 # ---------------------------------------------------------------------------
 # Testing and coverage options
@@ -59,33 +87,86 @@ add_compile_definitions(GLSL)
 # ---------------------------------------------------------------------------
 # libcvc — Core dependency
 # ---------------------------------------------------------------------------
-# Option A (default): FetchContent from GitHub
-# Option B: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
+# Option A: Prebuilt binary via find_library (CMAKE_PREFIX_PATH)
+# Option B: FetchContent from GitHub (fallback when no binary found)
+# Option C: Set LIBCVC_SOURCE_DIR to a local checkout for co-development
 #   cmake -B build -DLIBCVC_SOURCE_DIR=/path/to/libcvc
 # ---------------------------------------------------------------------------
-option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use FetchContent)" "")
+option(LIBCVC_SOURCE_DIR "Path to local libcvc source tree (empty = use prebuilt/FetchContent)" "")
 
 if(LIBCVC_SOURCE_DIR)
   message(STATUS "Using local libcvc: ${LIBCVC_SOURCE_DIR}")
-  # Prepend libcvc's CMake module path so its Setup*.cmake modules are found
-  # (libcvc uses CMAKE_SOURCE_DIR which points to TexMol when used as subdirectory)
   list(PREPEND CMAKE_MODULE_PATH "${LIBCVC_SOURCE_DIR}/CMake")
-  # Disable volrover3 — it uses CMAKE_SOURCE_DIR for source paths
   set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "" FORCE)
   add_subdirectory("${LIBCVC_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/libcvc")
 else()
-  include(FetchContent)
-  FetchContent_Declare(libcvc
-    GIT_REPOSITORY https://github.com/transfix/libcvc.git
-    GIT_TAG        573a89bfcadc70ef052e111dee569634063625f3
-  )
-  # Configure libcvc build options
-  set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
-  set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
-  set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
-  set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
-  set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
-  FetchContent_MakeAvailable(libcvc)
+  # Try to find a prebuilt libcvc binary on CMAKE_PREFIX_PATH.
+  # We bypass find_package(cvc) because the upstream cvcConfig.cmake
+  # encodes build-time deps (CUDA, libiimod, hardcoded system paths)
+  # that consumers typically don't have.  Instead create thin imported
+  # targets directly from the library and header paths.
+  find_path(_CVC_INC cvc/app.h PATH_SUFFIXES include)
+  find_library(_CVC_LIB NAMES cvc)
+  find_library(_CVC_XMLRPC_LIB NAMES xmlrpc)
+
+  if(_CVC_INC AND _CVC_LIB)
+    message(STATUS "Using prebuilt libcvc: ${_CVC_LIB}")
+
+    add_library(cvc::cvc SHARED IMPORTED GLOBAL)
+    set_target_properties(cvc::cvc PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${_CVC_INC}"
+    )
+    if(WIN32)
+      find_file(_CVC_DLL NAMES cvc.dll PATH_SUFFIXES bin)
+      set_target_properties(cvc::cvc PROPERTIES
+        IMPORTED_IMPLIB "${_CVC_LIB}"
+        IMPORTED_LOCATION "${_CVC_DLL}"
+      )
+    else()
+      set_target_properties(cvc::cvc PROPERTIES
+        IMPORTED_LOCATION "${_CVC_LIB}"
+      )
+    endif()
+
+    # Unnamespaced alias for legacy references
+    if(NOT TARGET cvc)
+      add_library(cvc ALIAS cvc::cvc)
+    endif()
+
+    if(_CVC_XMLRPC_LIB)
+      add_library(cvc::xmlrpc STATIC IMPORTED GLOBAL)
+      set_target_properties(cvc::xmlrpc PROPERTIES
+        IMPORTED_LOCATION "${_CVC_XMLRPC_LIB}"
+        INTERFACE_INCLUDE_DIRECTORIES "${_CVC_INC}"
+      )
+      if(WIN32)
+        set_target_properties(cvc::xmlrpc PROPERTIES
+          INTERFACE_LINK_LIBRARIES "wsock32;ws2_32"
+        )
+      endif()
+    endif()
+
+    set(_CVC_PREBUILT TRUE)
+  else()
+    message(STATUS "Prebuilt libcvc not found; building from source via FetchContent")
+    if(POLICY CMP0167)
+      cmake_policy(SET CMP0167 OLD)
+    endif()
+    include(FetchContent)
+    FetchContent_Declare(libcvc
+      GIT_REPOSITORY https://github.com/transfix/libcvc.git
+      GIT_TAG        v3.2.4
+    )
+    set(CVC_ENABLE_CUDA OFF CACHE BOOL "Disable CUDA in TexMol build by default")
+    set(CVC_USING_IMOD_MRC OFF CACHE BOOL "libiimod not available outside deps bundle")
+    set(CVC_ENABLE_IMAGEMAGICK OFF CACHE BOOL "TexMol does not need ImageMagick I/O")
+    set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
+    set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
+    set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
+    set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
+    FetchContent_MakeAvailable(libcvc)
+    set(_CVC_PREBUILT FALSE)
+  endif()
 endif()
 
 # Legacy compatibility macros for per-module CMakeLists.txt files
@@ -95,10 +176,19 @@ include(LegacyCompat)
 
 # ---------------------------------------------------------------------------
 # Make libcvc headers available globally (for compatibility shims in inc/)
+# Many legacy TexMol modules #include <cvc/endians.h> etc. via headers in
+# inc/ without linking cvc::cvc directly, so the include path must be
+# available project-wide.
 # ---------------------------------------------------------------------------
 if(LIBCVC_SOURCE_DIR)
   include_directories("${LIBCVC_SOURCE_DIR}/inc")
   include_directories("${CMAKE_BINARY_DIR}/inc")  # for generated cvc/config.h
+elseif(_CVC_PREBUILT)
+  include_directories("${_CVC_INC}")
+else()
+  # FetchContent — headers are in the fetched source tree
+  include_directories("${libcvc_SOURCE_DIR}/inc")
+  include_directories("${libcvc_BINARY_DIR}/inc")
 endif()
 
 # ---------------------------------------------------------------------------
@@ -110,11 +200,15 @@ if(NOT Qt6_FOUND)
   message(FATAL_ERROR "Qt6 not found. Install: sudo apt-get install qt6-base-dev libqt6opengl6-dev libqt6openglwidgets6")
 endif()
 
+# Threads (portable replacement for -lpthread)
+find_package(Threads REQUIRED)
+
 # OpenGL
 find_package(OpenGL REQUIRED)
 
 # GLEW (required — replaces bundled glew and hand-rolled StaticExtensionPointers)
 find_package(GLEW REQUIRED)
+include_directories(${GLEW_INCLUDE_DIRS})
 
 # GSL (for molecular analysis modules)
 find_package(GSL QUIET)
@@ -221,7 +315,13 @@ endif()
 message(STATUS "=== TexMol ${PROJECT_VERSION} Build Configuration ===")
 message(STATUS "  C++ Standard:           ${CMAKE_CXX_STANDARD}")
 message(STATUS "  Qt6:                    ${Qt6_VERSION}")
-message(STATUS "  libcvc:                 ${LIBCVC_SOURCE_DIR}")
+if(LIBCVC_SOURCE_DIR)
+  message(STATUS "  libcvc:                 local (${LIBCVC_SOURCE_DIR})")
+elseif(cvc_FOUND)
+  message(STATUS "  libcvc:                 prebuilt SDK (${cvc_VERSION})")
+else()
+  message(STATUS "  libcvc:                 FetchContent (v3.2.4)")
+endif()
 message(STATUS "  CGAL:                   ${HAVE_CGAL}")
 message(STATUS "  LAPACK:                 ${HAVE_LAPACK}")
 message(STATUS "  FFTW:                   ${HAVE_FFTW}")

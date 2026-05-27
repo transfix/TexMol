@@ -1,5 +1,6 @@
 #include <Utility/utility.h>
 #include <float.h>
+#include <vector>
 #include <libCG/CoarseGrain/optimizer.h>
 #include <libCG/CoarseGrain/optimizationFunction.h>
 #include <libCG/CoarseGrain/groupOfAtoms.h>
@@ -8,6 +9,7 @@
 #include <libCG/CoarseGrain/surface.h>
 #include "../src/levmar-2.5/levmar.h"
 #include <time.h>
+#include <TexMol/compat.h>
 
 #ifdef _WIN32
 #include <sys/types.h>
@@ -336,7 +338,7 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	//	std::vector<PDBParser::Atom*> atomList = getAtomList();
 	blurAtomList(atomList,blurValue);
 	n = numOfSamples;
-	double x[n]; // chi function
+	std::vector<double> x(n, 0.0); // chi function
 	srand48((long)time(NULL));
 	p[0] = adata[0].radius;
 	c[0] = adata[0].center[0];
@@ -357,10 +359,10 @@ void Optimizer::optimizeCenterAndRadius(int iteration)
 	{
 		// optimize radius first since the initial centers are close to the optimal centers
 		m = 1;
-		ret=dlevmar_dif(radiuscenterOptimizeFunction, p, x, m, n, 1000, opts, info, NULL, NULL, (void*)fdata);
+		ret=dlevmar_dif(radiuscenterOptimizeFunction, p, x.data(), m, n, 1000, opts, info, NULL, NULL, (void*)fdata);
 		updateFunctionData(fdata, c, p[0]);
 		int mm = 3*m;
-		ret = dlevmar_dif(radiuscenterOptimizeFunction, c, x, mm, n, 1000, opts, info, NULL, NULL, (void*)fdata);
+		ret = dlevmar_dif(radiuscenterOptimizeFunction, c, x.data(), mm, n, 1000, opts, info, NULL, NULL, (void*)fdata);
 		updateFunctionData(fdata, c, p[0]);
 		/*
 				m = 1;
@@ -413,7 +415,6 @@ void Optimizer::optimizeCharge()
 	// n - num of surface pts
 	// p - CG radii
 	// x - f(CG) - f(AA), the chi function
-	double q[numOfUnknown];
 	int m, n;
 	int i;
 	double start, end;
@@ -426,7 +427,8 @@ void Optimizer::optimizeCharge()
 	opts[4]=LM_DIFF_DELTA; // relevant only if the finite difference jacobian version is used
 	m = numOfUnknown;
 	n = m;
-	double x[n]; // chi function
+	std::vector<double> q(numOfUnknown);
+	std::vector<double> x(n); // chi function
 	srand48((long)time(NULL));
 	for(i = 0; i < numOfUnknown; i++)
 	{
@@ -441,7 +443,8 @@ void Optimizer::optimizeCharge()
 	initializeChargeData2(fdata); // optimize GB energy
 	start = getMyTime();
 	// constrained condition
-	double A[numOfUnknown], b[1];
+	std::vector<double> A(numOfUnknown);
+	double b[1];
 	for(i = 0; i < numOfUnknown; i++)
 	{
 		A[i] = 1.0;
@@ -454,8 +457,8 @@ void Optimizer::optimizeCharge()
 	*/
 	//	ret = dlevmar_lec_dif(chargeOptimizeFunction, q, x, m, n, A, b, 1, 1000, opts, info, NULL, NULL, (void*)fdata); // optimize self energy only
 	//	ret = dlevmar_lec_dif(chargeOptimizeFunction2, q, x, m, n, A, b, 1, 1000, opts, info, NULL, NULL, (void*)fdata); // optimize GB energy
-	ret = dlevmar_dif(chargeOptimizeFunction2, q, x, m, n, 6/*000*/, opts, info, NULL, NULL, (void*)fdata);
-	updateChargeData(fdata, q);
+	ret = dlevmar_dif(chargeOptimizeFunction2, q.data(), x.data(), m, n, 6/*000*/, opts, info, NULL, NULL, (void*)fdata);
+	updateChargeData(fdata, q.data());
 	end = getMyTime();
 	for(i = 0; i < numOfUnknown; i++)
 	{

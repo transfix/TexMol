@@ -21,6 +21,9 @@
 #if !defined(AFX_GAUSSIANRENDERER_H__B61DC823_49F9_4912_BE8E_6E4AABE7F0CB__INCLUDED_)
 #define AFX_GAUSSIANRENDERER_H__B61DC823_49F9_4912_BE8E_6E4AABE7F0CB__INCLUDED_
 
+#ifdef _WIN32
+#  include <TexMol/compat.h>
+#endif
 #include <GL/glew.h>
 
 #ifdef CG

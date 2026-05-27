@@ -129,9 +129,9 @@ namespace CVCColorTable
   }
 
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
-  void Table::setContourVolume(const VolMagick::Volume& vol)
+  void Table::setContourVolume(const cvc::volume& vol)
   {
-    _contourVolume = vol;
+    _contourVolume.emplace(vol);
     _dirtyContourTree = true;
     _dirtyContourSpectrum = true;
     _dirtyHistogram = true;
@@ -583,7 +583,7 @@ namespace CVCColorTable
 #if !defined(COLORTABLE2_DISABLE_CONTOUR_TREE) || !defined(COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
       if (_dirtyHistogram) {
 	// grab the histogram (convert from boost::tuple returned by VolMagick)
-	auto h = _contourVolume.histogram();
+	auto h = _contourVolume->histogram();
 	_histogram = std::make_tuple(boost::get<0>(h), boost::get<1>(h));
 	_dirtyHistogram = false;
       }
@@ -723,24 +723,24 @@ namespace CVCColorTable
   {
      if( !_dirtyContourTree ) return;
   
-     int dim[3] = { static_cast<int>(_contourVolume.XDim()),
-                    static_cast<int>(_contourVolume.YDim()),
-                    static_cast<int>(_contourVolume.ZDim()) };
+     int dim[3] = { static_cast<int>(_contourVolume->XDim()),
+                    static_cast<int>(_contourVolume->YDim()),
+                    static_cast<int>(_contourVolume->ZDim()) };
 
      _contourTreeVertices.clear();
      _contourTreeEdges.clear();
 
-     if(_contourVolume.voxelType() != CVC::UChar)
+     if(_contourVolume->voxelType() != CVC::UChar)
      {
-          _contourVolume.map(0.0,255.0);
-          _contourVolume.voxelType(CVC::UChar);
+          _contourVolume->map(0.0,255.0);
+          _contourVolume->voxelType(CVC::UChar);
      }
 
      CTVTX* verts = NULL;
      CTEDGE* edges = NULL;
      int no_vtx = 0, no_edge = 0;
             
-     computeCT(*_contourVolume,dim,no_vtx,no_edge,&verts,&edges);
+     computeCT(**_contourVolume,dim,no_vtx,no_edge,&verts,&edges);
  
      if(verts)
        {
@@ -792,27 +792,27 @@ namespace CVCColorTable
      Signature	*sig;
      int dim[3] = 
      {
-        static_cast<int>(_contourVolume.XDim()),
-        static_cast<int>(_contourVolume.YDim()),
-        static_cast<int>(_contourVolume.ZDim())
+        static_cast<int>(_contourVolume->XDim()),
+        static_cast<int>(_contourVolume->YDim()),
+        static_cast<int>(_contourVolume->ZDim())
      };
 
-     orig[0] = _contourVolume.XMin();
-     orig[1] = _contourVolume.YMin();
-     orig[2] = _contourVolume.ZMin();
+     orig[0] = _contourVolume->XMin();
+     orig[1] = _contourVolume->YMin();
+     orig[2] = _contourVolume->ZMin();
             
-     span[0] = _contourVolume.XSpan();
-     span[1] = _contourVolume.YSpan();
-     span[2] = _contourVolume.ZSpan();
+     span[0] = _contourVolume->XSpan();
+     span[1] = _contourVolume->YSpan();
+     span[2] = _contourVolume->ZSpan();
 
-     if(_contourVolume.voxelType() != CVC::UChar)
+     if(_contourVolume->voxelType() != CVC::UChar)
      {
-        _contourVolume.map(0.0,255.0);
-        _contourVolume.voxelType(CVC::UChar);
+        _contourVolume->map(0.0,255.0);
+        _contourVolume->voxelType(CVC::UChar);
      }
 
      // make a libcontour variable out of dataBuffer
-     the_data = newDatasetReg(CONTOUR_UCHAR, CONTOUR_REG_3D, 1, 1, dim, *_contourVolume);
+     the_data = newDatasetReg(CONTOUR_UCHAR, CONTOUR_REG_3D, 1, 1, dim, **_contourVolume);
      ((Datareg3 *)the_data->data->getData(0))->setOrig(orig);
      ((Datareg3 *)the_data->data->getData(0))->setSpan(span);
      // compute the contour spectrum
@@ -1093,7 +1093,7 @@ namespace CVCColorTable
 
   void Table::mouseReleaseEvent(QMouseEvent *e)
   {
-    std::cout << __PRETTY_FUNCTION__ << ": called!" << std::endl;
+    std::cout << __FUNCTION__ << ": called!" << std::endl;
 
     if(_selectedObj != -1)
       {
@@ -1108,7 +1108,7 @@ namespace CVCColorTable
   {
     using std::any_cast;
 
-    std::cout << __PRETTY_FUNCTION__ << ": called!" << std::endl;
+    std::cout << __FUNCTION__ << ": called!" << std::endl;
 
     bool modified = false;
     POPUPSELECTION selection = showPopup(e->globalPos());
@@ -1486,7 +1486,7 @@ namespace CVCColorTable
            val[j*2] = val[j*2]*mdx + val[j*2+1]*dx;
    
         // map iso value
-        *isoval = val[0] * (_contourVolume.max() - _contourVolume.min()) + _contourVolume.min();
+        *isoval = val[0] * (_contourVolume->max() - _contourVolume->min()) + _contourVolume->min();
         *area = val[2];
         *minvol = val[4];
         *maxvol = val[6];

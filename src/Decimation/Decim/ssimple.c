@@ -1,9 +1,12 @@
 #include <stdio.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #include <stdlib.h>
 #include <math.h>
 #include <memory.h>
 #include <Decimation/Decim/sdecimPriv.h>
+#include <TexMol/compat.h>
 
 #define DEBUG_SUMMARY
 #define DEBUG_REJECTNo

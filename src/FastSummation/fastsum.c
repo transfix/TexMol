@@ -401,7 +401,8 @@ double _Complex SearchTree(const int d, const int t, const double *x,
 void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, kernel k, double *param, unsigned flags, int nn, int m, int p, double eps_I, double eps_B)
 {
   int t;
-  int N[d], n[d];
+  int *N = (int*)malloc(d * sizeof(int));
+  int *n = (int*)malloc(d * sizeof(int));
   int n_total;
 
   ths->d = d;
@@ -449,6 +450,7 @@ void fastsum_init_guru(fastsum_plan *ths, int d, int N_total, int M_total, kerne
   nfft_init_guru(&(ths->mv1), d, N, N_total, n, m,
                    PRE_PHI_HUT| PRE_PSI| MALLOC_X | MALLOC_F_HAT| MALLOC_F| FFTW_INIT | FFT_OUT_OF_PLACE,
                    FFTW_MEASURE| FFTW_DESTROY_INPUT);
+  free(N); free(n);
   nfft_init_guru(&(ths->mv2), d, N, M_total, n, m,
                    PRE_PHI_HUT| PRE_PSI| MALLOC_X | MALLOC_F_HAT| MALLOC_F| FFTW_INIT | FFT_OUT_OF_PLACE,
                    FFTW_MEASURE| FFTW_DESTROY_INPUT);

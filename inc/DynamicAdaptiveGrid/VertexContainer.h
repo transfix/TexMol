@@ -27,27 +27,25 @@
 #include <string>
 #include <map>
 
-using namespace std;
-
 namespace DynamicAdaptiveGrid
 {
 	class VertexContainer
 	{
 		protected:
-			map<string,MeshVertex*> vertexCont;
-			map<string,int> vertMap;
+			std::map<std::string,MeshVertex*> vertexCont;
+			std::map<std::string,int> vertMap;
 //			VertexMap vertMap;
 
 		public:
 			VertexContainer();
 			~VertexContainer();			
 
-			void addVertex(string, MeshVertex*);
-			void removeVertex(string);
-			void updateVertex(string, MeshVertex*);
-			MeshVertex* getVertex(string);
+			void addVertex(std::string, MeshVertex*);
+			void removeVertex(std::string);
+			void updateVertex(std::string, MeshVertex*);
+			MeshVertex* getVertex(std::string);
 			void printVerticesAndUpdateMap(std::ofstream *outputFile);
-			int getVertexIndex(string);
+			int getVertexIndex(std::string);
 			int size();
 			void clearMap();
 			void clearContainer();

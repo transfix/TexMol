@@ -199,7 +199,7 @@ void sort_cluster_wrt_volume(const vector<double>& cluster_volume_vector, const 
 	for(int i = 0; i < (int)cluster_volume_vector.size(); i ++)
 	{
 		int ind = -1;
-		double max = -HUGE;
+		double max = -HUGE_COST;
 		for(int j = 0; j < (int)cluster_volume_vector.size(); j ++)
 		{
 			if(f[j])
@@ -213,7 +213,7 @@ void sort_cluster_wrt_volume(const vector<double>& cluster_volume_vector, const 
 			}
 		}
 		CGAL_assertion(ind != -1);
-		CGAL_assertion(max != -HUGE);
+		CGAL_assertion(max != -HUGE_COST);
 		f[ind] = true;
 		sorted_cluster_index_vector.push_back(cluster_rep_vector[ind]);
 	}

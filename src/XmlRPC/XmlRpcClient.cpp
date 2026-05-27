@@ -4,6 +4,7 @@
 #include "XmlRPC/XmlRpcClient.h"
 #include "XmlRPC/XmlRpc.h"
 #include "XmlRPC/XmlRpcSocket.h"
+#include <TexMol/compat.h>
 
 using namespace XmlRpc;
 

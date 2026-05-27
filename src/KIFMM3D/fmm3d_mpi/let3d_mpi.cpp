@@ -16,6 +16,7 @@ along with this program; see the file COPYING.  If not, write to the Free
 Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 02111-1307, USA.  */
 #include "let3d_mpi.hpp"
+#include <TexMol/compat.h>
 
 using std::min;
 using std::max;
