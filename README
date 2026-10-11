@@ -14,3 +14,11 @@ Visualization Center's website:
 
 http://cvcweb.ices.utexas.edu/cvc
 
+
+License
+-------
+
+TexMol is licensed under the GNU Lesser General Public License, version 2.1
+(see LICENSE), the same licence as libcvc. A few third-party and legacy
+components carry GPL headers instead; THIRD_PARTY_NOTICES.md lists them and
+says which are compiled into a default build.
