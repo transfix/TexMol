@@ -12,6 +12,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  # cvcpkg release (a cy-pca/cvcpkg tag) that installs the dependencies.
+  CVCPKG_RELEASE: cvcpkg-v2.4.0
+
 jobs:
   build:
     strategy:
@@ -50,18 +54,63 @@ jobs:
           fetch-depth: 0
 
       # ── Third-party dependencies via cvcpkg ──
-      # cvcpkg resolves and installs prebuilt component bundles from
-      # libcvc-deps.  When the catalog is available, this provides
-      # Boost, Qt6, FFTW, GSL, HDF5, etc. in a single step.
-      # On miss the action outputs path="" and we fall back to
-      # system package managers below.
+      # cvcpkg is a standalone binary released from cy-pca/cvcpkg (no
+      # Python needed); the installer verifies it against the release's
+      # sha256.  It replaces the cvcpkg-install action from
+      # transfix/libcvc-deps, an archived snapshot that no longer ships
+      # an installable cvcpkg.
+      - name: Install cvcpkg (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        env:
+          CVCPKG_VERSION: ${{ env.CVCPKG_RELEASE }}
+        run: |
+          set -euo pipefail
+          bindir="$RUNNER_TEMP/cvcpkg/bin"
+          curl -fsSL https://cvcpkg.org/install.sh | sh -s -- --install-dir "$bindir"
+          echo "$bindir" >> "$GITHUB_PATH"
+
+      - name: Install cvcpkg (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          CVCPKG_VERSION: ${{ env.CVCPKG_RELEASE }}
+        run: |
+          $bindir = Join-Path $env:RUNNER_TEMP 'cvcpkg\bin'
+          & ([scriptblock]::Create((Invoke-RestMethod https://cvcpkg.org/install.ps1))) -InstallDir $bindir
+          Add-Content -Path $env:GITHUB_PATH -Value $bindir
+
+      # cvcpkg resolves cvc-requirements.yaml and installs prebuilt
+      # component bundles (Boost, Qt6, FFTW, GSL, HDF5, etc.) into one
+      # prefix.  On a catalog miss path="" and we fall back to system
+      # package managers below.
       - name: Install dependencies (cvcpkg)
         id: libcvc-deps
-        uses: transfix/libcvc-deps/.github/actions/cvcpkg-install@v1.4.0
-        with:
-          requirements: cvc-requirements.yaml
-          build_type: ${{ matrix.build_type }}
-          link: shared
+        shell: bash
+        env:
+          BUILD_TYPE: ${{ matrix.build_type }}
+        run: |
+          set -euo pipefail
+          case "$RUNNER_OS" in
+            Linux)   platform=linux;   prefix="$HOME/libcvc-deps" ;;
+            macOS)   platform=macos;   prefix="$HOME/libcvc-deps" ;;
+            Windows) platform=windows; prefix="D:/libcvc-deps" ;;
+          esac
+          case "$(uname -m)" in
+            aarch64|arm64) arch=arm64 ;;
+            *)             arch=x86_64 ;;
+          esac
+          config=$(echo "$BUILD_TYPE" | tr '[:upper:]' '[:lower:]')
+          mkdir -p "$prefix"
+
+          if cvcpkg install --from cvc-requirements.yaml --prefix "$prefix" \
+               --platform "$platform" --arch "$arch" \
+               --config "$config" --link shared; then
+            echo "path=$prefix" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::cvcpkg could not install cvc-requirements.yaml for $platform/$arch/$config/shared; using the system fallback"
+            echo "path=" >> "$GITHUB_OUTPUT"
+          fi
 
       # Export library paths so Qt host tools (uic, moc, rcc) can
       # find their shared libraries at build time.
