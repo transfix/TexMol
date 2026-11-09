@@ -12,12 +12,12 @@
 
   MolSurf is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with MolSurf; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #if !defined(AFX_RAWNCFILE_H__2755A9D8_A22A_496D_BF36_C7CF6FE93F6D__INCLUDED_)
 #define AFX_RAWNCFILE_H__2755A9D8_A22A_496D_BF36_C7CF6FE93F6D__INCLUDED_

@@ -1,5 +1,6 @@
 #include <Histogram/histogram_data.h>
 #include <map>
+#include <vector>
 #include <SecondaryStructures/helix.h>
 #include <SecondaryStructures/op.h>
 
@@ -106,7 +107,7 @@ vector< vector<Point> > build_cylindrical_helices(const vector< vector<int> >& c
 //			cout<<"eigenvalue is  "<< w[0] <<"  " << w[1] <<"  "<<w[2] <<endl;
 //			for(int t=0; t<3; t++)
 //			cout<<a[t]<<" " <<a[t+3]<<" "<<a[t+6]<<endl;
-			double lambda[curve_comps[i].size()];
+			std::vector<double> lambda(curve_comps[i].size());
 			Vector tempp;
 			int j = 0;
 			for(int k=0; k < curve_comps[i].size(); k++)

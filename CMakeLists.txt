@@ -50,7 +50,11 @@ if(MSVC)
     WIN32_LEAN_AND_MEAN      # Prevent <windows.h> from pulling in <winsock.h>
     NOMINMAX
     _WIN32_WINNT=0x0601
+    BOOST_ALL_NO_LIB         # Boost comes in as linked targets, not #pragma auto-link
   )
+  # Undo the UCRT's snprintf -> _snprintf remap in every C++ translation
+  # unit (see inc/TexMol/msvc_compat.h).
+  string(APPEND CMAKE_CXX_FLAGS " /FI\"${CMAKE_SOURCE_DIR}/inc/TexMol/msvc_compat.h\"")
 endif()
 
 # ---------------------------------------------------------------------------
@@ -162,8 +166,12 @@ else()
     set(CVC_ENABLE_IMAGEMAGICK OFF CACHE BOOL "TexMol does not need ImageMagick I/O")
     set(CVC_USING_HDF5 ON CACHE BOOL "Enable HDF5 volume I/O")
     set(CVC_ENABLE_MESHER ON CACHE BOOL "Enable isosurface + volumetric meshing")
-    set(CVC_ENABLE_SDF ON CACHE BOOL "Enable SDF computation")
+    # TexMol builds its own SignDistanceFunction_v2; libcvc's copy of the same
+    # classes would clash with it at link time (LNK2005 on MSVC).
+    set(CVC_ENABLE_SDF OFF CACHE BOOL "TexMol uses its own SignDistanceFunction_v2")
     set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
+    set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "TexMol does not build libcvc's volrover3 app")
+    set(CVC_BUILD_TESTS OFF CACHE BOOL "TexMol does not build libcvc's own tests")
     FetchContent_MakeAvailable(libcvc)
     set(_CVC_PREBUILT FALSE)
   endif()

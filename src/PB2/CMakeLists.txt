@@ -20,3 +20,5 @@ ADD_LIBRARY(${NAME} STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 
 SetupBoost(${NAME})
 SetupPETSC(${NAME})
+# PBLinear.cpp uses cvc::volume and cvc::volume_file_io
+target_link_libraries(${NAME} cvc)

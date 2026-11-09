@@ -28,6 +28,7 @@ SetupBoost(ColorTable2)
 # Contour tree and contour spectrum re-enabled (modules restored)
 # add_compile_definitions(COLORTABLE2_DISABLE_CONTOUR_TREE COLORTABLE2_DISABLE_CONTOUR_SPECTRUM)
 
-set(LIBS QGLViewer)
+# Table.h / ColorTable.cpp use cvc::volume
+set(LIBS QGLViewer cvc)
 
 TARGET_LINK_LIBRARIES(ColorTable2 ${LIBS})

@@ -4,8 +4,11 @@
 #   cvcpkg install --from cvc-requirements.yaml --prefix ./deps
 #
 # TexMol needs a focused subset of libcvc-deps: Boost, CGAL,
-# FFTW3, GSL, HDF5, Qt6/VTK for the GUI, and ImageMagick for
-# texture I/O.  It does not use gRPC or the network stack.
+# FFTW3, GSL, HDF5, Qt6 and GLEW for the GUI, OpenBLAS for LAPACK,
+# and ImageMagick for texture I/O.  It does not use VTK, gRPC or the
+# network stack.  On Windows also install pthreads4w; on Linux also
+# libglvnd, glu, libx11, libsm and libice.  CI (.github/workflows/ci.yml)
+# installs exactly this set per platform.
 
 platform: auto
 arch: auto
@@ -22,5 +25,6 @@ components:
   - tiff
   - imagemagick
   - qt6
-  - vtk
-  - pthreads4w
+  - glew
+  - openblas
+  - log4cplus

@@ -19,14 +19,18 @@ ADD_LIBRARY (SecondaryStructures STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
 set(LIBS "")
 
 find_package(CGAL)
-if(CGAL_FOUND)
+if(CGAL_FOUND AND CGAL_USE_FILE)
+  # CGAL < 6 (e.g. Ubuntu's libcgal-dev) still ships UseCGAL.cmake
   include(${CGAL_USE_FILE})
   # need the following flags in case CGAL has some special compiler needs for this compiler
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CGAL_CXX_FLAGS_INIT}")
   set(LIBS ${LIBS} ${CGAL_LIBRARIES})
-else(CGAL_FOUND)
+elseif(CGAL_FOUND)
+  # CGAL 6 (the cvcpkg bundle) dropped CGAL_USE_FILE; use its imported target
+  set(LIBS ${LIBS} CGAL::CGAL)
+else()
   message(SEND_ERROR "PocketTunnel requires CGAL!")
-endif(CGAL_FOUND)
+endif()
 
 target_link_libraries(SecondaryStructures
   ${LIBS}
