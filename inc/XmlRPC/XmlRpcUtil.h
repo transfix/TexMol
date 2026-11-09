@@ -10,8 +10,10 @@
 # include <string>
 #endif
 #if defined(_MSC_VER)
-# define snprintf	    _snprintf
-# define vsnprintf    _vsnprintf
+# if _MSC_VER < 1900   // MSVC 2015 and later have snprintf/vsnprintf
+#  define snprintf	    _snprintf
+#  define vsnprintf    _vsnprintf
+# endif
 # define strcasecmp	  _stricmp
 # define strncasecmp	_strnicmp
 #elif defined(__BORLANDC__)
