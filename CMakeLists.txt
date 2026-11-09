@@ -51,6 +51,9 @@ if(MSVC)
     NOMINMAX
     _WIN32_WINNT=0x0601
   )
+  # Undo the UCRT's snprintf -> _snprintf remap in every C++ translation
+  # unit (see inc/TexMol/msvc_compat.h).
+  string(APPEND CMAKE_CXX_FLAGS " /FI\"${CMAKE_SOURCE_DIR}/inc/TexMol/msvc_compat.h\"")
 endif()
 
 # ---------------------------------------------------------------------------
