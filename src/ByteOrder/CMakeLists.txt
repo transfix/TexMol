@@ -11,3 +11,5 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY (ByteOrder STATIC ${SOURCE_FILES} ${INCLUDE_FILES})
+# ByteSwapping.h uses cvc/endians.h
+target_link_libraries(ByteOrder cvc)

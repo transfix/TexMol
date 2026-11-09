@@ -170,6 +170,7 @@ else()
     # classes would clash with it at link time (LNK2005 on MSVC).
     set(CVC_ENABLE_SDF OFF CACHE BOOL "TexMol uses its own SignDistanceFunction_v2")
     set(CVC_USING_XMLRPC OFF CACHE BOOL "XmlRPC deprecated")
+    set(CVC_BUILD_VOLROVER3 OFF CACHE BOOL "TexMol does not build libcvc's volrover3 app")
     set(CVC_BUILD_TESTS OFF CACHE BOOL "TexMol does not build libcvc's own tests")
     FetchContent_MakeAvailable(libcvc)
     set(_CVC_PREBUILT FALSE)
