@@ -12,12 +12,12 @@
 
   MolSurf is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with MolSurf; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 #if !defined(AFX_BIOMOLECULETRANSFORMATIONS_H__2C4DCE88_A8F6_4E08_BEC6_718DB814A308__INCLUDED_)
 #define AFX_BIOMOLECULETRANSFORMATIONS_H__2C4DCE88_A8F6_4E08_BEC6_718DB814A308__INCLUDED_
